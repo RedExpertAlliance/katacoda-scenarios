@@ -31,6 +31,8 @@ The package.json file is present in (most) Node applications: it specifies all t
 You could open func.js in the text editor to see the generated functionality of the function: that is where the real action takes place when the function is invoked.
 
 `~/hello/package.json`{{open}}
+`/root/hello/package.json`{{open}}
+`./package.json`{{open}}
 
 ## Deploy and Invoke the Function
 
