@@ -6,32 +6,32 @@
       {
         "course_id": "introduction-fn",
         "title": "An introduction to Project Fn",
-        "description": "Createm deploy and run serverless functions using Project Fn, in JavaScript, Java, Python and more."
+        "description": "Create, deploy and run serverless functions using Project Fn, in JavaScript, Java, Python and more."
       },
       {
         "course_id": "functions-on-oci",
-        "title": "Scenario with Editor Terminal UI",
-        "description": "Katacoda Scenario Example"
+        "title": "Serverless Functions on Oracle Cloud Infrastructure",
+        "description": "Getting started with Functions on Oracle Cloud Infrastructure."
       },
       {
         "course_id": "api-gateway-on-oci",
-        "title": "Scenario with Terminal iFrame UI",
-        "description": "Katacoda Scenario Example"
+        "title": "API Gateway on Oracle Cloud Infrastructure",
+        "description": "Getting started with API Gateway on Oracle Cloud Infrastructure - expose a stock response,  HTTP Backend and Serverless Functions."
       },
       {
         "course_id": "oci-functions-objects-apigateway",
-        "title": "Scenario with Terminal iFrame Split UI",
-        "description": "Katacoda Scenario Example"
+        "title": "Functions, Object Storage and API Gateway on Oracle Cloud Infrastructure",
+        "description": "Next steps with Serverless Functions on OCI, Object Storage and API Gateway."
       },
       {
         "course_id": "oci-streaming",
-        "title": "Scenario with iFrame only UI",
-        "description": ""
+        "title": "OCI (Event) Streaming, combined with Functions and API Gateway",
+        "description": "Getting started with OCI Streaming and combining with Functions and API Gateway."
       },
       {
         "course_id": "oci-lab-preparation",
-        "title": "Scenario with Terminal Terminal UI",
-        "description": "Katacoda Scenario Example"
+        "title": "Preparation for OCI Workshops",
+        "description": "Manage OCI LAB environment for Katacoda Scenarios"
       }
     ]
   }
