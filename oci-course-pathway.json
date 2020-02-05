@@ -1,43 +1,58 @@
 {
-    "title": "Oracle Cloud Infrastructure - Handson Labs",
-    "description": "A series of handson labs produced by REAL - the Red Expert Alliance - to get introduced to Oracle Cloud Infrastructure",
-    "icon": "fa-katacoda",
-    "courses": [
-      {
-        "course_id": "introduction-to-oci",
-        "title": "UNDER CONSTRUCTION: An introduction to Oracle Cloud Infrastructure core concepts",
-        "description": "First steps on OCI - learn about tenancy, compartments, console, CLI, Object Storage, resource management"
-      },
-      {
-        "course_id": "introduction-fn",
-        "title": "An introduction to Project Fn",
-        "description": "Create, deploy and run serverless functions using Project Fn, in JavaScript, Java, Python and more."
-      },
-      {
-        "course_id": "functions-on-oci",
-        "title": "Serverless Functions on Oracle Cloud Infrastructure",
-        "description": "Getting started with Functions on Oracle Cloud Infrastructure."
-      },
-      {
-        "course_id": "api-gateway-on-oci",
-        "title": "API Gateway on Oracle Cloud Infrastructure",
-        "description": "Getting started with API Gateway on Oracle Cloud Infrastructure - expose a stock response,  HTTP Backend and Serverless Functions."
-      },
-      {
-        "course_id": "oci-functions-objects-apigateway",
-        "title": "Functions, Object Storage and API Gateway on Oracle Cloud Infrastructure",
-        "description": "Next steps with Serverless Functions on OCI, Object Storage and API Gateway."
-      },
-      {
-        "course_id": "oci-streaming",
-        "title": "OCI (Event) Streaming, combined with Functions and API Gateway",
-        "description": "Getting started with OCI Streaming and combining with Functions and API Gateway."
-      },
-      {
-        "course_id": "oci-lab-preparation",
-        "title": "Preparation for OCI Workshops",
-        "description": "Manage OCI LAB environment for Katacoda Scenarios"
-      }
-    ]
-  }
-  
+  "title": "Oracle Cloud Infrastructure - Handson Labs",
+  "description": "A series of handson labs produced by REAL - the Red Expert Alliance - to get introduced to Oracle Cloud Infrastructure",
+  "icon": "fa-katacoda",
+  "courses": [
+    {
+      "course_id": "introduction-to-oci",
+      "title": "UNDER CONSTRUCTION: An introduction to Oracle Cloud Infrastructure core concepts",
+      "description": "First steps on OCI - learn about tenancy, compartments, console, CLI, Object Storage, resource management"
+    },
+    {
+      "course_id": "introduction-fn",
+      "title": "An introduction to Project Fn",
+      "description": "Create, deploy and run serverless functions using Project Fn, in JavaScript, Java, Python and more."
+    },
+    {
+      "course_id": "functions-on-oci",
+      "title": "Serverless Functions on Oracle Cloud Infrastructure",
+      "description": "Getting started with Functions on Oracle Cloud Infrastructure."
+    },
+    {
+      "course_id": "api-gateway-on-oci",
+      "title": "API Gateway on Oracle Cloud Infrastructure",
+      "description": "Getting started with API Gateway on Oracle Cloud Infrastructure - expose a stock response,  HTTP Backend and Serverless Functions."
+    },
+    {
+      "course_id": "oci-functions-objects-apigateway",
+      "title": "Functions, Object Storage and API Gateway on Oracle Cloud Infrastructure",
+      "description": "Next steps with Serverless Functions on OCI, Object Storage and API Gateway."
+    },
+    {
+      "course_id": "monitoring-metrics-alarms-on-oci",
+      "title": "UNDER CONSTRUCTION: Monitoring, Metrics, Alarms and Notifications",
+      "description": "On monitoring OCI metrics and creating automated alarms to publish notifications upon relevant situations"
+    },
+    {
+      "course_id": "oci-streaming",
+      "title": "OCI (Event) Streaming, combined with Functions and API Gateway",
+      "description": "Getting started with OCI Streaming and combining with Functions and API Gateway."
+    },
+    {
+      "course_id": "infrastructure-events-notifications-streaming-oci",
+      "title": "UNDER CONSTRUCTION: Responding to OCI Events",
+      "description": "OCI Events are published whenever OCI resources are manipulated. These events can trigger notifications, invoke functions and publish streaming events"
+    },
+    {
+      "course_id": "oke-redis-cache-and-functions-oci",
+      "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine",
+      "description": "Work with OKE, the OCI managed Kubernetes service."
+    },
+    
+    {
+      "course_id": "oci-lab-preparation",
+      "title": "Preparation for OCI Workshops",
+      "description": "Manage OCI LAB environment for Katacoda Scenarios"
+    }
+  ]
+}

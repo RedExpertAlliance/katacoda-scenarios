@@ -1,0 +1,1 @@
+OCI Events are published whenever OCI resources are manipulated. These events can trigger notifications, invoke functions and publish streaming events
