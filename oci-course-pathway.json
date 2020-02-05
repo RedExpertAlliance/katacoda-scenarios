@@ -5,8 +5,8 @@
     "courses": [
       {
         "course_id": "introduction-to-oci",
-        "title": "An introduction to Oracle Cloud Infrastructure core concepts",
-        "description": "First steps on OCI - learn about tenancy, compartments, groups, policies, console, OCI Command Line Interface, Object Storage, Resource Tags and Search"
+        "title": "UNDER CONSTRUCTION: An introduction to Oracle Cloud Infrastructure core concepts",
+        "description": "First steps on OCI - learn about tenancy, compartments, console, CLI, Object Storage, resource management"
       },
       {
         "course_id": "introduction-fn",
