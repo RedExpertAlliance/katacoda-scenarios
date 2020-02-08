@@ -36,7 +36,7 @@ Create an appropriate Fn context for working with OCI as provider (see [OCI Docs
 
 `fn use context lab-fn-context`{{execute}}
 
-Prepare a number of environment variables. Note: the assumptions here are a compartment called *lab-compartment*  and an API Gateway *lab-apigw* in that same compartment as well as an API Deployment called MY_API_DEPL# on the API Gateway. We need to get references to these resources in order to create new resources in the right place.  
+Prepare a number of environment variables. Note: the assumptions here are that you are working in a tenancy in the Ashburn region and a compartment called *lab-compartment* exists as well as an API Gateway *lab-apigw* in that same compartment as well as an API Deployment called MY_API_DEPL# on the API Gateway. We need to get references to these resources in order to create new resources in the right place.  
 
 ```
 cs=$(oci iam compartment list)
