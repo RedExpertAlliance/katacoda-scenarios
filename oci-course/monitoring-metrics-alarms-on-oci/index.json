@@ -37,11 +37,11 @@
       "client": [
         {
           "file": "custom-metrics.json",
-          "target": "/home/scrapbook/"
+          "target": "/home/scrapbook/c.json"
         },
         {
           "file": "custom-metrics.json",
-          "target": "~/"
+          "target": "~/ap/"
         },
         {
           "file": "custom-metrics.json",
