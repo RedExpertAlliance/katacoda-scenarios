@@ -12,18 +12,18 @@
       {
         "title": "Step 2 - Metrics Explorer",
         "text": "step2.md"
-    },
-    {
-      "title": "Step 3 - Publishing Custom Metrics",
-      "text": "step3.md"
-    }
-  ],
+      },
+      {
+        "title": "Step 3 - Publishing Custom Metrics",
+        "text": "step3.md"
+      }
+    ],
     "intro": {
       "text": "intro.md",
       "credits": "",
       "courseData": "background.sh",
       "code": "foreground.sh"
-        },
+    },
     "finish": {
       "text": "finish.md"
     },
@@ -31,10 +31,11 @@
       "client": [
         {
           "file": "custom-metrics.json",
-          "target": "/root/"
+          "target": "~/"
         }
       ]
-    }},
+    }
+  },
   "environment": {
     "uilayout": "editor-terminal",
     "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
