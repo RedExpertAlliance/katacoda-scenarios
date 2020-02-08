@@ -30,29 +30,12 @@
     "assets": {
       "host01": [
         {
-          "file": "*",
+          "file": "custom-metrics.json",
           "target": "/root"
-        }
-      ],
-      "client": [
-        {
-          "file": "custom-metrics.json",
-          "target": "/home/scrapbook/c.json"
-        },
-        {
-          "file": "custom-metrics.json",
-          "target": "~/ap/"
-        },
-        {
-          "file": "custom-metrics.json",
-          "target": "/home/scrapbook/my-metrics.json"
         }
       ]
     }
   },
-  "files": [
-    "/root/custom-metrics.json"
-  ],
   "environment": {
     "uilayout": "editor-terminal",
     "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
