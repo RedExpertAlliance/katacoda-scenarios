@@ -22,7 +22,7 @@
         "note": "national holiday"
       },
       "name": "productOrder",
-      "namespace": "my-metrics-namespace",
+      "namespace": "mymetricsnamespace",
       "resourceGroup": "division X"
     },
     {
@@ -48,7 +48,7 @@
         "note": "start second semester"
       },
       "name": "productOrder",
-      "namespace": "my-metrics-namespace",
+      "namespace": "mymetricsnamespace",
       "resourceGroup": "division Y"
     }
   ]
