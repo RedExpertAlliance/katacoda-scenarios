@@ -1,0 +1,54 @@
+[
+    {
+      "compartmentId": "$compartmentId",
+      "datapoints": [
+        {
+          "count": 10,
+          "timestamp": "2020-02-08T04:18:01+00:00",
+          "value": 5.0
+        },
+        {
+          "count": 3,
+          "timestamp": "2020-02-08T05:11:01+00:00",
+          "value": 10.0
+        }
+      ],
+      "dimensions": {
+        "product": "ball",
+        "country": "NL"
+      },
+      "metadata": {
+        "category": "toys",
+        "note": "national holiday"
+      },
+      "name": "productOrder",
+      "namespace": "my-metrics-namespace",
+      "resourceGroup": "division X"
+    },
+    {
+      "compartmentId": "$compartmentId",
+      "datapoints": [
+        {
+          "count": 7,
+          "timestamp": "2020-02-08T03:22:01+00:00",
+          "value": 3.0
+        },
+        {
+          "count": 11,
+          "timestamp": "2020-02-08T05:08:03+00:00",
+          "value": 2
+        }
+      ],
+      "dimensions": {
+        "product": "The Road to Nowhere",
+        "country": "FR"
+      },
+      "metadata": {
+        "category": "books",
+        "note": "start second semester"
+      },
+      "name": "productOrder",
+      "namespace": "my-metrics-namespace",
+      "resourceGroup": "division Y"
+    }
+  ]

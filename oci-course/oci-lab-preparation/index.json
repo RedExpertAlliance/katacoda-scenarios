@@ -35,14 +35,6 @@
     "finish": {
       "text": "finish.md",
       "courseData": "teardown.sh"
-    },
-    "assets": {
-      "client": [
-        {
-          "file": "prepareStepOne.sh",
-          "target": "/root/"
-        }
-      ]
     }
   },
   "environment": {

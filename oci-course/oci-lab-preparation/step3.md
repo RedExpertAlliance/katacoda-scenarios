@@ -85,3 +85,9 @@ Allow group lab-participants to use stream-push in compartment lab-compartment
 ```
 oci iam policy create  --name "streaming-for-lab-participants" --compartment-id $compartmentId  --statements "[ \"Allow group lab-participants to use streams in compartment lab-compartment\",\"Allow group lab-participants to use stream-pull in compartment lab-compartment\",\"Allow group lab-participants to use stream-push in compartment lab-compartment\" ]" --description "to allow lab-participants to work with Streaming"
 ```{{execute}}
+
+## Metrics and Monitoring
+
+oci iam policy create  --name "monitoring-and-metrics-for-lab-participants" --compartment-id $compartmentId  --statements "[ \"Allow group lab-participants to use metrics in tenancy where target.metrics.namespace='my-metrics-namespace\",\"Allow group lab-participants to inspect metrics in compartment  lab-compartment\",\"Allow group lab-participants to read metrics in compartment lab-compartment\",\"Allow group lab-participants to manage alarms in tenancy\",\"Allow group lab-participants to manage ons-topics in tenancy\" ]" --description "to allow lab-participants to work with Monitoring and Metrics and Alarms"
+```{{execute}}
+

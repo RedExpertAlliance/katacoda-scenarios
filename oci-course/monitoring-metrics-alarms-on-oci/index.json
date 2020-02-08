@@ -27,8 +27,14 @@
     "finish": {
       "text": "finish.md"
     },
-    "assets": {}
-  },
+    "assets": {
+      "client": [
+        {
+          "file": "custom-metrics.json",
+          "target": "/root/"
+        }
+      ]
+    }},
   "environment": {
     "uilayout": "editor-terminal",
     "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
