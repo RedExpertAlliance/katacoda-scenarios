@@ -31,7 +31,7 @@
       "client": [
         {
           "file": "custom-metrics.json",
-          "target": "~/"
+          "target": "/home/scrapbook/"
         }
       ]
     }
