@@ -28,14 +28,31 @@
       "text": "finish.md"
     },
     "assets": {
+      "host01": [
+        {
+          "file": "*",
+          "target": "/root"
+        }
+      ],
       "client": [
         {
           "file": "custom-metrics.json",
           "target": "/home/scrapbook/"
+        },
+        {
+          "file": "custom-metrics.json",
+          "target": "~/"
+        },
+        {
+          "file": "custom-metrics.json",
+          "target": "/home/scrapbook/my-metrics.json"
         }
       ]
     }
   },
+  "files": [
+    "custom-metrics.json"
+  ],
   "environment": {
     "uilayout": "editor-terminal",
     "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
