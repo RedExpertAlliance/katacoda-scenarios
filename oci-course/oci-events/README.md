@@ -62,4 +62,4 @@ The OCI Events scenarios that you are about to go through are the following:
 
 # Resources
 
-Official Oracle Documentation 
+Oracle Documentation https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsoverview.htm
