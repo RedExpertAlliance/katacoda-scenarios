@@ -3,22 +3,22 @@ INTRO
 
 With OCI Events you can easily create events that respond to actions that happened within other OCI elemnets, such as:
 
-a) Identity Services
-b) Functions
-c) Database
-d) Compute
-e) Big Data Service
-f) Object Storage
-g) Block Volume 
-h) File Storage
-i) Data Safe
-j) Networking
-k) Health Checks
-l) Analytics
-m) Resource Manager
-n) Content and Experience
-o) Digital Assistant
-p) API Gateway
+- Identity Services
+- Functions
+- Database
+- Compute
+- Big Data Service
+- Object Storage
+- Block Volume 
+- File Storage
+- Data Safe
+- Networking
+- Health Checks
+- Analytics
+- Resource Manager
+- Content and Experience
+- Digital Assistant
+- API Gateway
 
 Pretty much most of the OCI components are candidates to trigger events.
 
