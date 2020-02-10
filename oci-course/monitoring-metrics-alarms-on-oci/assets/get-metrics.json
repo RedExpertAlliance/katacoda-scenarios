@@ -1,0 +1,9 @@
+{
+  "compartmentId": "$compartmentId",
+  "endTime": "2020-02-08T20:00:00+00:00",
+  "namespace": "mymetricsnamespace",
+  "queryText": "productOrder[1m].sum()",
+  "resolution": "5m",
+  "resourceGroup": "divisionX",
+  "startTime": "2020-02-07T23:00:00+00:00"
+}

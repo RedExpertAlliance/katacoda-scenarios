@@ -23,7 +23,7 @@
       },
       "name": "productOrder",
       "namespace": "mymetricsnamespace",
-      "resourceGroup": "division X"
+      "resourceGroup": "divisionX"
     },
     {
       "compartmentId": "$compartmentId",
@@ -49,6 +49,6 @@
       },
       "name": "productOrder",
       "namespace": "mymetricsnamespace",
-      "resourceGroup": "division Y"
+      "resourceGroup": "divisionY"
     }
   ]

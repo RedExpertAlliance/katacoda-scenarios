@@ -1,4 +1,4 @@
-You can publish your own metrics to Monitoring using the API. You can view charts of your published metrics using the Console , query metrics using the API, and set up alarms using the Console or API.You can access your published custom metrics the same way you access any other metrics stored by the Monitoring service. Define your metrics with aggregation in mind. While custom metrics can be posted as frequently as every second, the minimum aggregation interval is one minute.
+You can publish your own metrics to Monitoring using the API. You can view charts of your published metrics using the Console , query metrics using the API, and set up alarms using the Console or API.You can access your published custom metrics the same way you access any other metrics stored by the Monitoring service. Define your metrics with aggregation in mind. While custom metrics can be posted as frequently as every second, the minimum aggregation interval is one minute. The datapoint timestamps must between 2 hours ago and 10 minutes from now.
 
 For example, to monitor application health, one of the common KPIs is failure rate, for which a common definition is the number of failed transactions divided by total transactions. This KPI is usually delivered through application monitoring and management software.
 
@@ -15,11 +15,14 @@ Open file *custom-metrics.json*
 Replace two occurrences of `$compartmentId` in this file with the value of the compartment OCID:
 `echo compartment OCID= $compartmentId`{{execute}}
 
-Feel free to change timestamps or other values in the file.
+Replace the timestamps with values that are less than two hours ago.
 
 To post the metrics defined in this file, execute this statement:
 
 `oci monitoring metric-data post --endpoint https://telemetry-ingestion.us-ashburn-1.oraclecloud.com --metric-data file://./custom-metrics.json`{{execute}}
 
 
+To retrieve metrics:
+
+`oci monitoring metric-data summarize-metrics-data --from-json file://./get-metrics.json`{{execute}}
 
