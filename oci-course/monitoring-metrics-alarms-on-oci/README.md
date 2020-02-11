@@ -14,7 +14,7 @@ Next, you switch to the console. In he browser, you will use the Metrics Explore
 
 You will then define an Alarm - a condition defined in terms of the metrics that we want to use to detect special situations or behavior. Special is anything we deem special: too much or too little activity, too large or too small files, too slow or too fast function execution. Any condition we can define using the metrics reported by OCI can be used for the Alarm.
 
-The Alarm is association with a Notification Topic. When the Alarm is triggered because its condition has been met by actual metrics, this will be visible in he console. In order to also generate an action from the Alarm, a message is published by a triggering alarm to the Notification Topic. You will create a subscriber to the Notification Topic that sends an email to alert the recipient - you in this scenario - of the fact that the alarm is triggered. A notification topic can also invoke a Web Hook (any HTTP endpoint) to deliver a notification message.
+The Alarm is associated with a Notification Topic. When the Alarm is triggered because its condition has been met by actual metrics, this will be visible in he console. In order to also generate an action from the Alarm, a message is published by a triggering alarm to the Notification Topic. You will create a subscriber to the Notification Topic that sends an email to alert the recipient - you in this scenario - of the fact that the alarm is triggered. A notification topic can also invoke a Web Hook (any HTTP endpoint) to deliver a notification message.
 
 Of course you will at that point perform some additional activity that should set of the alarm and cause the email to be sent your way.
 
