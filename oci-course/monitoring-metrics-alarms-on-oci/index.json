@@ -32,6 +32,10 @@
         {
           "file": "custom-metrics.json",
           "target": "/root"
+        },
+        {
+          "file": "get-metrics.json",
+          "target": "/root"
         }
       ]
     }
