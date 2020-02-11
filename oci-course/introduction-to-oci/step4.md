@@ -1,1 +1,1 @@
-In this step we create and navigate some compartments. 
+Virtually all OCI resources live in a *compartment*. You will learn more about these compartments, and create one yourself. In this new compartment, you will create a bucket - a container for objects in the Object Storage service. Then you will upload a file into this bucket.
