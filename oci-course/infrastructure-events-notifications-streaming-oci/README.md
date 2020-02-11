@@ -41,6 +41,20 @@ You also have the ability to chain events, with the alternative to use the atrri
 - You want to create an action, everytime a bucket is created AND when the resourceName is "backups". 
 - If those two things happen, you want to take action and send an Email to the backups administrator.
 
+The format of the OCI Event is compliant with an standard defined by the CNCF for cloud based events. The envelope contains elements such as:
+
+- cloudEventsVersion
+- contentType
+- data
+- eventID
+- eventTime
+- eventType
+- eventTypeVersion
+- extensions
+- source
+
+(If you want to lear more about the structe take a look to this documentation https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Reference/eventenvelopereference.htm)
+
 For learning more about events, you can take a look to the official Oracle documentation, here: https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsoverview.htm
 
 The OCI Events scenarios that you are about to go through are the following:
@@ -63,3 +77,4 @@ The OCI Events scenarios that you are about to go through are the following:
 # Resources
 
 Oracle Documentation https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsoverview.htm
+Event Envelope reference https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Reference/eventenvelopereference.htm
