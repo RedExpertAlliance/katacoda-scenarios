@@ -10,16 +10,36 @@
         "text": "step1.md"
       },
       {
-        "title": "Step 2 - Compartments",
+        "title": "Step 2 - Core Concepts and Terminology",
         "text": "step2.md"
       },
       {
-        "title": "Step 3 - OCI Command Line Interface",
+        "title": "Step 3 - OCI Console - the browser based user interface for Oracle Cloud Infrastructure",
         "text": "step3.md"
       },
       {
-        "title": "Step 4 - Object Storage",
+        "title": "Step 4 - Compartments",
         "text": "step4.md"
+      },
+      {
+        "title": "Step 5 - Object Storage",
+        "text": "step5.md"
+      },
+      {
+        "title": "Step 6 - Tagging and Searching Resources",
+        "text": "step6.md"
+      },
+      {
+        "title": "Step 7 - Uniquely identifiying OCI Resources using OCIDs",
+        "text": "step7.md"
+      },
+      {
+        "title": "Step 8 - OCI Command Line Interface",
+        "text": "step8.md"
+      },
+      {
+        "title": "Step 9 - Users, Groups and Policies",
+        "text": "step9.md"
       }
     ],
     "intro": {

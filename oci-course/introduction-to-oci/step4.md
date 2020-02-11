@@ -1,3 +1,1 @@
-# Object Storage
-
-One of the foundational services in OCI is Object Storage. 
+In this step we create and navigate some compartments. 

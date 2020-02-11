@@ -1,3 +1,2 @@
-# Compartments
+# Core Concepts and Terminology
 
-In this step we create and navigate some compartments. 
