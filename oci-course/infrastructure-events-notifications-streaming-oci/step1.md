@@ -42,9 +42,9 @@ allow group <RuleAdmins> to manage cloudevents-rules in tenancy
 The <RuleAdmins> group needs to be created and your user must be part of it in order to be able to create what you are going to learn in this scenario.
 
 To validate if your tenant has the policy with the previous statements execute the following:
-`oci iam policy get --policy-id <policy_ocid>` {{execute}}
+`oci iam policy get --policy-id policy_ocid`{{execute}}
 
-Ask for your instructor to give you the policy ocid, or if you are using your own tenant go to the policy page and get the ocid.
+Ask for your instructor to give you the policy_ocid, or if you are using your own tenant go to the policy page and get the ocid.
 
 With the policy and statement in place, we are ready to create our first Rule that will be triggered after a Object Store Bucket is created.
 
