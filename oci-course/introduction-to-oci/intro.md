@@ -6,7 +6,7 @@ Some of the concepts in this scenario:
 
 * Tenancy, Region, Availability Domain
 * Compartments
-* Resources: OCID, Tags, Search
+* Resources, OCID, Tags, Search
 * OCI Command Line Interface tool
 * OCI Browser Console
 * Object Storage Service
