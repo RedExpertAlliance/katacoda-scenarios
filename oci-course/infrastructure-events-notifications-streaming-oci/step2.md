@@ -54,7 +54,36 @@ Let's use the CLI for creating the bucket (you need the OCID for your compartmen
 
 `oci os bucket create -c ocid1.compartment.oc1..625m6yxz567qsecqxu5cqpc5ypyjum4gccynrmiqf2a --name myBucketLabID`{{execute}}
 
-You should had received the email notification, since the two conditions were met: Bucket creation and the name of the Bucket.
+You should had received the email notification, since the two conditions were met: Bucket creation and the name of the Bucket. The email body should look
+something like this:
+
+~~~~
+{
+  "eventType" : "com.oraclecloud.objectstorage.createbucket",
+  "cloudEventsVersion" : "0.1",
+  "eventTypeVersion" : "2.0",
+  "source" : "ObjectStorage",
+  "eventTime" : "2020-02-12T03:47:42.885Z",
+  "contentType" : "application/json",
+  "data" : {
+    "compartmentId" : "ocid1.compartment.oc1..2432422342asddfsaf",
+    "compartmentName" : "funcscompgb",
+    "resourceName" : "myBucket",
+    "resourceId" : "/n/idi66ekilhnr/b/",
+    "availabilityDomain" : "IAD-AD-3",
+    "additionalDetails" : {
+      "bucketName" : "myBucket",
+      "publicAccessType" : "NoPublicAccess",
+      "namespace" : "idi66ekilhnr",
+      "eTag" : "aac9e2c9-e907-40e6-8178-e7f951c57c4a"
+    }
+  },
+  "eventID" : "208dc368-219a-477e-eac7-a665c00c2013",
+  "extensions" : {
+    "compartmentId" : "ocid1.compartment.oc1..23422asfsafsafsafdf"
+  }
+}
+~~~~
 
 Simple, right? Now let's use the Events but mixing them with Oracle Functions.
 
