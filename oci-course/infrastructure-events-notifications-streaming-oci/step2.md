@@ -84,7 +84,7 @@ something like this:
   }
 }
 ~~~~
-This is an standard based event envelope defined by the CNCF, for more details take a look at here [link](https://github.com/cloudevents/spec "cloudevents envelope").
+This is an standard based event envelope defined by the CNCF, for more details take a look at [here](https://github.com/cloudevents/spec "cloudevents envelope").
 
 
 Simple, right? Now let's use the Events but mixing them with Oracle Functions.
