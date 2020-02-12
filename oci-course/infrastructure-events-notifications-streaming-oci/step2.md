@@ -19,17 +19,17 @@ In the next section of the Create Rule page, we will find Rule Conditions.
 We will configure two chain conditions with the following definitions:
 
 1. First Condition.
-	- Condition Type combo, select: Event Type
-	- Service Name combo, select: Object Storage
-	- Event Type, select: Bucket Creation
+	- Condition Type combo box, select: Event Type
+	- Service Name combo box, select: Object Storage
+	- Event Type combo box, select: Bucket Creation
 2. Second Condition.
-	- Condition Type combo, select: Attribute
-	- Attribute name combo, select: resourceName
-	- Attribute values combo, select: myBucket{LabID}
+	- Condition Type combo box, select: Attribute
+	- Attribute name combo box, select: resourceName
+	- Attribute values combo box, select: myBucket{LabID}
 	
 You should had noticed that the second condition contained different values, compared to the first condition. The reason is that the second combo is always 
 going to be affected depending on what you chose in the first one. In this case, we used Object Storage as the Service Name, and therefore, in the second 
-condition, the Attribute name combo contained the values: availabilityDomain, compartmentId, compartmentName, eTag, namespace, publicAccessType, resourceid,
+condition, the Attribute name combo box contained the values: availabilityDomain, compartmentId, compartmentName, eTag, namespace, publicAccessType, resourceid,
 resourceName. Which are values that will be contained in the event envelope. But if instead of chosing Object Storage, you chose Functions (for example), then
 the list of attribute names will be different.
 
@@ -54,7 +54,38 @@ Let's use the CLI for creating the bucket (you need the OCID for your compartmen
 
 `oci os bucket create -c ocid1.compartment.oc1..625m6yxz567qsecqxu5cqpc5ypyjum4gccynrmiqf2a --name myBucketLabID`{{execute}}
 
-You should had received the email notification, since the two conditions were met: Bucket creation and the name of the Bucket.
+You should had received the email notification, since the two conditions were met: Bucket creation and the name of the Bucket. The email body should look
+something like this:
+
+~~~~
+{
+  "eventType" : "com.oraclecloud.objectstorage.createbucket",
+  "cloudEventsVersion" : "0.1",
+  "eventTypeVersion" : "2.0",
+  "source" : "ObjectStorage",
+  "eventTime" : "2020-02-12T03:47:42.885Z",
+  "contentType" : "application/json",
+  "data" : {
+    "compartmentId" : "ocid1.compartment.oc1..2432422342asddfsaf",
+    "compartmentName" : "funcscompgb",
+    "resourceName" : "myBucket",
+    "resourceId" : "/n/idi66ekilhnr/b/",
+    "availabilityDomain" : "IAD-AD-3",
+    "additionalDetails" : {
+      "bucketName" : "myBucket",
+      "publicAccessType" : "NoPublicAccess",
+      "namespace" : "idi66ekilhnr",
+      "eTag" : "aac9e2c9-e907-40e6-8178-e7f951c57c4a"
+    }
+  },
+  "eventID" : "208dc368-219a-477e-eac7-a665c00c2013",
+  "extensions" : {
+    "compartmentId" : "ocid1.compartment.oc1..23422asfsafsafsafdf"
+  }
+}
+~~~~
+This is an standard based event envelope defined by the CNCF, for more details take a look at [here](https://github.com/cloudevents/spec "cloudevents envelope").
+
 
 Simple, right? Now let's use the Events but mixing them with Oracle Functions.
 
