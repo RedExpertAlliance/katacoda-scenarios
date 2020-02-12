@@ -19,17 +19,17 @@ In the next section of the Create Rule page, we will find Rule Conditions.
 We will configure two chain conditions with the following definitions:
 
 1. First Condition.
-	- Condition Type combo, select: Event Type
-	- Service Name combo, select: Object Storage
-	- Event Type, select: Bucket Creation
+	- Condition Type combo box, select: Event Type
+	- Service Name combo box, select: Object Storage
+	- Event Type combo box, select: Bucket Creation
 2. Second Condition.
-	- Condition Type combo, select: Attribute
-	- Attribute name combo, select: resourceName
-	- Attribute values combo, select: myBucket{LabID}
+	- Condition Type combo box, select: Attribute
+	- Attribute name combo box, select: resourceName
+	- Attribute values combo box, select: myBucket{LabID}
 	
 You should had noticed that the second condition contained different values, compared to the first condition. The reason is that the second combo is always 
 going to be affected depending on what you chose in the first one. In this case, we used Object Storage as the Service Name, and therefore, in the second 
-condition, the Attribute name combo contained the values: availabilityDomain, compartmentId, compartmentName, eTag, namespace, publicAccessType, resourceid,
+condition, the Attribute name combo box contained the values: availabilityDomain, compartmentId, compartmentName, eTag, namespace, publicAccessType, resourceid,
 resourceName. Which are values that will be contained in the event envelope. But if instead of chosing Object Storage, you chose Functions (for example), then
 the list of attribute names will be different.
 
@@ -84,6 +84,8 @@ something like this:
   }
 }
 ~~~~
+This is an standard based event envelope defined by the CNCF, for more details take a look at here [link](https://github.com/cloudevents/spec "cloudevents envelope").
+
 
 Simple, right? Now let's use the Events but mixing them with Oracle Functions.
 
