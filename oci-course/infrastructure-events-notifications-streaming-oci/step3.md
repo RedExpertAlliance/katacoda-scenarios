@@ -58,6 +58,21 @@ Once the function is deployed, we need to obtain its OCID. To do that, execute t
 
 Copy the OCID and edit the actions.json file to include it.
 
+The action file looks like this
+
+~~~~
+{
+  "actions": [
+    {
+      "actionType": "FAAS",
+      "description": "Invoke PDF conversion when .txt file is uploaded to storage bucket",
+      "isEnabled": true,
+      "functionId": "ocid1.fnfunc.oc1.phx.fadfadfasd"
+    }
+  ]
+}
+~~~~
+
 # Buckets creation
 
 We are going to create two buckets:
@@ -73,6 +88,10 @@ We are going to create two buckets:
 
 # Rule creation using OCI CLI
 
+For the rule creation, execute this:
 
+`oci cloud-events rule create --display-name text2PDF{LabID} --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.object.create", "data": {"bucketName":"inLabID"}}' --compartment-id <compartment-ocid> --actions file://<filename>.json `{{execute}}
 
+Now we are ready to test it, we can use the lorem.txt file to upload it to the input bucket and after a few seconds in the output bucket you should see a 
+PDF file. 
 
