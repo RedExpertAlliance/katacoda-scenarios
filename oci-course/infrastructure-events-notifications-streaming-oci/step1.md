@@ -15,6 +15,8 @@ Try out the following command to get a list of all namespaces you currently have
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
+The lab-compartment should be in place.
+
 ## Oracle Events Configuration
 
 In this scenario we will be mostly using the OCI Console to configure the Events, Rules, Topics, etc.
@@ -22,24 +24,8 @@ In this scenario we will be mostly using the OCI Console to configure the Events
 In the tenant that you are using, there are a set of policies already in place, but if you are curious or if you are using your own environment you need to
 create a set of polices that will allow users to create and manage rules
 
-As we already mentioned in the tenant you are using, those policies are already in place. But if you are using this tutorial pointing to your tenant, then 
-you will have to create the following policies (you need to go to Governance and Administration, go to Identity and click Policies).
-
-Create a Policy and give name/description and type the following statements:
-
-allow group <RuleAdmins> to inspect compartments in tenancy
-allow group <RuleAdmins> to use tag-namespaces in tenancy
-allow group <RuleAdmins> to inspect streams in tenancy
-allow group <RuleAdmins> to use stream-push in tenancy
-allow group <RuleAdmins> to use stream-pull in tenancy
-allow group <RuleAdmins> to use virtual-network-family in tenancy
-allow group <RuleAdmins> to manage function-family in tenancy
-allow group <RuleAdmins> to use ons-topic in tenancy
-allow group <RuleAdmins> to manage cloudevents-rules in tenancy
-
-(For a full explanation of this statements, go to: https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsgetstarted.htm)
-
-The <RuleAdmins> group needs to be created and your user must be part of it in order to be able to create what you are going to learn in this scenario.
+As we already mentioned, in the tenant you are using, those policies are already in place. If you want to learn
+more about those policies take a look [here](https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsgetstarted.htm "Policies Concepts").
 
 To validate if your tenant has the policy with the previous statements execute the following:
 `oci iam policy get --policy-id policy_ocid`{{execute}}
@@ -66,13 +52,10 @@ Now we need to create a suscription to the previous Topic, and there we will con
 is created.
 
 Click on the Topic that we have created, and then click on Subscription. Give a name and select Email as the protocol, then type your prefered email address
-where you want to receive the notifications.
+where you want to receive the notifications. After that happened, you will receive an email where you need to confirm the subscription.
 
 You are all set, now in the next step we will create the Rule that will be triggered after the Bucket creation, and that will use the Topic and Subscription
 previously created.
-
-
-
 
 
 

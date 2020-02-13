@@ -2,7 +2,7 @@
   "title": "UNDER CONSTRUCTION: Responding to OCI Events",
   "description": "OCI Events are published whenever OCI resources are manipulated. These events can trigger notifications, invoke functions and publish streaming events.",
   "difficulty": "beginner",
-  "time": "20 minutes",
+  "time": "30 minutes",
   "details": {
     "steps": [
       {
@@ -15,7 +15,7 @@
       },
 	  {
         "title": "Step 3 - Using OCI Events together with Oracle Functions",
-        "text": "step1.md"
+        "text": "step3.md"
       }
     ],
     "intro": {
