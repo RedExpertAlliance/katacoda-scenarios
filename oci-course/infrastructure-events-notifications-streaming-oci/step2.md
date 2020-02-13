@@ -5,9 +5,9 @@ We also configured our first Topic and Subscription (email based).
 
 Now, we are going to create our first rule, that will be triggered after a Object Storage Bucket creation.
 
-To create the rule go the menu: Solutions and Platform group, go to Application Integration and click om Events Service.
-Then, select the compartment that the Instructor has assigned to you, or if your are using your own tenant, go to the compartment that you defined.
-Once in the compartment, click on the Create Rule button. In that page, define:
+To create the rule, execute the following:
+
+
 
 - The name for your rule. For example: BucketCreationRule{LabID}
 - A short description for your rule

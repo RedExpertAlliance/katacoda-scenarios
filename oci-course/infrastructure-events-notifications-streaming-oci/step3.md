@@ -6,8 +6,8 @@ In this step we will apply what we learned in our previous steps, regarding:
 
 But this time we are not going to use the email notification action, we will call an Oracle Function.
 
-This is a very good integration between two OCI components: OCI based Events and Oracle Functions. This will open up a lot of alternatives and broaden your limits
-in terms of what to do after reacting to an event; at the end, within an Function you can pretty much do whatever you want with code.
+This is a very good integration between two OCI components: OCI based Events and Oracle Functions. This will open up a lot of alternatives and broaden your 
+limits in terms of what to do after reacting to an event; at the end, within an Function you can pretty much do whatever you want with code.
 
 The scenario is quite simple: 
 - We are going to create a function that transform text to a PDF document. 
@@ -90,8 +90,10 @@ We are going to create two buckets:
 
 For the rule creation, execute this:
 
-`oci cloud-events rule create --display-name text2PDF{LabID} --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.object.create", "data": {"bucketName":"inLabID"}}' --compartment-id <compartment-ocid> --actions file://<filename>.json `{{execute}}
+`oci events rule create --display-name text2PDF{LabID} --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.object.create", "data": {"bucketName":"inLabID"}}' --compartment-id <compartment-ocid> --actions file://<filename>.json `{{execute}}
 
 Now we are ready to test it, we can use the lorem.txt file to upload it to the input bucket and after a few seconds in the output bucket you should see a 
 PDF file. 
+
+
 
