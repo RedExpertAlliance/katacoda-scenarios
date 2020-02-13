@@ -7,7 +7,7 @@ https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets
 Now make sure that you are in the right compartment context, of compartment *lab-compartment*. You select the compartment using the Compartment widget in the lower left hand corner. 
 
 Press the button *Create Bucket*. A form appears in which you can enter the details for the new bucket.
-![Create Bucket](/RedExpertAlliance/scenarios/introduction-to-oci/assets/oci-intro-create-bucket.png)
+![Create Bucket](/RedExpertAlliance/courses/introduction-to-oci/assets/oci-intro-create-bucket.png)
 
 
 Set *Bucket Name* to *bucket-LAB_ID* (and replace LAB_ID with the id assigned to you by your instructor, for example 01). Accept the default values for Storage Tier and Encryption. In the field *TAG KEY* enter the value *department* and in *VALUE* enter *innovation*. This assigns a key-value pair to the new bucket that we can make use of later on when searching OCI resources. 
@@ -15,7 +15,7 @@ Set *Bucket Name* to *bucket-LAB_ID* (and replace LAB_ID with the id assigned to
 Press *Create Bucket*.
 
 The new Object Storage Bucket is created. It should be listed in the list of buckets in compartment *lab-compartment*.
-![Bucket List](/RedExpertAlliance/scenarios/introduction-to-oci/assets/oci-intro-after-create-bucket.png)
+![Bucket List](/RedExpertAlliance/courses/introduction-to-oci/assets/oci-intro-after-create-bucket.png)
 
 Click on the name of the new bucket. 
 
@@ -23,7 +23,7 @@ Objects in this bucket can be created in several ways: through the Command Line 
 
 Press *Upload Objects*. A dialog window appears where you can specify an object prefix - for example *LAB<LAB_ID>* - and where you can select or drag & drop files from your computer. Go go ahead and select a file to upload - the contents does not matter. 
 
-![Upload File](/RedExpertAlliance/scenarios/oci-course/introduction-to-oci/assets/oci-intro-upload-file.png)
+![Upload File](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-intro-upload-file.png)
 
 Press *Upload Objects* to upload the file into the bucket in Object Storage. When the upload is complete, you can close the dialog window. 
 
