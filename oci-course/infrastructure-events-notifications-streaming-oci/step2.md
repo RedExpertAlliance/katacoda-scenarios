@@ -7,52 +7,44 @@ Now, we are going to create our first rule, that will be triggered after a Objec
 
 To create the rule, execute the following:
 
+`oci events rule create --display-name myBucketCreation$LabID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.bucket.create", "data": {"bucketName":"myBucket$LabID"}}' --compartment-id $COMPARTMENT_OCID --actions file://actions.json`{{execute}}
 
+With this single CLI command we have created:
 
-- The name for your rule. For example: BucketCreationRule{LabID}
-- A short description for your rule
+- A rule with the name myBucketCreation$LabID
+- A condition associated with the rule that needs to be met to trigger an action. The condition is that the bucket created name needs to be named 
+as myBucket$LabID
+- The action is defined in the actions.json file, whose contents are:
 
-Then the interesting part has arrived, we are going to determine the conditions that needs to be met in order to trigger the rule that will notifies us 
-after a bucket creation.
+~~~~
+{
+  "actions": [
+    {
+      "actionType": "ONS",
+      "description": "Send an email notification when a Bucket with name myBucketCreation$LabID is created",
+      "isEnabled": true,
+      "topicId": "ocid1.onstopic.oc1.iadadfasfd"
+    }
+  ]
+}
+~~~~
 
-In the next section of the Create Rule page, we will find Rule Conditions. 
-We will configure two chain conditions with the following definitions:
-
-1. First Condition.
-	- Condition Type combo box, select: Event Type
-	- Service Name combo box, select: Object Storage
-	- Event Type combo box, select: Bucket Creation
-2. Second Condition.
-	- Condition Type combo box, select: Attribute
-	- Attribute name combo box, select: resourceName
-	- Attribute values combo box, select: myBucket{LabID}
-	
-You should had noticed that the second condition contained different values, compared to the first condition. The reason is that the second combo is always 
-going to be affected depending on what you chose in the first one. In this case, we used Object Storage as the Service Name, and therefore, in the second 
-condition, the Attribute name combo box contained the values: availabilityDomain, compartmentId, compartmentName, eTag, namespace, publicAccessType, resourceid,
-resourceName. Which are values that will be contained in the event envelope. But if instead of chosing Object Storage, you chose Functions (for example), then
-the list of attribute names will be different.
-
-Then is the Actions section, here we will define which action take after the conditions are met. We have three options:
-
-- Streaming
-- Notifications
-- Functions
+The elements in the actions file, are:
+- actionType. In this case ONS (Oracle Notification Services). Other options are FAAS (see Step 3), and OSS (Streaming).
+- description. A brief description of what the actions is going to perform
+- isEnabled. If you cand to enable it as it is created, you can use true, if not, use false
+- topicId. You need to get the topicId from the previous step (Step 2)
 
 (In this step we will use Notifications, but in the up coming steps you will test the Functions option).
 
-After we have selected Notifications, select the compartment where you've created the Topic, and finally choose your Topic (topic{LabID}).
-
-You should had noticed that you can incorporate more than one action, which is a pretty good functionality, since you can chain different actions, not
-only notify someone, but maybe execute something via a Function.
-
-Now just click on the Create Rule button.
+You should had noticed that you can incorporate more than one action (the json file contains an array), which is a pretty good functionality, since you can 
+chain different actions, not only notify someone, but maybe execute something via a Function.
 
 We are all set with our first Rule, now let's create a Bucket and see if we receive the notification.
 
-Let's use the CLI for creating the bucket (you need the OCID for your compartment, and the remember to include your LabID after the bucket name):
+Let's use the CLI for creating the bucket (you need the OCID for your compartment, and also remember to include your LabID after the bucket name):
 
-`oci os bucket create -c ocid1.compartment.oc1..625m6yxz567qsecqxu5cqpc5ypyjum4gccynrmiqf2a --name myBucketLabID`{{execute}}
+`oci os bucket create -c $COMPARTMENT_OCID --name myBucketLabID`{{execute}}
 
 You should had received the email notification, since the two conditions were met: Bucket creation and the name of the Bucket. The email body should look
 something like this:
