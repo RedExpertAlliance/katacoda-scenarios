@@ -20,15 +20,17 @@ The scenario is quite simple:
 
 # Function creation
 
-We are going to leverage from this code:
-https://github.com/rcarrascosps/fn-text2pdf
+We are going to leverage from this code, which was originally developed by Abhishek Gupta.
+https://github.com/rcarrascosps/fn-text2pdf-events
 
 First let's clone the code:
-`git clone https://github.com/rcarrascosps/fn-text2pdf.git`{{execute}}
+`git clone https://github.com/rcarrascosps/fn-text2pdf-events.git`{{execute}}
 
-Once you have the code, execute this:
+Copy the private key to the folder where the repository was downloaded.
 
-`fn create app text2pdf{LabID} --annotation oracle.com/oci/subnetIds={SUBNETS} --config TENANT_OCID={TENANT_OCID} --config USER_OCID={USER_OCID} --config FINGERPRINT={FINGERPRINT} --config PASSPHRASE={PASSPHRASE>} --config REGION={REGION} --config PRIVATE_KEY_NAME={PRIVATE_KEY_NAME} --config NAMESPACE={NAMESPACE} --config BUCKET_NAME={BUCKET_NAME}`{{execute}}
+Once you have the code and the private key, execute this:
+
+`fn create app text2pdfEvents{LabID} --annotation oracle.com/oci/subnetIds=<SUBNETS> --config TENANT_OCID=<TENANT_OCID> --config USER_OCID=<USER_OCID> --config FINGERPRINT=<FINGERPRINT> --config PASSPHRASE=<PASSPHRASE> --config REGION=<REGION> --config PRIVATE_KEY_NAME=<PRIVATE_KEY_NAME> --config OUTPUT_BUCKET=<OUTPUT_BUCKET>`{{execute}}
 
 You need to ask the instructor for the following elements:
 
@@ -40,7 +42,7 @@ You need to ask the instructor for the following elements:
 - REGION
 - NAMESPACE
 - PRIVATE_KEY_NAME
-- BUCKET_NAME (this is the bucket where you need to upload your file)
+- OUTPUT_BUCKET (this is the bucket where the PDF will be stored)
 
 Do not forget to identity your application (text2pdf{LabID}) in order to differentiate it from others.
 
@@ -48,7 +50,28 @@ Once the application is created we need to deploy it executing this:
 
 `cd fn-text2pdf`{{execute}}
 
-`fn -v deploy --app text2{LabID} --build-arg PRIVATE_KEY_NAME={privateKeyName}`{{execute}}
+`fn -v deploy --app text2pdfEvents{LabId} --build-arg PRIVATE_KEY_NAME=<private_key_name>`{{execute}}
+
+Once the function is deployed, we need to obtain its OCID. To do that, execute the following:
+
+`fn inspect fn text2pdfEvents{LabId} convert | jq '.id' | sed -e 's/^"//' -e 's/"$//'`{{execute}}
+
+Copy the OCID and edit the actions.json file to include it.
+
+# Buckets creation
+
+We are going to create two buckets:
+
+- One to upload the text file
+- A second one where the PDF document will be automatically uploaded by our function
+
+`oci os bucket create -c ocid1.compartment.oc1..625m6yxz567qsecqxu5cqpc5ypyjum4gccynrmiqf2a --name inLabID`{{execute}}
+(Replace the LabID for your assigned LabID)
+
+`oci os bucket create -c ocid1.compartment.oc1..625m6yxz567qsecqxu5cqpc5ypyjum4gccynrmiqf2a --name outLabID`{{execute}}
+(Replace the LabID for your assigned LabID)
+
+# Rule creation using OCI CLI
 
 
 
