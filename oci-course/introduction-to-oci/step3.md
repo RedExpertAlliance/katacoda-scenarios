@@ -8,6 +8,8 @@ Login using the console credentials provided by the lab instructor.
 
 In the upper right hand corner of the console, you will find the region that we are currently in the context of, as well as our help-lines to Live Chat and the Help menu that has links to create a My Oracle Support ticket and submit a request for increasing limits on cloud resources. The Person icon links to our account settings. Through the *globe* icon, you can change the language of the console. 
 
+![Console](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-intro-console.png)
+
 In the upper left hand corner is the so called hamburger menu. Click it to bring up a menu that contains all OCI services, from Core Infrastructure through Database and Data and AI all the way down to Solutions and Platfor and finally Governance and Administration. In this last section we can manage identity and access and inspect our cloud usage and bill. We will be navigating this menu quite a bit in the steps and scenarios still to come.
 
 Let's look at *compartments*.
