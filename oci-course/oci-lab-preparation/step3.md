@@ -2,6 +2,19 @@
 
 Create policies to assign privileges to group *lab-participants*  
 
+
+## Compartments
+
+Policy `lab-participants-compartment-mgt-lab-compartment` to allow lab-participants to work with Compartments in compartment lab-compartment:
+
+`Allow group lab-participants to manage compartments in compartment lab-compartment`
+
+```
+TODO
+oci iam policy create  --name "lab-participants-object-storage-in-lab-compartment" --compartment-id $compartmentId  --statements "[ \"Allow group lab-participants to use object-family in compartment lab-compartment\",\"Allow group lab-participants to manage buckets in compartment lab-compartment\",\"Allow group lab-participants to manage objects in compartment lab-compartment\" ]" --description "to allow lab-participants to work with Object Storage"
+```{{execute}}
+
+
 ## Functions (FaaS) Policies
 
 Prepare some environment variables
