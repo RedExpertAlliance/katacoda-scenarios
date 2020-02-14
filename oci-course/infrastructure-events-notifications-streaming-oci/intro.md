@@ -59,7 +59,7 @@ For learning more about events, you can take a look to the official Oracle docum
 
 The OCI Events scenarios that you are about to go through are the following:
 
-1. First scenario.
+1.First scenario.
 - We will use the object storage as the service that will trigger the events.
 - This first scenario is the simplest one. After a bucket is created and the name is bucketLab+LabID, you will receive an email with the bucket details.
 - In this scenario you will learn:
@@ -68,13 +68,13 @@ The OCI Events scenarios that you are about to go through are the following:
 	c) How to create an Action
 	d) How to create a Topic with an email Endpoint
 
-2. Second scenario.
+2.Second scenario.
 - We are still going to use the object storage, but the rule will be different
 - In this second scenario, we will react after an object is created. 
 - We will create a function that will receive the event information including the object created, and it will use its contents to create a PDF and upload it to a second bucket.
 - The function code will be provided in the scenario. The recommendation is that you follow the functions scenarios before executing this.
 
-![OCI Cloud Native Events](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/intro.png)
+![OCI Cloud Native Events](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/intro.PNG)
 
 
 # Resources
