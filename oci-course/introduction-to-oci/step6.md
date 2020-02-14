@@ -2,6 +2,7 @@ Tagging and Searching Resources
 
 It is easy to find resources, using the Search tool in the console. You can search by name, and by several other attributes. Or by user defined tags: any OCI resource can be further labeled using tags. These help with searching and grouping and also with billing, monitoring and security policies. You will create custom tags - and use them in searching. 
 
+![Search](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-intro-search.png)
 
 Tagging
 
