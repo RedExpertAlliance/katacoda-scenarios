@@ -74,7 +74,7 @@ The OCI Events scenarios that you are about to go through are the following:
 - We will create a function that will receive the event information including the object created, and it will use its contents to create a PDF and upload it to a second bucket.
 - The function code will be provided in the scenario. The recommendation is that you follow the functions scenarios before executing this.
 
-![OCI Cloud Native Events](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/intro.PNG)
+![OCI Cloud Native Events](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/intro.jpg)
 
 
 # Resources

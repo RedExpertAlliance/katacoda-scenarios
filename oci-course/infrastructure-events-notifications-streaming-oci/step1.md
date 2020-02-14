@@ -55,6 +55,9 @@ Execute this:
 
 After this you should receive an email to confirm the subscription. Once you receive it click on the link to confirm it.
 
+![Email Notification](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/emailNotification.jpg)
+
+
 You are all set, now in the next step we will create the Rule that will be triggered after the Bucket creation, and that will use the Topic and Subscription
 previously created.
 
