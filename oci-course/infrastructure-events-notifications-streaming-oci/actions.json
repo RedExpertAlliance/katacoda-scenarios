@@ -1,0 +1,10 @@
+{
+  "actions": [
+    {
+      "actionType": "ONS",
+      "description": "Send an Email Notification after a bucket is created",
+      "isEnabled": true,
+      "topicId": "TopicID"
+    }
+  ]
+}

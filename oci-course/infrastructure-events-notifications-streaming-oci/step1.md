@@ -7,6 +7,10 @@ You need to provide details on the OCI tenancy you will work in and the OCI user
 
 Paste the contents provided by the workshop instructor into these two files.
 
+Set the environment variable LAB_ID to the number provided to you by the workshop instructor.
+
+`export LAB_ID=1`{{execute}}
+
 Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and you can continue.
 
 Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
@@ -44,7 +48,7 @@ This is the list of things that we are going to create:
 
 For the Topic, execute this:
 
-`oci ons topic create -c $COMPARTMENT_OCID --name TopicCLITest$LabID`{{execute}}
+`oci ons topic create -c $COMPARTMENT_OCID --name TopicCLITest$LAB_ID`{{execute}}
 
 Now we need to create a subscription to the previous Topic, and there we will configure our own email address to receive the notifications after the Bucket 
 is created.
@@ -55,7 +59,7 @@ Execute this:
 
 After this you should receive an email to confirm the subscription. Once you receive it click on the link to confirm it.
 
-![Email Notification](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/emailNotification.jpg)
+![Email Confirmation](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/emailConfirmation.jpg)
 
 
 You are all set, now in the next step we will create the Rule that will be triggered after the Bucket creation, and that will use the Topic and Subscription

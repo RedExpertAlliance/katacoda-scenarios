@@ -7,13 +7,13 @@ Now, we are going to create our first rule, that will be triggered after a Objec
 
 To create the rule, execute the following:
 
-`oci events rule create --display-name myBucketCreation$LabID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.bucket.create", "data": {"bucketName":"myBucket$LabID"}}' --compartment-id $COMPARTMENT_OCID --actions file://actions.json`{{execute}}
+`oci events rule create --display-name myBucketCreation$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.bucket.create", "data": {"bucketName":"myBucket$LAB_ID"}}' --compartment-id $COMPARTMENT_OCID --actions file://actions.json`{{execute}}
 
 With this single CLI command we have created:
 
-- A rule with the name myBucketCreation$LabID
+- A rule with the name myBucketCreation$LAB_ID
 - A condition associated with the rule that needs to be met to trigger an action. The condition is that the bucket created name needs to be named 
-as myBucket$LabID
+as myBucket$LAB_ID
 - The action is defined in the actions.json file, whose contents are:
 
 ~~~~
@@ -21,7 +21,7 @@ as myBucket$LabID
   "actions": [
     {
       "actionType": "ONS",
-      "description": "Send an email notification when a Bucket with name myBucketCreation$LabID is created",
+      "description": "Send an email notification when a Bucket with name myBucketCreation$LAB_ID is created",
       "isEnabled": true,
       "topicId": "ocid1.onstopic.oc1.iadadfasfd"
     }
@@ -42,13 +42,12 @@ chain different actions, not only notify someone, but maybe execute something vi
 
 We are all set with our first Rule, now let's create a Bucket and see if we receive the notification.
 
-Let's use the CLI for creating the bucket (you need the OCID for your compartment, and also remember to include your LabID after the bucket name):
+Let's use the CLI for creating the bucket (you need the OCID for your compartment, and also remember to include your LAB_ID after the bucket name):
 
-`oci os bucket create -c $COMPARTMENT_OCID --name myBucketLabID`{{execute}}
+`oci os bucket create -c $COMPARTMENT_OCID --name myBucketLAB_ID`{{execute}}
 
 You should had received the email notification, since the two conditions were met: Bucket creation and the name of the Bucket. The email body should look
 something like this:
-
 ~~~~
 {
   "eventType" : "com.oraclecloud.objectstorage.createbucket",
@@ -76,6 +75,10 @@ something like this:
   }
 }
 ~~~~
+
+![Email Event](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/emailEvent.jpg)
+
+
 This is an standard based event envelope defined by the CNCF, for more details take a look at [here](https://github.com/cloudevents/spec "cloudevents envelope").
 
 
