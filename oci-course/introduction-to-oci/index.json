@@ -2,7 +2,7 @@
   "title": "UNDER CONSTRUCTION: An introduction to Oracle Cloud Infrastructure core concepts",
   "description": "First steps on OCI - learn about tenancy, compartments, groups, policies, console, OCI Command Line Interface, Object Storage, Resource Tags and Search.",
   "difficulty": "beginner",
-  "time": "20 minutes",
+  "time": "30 minutes",
   "details": {
     "steps": [
       {
