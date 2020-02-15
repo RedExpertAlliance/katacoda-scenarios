@@ -21,13 +21,13 @@ To check out the tag namespaces that have currently been set up in the tenancy, 
 You should see the tags namespace *lab-tags*. Click on the name to drill down. You see the details for the namespace. Click on the button *Create Tag Definition*. A dialog appears for defining a tag. Create a tag called *region*. Check the box for *COST-TRACKING*. Select the option *A LIST OF VALUES* and define the *VALUES*: global, americas, emea and apac. This tag can be used to label resources with the imaginary region within our imaginary organization for which they are created and that should pay for them. This tag can be used to prepare cost statements grouped by region. It can also be used in security policies. Note: Defined tag keys are case insensitive.
 Defined tag values are case sensitive. For example, "alpha" and "Alpha" are distinct values. 
 
-![Create Defined Tag](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-created-defined-tag.png)
+![Create Defined Tag](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-create-defined-tag.png)
 
 Click on button *Create Tag Definition*. The tag definition is created in the tag namespace.
 
 Return to the bucket that you created in the previous step: navigate to Core Infrastructure | Object Storage | Object Storage, or use the direct URL for Ashburn: https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets. Drill down to the bucket details page for *bucket-*LAB_ID*. Click on the button *Add Tags*. Now specify using the new defined tag *region* that this bucket is created specifically for region *americas*. 
 
-![Add Tag to Bucket](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-add-tag-to-bucket.png)
+![Add Tag to Bucket](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-apply-tag-to-bucket.png)
 
 After clicking *Add Tags*, the tag is added to the bucket. When you no inspect tab *Tags*, you will find three Defined Tags on the bucket and one free format tag. 
 
@@ -47,14 +47,15 @@ The Cost Analysis page - https://console.us-ashburn-1.oraclecloud.com/account-ma
 ### Tag Defaults
 
 Two of the defined tags from the namespace *Oracle-Tags* were added automatically when the bucket was created, because they have been defined as *Tag Defaults*. Tag defaults are tags that have been defined to be applied automatically to all resources, at the time of creation, in a specific compartment. This feature allows you to ensure that appropriate tags are applied at resource creation without requiring the user who is creating the resource to have access to the tag namespaces.Tag defaults are defined for a specific compartment, and in the Console you manage them on the Compartment Details page.  Tag defauls are inherited in nested compartments. For example, the two tags that were applied by default to the bucket created in *lab-compartment* were the result of default tags defined at root compartment level:  
-![Tag Defaults](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-add-tag-defaults.png)
+![Tag Defaults](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-tag-defaults.png)
 
 In the definition of Tag Defaults, you can use tag variables that resolve to actual value when a resource is created and the tag is attached. At the present, the available variables are ${oci.datetime}, ${iam.principal.name} and ${iam.principal.type}. 
 
 
 
 ## Resources
-OCI Docs on [Tagging OCI Resources](https://docs.cloud.oracle.com/en-us/iaas/Content/Tagging/Concepts/taggingoverview.htm)
-OCI Docs on [Tag Defaults](https://docs.cloud.oracle.com/en-us/iaas/Content/Tagging/Tasks/managingtagdefaults.htm)
-OCI Docs on [Cost Tracking Tags](https://docs.cloud.oracle.com/en-us/iaas/Content/Tagging/Tasks/usingcosttrackingtags.htm)
+
+* OCI Docs on [Tagging OCI Resources](https://docs.cloud.oracle.com/en-us/iaas/Content/Tagging/Concepts/taggingoverview.htm)
+* OCI Docs on [Tag Defaults](https://docs.cloud.oracle.com/en-us/iaas/Content/Tagging/Tasks/managingtagdefaults.htm)
+* OCI Docs on [Cost Tracking Tags](https://docs.cloud.oracle.com/en-us/iaas/Content/Tagging/Tasks/usingcosttrackingtags.htm)
 
