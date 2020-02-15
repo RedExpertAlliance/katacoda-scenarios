@@ -30,7 +30,7 @@ Copy the private key to the folder where the repository was downloaded.
 
 Once you have the code and the private key, execute this:
 
-`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds=<SUBNETS> --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=./.oci/oci_api_key.pem --config OUTPUT_BUCKET=out$LAB_ID`{{execute}}
+`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds=$SUBNETS --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=./.oci/oci_api_key.pem --config OUTPUT_BUCKET=out$LAB_ID`{{execute}}
 
 You need to have all the following environment variables already set.
 

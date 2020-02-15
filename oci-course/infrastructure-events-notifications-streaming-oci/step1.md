@@ -11,6 +11,17 @@ Set the environment variable LAB_ID to the number provided to you by the worksho
 
 `export LAB_ID=1`{{execute}}
 
+Now let'´s set the following variables, please ask the instructor the correct values, depending on the instance assigned:
+
+`export SUBNETS=sbunetID`{{execute}}
+`export TENANT_OCID=tenantID`{{execute}}
+`export USER_OCID=tenantID`{{execute}}
+`export FINGERPRINT=tenantID`{{execute}}
+`export PASSPHRASE=tenantID`{{execute}}
+`export REGION=tenantID`{{execute}}
+`export NAMESPACE=tenantID`{{execute}}
+
+
 Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and you can continue.
 
 Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
