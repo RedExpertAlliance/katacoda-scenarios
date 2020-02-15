@@ -9,3 +9,5 @@ touch  ~/.oci/oci_api_key.pem
 curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
 chmod +777 install-oci-cli.sh
 ./install-oci-cli.sh --accept-all-defaults
+
+touch /root/allSetInBackground
