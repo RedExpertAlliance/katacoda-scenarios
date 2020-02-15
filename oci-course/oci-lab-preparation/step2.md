@@ -32,7 +32,8 @@ cs=$(oci iam compartment list)
 export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
 ```{{execute}}
 
-
+Create tags namespace lab-tags in compartment lab-compartment
+TODO
 
  (Compartment, VCN, API Gateway, Stream)
 
