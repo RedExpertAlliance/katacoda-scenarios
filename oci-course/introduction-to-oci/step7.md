@@ -13,7 +13,7 @@ The OCID is a fairly long string. It is composed in a structured way:
 * future use: Reserved for future use. Currently blank.
 * unique ID: The unique portion of the ID. The format may vary depending on the type of resource or service.
 
-You do not really to be able to interpret OCID values. It is good however to know what they are and what they are used for. 
+You do not really need to be able to interpret OCID values. It is useful however to know what they are and what they are used for. 
 
 For most of the OCI resources you create, you can optionally assign a display name. It can be a friendly description or other information that helps you easily identify the resource. The display name does not have to be unique, and you can change it whenever you like. The Console shows the resource's display name along with its OCID.
 
