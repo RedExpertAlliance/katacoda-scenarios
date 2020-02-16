@@ -1,3 +1,11 @@
+echo "Installing OCI CLI"
+
+# Install the OCI CLI in silent mode with default settings
+curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
+chmod +777 install-oci-cli.sh
+./install-oci-cli.sh --accept-all-defaults
+
+
 echo "Installing Project Fn - in the background"
 
 export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
