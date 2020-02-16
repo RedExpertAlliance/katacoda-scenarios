@@ -22,7 +22,7 @@ It is easy to find resources, using the Search tool in the console. You can sear
 
 One attribute assigned to all OCI resources is OCID - the cloud wide identifier that uniquely designates any resource. You will learn about OCIDs.
 
-In addition to the OCI console, you can interact with Oracle Cloud Infrastructure through the Command Line Interface or CLI. This CLI is stand alone application that you need to install on a computer, for example your laptop. You need to provide a configuration file to the CLI that define which cloud tenancy to interact with and which credentials to use for that. In this scenario, you will install the OCI CLI, provide a configuration file and then use the CLI to perform a number of look up operations and administrative actions.  
+In addition to the OCI console, you can interact with Oracle Cloud Infrastructure through the Command Line Interface or CLI. This CLI is stand alone application that you need to install on a computer, for example your laptop. You need to provide a configuration file to the CLI that defines which cloud tenancy to interact with and which credentials to use for that. In this scenario, you will install the OCI CLI, provide a configuration file and then use the CLI to perform a number of look up operations and administrative actions.  
 
 The CLI allows the same operations to be performed as the Console - using command line statements that lend themselves to being scripted. Automating management of OCI resources can be done using the OCI CLI - the term *infrastructure as code* is typically used for this type of automation. Infrastructure as Code on OCI can also be done using Terraform and the Terraform Provider for Oracle Cloud Infrastructure.
 
