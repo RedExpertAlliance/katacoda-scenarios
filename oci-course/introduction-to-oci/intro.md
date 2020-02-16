@@ -11,6 +11,7 @@ Some of the concepts in this scenario:
 * OCI Browser Console
 * Object Storage Service
 * Users, Groups, Dynamic Groups, Policies
+* Audit Trail
 
 # Resource
 

@@ -7,7 +7,8 @@ Check in the console: Governance and Administration | Governance | Audit or at h
 Note that all operations - whether they took place via the Console or through the Command Line Interface - are expressed in terms of REST API calls - GET, POST, PUT, DELETE - for Read, Create, Update and Delete.
 
 Audit details can also be retrieved through the API and the CLI, like this:
-`oci audit event list --compartment-id=$compartmentId`{{execute}}
+` oci audit event list --compartment-id=$compartmentId --end-time=2020-02-16 --start-time=2020-02-14`{{execute}}
+You need to update the dates in start-time and end-time.
 
 Note that retrieving the audit trail itself is an event that is part of the audit trail.
 
