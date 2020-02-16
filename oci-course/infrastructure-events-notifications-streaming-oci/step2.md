@@ -79,7 +79,7 @@ something like this:
 }
 ~~~~
 
-![Email Event](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/emailEvent.jpg)
+![Email Event](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/emailEvent2.jpg)
 
 
 This is an standard based event envelope defined by the CNCF, for more details take a look at [here](https://github.com/cloudevents/spec "cloudevents envelope").
