@@ -11,7 +11,12 @@ Please proceed now by providing details on the OCI tenancy you are working in an
 
 Paste the respective snippets of contents provided by the workshop instructor into these two files.
 
-`~/install-oci-cli.sh --accept-all-defaults`{{execute}}
+Execute these three statements that will install the OCI Command Line Interface into the Katacoda scenario's Ubuntu environment:
+```
+curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > ~/install-oci-cli.sh
+chmod +777 install-oci-cli.sh
+~/install-oci-cli.sh --accept-all-defaults
+```{{execute}}
 
 Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
 
