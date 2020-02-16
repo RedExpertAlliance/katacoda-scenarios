@@ -11,6 +11,8 @@ Please proceed now by providing details on the OCI tenancy you are working in an
 
 Paste the respective snippets of contents provided by the workshop instructor into these two files.
 
+`~/install-oci-cli.sh --accept-all-defaults`{{execute}}
+
 Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
 
 `oci os ns get`{{execute}} 
@@ -29,7 +31,8 @@ To get details for the *lab-compartment*, we can use a little tool called *jq* t
 
 To store the OCID for compartment *lab-compartment* in environment variable *compartmentId* , execute this command:
 
-```export compartmentId=$(oci iam compartment list | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
+```
+export compartmentId=$(oci iam compartment list | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id ')
 echo $compartmentId
 ```{{execute}}
 
@@ -56,7 +59,7 @@ And to get the details for your specific bucket:
 `oci os bucket list --compartment-id=$compartmentId | jq -r --arg name "bucket-$LAB_ID" '.data | map(select(."name" == $name)) | .[0] '`{{execute}}
 Actually, these are not all the details. It turns out there is a much better way to retrieve the bucket details, using this command:
 
-`oci os bucket get --bucket-name="bucket-$LAB_ID"`{{execute}}.
+`oci os bucket get --bucket-name="bucket-$LAB_ID"`{{execute}}
 
 Let's list the files in the bucket - to see the file you have uploaded in step 5.
 
