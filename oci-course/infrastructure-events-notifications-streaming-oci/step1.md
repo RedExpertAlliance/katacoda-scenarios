@@ -7,21 +7,6 @@ You need to provide details on the OCI tenancy you will work in and the OCI user
 
 Paste the contents provided by the workshop instructor into these two files.
 
-Set the environment variable LAB_ID to the number provided to you by the workshop instructor.
-
-`export LAB_ID=1`{{execute}}
-
-Now let'´s set the following variables, please ask the instructor the correct values, depending on the instance assigned:
-
-`export SUBNETS=sbunetID`{{execute}}
-`export TENANT_OCID=tenantID`{{execute}}
-`export USER_OCID=tenantID`{{execute}}
-`export FINGERPRINT=tenantID`{{execute}}
-`export PASSPHRASE=tenantID`{{execute}}
-`export REGION=tenantID`{{execute}}
-`export NAMESPACE=tenantID`{{execute}}
-
-
 Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and you can continue.
 
 Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
@@ -30,7 +15,34 @@ Try out the following command to get a list of all namespaces you currently have
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
-The lab-compartment should be in place.
+Set the environment variable LAB_ID to the number provided to you by the workshop instructor.
+
+`export LAB_ID=1`{{execute}}
+
+Now let'´s set the following enviornment variables.
+Note: the assumptions here are a compartment called *lab-compartment*, a VCN called *vcn-lab* and a subnet in that VCN called *Public Subnet-vcn-lab*. We need 
+to get references to these resources in order to create the Functions that we will use in step 3.  
+```
+export CS=$(oci iam compartment list)
+export COMPARTMENT_OCID=$(echo $CS | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
+export VCNS=$(oci network vcn list -c $COMPARTMENT_OCID)
+export VCNID=$(echo $VCNS | jq -r --arg display_name "vcn-lab" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
+export SUBNETS=$(oci network subnet list  -c $COMPARTMENT_OCID --vcn-id $VCNID)
+export SUBNETID=$(echo $SUBNETS | jq -r --arg display_name "Public Subnet-vcn-lab" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
+export NSS=$(oci os ns get)
+export NAMESPACE=$(echo $NSS | jq -r '.data')
+export REGION=us-ashburn-1
+export MY_BUCKET=$(echo myBucket$LAB_ID)
+```{{execute}}
+
+The following variables needs to be set using the information contained in the config ~/.oci/config file
+```
+export TENANT_OCID=tenantID
+export USER_OCID=userID
+export FINGERPRINT=fingerPrint
+export PASSPHRASE=passphrase
+```{{execute}}
+
 
 ## Oracle Events Configuration
 
@@ -39,14 +51,6 @@ create a set of polices that will allow users to create and manage rules
 
 As we already mentioned, in the tenant you are using, those policies are already in place. If you want to learn
 more about those policies take a look [here](https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsgetstarted.htm "Policies Concepts").
-
-To validate if your tenant has the policy with the previous statements execute the following:
-`oci iam policy get --policy-id $POLICY_OCID`{{execute}}
-
-(If you are using your own tenant go to the policy page and get the OCID.)
-
-With the policy and statements in place, we are ready to create our first Rule that will be triggered after a Object Store Bucket is created.
-
 
 ## Rule and Bucket creation using Oracle CLI
 
@@ -59,10 +63,18 @@ This is the list of things that we are going to create:
 
 For the Topic, execute this:
 
-`oci ons topic create -c $COMPARTMENT_OCID --name TopicCLITest$LAB_ID`{{execute}}
+`oci ons topic create -c $COMPARTMENT_OCID --name Topic$LAB_ID`{{execute}}
+
+Copy the topic-id that was returned as part of the previous execution.
+Now set the value of TOPIC_ID variable with the value you copied in the previos execution (instead of topic-id put the value you just copied).
+
+`export TOPIC_ID=topic-id"`{{execute}}
 
 Now we need to create a subscription to the previous Topic, and there we will configure our own email address to receive the notifications after the Bucket 
 is created.
+
+First set the following variable with your email address where you want to receive the notifications
+`export YOUR_EMAIL=myname@me.com"`{{execute}}
 
 Execute this:
 
@@ -71,7 +83,6 @@ Execute this:
 After this you should receive an email to confirm the subscription. Once you receive it click on the link to confirm it.
 
 ![Email Confirmation](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/emailConfirmation.jpg)
-
 
 You are all set, now in the next step we will create the Rule that will be triggered after the Bucket creation, and that will use the Topic and Subscription
 previously created.

@@ -27,7 +27,14 @@
     "finish": {
       "text": "finish.md"
     },
-    "assets": {}
+    "assets": {
+      "client": [
+        {
+          "file": "prepareStepOne.sh",
+          "target": "/root/"
+        }
+      ]
+    }
   },
   "environment": {
     "uilayout": "editor-terminal",
