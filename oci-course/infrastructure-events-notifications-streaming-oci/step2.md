@@ -5,9 +5,12 @@ We also configured our first Topic and Subscription (email based).
 
 Now, we are going to create our first rule, that will be triggered after a Object Storage Bucket creation.
 
+Before that, open the file actions.json and edit the value for element topicId, with the one we got in Step 1.
+
 To create the rule, execute the following:
 
-`oci events rule create --display-name myBucketCreation$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.bucket.create", "data": {"bucketName":"myBucket$LAB_ID"}}' --compartment-id $COMPARTMENT_OCID --actions file://actions.json`{{execute}}
+`oci events rule create --display-name myBucketCreation$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.bucket.create", "data": {"bucketName":$MY_BUCKET}}' --compartment-id $COMPARTMENT_OCID --actions file://actions.json`{{execute}}
+(Note that you need to replace the value of the variable $MY_BUCKET for the command to execute correctly)
 
 With this single CLI command we have created:
 
@@ -44,7 +47,7 @@ We are all set with our first Rule, now let's create a Bucket and see if we rece
 
 Let's use the CLI for creating the bucket (you need the OCID for your compartment, and also remember to include your LAB_ID after the bucket name):
 
-`oci os bucket create -c $COMPARTMENT_OCID --name myBucketLAB_ID`{{execute}}
+`oci os bucket create -c $COMPARTMENT_OCID --name myBucket$LAB_ID`{{execute}}
 
 You should had received the email notification, since the two conditions were met: Bucket creation and the name of the Bucket. The email body should look
 something like this:
@@ -58,7 +61,7 @@ something like this:
   "contentType" : "application/json",
   "data" : {
     "compartmentId" : "ocid1.compartment.oc1..2432422342asddfsaf",
-    "compartmentName" : "funcscompgb",
+    "compartmentName" : "lab-compartment",
     "resourceName" : "myBucket",
     "resourceId" : "/n/idi66ekilhnr/b/",
     "availabilityDomain" : "IAD-AD-3",
