@@ -35,6 +35,21 @@ We now have at least caused the creation of two sets of metrics from the Object 
 
 To retrieve some metrics:
 
+This returns the number of objects in various buckets over the last three hours
+`oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "ObjectCount[1m].sum()"`{{execute}}
+
+This returns the number of objects in *bucket-$LAB_ID* over the last three hours
+`oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "ObjectCount[1m]{resourceDisplayName = "bucket-$LAB_ID"}.sum()" --resolution 1m`{{execute}}
+
+Count the put requests to Object Storage (aka the file uploads) into bucket-$LAB-ID:
+`oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "PutRequests[1m]{resourceDisplayName = "bucket-$LAB_ID"}.sum()" --resolution 1m`{{execute}}
+
+The responses to the metrics requests can quickly grow pretty sizable. Typically you will make these requests to collect data for analysis. To better inspect the response, you could save it to a file, using `> filename`. For example:
+
+`oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "PutRequests[1m]{resourceDisplayName = "bucket-$LAB_ID"}.sum()" --resolution 1m > putrequests-bucket-$LAB_ID.txt`{{execute}}
+
+Then open the file in the editor or use cat to inspect the file contents.
+
 
 
 ## Resouces
