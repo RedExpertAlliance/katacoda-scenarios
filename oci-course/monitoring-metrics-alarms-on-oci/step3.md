@@ -10,7 +10,7 @@ Navigate to the Metrics Explorer: in the *hamburger menu*, select Solutions and 
 
 Select *oci_objectstorage* as the Metrics Namespace and *PutRequests* as the metric. Set the *Interval* to *1m* and select *Count* as the *statistic*. Press *Update Chart* to get a chart of the most recent numbers of PutRequests (per one minute interval). Use the Quick Select *Last Hour*.
 
-![Metrics Explorer](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-metrics-explorer.png)
+![Metrics Explorer](/RedExpertAlliance/courses/oci-course/monitoring-metrics-alarms-on-oci/assets/oci-metrics-explorer.png)
 
 Feel free to Adjust the X-axis (to zoom in) on an even shorter time window. Change the metric, to for example look at the number of file downloads (GetRequests) or the (Max) TotalRequestLatency.
 

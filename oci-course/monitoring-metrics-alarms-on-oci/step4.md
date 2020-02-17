@@ -9,4 +9,26 @@ The minimum CPU Utilization per hour on a specific set of VMs is larger than Q %
 ```
 When you define an alarm, you specify a name and description for the alarm and also the rule condition. This condition is expressed using a metric for either a specific resource or type of resource in the context of a compartment. The metric is aggregated over a specified period. This period is not shorter than one minute and not longer than one hour. The aggregation operators include Count, Sum, Min, Max, Mean, Rate and also P50, P90, P95, P99. The last four indicate the high water mark for at least 50, 90, 95 or 99% of all registered metrics for the given time window. The aggregated value is compared to a hard coded value  
 
-TODO rule using tags??
+The steps we will go through:
+* create notification topic *lab-notification-topic-$LAB_ID*
+* create alarm  *lab-alarm-rapid-file-download-$LAB_ID* - associated with notification topic
+
+`oci ons topic create --compartment-id=$compartmentId --name=lab-notification-topic-$LAB_ID --description="notification topic gets notified for lab alarms"`{{execute}}
+
+oci ons topic list --compartment-id=$compartmentId --output table
+
+Get hold of Topic OCID
+`export ONS_TOPIC_OCID=$(oci ons topic list --compartment-id=$compartmentId | jq -r --arg name "lab-notification-topic-$LAB_ID" '.data | map(select(."name" == $name)) | .[0] | ."topic-id"')`{{execute}}
+
+Learn how pass destinations in JSON format:
+`oci monitoring alarm create  --generate-param-json-input destinations > demo.txt`{{execute}}
+
+Create an alarm, associated with the *lab-notification-topic-$LAB_ID* notification topic and triggered by a fairly high (> 3) number of file downloads within one minute:
+```
+oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-alarm-rapid-file-download-$LAB_ID --destinations="\[$ONS_TOPIC_OCID\]"  --display-name="High rate of file downloads" --metric-compartment-id=$compartmentId --namespace="oci_objectstorage"  --query-text="GetRequests[1m].count() > 3"  --severity="INFO" --body="The number of recent file download operations in compartment lab-compartment was excessive" --pending-duration="PT1M"  --resolution="1m" --is-enabled=true
+```{{execute}}
+
+Check out the alarm definition - and its current state - in the console (https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms ) or through the CLI:
+
+`oci monitoring alarm list --compartment-id=$compartmentId --output table`{{execute}}
+

@@ -1,1 +1,1 @@
-Create email subscription
+Create email subscription on notification topic

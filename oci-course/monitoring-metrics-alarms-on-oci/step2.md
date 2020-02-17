@@ -42,7 +42,7 @@ This returns the number of objects in *bucket-$LAB_ID* over the most recent thre
 `oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "ObjectCount[1m]{resourceDisplayName = "bucket-$LAB_ID"}.sum()" --resolution 1m`{{execute}}
 
 Count the put requests to Object Storage (aka the file uploads) into bucket-$LAB-ID over the most recent three datapoints (spaced one minute apart):
-`oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "PutRequests[1m]{resourceDisplayName = "bucket-$LAB_ID"}.sum()" --resolution 1m`{{execute}}
+`oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "PutRequests[1m]{resourceDisplayName = "bucket-$LAB_ID"}.sum()" --resolution 1m --output table`{{execute}}
 
 The responses to the metrics requests can quickly grow pretty sizable. Typically you will make these requests to collect data for analysis. To better inspect the response, you could save it to a file, using `> filename`. For example:
 

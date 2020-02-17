@@ -19,6 +19,15 @@ oci iam policy create  --name "lab-participants-object-storage-in-lab-compartmen
 Allow group lab-participants to use tag-namespaces in tenancy
 
 
+## NOtifications
+Allow group lab-participants to manage ons-topics in tenancy
+Allow group lab-participants to manage ons-subscriptions in tenancy
+
+## Alarms
+Allow group lab-participants to manage alarms in tenancy
+Allow group lab-participants to read metrics in tenancy
+
+
 ## Functions (FaaS) Policies
 
 Prepare some environment variables
