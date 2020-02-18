@@ -32,27 +32,27 @@ In order to do that, go to your Tenant Dashboard and then go to this menu:
 
 Once there, click on the Create Cluster blue button:
 
-![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/2.JPG)
+![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/2.jpg)
 
 Select the Quick Create option, and then Launch Workflow:
 
-![OKE Quick Create Option](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/3.JPG)
+![OKE Quick Create Option](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/3.jpg)
 
 Once in the workflow window, give a name to your cluster, select the compartment and leave the rest of the fields as default:
 
-![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/4.JPG)
+![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/4.jpg)
 
 In the lower part of the window enable both Tiller and Kubernetes Dashboard:
 
-![OKE Enable Tiller](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/5.JPG)
+![OKE Enable Tiller](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/5.jpg)
 
 Finally, click on Next:
 
-![OKE Click on Next](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/6.JPG)
+![OKE Click on Next](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/6.jpg)
 
 And read the summary for your cluster:
 
-![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/7.JPG)
+![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/7.jpg)
 
 Click on Create Cluster and wait for the cluster to be created. In the home page for OKE, wait for the status to be Active:
 
