@@ -68,17 +68,17 @@ For the Topic, execute this:
 Copy the topic-id that was returned as part of the previous execution.
 Now set the value of TOPIC_ID variable with the value you copied in the previos execution (instead of topic-id put the value you just copied).
 
-`export TOPIC_ID=topic-id"`{{execute}}
+`export TOPIC_ID="topic-id"`{{execute}}
 
 Now we need to create a subscription to the previous Topic, and there we will configure our own email address to receive the notifications after the Bucket 
 is created.
 
 First set the following variable with your email address where you want to receive the notifications
-`export YOUR_EMAIL=myname@me.com"`{{execute}}
+`export YOUR_EMAIL="myname@me.com"`{{execute}}
 
 Execute this:
 
-`oci ons subscription -c $COMPARTMENT_OCID --protocol EMAIL --subscription-endpoint $YOUR_EMAIL --topic-id $TOPIC_ID`{{execute}}
+`oci ons subscription create -c $COMPARTMENT_OCID --protocol EMAIL --subscription-endpoint $YOUR_EMAIL --topic-id $TOPIC_ID`{{execute}}
 
 After this you should receive an email to confirm the subscription. Once you receive it click on the link to confirm it.
 
