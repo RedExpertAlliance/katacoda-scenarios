@@ -57,3 +57,7 @@ And read the summary for your cluster:
 Click on Create Cluster and wait for the cluster to be created. In the home page for OKE, wait for the status to be Active:
 
 ![OKE Ready](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/08.jpg)
+
+Once the status turned into Active, you are about to be able to use it.
+
+Let's go the next step!
