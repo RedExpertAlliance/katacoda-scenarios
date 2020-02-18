@@ -18,7 +18,7 @@ Quick Create option, and in less than 10 minutes you will have a full Kubernetes
 - Internet Gateway
 - NAT Gateway
 
-And the option to provision Kubernetes Administration Dashboard, as well as Tiller.
+Plus the option to provision Kubernetes Administration Dashboard, as well as Tiller.
 
 # Scenario Pre-requisites
 
@@ -30,8 +30,7 @@ Kubectl and Kubernetes concepts are desirable to follow this scenario, but if yo
 # Scenario Description
 
 In this scenario you will learn how to provision an Oracle Kubernetes Engine using the Quick Create Option.
-Once you have your cluster we will deploy REDIS (https://redis.io/) that we will use as a database for a PHP based application. We will use the classic
-PHP Guestbook application.
+Once you have your cluster we will deploy an application based on Redis and Go.
 You will also learn:
 
 - How to configure your Oracle Cloud Infrastructure Command Line Interface (OCI CLI) to create the Kubernetes config file in order to manage your cluster 
