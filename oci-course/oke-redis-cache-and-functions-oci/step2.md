@@ -48,6 +48,6 @@ proxymux-client-10.0.12.2               1/1       Running       0          191d
 tiller-deploy-5d6cc99fc-45mwd           1/1       Running       0          128d
 ~~~~
 
-(Note. You will get different names and ages, but a similar output should be output)
+(Note. You will get different names and ages, but a similar output should be shown)
 
 With this we have our cluster ready to be used. Pretty fast, right?
