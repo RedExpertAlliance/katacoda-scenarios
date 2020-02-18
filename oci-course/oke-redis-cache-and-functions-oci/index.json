@@ -2,12 +2,28 @@
   "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine",
   "description": "Work with OKE, the OCI managed Kubernetes service.",
   "difficulty": "beginner",
-  "time": "20 minutes",
+  "time": "40 minutes",
   "details": {
     "steps": [
       {
-        "title": "Step 1 - Overview of OKE",
+        "title": "Step 1 - Create your first OKE Cluster",
         "text": "step1.md"
+      },
+	  {
+        "title": "Step 2 - Connect to your OKE Cluster",
+        "text": "step2.md"
+      },
+	  {
+        "title": "Step 3 - Deploy your first application to OKE",
+        "text": "step3.md"
+      },
+	  {
+        "title": "Step 4 - Test your application",
+        "text": "step4.md"
+      },
+	  {
+        "title": "Step 5 - Scale your application",
+        "text": "step5.md"
       }
     ],
     "intro": {
