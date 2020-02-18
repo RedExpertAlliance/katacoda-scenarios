@@ -14,7 +14,7 @@ Now let's create the kubeconfig file:
 Now let's get the cluster id of our cluster with this:
 
 `clusterlist=$(oci ce cluster list -c $TENANT_ID)`{{execute}}
-`export CLUSTER_ID=$(echo $clusterlist | jq -r --arg display_name "RCPK8sCluster" '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
+`export CLUSTER_ID=$(echo $clusterlist | jq -r --arg display_name $MY_CLUSTER_NAME '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
 
 And let's configure it:
 
@@ -48,6 +48,6 @@ proxymux-client-10.0.12.2               1/1       Running       0          191d
 tiller-deploy-5d6cc99fc-45mwd           1/1       Running       0          128d
 ~~~~
 
-(Note. You will get different names, but a similar output should be printed)
+(Note. You will get different names and ages, but a similar output should be output)
 
-With this we have our cluster ready to be used.
+With this we have our cluster ready to be used. Pretty fast, right?

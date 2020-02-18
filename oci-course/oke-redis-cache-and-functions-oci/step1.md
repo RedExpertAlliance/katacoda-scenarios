@@ -15,6 +15,10 @@ Try out the following command to get a list of all namespaces you currently have
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
+Let´s also create the following environment variables, that we will use in the next steps:
+(Note. Change the tenantID value for the one that is in the ~/.oci/config file)
+
+`export TENANT_OCID=tenantID`{{execute}}
 
 ## Policy pre-requisite
 
@@ -44,9 +48,13 @@ Select the Quick Create option, and then Launch Workflow:
 
 ![OKE Quick Create Option](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/03.jpg)
 
-Once in the workflow window, give a name to your cluster, select the compartment and leave the rest of the fields as default:
+Once in the workflow window, give ***MyFirstOKE*** as the name, select the compartment and leave the rest of the fields as default:
 
 ![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/04.jpg)
+
+Let's create an enviornment variable with the value of the name of the OKE cluster:
+
+`export MY_CLUSTER_NAME=MyFirstOKE`{{execute}}
 
 In the lower part of the window enable both Tiller and Kubernetes Dashboard:
 
