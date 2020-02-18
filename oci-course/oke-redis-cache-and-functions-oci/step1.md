@@ -15,13 +15,33 @@ Try out the following command to get a list of all namespaces you currently have
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
+Let's also test that kubectl install and working properly, execute the following:
+`kubectl version`
+
+You should receive something like this:
+
+~~~~
+Client Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.3", GitCommit:"06ad960bfd03b39c8310aaf92d1e7c12ce618213", GitTreeState:"clean", BuildDate:"2020-02-12T13:43:46Z", GoVersion:"go1.13.7", Compiler:"gc", Platform:"linux/amd64"}
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+~~~~
+
+Let´s also create the following environment variables, that we will use in the next steps:
+(Note. Change the tenantID value for the one that is in the ~/.oci/config file)
+
+`export TENANT_OCID=tenantID`{{execute}}
 
 ## Policy pre-requisite
 
 Before creating the cluster, you need to apply a Policy to allow OKE to manage your tenant resources. This policy creation is described here:
 https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm#PolicyPrerequisitesService
 
+Please create that policy before continue with the next section.
+
+In this scenario we will use both the Oracle Cloud Infrastructure Web Console and the Oracle CLI. In particular in this first step, most of the things 
+will be executed using the Web Console.
+
 Please create that policy and then continue with the next section.
+
 
 ## Oracle Kubernetes Engine Cluster Creation
 
@@ -38,9 +58,13 @@ Select the Quick Create option, and then Launch Workflow:
 
 ![OKE Quick Create Option](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/03.jpg)
 
-Once in the workflow window, give a name to your cluster, select the compartment and leave the rest of the fields as default:
+Once in the workflow window, give ***MyFirstOKE*** as the name, select the compartment and leave the rest of the fields as default:
 
 ![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/04.jpg)
+
+Let's create an enviornment variable with the value of the name of the OKE cluster:
+
+`export MY_CLUSTER_NAME=MyFirstOKE`{{execute}}
 
 In the lower part of the window enable both Tiller and Kubernetes Dashboard:
 
