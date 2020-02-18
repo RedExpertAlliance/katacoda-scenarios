@@ -15,7 +15,8 @@ The steps we will go through:
 
 `oci ons topic create --compartment-id=$compartmentId --name=lab-notification-topic-$LAB_ID --description="notification topic gets notified for lab alarms"`{{execute}}
 
-oci ons topic list --compartment-id=$compartmentId --output table
+List all Notification Topics in compartment *lab-compartment*:
+`oci ons topic list --compartment-id=$compartmentId --output table
 
 Get hold of Topic OCID
 `export ONS_TOPIC_OCID=$(oci ons topic list --compartment-id=$compartmentId | jq -r --arg name "lab-notification-topic-$LAB_ID" '.data | map(select(."name" == $name)) | .[0] | ."topic-id"')`{{execute}}
@@ -25,10 +26,13 @@ Learn how pass destinations in JSON format:
 
 Create an alarm, associated with the *lab-notification-topic-$LAB_ID* notification topic and triggered by a fairly high (> 3) number of file downloads within one minute:
 ```
-oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-alarm-rapid-file-download-$LAB_ID --destinations="\[$ONS_TOPIC_OCID\]"  --display-name="High rate of file downloads" --metric-compartment-id=$compartmentId --namespace="oci_objectstorage"  --query-text="GetRequests[1m].count() > 3"  --severity="INFO" --body="The number of recent file download operations in compartment lab-compartment was excessive" --pending-duration="PT1M"  --resolution="1m" --is-enabled=true
+oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-alarm-rapid-file-download-$LAB_ID --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="High rate of file downloads" --metric-compartment-id=$compartmentId --namespace="oci_objectstorage"  --query-text="GetRequests[1m].count() > 3"  --severity="INFO" --body="The number of recent file download operations in compartment lab-compartment was excessive" --pending-duration="PT1M"  --resolution="1m" --is-enabled=true
 ```{{execute}}
 
 Check out the alarm definition - and its current state - in the console (https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms ) or through the CLI:
 
 `oci monitoring alarm list --compartment-id=$compartmentId --output table`{{execute}}
+
+![Alarm Definition](/RedExpertAlliance/courses/oci-course/monitoring-metrics-alarms-on-oci/assets/oci-alarm-definition.png)
+
 
