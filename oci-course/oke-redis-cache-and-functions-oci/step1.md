@@ -32,28 +32,28 @@ In order to do that, go to your Tenant Dashboard and then go to this menu:
 
 Once there, click on the Create Cluster blue button:
 
-![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/2.jpg)
+![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/02.jpg)
 
 Select the Quick Create option, and then Launch Workflow:
 
-![OKE Quick Create Option](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/3.jpg)
+![OKE Quick Create Option](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/03.jpg)
 
 Once in the workflow window, give a name to your cluster, select the compartment and leave the rest of the fields as default:
 
-![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/4.jpg)
+![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/04.jpg)
 
 In the lower part of the window enable both Tiller and Kubernetes Dashboard:
 
-![OKE Enable Tiller](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/5.jpg)
+![OKE Enable Tiller](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/05.jpg)
 
 Finally, click on Next:
 
-![OKE Click on Next](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/6.jpg)
+![OKE Click on Next](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/06.jpg)
 
 And read the summary for your cluster:
 
-![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/7.jpg)
+![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/07.jpg)
 
 Click on Create Cluster and wait for the cluster to be created. In the home page for OKE, wait for the status to be Active:
 
-![OKE Ready](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/8.jpg)
+![OKE Ready](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/08.jpg)
