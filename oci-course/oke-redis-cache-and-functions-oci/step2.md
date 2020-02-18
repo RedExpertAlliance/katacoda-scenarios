@@ -13,7 +13,8 @@ Now let's create the kubeconfig file:
 
 Now let's get the cluster id of our cluster with this:
 
-`export CLUSTER_ID=$(TBD)
+`clusterlist=$(oci ce cluster list -c $TENANT_ID)`{{execute}}
+`export CLUSTER_ID=$(echo $clusterlist | jq -r --arg display_name "RCPK8sCluster" '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
 
 And let's configure it:
 
