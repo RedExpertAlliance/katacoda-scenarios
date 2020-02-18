@@ -21,7 +21,13 @@ If you get a proper response, the OCI is configured correctly and you can procee
 Before creating the cluster, you need to apply a Policy to allow OKE to manage your tenant resources. This policy creation is described here:
 https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm#PolicyPrerequisitesService
 
+Please create that policy before continue with the next section.
+
+In this scenario we will use both the Oracle Cloud Infrastructure Web Console and the Oracle CLI. In particular in this first step, most of the things 
+will be executed using the Web Console.
+
 Please create that policy and then continue with the next section.
+
 
 ## Oracle Kubernetes Engine Cluster Creation
 
