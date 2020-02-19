@@ -85,11 +85,12 @@ First let's clone the code:
 
 Copy the private key (oci_api_key.pem to the folder where the repository was downloaded.
 
-Once you have the code and the private key, execute this:
+```
+cd fn-text2pdf-events/
+cp $HOME/.oci/oci_api_key.pem .
+```{{execute}}
 
-`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds=$SUBNETS --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=./.oci/oci_api_key.pem --config OUTPUT_BUCKET=$OUTPUT_BUCKET`{{execute}}
-
-You need to have all the following environment variables already set.
+You need to have all the following environment variables already set (you set them in Step 1).
 
 - SUBNETS
 - TENANT_OCID
@@ -98,13 +99,21 @@ You need to have all the following environment variables already set.
 - PASSPHRASE
 - REGION
 - NAMESPACE
-- OUTPUT_BUCKET (this is the bucket where the PDF will be stored)
 
-Do not forget to identify your application (text2pdf$LAB_ID) in order to differentiate it from others.
+Now let's set two more variables for the names of our buckets:
+
+```
+export IN_BUCKET=$(echo in$LAB_ID)
+export OUT_BUCKET_BUCKET=$(echo out$LAB_ID)
+```{{execute}}
+
+- IN_BUCKET is the name of the bucket where you will upload the text file.
+- OUT_BUCKET is the name of the bucket where the converted PDF will be uploaded.
+
+
+`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds='["'"$subnetId"'"]' --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=./.oci/oci_api_key.pem --config OUT_BUCKET=$OUT_BUCKET`{{execute}}
 
 Once the application is created we need to deploy it executing this:
-
-`cd fn-text2pdf`{{execute}}
 
 `fn -v deploy --app text2pdfEvents$LAB_ID --build-arg PRIVATE_KEY_NAME=./.oci/oci_api_key.pem`{{execute}}
 
@@ -114,7 +123,7 @@ Once the function is deployed, we need to obtain its OCID. To do that, execute t
 
 Copy the function OCID and edit the actionsFunc.json file to include as the value for element functionId.
 
-The action file looks like this
+The actionsFunc.json file looks like this
 
 ~~~~
 {
@@ -136,21 +145,19 @@ We are going to create two buckets:
 - One to upload the text file
 - A second one where the PDF document will be automatically uploaded by our function
 
-`oci os bucket create -c $COMPARTMENT_ID --name in$LAB_ID`{{execute}}
+`oci os bucket create -c $COMPARTMENT_ID --name $IN_BUCKET`{{execute}}
 
-`oci os bucket create -c $COMPARTMENT_ID --name out$LAB_ID`{{execute}}
+`oci os bucket create -c $COMPARTMENT_ID --name $OUT_BUCKET`{{execute}}
 
 # Rule creation using OCI CLI
 
 For the rule creation, execute this:
 
-`export IN_BUCKET=$(echo in$LAB_ID)`{{execute}}
-`oci events rule create --display-name text2PDF$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.object.create", "data": {"bucketName":$IN_BUCKET}}' --compartment-id $COMPARTMENT_OCID --actions file://actionsFunc.json `{{execute}}
-(Note. The previous step will not work. Change the value of "bucketName":$IN_BUCKET for "bucketName":"THE_VALUE_OF_$IN_BUCKET")
+`oci events rule create --display-name text2PDF$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.object.create", "data": {"bucketName":"'"$IN_BUCKET"'"}}' --compartment-id $COMPARTMENT_OCID --actions file://actionsFunc.json `{{execute}}
 
 Now we are ready to test it, we can use the lorem.txt file to upload it to the input bucket and after a few seconds in the output bucket you should see a 
 PDF file. 
 
 To validate it, list the contents of the out bucket executing the following:
 
-`oci os object list -bn $OUTPUT_BUCKET`{{execute}}
+`oci os object list -bn $OUT_BUCKET`{{execute}}
