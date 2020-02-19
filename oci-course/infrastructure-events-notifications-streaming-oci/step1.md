@@ -32,7 +32,7 @@ export SUBNETID=$(echo $SUBNETS | jq -r --arg display_name "Public Subnet-vcn-la
 export NSS=$(oci os ns get)
 export NAMESPACE=$(echo $NSS | jq -r '.data')
 export REGION=us-ashburn-1
-export MY_BUCKET=
+export MY_BUCKET=$(echo myBucket$LAB_ID)
 ```{{execute}}
 
 The following variables will be set using the information contained in the config ~/.oci/config file
@@ -84,7 +84,7 @@ Execute this:
 
 `oci ons subscription create -c $COMPARTMENT_OCID --protocol EMAIL --subscription-endpoint $YOUR_EMAIL --topic-id $TOPIC_ID`{{execute}}
 
-After this you should receive an email to confirm the subscription. Once you receive it click on the link to confirm it.
+After this you should receive an email to confirm the subscription. Once you receive it, click on the link to confirm it.
 
 ![Email Confirmation](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/emailConfirmation.jpg)
 
