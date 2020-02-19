@@ -11,7 +11,7 @@ Before that, open the file *actions.json* and edit the value for element topicId
 Set the value of the variable $MY_BUCKET:
 `MY_BUCKET=myBucket$LAB_ID`{{execute}}
 Then, to create the rule, execute the following:
-`oci events rule create --display-name myBucketCreation$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.bucket.create", "data": {"bucketName":"$MY_BUCKET"}}' --compartment-id $COMPARTMENT_OCID --actions file://actions.json`{{execute}}
+`oci events rule create --display-name myBucketCreation$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.bucket.create", "data": {"bucketName":"'"$MY_BUCKET"'"}}' --compartment-id $COMPARTMENT_OCID --actions file://actions.json`{{execute}}
 
 With this single CLI command we have created:
 - A rule with the name myBucketCreation$LAB_ID
