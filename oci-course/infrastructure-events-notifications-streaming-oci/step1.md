@@ -32,9 +32,9 @@ export SUBNETID=$(echo $SUBNETS | jq -r --arg display_name "Public Subnet-vcn-la
 export NSS=$(oci os ns get)
 export NAMESPACE=$(echo $NSS | jq -r '.data')
 export REGION=us-ashburn-1
-export MY_BUCKET=$(echo myBucket$LAB_ID)
+export MY_BUCKET=
 ```{{execute}}
-
+$(echo myBucket$LAB_ID)
 The following variables needs to be set using the information contained in the config ~/.oci/config file
 ```
 export TENANT_OCID=tenantID
@@ -42,7 +42,7 @@ export USER_OCID=userID
 export FINGERPRINT=fingerPrint
 export PASSPHRASE=passphrase
 ```{{execute}}
-
+***(Note. If you do not have a passphrase, it is not necessary to set that environment variable)***
 
 ## Oracle Events Configuration
 
@@ -65,10 +65,14 @@ For the Topic, execute this:
 
 `oci ons topic create -c $COMPARTMENT_OCID --name Topic$LAB_ID`{{execute}}
 
-Copy the topic-id that was returned as part of the previous execution.
-Now set the value of TOPIC_ID variable with the value you copied in the previos execution (instead of topic-id put the value you just copied).
+Now let's get the Topic OCID:
 
-`export TOPIC_ID="topic-id"`{{execute}}
+```
+export TOPIC_NAME=Topic$LAB_ID
+export TOPIC_LIST=$(oci ons topic list -c $COMPARTMENT_OCID)
+export TOPIC_ID=$(echo $TOPIC_LIST | jq -r --arg name $TOPIC_NAME '.data | map(select(."name" == $name)) | .[0] | .["topic-id"]')
+```{{execute}}
+
 
 Now we need to create a subscription to the previous Topic, and there we will configure our own email address to receive the notifications after the Bucket 
 is created.
@@ -86,6 +90,3 @@ After this you should receive an email to confirm the subscription. Once you rec
 
 You are all set, now in the next step we will create the Rule that will be triggered after the Bucket creation, and that will use the Topic and Subscription
 previously created.
-
-
-
