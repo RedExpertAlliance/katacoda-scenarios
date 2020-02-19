@@ -13,16 +13,21 @@ The steps we will go through:
 * create notification topic *lab-notification-topic-$LAB_ID*
 * create alarm  *lab-alarm-rapid-file-download-$LAB_ID* - associated with notification topic
 
+This next command creates a Notification Topic called *lab-notification-topic-$LAB_ID*.
 `oci ons topic create --compartment-id=$compartmentId --name=lab-notification-topic-$LAB_ID --description="notification topic gets notified for lab alarms"`{{execute}}
 
-List all Notification Topics in compartment *lab-compartment*:
+List all Notification Topics in compartment *lab-compartment* and verify that a new topic has been created:
 `oci ons topic list --compartment-id=$compartmentId --output table
 
 Get hold of Topic OCID
 `export ONS_TOPIC_OCID=$(oci ons topic list --compartment-id=$compartmentId | jq -r --arg name "lab-notification-topic-$LAB_ID" '.data | map(select(."name" == $name)) | .[0] | ."topic-id"')`{{execute}}
 
-Learn how pass destinations in JSON format:
-`oci monitoring alarm create  --generate-param-json-input destinations > demo.txt`{{execute}}
+We need to pass the list of destinations for an alarm (one ore more notification topics) in a JSON document. To learn the format for this document, we can use the OCI CLI feature *--generate-param-json-input*. When we pass this switch and indicate the name of the parameter for which we want to learn the required format, we can make a call like the following one for *destinations*:
+`oci monitoring alarm create  --generate-param-json-input destinations > destinations-param-sample.txt`{{execute}}
+
+Inspect file
+`destinations-param-sample.txt`{{open}}
+to see the structure we need to provide for the *destinations* parameter.
 
 Create an alarm, associated with the *lab-notification-topic-$LAB_ID* notification topic and triggered by a fairly high (> 3) number of file downloads within one minute:
 ```

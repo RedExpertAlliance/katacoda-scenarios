@@ -3,6 +3,7 @@ The messages published to a notification topic by an alarm - or from any other t
 * PagerDuty
 * WebHook / HTTP endpoint (such as a Function behind an API Gateway)
 * Slack
+* Function (planned, not yet available in February 2020)
 
 You will now create a subscription to notification topic *lab-notification-topic-$LAB_ID* to deliver messages to your email address. Set an email address where you want to receive subscriptions in environment variable YOUR_EMAIL_ADDRESS: 
 `YOUR_EMAIL_ADDRESS=your.mail@a.com`{{execute}}
