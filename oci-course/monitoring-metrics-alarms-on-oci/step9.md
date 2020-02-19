@@ -4,7 +4,7 @@ You will now create an Alarm for the custom metric *productOrder* that will be t
 
 The alarm is associated with the *lab-notification-topic-$LAB_ID* notification topic that was used in step 4 of this scenario - and that has a subscription for your email address.
 ```
-oci monitoring alarm create --compartment-id=$compartmentId --display-name=TooManyProductOrders --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="An extremely high number or product orders were received" --metric-compartment-id=$compartmentId --namespace="mymetricsnamespace"  --query-text="GetRequests[1m].count() > 3"  --severity="INFO" --body="The number of recent file download operations in compartment lab-compartment was excessive" --pending-duration="PT1M"  --resolution="1m" --is-enabled=true
+oci monitoring alarm create --compartment-id=$compartmentId --display-name=TooManyProductOrders --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="An extremely high number or product orders were received" --metric-compartment-id=$compartmentId --namespace="mymetricsnamespace"  --query-text="productOrder[5m].sum() > 100"  --severity="INFO" --body="High order volume alert: The number of products ordered over a 5 minute period exceeded 100." --pending-duration="PT1M"  --resolution="1m" --is-enabled=true  --resource-group="divisionX"
 ```{{execute}}
 
 Check out the alarm definition - and its current state - in the console (https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms ) or through the CLI:
@@ -24,4 +24,4 @@ Then execute this statement to publish these metrics:
 
 `oci monitoring metric-data post --endpoint https://telemetry-ingestion.us-ashburn-1.oraclecloud.com --metric-data file://./custom-metrics.json`{{execute}}
 
-This should set off the alarm - but remember that this takes about 90 seconds.
+This should set off the alarm - but remember that it takes some time (several minutes) to be activated. You can check the alarm status in the console https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms/status or through the CLI. You can also sit back and relax and wait for that email alerts to arrive.

@@ -9,7 +9,11 @@ The next screenshot shows the graphical representation of the few custom data po
 The Data Table view shows the *individual data points* for the selected resource group and the selected metric.
 
 Alternatively, you can retrieve the metrics from the OCI CLI, using the next statement. Before you execute this statement, please open file get-metrics.json and modify the endTime timestamp to very recently or even the near the future.
+
 `get-metrics.json`{{open}}
+ Also replace `$compartmentId` in this file with the value of the compartment OCID:
+`echo compartment OCID= $compartmentId`{{execute}}
+
 Now fetch those metrics:
 `oci monitoring metric-data summarize-metrics-data --from-json file://./get-metrics.json`{{execute}}
 
