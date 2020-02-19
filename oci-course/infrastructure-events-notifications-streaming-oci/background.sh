@@ -5,6 +5,9 @@ mkdir ~/.oci
 touch  ~/.oci/config
 touch  ~/.oci/oci_api_key.pem
 
+wget https://github.com/RedExpertAlliance/katacoda-scenarios/blob/master/oci-course/infrastructure-events-notifications-streaming-oci/actions.json --no-check-certificate
+wget https://github.com/RedExpertAlliance/katacoda-scenarios/blob/master/oci-course/infrastructure-events-notifications-streaming-oci/actionsFunc.json --no-check-certificate
+
 
 # Install the OCI CLI in silent mode with default settings
 curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
