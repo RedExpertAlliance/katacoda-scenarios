@@ -5,32 +5,9 @@ mkdir ~/.oci
 touch  ~/.oci/config
 touch  ~/.oci/oci_api_key.pem
 
-{
-echo '{'
-echo  '"actions": ['
-echo    '{'
-echo      '"actionType": "ONS",'
-echo      '"description": "Send an Email Notification after a bucket is created",'
-echo      '"isEnabled": true,'
-echo      '"topicId": "<TopicID>"'
-echo    '}'
-echo  ']'
-echo '}'
-}>actions.json
+wget https://github.com/RedExpertAlliance/katacoda-scenarios/blob/master/oci-course/infrastructure-events-notifications-streaming-oci/actions.json --no-check-certificate
+wget https://github.com/RedExpertAlliance/katacoda-scenarios/blob/master/oci-course/infrastructure-events-notifications-streaming-oci/actionsFunc.json --no-check-certificate
 
-
-{
-echo '{'
-echo  '"actions": ['
-echo    '{'
-echo      '"actionType": "FAAS",'
-echo      '"description": "Invoke PDF conversion when text file is uploaded to the IN bucket",'
-echo      '"isEnabled": true,'
-echo      '"topicId": "<FunctionID>"'
-echo    '}'
-echo  ']'
-echo '}'
-}>actionsFunc.json
 
 # Install the OCI CLI in silent mode with default settings
 curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
