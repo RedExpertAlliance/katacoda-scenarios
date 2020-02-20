@@ -24,4 +24,4 @@ Then execute this statement to publish these metrics:
 
 `oci monitoring metric-data post --endpoint https://telemetry-ingestion.us-ashburn-1.oraclecloud.com --metric-data file://./custom-metrics.json`{{execute}}
 
-This should set off the alarm - but remember that it takes some time (several minutes) to be activated. You can check the alarm status in the console https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms/status or through the CLI. You can also sit back and relax and wait for that email alerts to arrive.
+This should set off the alarm - but remember that it takes some time (several minutes) to be activated. You can check the alarm status in the console https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms/status or through the CLI. You can also sit back and relax and wait for that email alert to arrive.

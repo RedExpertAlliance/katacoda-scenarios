@@ -30,7 +30,7 @@
     },
     {
       "course_id": "monitoring-metrics-alarms-on-oci",
-      "title": "UNDER CONSTRUCTION: Monitoring, Metrics, Alarms and Notifications",
+      "title": "Preview: Monitoring, Metrics, Alarms and Notifications",
       "description": "On monitoring OCI metrics and creating automated alarms to publish notifications upon relevant situations"
     },
     {
@@ -40,7 +40,7 @@
     },
     {
       "course_id": "infrastructure-events-notifications-streaming-oci",
-      "title": "UNDER CONSTRUCTION: Responding to OCI Events",
+      "title": "Preview: Responding to OCI Events",
       "description": "OCI Events are published whenever OCI resources are manipulated. These events can trigger notifications, invoke functions and publish streaming events"
     },
     {
