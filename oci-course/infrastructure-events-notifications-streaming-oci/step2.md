@@ -9,9 +9,11 @@ Before that, open the file *actions.json* and edit the value for element topicId
 `echo topicId=$TOPIC_ID`
 
 Set the value of the variable $MY_BUCKET:
-`MY_BUCKET=myBucket$LAB_ID`{{execute}}
+
+`export MY_BUCKET=myBucket$LAB_ID`{{execute}}
+
 Then, to create the rule, execute the following:
-`oci events rule create --display-name myBucketCreation$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.bucket.create", "data": {"bucketName":"'"$MY_BUCKET"'"}}' --compartment-id $COMPARTMENT_OCID --actions file://actions.json`{{execute}}
+`oci events rule create --display-name myBucketCreation$LAB_ID --is-enabled true --condition '{"eventType":["com.oraclecloud.objectstorage.createbucket"], "data": {"resourceName":"'"$MY_BUCKET"'"}}' --compartment-id $COMPARTMENT_OCID --actions file://actions.json`{{execute}}
 
 With this single CLI command we have created:
 - A rule with the name myBucketCreation$LAB_ID
@@ -35,7 +37,7 @@ as myBucket$LAB_ID
 The elements in the actions file, are:
 - actionType. In this case ONS (Oracle Notification Services). Other options are FAAS (see Step 3), and OSS (Streaming).
 - description. A brief description of what the actions is going to perform
-- isEnabled. If you cand to enable it as it is created, you can use true, if not, use false
+- isEnabled. If you want to enable it as it is created, you can use true, if not, use false
 - topicId. You need to get the topicId from the previous step (Step 2)
 
 (In this step we will use Notifications, but in the up coming steps you will test the Functions option).
@@ -45,7 +47,7 @@ chain different actions, not only notify someone, but maybe execute something vi
 
 We are all set with our first Rule, now let's create a Bucket and see if we receive the notification.
 
-Let's use the CLI for creating the bucket (you need the OCID for your compartment, and also remember to include your LAB_ID after the bucket name):
+Let's use the CLI for creating the bucket (the name of the bucket is in the MY_BUCKET variable):
 
 `oci os bucket create -c $COMPARTMENT_OCID --name $MY_BUCKET`{{execute}}
 

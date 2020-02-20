@@ -35,7 +35,7 @@ export REGION=us-ashburn-1
 export MY_BUCKET=$(echo myBucket$LAB_ID)
 ```{{execute}}
 
-The following variables will be set using the information contained in the config ~/.oci/config file
+The following variables will be set using the information contained in the OCI config file ($HOME/.oci/config)
 ```
 export TENANT_OCID=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=')
 export USER_OCID=$(grep -i 'user' $HOME/.oci/config  | cut -f2 -d'=')
@@ -68,8 +68,8 @@ For the Topic, execute this:
 Now let's get the Topic OCID:
 
 ```
-export TOPIC_NAME=Topic$LAB_ID
 export TOPIC_LIST=$(oci ons topic list -c $COMPARTMENT_OCID)
+export TOPIC_NAME=Topic$LAB_ID
 export TOPIC_ID=$(echo $TOPIC_LIST | jq -r --arg name $TOPIC_NAME '.data | map(select(."name" == $name)) | .[0] | .["topic-id"]')
 ```{{execute}}
 

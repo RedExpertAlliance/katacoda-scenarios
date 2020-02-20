@@ -104,18 +104,18 @@ Now let's set two more variables for the names of our buckets:
 
 ```
 export IN_BUCKET=$(echo in$LAB_ID)
-export OUT_BUCKET_BUCKET=$(echo out$LAB_ID)
+export OUT_BUCKET=$(echo out$LAB_ID)
 ```{{execute}}
 
 - IN_BUCKET is the name of the bucket where you will upload the text file.
 - OUT_BUCKET is the name of the bucket where the converted PDF will be uploaded.
 
 
-`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds='["'"$subnetId"'"]' --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=./.oci/oci_api_key.pem --config OUT_BUCKET=$OUT_BUCKET`{{execute}}
+`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds='["'"$subnetId"'"]' --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=oci_api_key.pem --config OUT_BUCKET=$OUT_BUCKET`{{execute}}
 
 Once the application is created we need to deploy it executing this:
 
-`fn -v deploy --app text2pdfEvents$LAB_ID --build-arg PRIVATE_KEY_NAME=./.oci/oci_api_key.pem`{{execute}}
+`fn -v deploy --app text2pdfEvents$LAB_ID --build-arg PRIVATE_KEY_NAME=oci_api_key.pem`{{execute}}
 
 Once the function is deployed, we need to obtain its OCID. To do that, execute the following:
 
@@ -145,9 +145,9 @@ We are going to create two buckets:
 - One to upload the text file
 - A second one where the PDF document will be automatically uploaded by our function
 
-`oci os bucket create -c $COMPARTMENT_ID --name $IN_BUCKET`{{execute}}
+`oci os bucket create -c $COMPARTMENT_OCID --name $IN_BUCKET`{{execute}}
 
-`oci os bucket create -c $COMPARTMENT_ID --name $OUT_BUCKET`{{execute}}
+`oci os bucket create -c $COMPARTMENT_OCID --name $OUT_BUCKET`{{execute}}
 
 # Rule creation using OCI CLI
 
