@@ -21,3 +21,5 @@ And now initialize the Terraform provider:
 ##Resources
 
 GitHub Repo with many sample Terraform configurations for OCI Resources https://github.com/terraform-providers/terraform-provider-oci/tree/master/examples 
+
+Example OCI Terraform Provider - Bucket - https://www.terraform.io/docs/providers/oci/r/objectstorage_bucket.html
