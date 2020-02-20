@@ -33,11 +33,15 @@
     "assets": {
       "host01": [
         {
-          "file": "custom-metrics.json",
+          "file": "provider.tf",
           "target": "/root"
         },
         {
-          "file": "get-metrics.json",
+          "file": "variable.tf",
+          "target": "/root"
+        },
+        {
+          "file": "environment.sh",
           "target": "/root"
         }
       ]
