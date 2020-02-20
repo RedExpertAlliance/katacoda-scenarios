@@ -37,7 +37,7 @@
           "target": "/root"
         },
         {
-          "file": "variable.tf",
+          "file": "bucket.tf",
           "target": "/root"
         },
         {
