@@ -48,6 +48,11 @@
       "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine",
       "description": "Work with OKE, the OCI managed Kubernetes service."
     },
+    {
+      "course_id": "oci-terraform-provider",
+      "title": "UNDER CONSTRUCTION: Introduction to OCI Terraform Provider",
+      "description": "Infrastructure as Code on Oracle Cloud Infrastructure with Terraform."
+    },
     
     {
       "course_id": "oci-lab-preparation",
