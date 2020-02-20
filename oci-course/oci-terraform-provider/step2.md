@@ -7,7 +7,16 @@ Run the Terraform installer to install Terraform
 Test the currently installed version of Terraform. This should be at least version v0.10
 `terraform version`{{execute}}
 
-Install OCI Provider for Terraform
+Edit the environment variable values in `environment.sh`{{open}}
+Then execute the script to set those environment variables:
+`./environment.sh`{{execute}}
+
+And now initialize the Terraform provider:
+
+`terraform init`{{execute}}
+
+
+
 
 ##Resources
 

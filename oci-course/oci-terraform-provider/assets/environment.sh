@@ -3,3 +3,5 @@ export user_ocid=ocid1.user.oc1..aaaaaaaa5x6wemfpk4n5o5wb27bonod6pvh2t3kcqhivndr
 export fingerprint=eb:59:c1:56:65:80:2f:46:13:29:37:cb:5b:cb:a7:4e
 export region=us-ashburn-1
 export private_key_path=~/.oci/oci_api_key.pem
+export compartment_id=$(oci iam compartment list | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
+export namespace=$(oci os ns get| jq -r '.data')
