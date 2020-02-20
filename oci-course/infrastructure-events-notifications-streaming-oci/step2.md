@@ -6,7 +6,7 @@ We also configured our first Topic and Subscription (email based).
 Now, we are going to create our first rule, that will be triggered after a Object Storage Bucket creation.
 
 Before that, open the file *actions.json* and edit the value for element topicId, with the one we got in Step 1.
-`echo topicId=$TOPIC_ID`
+`echo $TOPIC_ID`{{execute}}
 
 Set the value of the variable $MY_BUCKET:
 
