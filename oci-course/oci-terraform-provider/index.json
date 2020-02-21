@@ -38,7 +38,7 @@
         },
         {
           "file": "bucket.tf",
-          "target": "/root"
+          "target": "/root/tf_bucket/"
         },
         {
           "file": "environment.sh",

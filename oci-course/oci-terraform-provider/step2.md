@@ -20,10 +20,9 @@ And now initialize the Terraform provider:
 
 `terraform init`{{execute}}
 
+`cd ~/tf_bucket`
+`terraform plan -out config.tfplan`{{execute}}
 
-`terraform plan`{{execute}}
-
-`terraform init`{{execute}}
 `terraform apply`{{execute}}
 
 
