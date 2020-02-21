@@ -1,6 +1,5 @@
 # https://www.terraform.io/docs/configuration/providers.html
 # https://www.terraform.io/docs/providers/oci/index.html
-variable "compartment_id" {}
 
 provider "oci" {
  
