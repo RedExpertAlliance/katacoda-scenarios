@@ -111,7 +111,7 @@ export OUT_BUCKET=$(echo out$LAB_ID)
 - OUT_BUCKET is the name of the bucket where the converted PDF will be uploaded.
 
 
-`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds='["'"$subnetId"'"]' --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=oci_api_key.pem --config OUT_BUCKET=$OUT_BUCKET`{{execute}}
+`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds='["'"$subnetId"'"]' --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=oci_api_key.pem --config OUTPUT_BUCKET=$OUT_BUCKET`{{execute}}
 
 Once the application is created we need to deploy it executing this:
 
