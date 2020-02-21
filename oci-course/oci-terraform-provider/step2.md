@@ -9,13 +9,22 @@ Test the currently installed version of Terraform. This should be at least versi
 
 Edit the environment variable values in `environment.sh`{{open}}
 Then execute the script to set those environment variables:
-`./environment.sh`{{execute}}
+```
+chmod +777 environment.sh
+./environment.sh
+export compartment_id=$(oci iam compartment list | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
+export namespace=$(oci os ns get| jq -r '.data')
+```{{execute}}
 
 And now initialize the Terraform provider:
 
 `terraform init`{{execute}}
 
 
+`terraform plan`{{execute}}
+
+`terraform init`{{execute}}
+`terraform apply`{{execute}}
 
 
 ##Resources
