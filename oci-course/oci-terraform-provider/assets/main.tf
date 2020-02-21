@@ -21,11 +21,11 @@ resource "oci_objectstorage_bucket" "test_bucket" {
 
 data "oci_objectstorage_bucket" "inspect_bucket" {
     #Required
-    name = "var.bucket_name"
-    namespace = "var.namespace"
+    name = "${var.bucket_name}"
+    namespace = "${var.namespace}"
 }
 
 # Output the result
 output "show-bucket" {
-  value = "${data.oci_objectstorage_bucket.inspect_bucket}"
+  value = "${data.oci_objectstorage_bucket.inspect_bucket.compartment_id}"
 }
