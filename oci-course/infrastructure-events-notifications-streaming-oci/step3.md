@@ -156,8 +156,8 @@ For the rule creation, execute this:
 
 `oci events rule create --display-name text2PDF$LAB_ID --is-enabled true --condition '{"eventType":["com.oraclecloud.objectstorage.createobject"], "data": {"bucketName":"'"$IN_BUCKET"'"}}' --compartment-id $COMPARTMENT_OCID --actions file://actionsFunc.json `{{execute}}
 
-Now we are ready to test it, we can use the lorem.txt file to upload it to the input bucket and after a few seconds in the output bucket you should see a 
-PDF file. 
+Now we are ready to test it, we can use the lorem.txt (it is located in the fn-text2pdf-events) file to upload it to the input bucket,and after a few seconds, in the output bucket you should see a 
+PDF file with the same name (lorem.pdf). 
 
 To validate it, list the contents of the out bucket executing the following:
 
