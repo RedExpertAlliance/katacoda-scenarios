@@ -12,8 +12,8 @@ Then execute the script to set those environment variables:
 ```
 chmod +777 environment.sh
 ./environment.sh
-export compartment_id=$(oci iam compartment list | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
-export namespace=$(oci os ns get| jq -r '.data')
+export TF_VAR_compartment_id=$(oci iam compartment list | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
+export TF_VAR_namespace=$(oci os ns get| jq -r '.data')
 ```{{execute}}
 
 And now initialize the Terraform provider:
@@ -24,6 +24,8 @@ And now initialize the Terraform provider:
 `terraform plan -out config.tfplan`{{execute}}
 
 `terraform apply`{{execute}}
+
+`terraform show`{{execute}}
 
 
 ##Resources
