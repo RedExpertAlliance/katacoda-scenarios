@@ -86,6 +86,7 @@ First let's clone the code:
 Copy the private key (oci_api_key.pem to the folder where the repository was downloaded.
 
 `cd fn-text2pdf-events/`{{execute}}
+
 `cp $HOME/.oci/oci_api_key.pem .`{{execute}}
 
 You need to have all the following environment variables already set (you set them in Step 1).
@@ -152,6 +153,7 @@ We are going to create two buckets:
 For the rule creation, execute this:
 
 `cp ../actionsFunc.json .`{{execute}}
+
 `oci events rule create --display-name text2PDF$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.createobject", "data": {"bucketName":"'"$IN_BUCKET"'"}}' --compartment-id $COMPARTMENT_OCID --actions file://actionsFunc.json `{{execute}}
 
 Now we are ready to test it, we can use the lorem.txt file to upload it to the input bucket and after a few seconds in the output bucket you should see a 
