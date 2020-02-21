@@ -112,6 +112,12 @@ export OUT_BUCKET=$(echo out$LAB_ID)
 
 `fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds='["'"$subnetId"'"]' --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=oci_api_key.pem --config OUTPUT_BUCKET=$OUT_BUCKET`{{execute}}
 
+The function needs a set of config variables to work:
+
+- OUT_BUCKET is the name of the bucket where the PDF will be stored
+- PRIVATE_KEY_NAME, PASSPHRASE, USER_OCID, TENANT_OCID, FINGERPRINT are used because within the code we are going to upload the PDF into the bucket, and 
+we need to be authenticated. The PASSPHRASE is optional, as we mentioned in Step 1.
+
 Once the application is created we need to deploy it executing this:
 
 `fn -v deploy --app text2pdfEvents$LAB_ID --build-arg PRIVATE_KEY_NAME=oci_api_key.pem`{{execute}}
@@ -159,6 +165,47 @@ For the rule creation, execute this:
 Now we are ready to test it, we can use the lorem.txt (it is located in the fn-text2pdf-events) file to upload it to the input bucket,and after a few seconds, in the output bucket you should see a 
 PDF file with the same name (lorem.pdf). 
 
+A sample event envelope is like this:
+~~~~
+{
+  "eventType" : "com.oraclecloud.objectstorage.createobject",
+  "cloudEventsVersion" : "0.1",
+  "eventTypeVersion" : "2.0",
+  "source" : "ObjectStorage",
+  "eventTime" : "2020-02-21T04:04:53.733Z",
+  "contentType" : "application/json",
+  "data" : {
+    "compartmentId" : "ocid1.compartment.oc1..aaaaaaaa4tjjg5nin3wslisvfygemkiem3f2azdapdrt5vhvunfg4a",
+    "compartmentName" : "lab-compartment",
+    "resourceName" : "lorem.txt",
+    "resourceId" : "/n/idi66ekilhnr/b/in96/o/lorem.txt",
+    "availabilityDomain" : "IAD-AD-2",
+    "additionalDetails" : {
+      "bucketName" : "in1",
+      "archivalState" : "Available",
+      "namespace" : "idadsfilhnr",
+      "bucketId" : "ocid1.bucket.oc1.iad.aaaaaaaagasgtwuzlgg4zg5vemzi3tginlvvh2przavniuknq3gv7mxrc3moasma",
+      "eTag" : "f5293af9-f123-4e9f-ac4a-438d81a0464c"
+    }
+  },
+  "eventID" : "7b805085-83f4-9344-48b1-13b1a52bdfb4",
+  "extensions" : {
+    "compartmentId" : "ocid1.compartment.oc1..adfafg5viv3wsnisvfegemkkin3nwzem3f2azdapdrt5vhvunfg4a"
+  }
+}
+~~~~
+
+
 To validate it, list the contents of the out bucket executing the following:
 
 `oci os object list -bn $OUT_BUCKET`{{execute}}
+
+If you want to manually test the function, you can do it executing something like the following. If you want to do it, just replace the compartmentId, namespace
+and bucketId to reflect your environment. If you have any doubt, ask the instructor, or if you are doing this on your own, all those values are already set 
+in the environment variables that we have set until this point.
+
+`export event= '{"eventType":"com.oraclecloud.objectstorage.createobject","cloudEventsVersion":"0.1","eventTypeVersion":"2.0","source":"ObjectStorage","eventTime":"2020-02-21T04:04:53.733Z","contentType":"application/json","data":{"compartmentId":"ocid1.compartment.oc1..aaaaaaaa4tjjg5nin3wslisvfygemkiem3f2azdapdrt5vhvunfg4a","compartmentName":"lab-compartment","resourceName":"lorem.txt","resourceId":"/n/idi66ekilhnr/b/in96/o/lorem.txt","availabilityDomain":"IAD-AD-2","additionalDetails":{"bucketName":"in1","archivalState":"Available","namespace":"idadsfilhnr","bucketId":"ocid1.bucket.oc1.iad.aaaaaaaagasgtwuzlgg4zg5vemzi3tginlvvh2przavniuknq3gv7mxrc3moasma","eTag":"f5293af9-f123-4e9f-ac4a-438d81a0464c"}},"eventID":"7b805085-83f4-9344-48b1-13b1a52bdfb4","extensions":{"compartmentId":"ocid1.compartment.oc1..adfafg5viv3wsnisvfegemkkin3nwzem3f2azdapdrt5vhvunfg4a"}}'`{{export}}
+
+`echo $event | fn invoke text2pdfEvents$LAB_ID convert`{{execute}}
+
+With this we have finalized this scenario.
