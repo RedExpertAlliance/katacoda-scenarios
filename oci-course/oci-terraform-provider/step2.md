@@ -20,7 +20,8 @@ And now initialize the Terraform provider:
 
 `terraform init`{{execute}}
 
-`cd ~/tf_bucket`
+Note: the file `variables.tf` contains the OCI Provider for Terraform. When no variables are defined for the provider, it will attempt to find the file ~/.oci/config and use the settings from the DEFAULT config. When that files exists and has the right entries, you do not need to define fingerprint, tenancy_ocid and other configuration variables in the provider.
+
 `terraform plan -out config.tfplan`{{execute}}
 
 `terraform apply`{{execute}}
