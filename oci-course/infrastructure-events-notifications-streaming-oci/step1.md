@@ -37,10 +37,10 @@ export MY_BUCKET=$(echo myBucket$LAB_ID)
 
 The following variables will be set using the information contained in the OCI config file ($HOME/.oci/config)
 ```
-export TENANT_OCID=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=')
-export USER_OCID=$(grep -i 'user' $HOME/.oci/config  | cut -f2 -d'=')
-export FINGERPRINT=$(grep -i 'fingerprint' $HOME/.oci/config  | cut -f2 -d'=')
-export PASSPHRASE=$(grep -i 'pass_phrase' $HOME/.oci/config  | cut -f2 -d'=')
+export TENANT_OCID=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
+export USER_OCID=$(grep -i 'user' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
+export FINGERPRINT=$(grep -i 'fingerprint' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
+export PASSPHRASE=$(grep -i 'pass_phrase' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
 ```{{execute}}
 ***(Note. If you do not have a passphrase, it is not necessary to set that environment variable)***
 

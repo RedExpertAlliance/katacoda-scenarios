@@ -85,10 +85,9 @@ First let's clone the code:
 
 Copy the private key (oci_api_key.pem to the folder where the repository was downloaded.
 
-```
-cd fn-text2pdf-events/
-cp $HOME/.oci/oci_api_key.pem .
-```{{execute}}
+`cd fn-text2pdf-events/`{{execute}}
+
+`cp $HOME/.oci/oci_api_key.pem .`{{execute}}
 
 You need to have all the following environment variables already set (you set them in Step 1).
 
@@ -111,7 +110,7 @@ export OUT_BUCKET=$(echo out$LAB_ID)
 - OUT_BUCKET is the name of the bucket where the converted PDF will be uploaded.
 
 
-`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds='["'"$subnetId"'"]' --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=oci_api_key.pem --config OUT_BUCKET=$OUT_BUCKET`{{execute}}
+`fn create app text2pdfEvents$LAB_ID --annotation oracle.com/oci/subnetIds='["'"$subnetId"'"]' --config TENANT_OCID=$TENANT_OCID --config USER_OCID=$USER_OCID --config FINGERPRINT=$FINGERPRINT --config PASSPHRASE=$PASSPHRASE --config REGION=$REGION --config PRIVATE_KEY_NAME=oci_api_key.pem --config OUTPUT_BUCKET=$OUT_BUCKET`{{execute}}
 
 Once the application is created we need to deploy it executing this:
 
@@ -154,10 +153,11 @@ We are going to create two buckets:
 For the rule creation, execute this:
 
 `cp ../actionsFunc.json .`{{execute}}
-`oci events rule create --display-name text2PDF$LAB_ID --is-enabled true --condition '{"eventType":"com.oraclecloud.objectstorage.object.create", "data": {"bucketName":"'"$IN_BUCKET"'"}}' --compartment-id $COMPARTMENT_OCID --actions file://actionsFunc.json `{{execute}}
 
-Now we are ready to test it, we can use the lorem.txt file to upload it to the input bucket and after a few seconds in the output bucket you should see a 
-PDF file. 
+`oci events rule create --display-name text2PDF$LAB_ID --is-enabled true --condition '{"eventType":["com.oraclecloud.objectstorage.createobject"], "data": {"bucketName":"'"$IN_BUCKET"'"}}' --compartment-id $COMPARTMENT_OCID --actions file://actionsFunc.json `{{execute}}
+
+Now we are ready to test it, we can use the lorem.txt (it is located in the fn-text2pdf-events) file to upload it to the input bucket,and after a few seconds, in the output bucket you should see a 
+PDF file with the same name (lorem.pdf). 
 
 To validate it, list the contents of the out bucket executing the following:
 
