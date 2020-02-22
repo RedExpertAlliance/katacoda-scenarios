@@ -29,3 +29,18 @@ data "oci_objectstorage_bucket" "inspect_bucket" {
 output "show-bucket" {
   value = "${data.oci_objectstorage_bucket.inspect_bucket.compartment_id}"
 }
+
+output "show-new-bucket" {
+  value = "${oci_objectstorage_bucket.test_bucket.compartment_id}"
+}
+
+# Get a list of Availability Domains
+data "oci_identity_availability_domains" "ads" {
+  compartment_id = "${var.compartment_id}"
+}
+
+
+# Output the result
+output "show-ads" {
+  value = "${data.oci_identity_availability_domains.ads.availability_domains}"
+}
