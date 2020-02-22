@@ -14,11 +14,10 @@ resource "oci_objectstorage_bucket" "lab_bucket" {
     compartment_id = var.compartment_id
     name           = var.lab_bucket_name
     namespace      = var.namespace
-
-    #Optional
-    freeform_tags = {"Department"= "Finance"}
+    freeform_tags = var.tags
 }
 
+# make sure lab-user has required privileges
 resource "oci_identity_compartment" "lab-child_compartment" {
     #Required
     compartment_id = "var.compartment_id"

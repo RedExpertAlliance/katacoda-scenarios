@@ -1,24 +1,36 @@
-The OCI Console is the browser based GUI for managing Oracle Cloud Infrastructure. You probably have worked before with OCI Console, for example in the scenario Introduction to OCI. We will now use the Metrics Explorer, a tool in the OCI Console that allows exploring, analyzing and visualizing metrics collected in the OCI Metrics lake.
+Let's check on what Terraform has done to our OCI resources.
 
-Open the OCI Console - for tenancies subscribed to the Ashburn region, the URL is:
+With the next command, we ask Terraform to show in human-readable output the current state for the resources as Terraform sees it.
+`terraform show`{{execute}}
 
-https://console.us-ashburn-1.oraclecloud.com/
+Check in the console if the resource was created as intended:
+https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets 
 
-Login using the console credentials provided by the lab instructor.
+Or use
 
-Navigate to the Metrics Explorer: in the *hamburger menu*, select Solutions and Platform | Monitoring | Metrics Explorer, or go straight to: https://console.us-ashburn-1.oraclecloud.com/monitoring/explore.
+`oci os bucket list --compartment-id=$compartmentId`{{execute}}
 
-Select *oci_objectstorage* as the Metrics Namespace and *PutRequests* as the metric. Set the *Interval* to *1m* and select *Count* as the *statistic*. Press *Update Chart* to get a chart of the most recent numbers of PutRequests (per one minute interval). Use the Quick Select *Last Hour*.
+to list all buckets and find the bucket created by Terraform: *tf-bucket*. 
 
-![Metrics Explorer](/RedExpertAlliance/courses/oci-course/monitoring-metrics-alarms-on-oci/assets/oci-metrics-explorer.png)
+The next command will generate an SVG visualization of the resources managed by Terraform, in a file called graph.svg.
 
-Feel free to Adjust the X-axis (to zoom in) on an even shorter time window. Change the metric, to for example look at the number of file downloads (GetRequests) or the (Max) TotalRequestLatency.
+`terraform graph | dot -Tsvg > graph.svg`{{execute}}
 
-Toggle to *Show Data Table* to get a list of metrics data points. 
+You can open the file `graph.svg`{{open}} and copy the contents to the clipboard. Then open an online SVG editor, for example at https://www.freecodeformat.com/svg-editor.php or https://thedevband.com/online-svg-viewer.html  . Copy the contents of the clipboard into the editor and press *Draw* to show the visual representation. 
 
-If you click on *Advanced Mode*, you can edit the queries in MQL (Monitoring Query Language). This allows you for example to use custom aggregation time windows.
+## Discovery
+
+Beginning with version 3.50, the terraform-oci-provider can be run as a command line tool to discover resources that have been created within Oracle Cloud Infrastructure compartments and generate Terraform configuration files for the discovered resources.
+
+```
+mkdir discovery_oci_tf
+
+```{{execute}}
+
+`terraform-provider-oci -command=export -compartment_id=$TF_VAR_compartment_id -output_path=discovery_oci_tf`{{execute}}
+
+.terraform/plugins/linux_amd64/terraform-provider-oci_v3.63.0_x4  -command=export -compartment_id=$TF_VAR_compartment_id -service=core,tagging -output_path=discovery_oci_tf
 
 ## Resources
 
-OCI Documentation [To edit a query using MQL syntax](https://docs.cloud.oracle.com/en-us/iaas/Content/Monitoring/Tasks/buildingqueries.htm#MQLEdit)
-
+Resource Discovery: https://www.terraform.io/docs/providers/oci/guides/resource_discovery.html 

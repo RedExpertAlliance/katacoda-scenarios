@@ -14,11 +14,11 @@
         "text": "step2.md"
       },
       {
-        "title": "Step 3 - Provision a resource",
+        "title": "Step 3 - Inspect and Visualize",
         "text": "step3.md"
       },
       {
-        "title": "Step 4 - More resources",
+        "title": "Step 4 - Destroy Resources Managed by Terraform",
         "text": "step4.md"
       }    ],
     "intro": {
