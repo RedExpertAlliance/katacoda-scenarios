@@ -4,34 +4,34 @@
 # inherits values from Environment Variable TF_VAR_compartment_id
 variable "compartment_id" {}
 
-variable "bucket_name" {
+variable "lab_bucket_name" {
 default = "tf-bucket"
 }
 variable "namespace" {}
 
-resource "oci_objectstorage_bucket" "test_bucket" {
+resource "oci_objectstorage_bucket" "lab_bucket" {
     #Required
   compartment_id = var.compartment_id
-  name           = var.bucket_name
+  name           = var.lab_bucket_name
   namespace      = var.namespace
 
     #Optional
     freeform_tags = {"Department"= "Finance"}
 }
 
-data "oci_objectstorage_bucket" "inspect_bucket" {
+resource "oci_objectstorage_object" "test_object" {
     #Required
-    name = "${var.bucket_name}"
-    namespace = "${var.namespace}"
+    bucket = "${oci_objectstorage_bucket.lab_bucket.name}"
+    content = "Hello World in Terraformed file"
+    namespace = "var.namespace"
+    object = "my-new-object"
+
+    freeform_tags = "${var.tags}"
 }
 
-# Output the result
-output "show-bucket" {
-  value = "${data.oci_objectstorage_bucket.inspect_bucket.compartment_id}"
-}
 
 output "show-new-bucket" {
-  value = "${oci_objectstorage_bucket.test_bucket.compartment_id}"
+  value = "${oci_objectstorage_bucket.lab_bucket.compartment_id}"
 }
 
 # Get a list of Availability Domains

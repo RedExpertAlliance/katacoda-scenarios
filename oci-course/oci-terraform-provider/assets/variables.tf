@@ -9,6 +9,6 @@ provider "oci" {
 variable "tags" {
   type = map(string)
   default = {
-    "CreatedFor" = "KatacodaLab"
+    "created-for" = "KatacodaLab"
   }
 }
