@@ -11,23 +11,33 @@ variable "namespace" {}
 
 resource "oci_objectstorage_bucket" "lab_bucket" {
     #Required
-  compartment_id = var.compartment_id
-  name           = var.lab_bucket_name
-  namespace      = var.namespace
+    compartment_id = var.compartment_id
+    name           = var.lab_bucket_name
+    namespace      = var.namespace
 
     #Optional
     freeform_tags = {"Department"= "Finance"}
 }
 
-resource "oci_objectstorage_object" "test_object" {
+resource "oci_identity_compartment" "lab-child_compartment" {
     #Required
-    bucket = "${oci_objectstorage_bucket.lab_bucket.name}"
-    content = "Hello World in Terraformed file"
-    namespace = "var.namespace"
-    object = "my-new-object"
-
-    freeform_tags = "${var.tags}"
+    compartment_id = "var.compartment_id"
+    description = "Child Compartment Inside Lab-Compartment"
+    name = "lab-child-compartment"
+    enable_delete = "true"
+    
+    #Optional
+    freeform_tags = var.tags
 }
+
+
+## resource "oci_objectstorage_object" "test_object" {
+##    #Required
+##    bucket = "oci_objectstorage_bucket.lab_bucket.name"
+##    content = "Hello World in Terraformed file"
+##    namespace = "var.namespace"
+##    object = "my-new-object"
+##}
 
 
 output "show-new-bucket" {
