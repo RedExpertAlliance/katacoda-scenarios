@@ -14,12 +14,20 @@
         "text": "step2.md"
       },
       {
-        "title": "Step 3 - Inspect and Visualize",
+        "title": "Step 3 - Manage OCI Resource with Terraform",
         "text": "step3.md"
       },
       {
-        "title": "Step 4 - Destroy Resources Managed by Terraform",
+        "title": "Step 4 - Inspect and Visualize",
         "text": "step4.md"
+      },
+      {
+        "title": "Step 5 - Destroy Resources Managed by Terraform",
+        "text": "step5.md"
+      },
+      {
+        "title": "Bonus: Step 6 - Create and Invoke Function using Terraform",
+        "text": "step6.md"
       }    ],
     "intro": {
       "text": "intro.md",
@@ -35,6 +43,10 @@
         {
           "file": "main.tf",
           "target": "/root"
+        },
+        {
+          "file": "function.tf",
+          "target": "/root/terraform_details"
         },
         {
           "file": "variables.tf",
