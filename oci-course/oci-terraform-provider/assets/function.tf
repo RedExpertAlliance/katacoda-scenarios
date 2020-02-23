@@ -9,6 +9,11 @@ data "oci_functions_applications" "lab_application" {
 
     #Optional
     display_name = "lab1"
+    
+    filter {
+        name   = "display_name"
+        values  = [ "lab1" ]
+    }
 }
 
 
@@ -27,9 +32,13 @@ output "show-applications" {
   value = "${data.oci_functions_applications.lab_application.applications}"
 }
 
+output "show-application_id" {
+  value = "${data.oci_functions_applications.lab_application.id}"
+}
+
 data "oci_functions_functions" "hello_function" {
-    #Required
-    application_id = "${data.oci_functions_applications.lab_application[0].id}"
+    #Required 
+    application_id = "${local.lab1_app.id}"
 
     #Optional
     display_name = "hello1"
@@ -38,6 +47,7 @@ data "oci_functions_functions" "hello_function" {
 output "show-functions" {
   value = "${data.oci_functions_functions.hello_function.functions}"
 }
+
 
 locals {
   hello_func = data.oci_functions_functions.hello_function.functions[0]
@@ -50,12 +60,21 @@ output "hello" {
 
 data "oci_functions_function" "hello_func" {
     #Required
-    function_id = "${data.oci_functions_functions.hello_function.functions[0].id}"
-
+    function_id = "${local.hello_func.id}"
 }
 
 output "show-function" {
   value = "${data.oci_functions_function.hello_func.image}"
+}
+
+data "oci_functions_function" "hello_func2" {
+    #Required
+    function_id = "${data.oci_functions_functions.hello_function.functions.id}"
+}
+
+
+output "show-function2" {
+  value = "${data.oci_functions_function.hello_func2.image}"
 }
 
 
