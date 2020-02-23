@@ -11,6 +11,18 @@ data "oci_functions_applications" "lab_application" {
     display_name = "lab1"
 }
 
+
+locals {
+  # Ids for multiple sets of EC2 instances, merged together
+  lab1_app = data.oci_functions_applications.lab_application.applications[0]
+}
+
+output "lab_app" {
+  value       = local.lab1_app
+  description = "The App"
+}
+
+
 output "show-applications" {
   value = "${data.oci_functions_applications.lab_application.applications}"
 }
@@ -25,6 +37,15 @@ data "oci_functions_functions" "hello_function" {
 
 output "show-functions" {
   value = "${data.oci_functions_functions.hello_function.functions}"
+}
+
+locals {
+  hello_func = data.oci_functions_functions.hello_function.functions[0]
+}
+
+output "hello" {
+  value       = local.hello_func
+  description = "The Hello Function"
 }
 
 data "oci_functions_function" "hello_func" {
