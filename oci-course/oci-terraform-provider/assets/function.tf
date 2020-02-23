@@ -5,8 +5,7 @@
 
 data "oci_functions_applications" "lab_application" {
     #Required
-    compartment_id = "var.compartment_id"
-
+    compartment_id = "${var.compartment_id}"
     #Optional
     display_name = "lab1"
     
@@ -18,84 +17,68 @@ data "oci_functions_applications" "lab_application" {
 
 
 locals {
-  # Ids for multiple sets of EC2 instances, merged together
-  lab1_app = data.oci_functions_applications.lab_application.applications[0]
+  # store the first (and only) application returned from the data source in the local variable
+  lab_app = data.oci_functions_applications.lab_application.applications[0]
 }
 
+# purely debug info - to show the application has been retrieved
 output "lab_app" {
-  value       = local.lab1_app
+  value       = local.lab_app
   description = "The App"
 }
 
-
-output "show-applications" {
-  value = "${data.oci_functions_applications.lab_application.applications}"
-}
-
+# purely debug info
 output "show-application_id" {
-  value = "${data.oci_functions_applications.lab_application.id}"
+  value = "${local.lab_app.id}"
 }
 
+# retrieve function hello$LAB-ID in the application indicated by the application identifier held in the local variable
 data "oci_functions_functions" "hello_function" {
     #Required 
-    application_id = "${local.lab1_app.id}"
+    application_id = "${local.lab_app.id}"
 
     #Optional
     display_name = "hello1"
 }
 
-output "show-functions" {
-  value = "${data.oci_functions_functions.hello_function.functions}"
-}
-
-
 locals {
+  # store the first and only function returned from the data source in the local variable hello_func
   hello_func = data.oci_functions_functions.hello_function.functions[0]
 }
 
+# debug only
 output "hello" {
   value       = local.hello_func
   description = "The Hello Function"
 }
 
+# retrieve the hello function into the data source using the local variable with the function OCID
 data "oci_functions_function" "hello_func" {
     #Required
     function_id = "${local.hello_func.id}"
 }
 
+# purely debug: show the image associated with the existing hello function
 output "show-function" {
   value = "${data.oci_functions_function.hello_func.image}"
 }
 
-data "oci_functions_function" "hello_func2" {
-    #Required
-    function_id = "${data.oci_functions_functions.hello_function.functions.id}"
-}
 
-
-output "show-function2" {
-  value = "${data.oci_functions_function.hello_func2.image}"
-}
-
-
+# manage function resource
 resource "oci_functions_function" "hello_function" {
     # see: https://www.terraform.io/docs/providers/oci/r/functions_function.html
     #Required
 
     # the OCID of a functions application that the current user can make use of
-    application_id = "ocid1.fnapp.oc1.iad.aaaaaaaaaggy6vypllumrzugdpgcdi4fd5aauv475ikfos46nlcualwiq26q"
-    display_name = "my-hello-func"
-    # prepared fully qualified name of a container image (suitable for use for a function) the current user has access to 
-    image = "iad.ocir.io/idtwlqf2hanz/cloudlab-repo/hello:0.0.10"
+    application_id = "${local.lab_app.id}"
+    display_name = "my-hello-function"
+    # image name is retrieved from the local variable
+    image = "${data.oci_functions_function.hello_func.image}"
     memory_in_mbs = "256"
-
-    #Optional
-    ##config = "${var.function_config}"
-    ##defined_tags = {"Operations.CostCenter"= "42"}
     freeform_tags = {"Department"= "Finance"}
 }
 
-resource "oci_functions_invoke_function" "invoke_hello_function" {\
+resource "oci_functions_invoke_function" "invoke_hello_function" {
     # see: https://www.terraform.io/docs/providers/oci/r/functions_invoke_function.html 
 
     #Required
