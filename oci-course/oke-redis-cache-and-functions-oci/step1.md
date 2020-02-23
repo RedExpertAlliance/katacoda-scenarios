@@ -5,7 +5,9 @@ You need to provide details on the OCI tenancy you will work in and the OCI user
 * ~/.oci/config
 * ~/.oci/oci_api_key.pem
 
-If you do not have the OCI config file, nor the oci API key, you can go through these steps: https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
+If you do not have the OCI config file, nor the oci API key yet, you can go through these steps: https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
+
+Once you have the config file and the api key, copy their contents in ~/.oci/config and ~/.oci/oci_api_key.pem respectively.
 
 Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and is connected to your tenant.
 
@@ -41,6 +43,10 @@ In this scenario we will use both the Oracle Cloud Infrastructure Web Console an
 will be executed using the Web Console.
 
 Please create that policy and then continue with the next section.
+
+For the lab purposes you will be assigned with a LAB ID number, execute this with the ID that the instructor assigns to you:
+
+`export LAB_ID=1`{{execute}}
 
 
 ## Oracle Kubernetes Engine Cluster Creation
