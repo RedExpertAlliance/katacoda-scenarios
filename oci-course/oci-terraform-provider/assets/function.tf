@@ -71,7 +71,7 @@ resource "oci_functions_function" "hello_function" {
 
     # the OCID of a functions application that the current user can make use of
     application_id = "${local.lab_app.id}"
-    display_name = "my-hello-function"
+    display_name = "my-hello-function-tf"
     # image name is retrieved from the local variable
     image = "${data.oci_functions_function.hello_func.image}"
     memory_in_mbs = "256"

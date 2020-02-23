@@ -22,14 +22,16 @@ You can open the file `graph.svg`{{open}} and copy the contents to the clipboard
 
 Beginning with version 3.50, the terraform-oci-provider can be run as a command line tool to discover resources that have been created within Oracle Cloud Infrastructure compartments and generate Terraform configuration files for the discovered resources.
 
+See https://www.terraform.io/docs/providers/oci/guides/resource_discovery.html for details on discovery.
+
+The command to start discovery looks like this. Note: I have not been able to get it to work properly.
+
 ```
 mkdir discovery_oci_tf
 
+.terraform/plugins/linux_amd64/terraform-provider-oci_v3.63.0_x4  -command=export -compartment_id=$TF_VAR_compartment_id -service=core,tagging -output_path=discovery_oci_tf
 ```{{execute}}
 
-`terraform-provider-oci -command=export -compartment_id=$TF_VAR_compartment_id -output_path=discovery_oci_tf`{{execute}}
-
-.terraform/plugins/linux_amd64/terraform-provider-oci_v3.63.0_x4  -command=export -compartment_id=$TF_VAR_compartment_id -service=core,tagging -output_path=discovery_oci_tf
 
 ## Resources
 

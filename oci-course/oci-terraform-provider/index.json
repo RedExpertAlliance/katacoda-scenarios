@@ -1,8 +1,8 @@
 {
-  "title": "Under Construction: Infrastructure as Code with OCI Terraform Provider",
+  "title": "Preview: Infrastructure as Code with OCI Terraform Provider",
   "description": "Provisioning Oracle Cloud Infrastructure resources as Infrastructure as Code through Terraform.",
   "difficulty": "beginner",
-  "time": "35 minutes",
+  "time": "25 minutes",
   "details": {
     "steps": [
       {

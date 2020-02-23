@@ -2,20 +2,19 @@ In this step you will look at managing a single OCI Resource using Terraform. Ju
 
 Terraform will process all *.tf* files in the current directory (and possibly files in other directories to which references exist).
 
-File `variables.tf`{{open}} contains the OCI provider definition and is also - by convention - the place for global variable definitions and constants that can be used throughout the other *.tf files*. The values of variables can be determined by Terraform in several ways (in this order):
+File `variables.tf`{{open}} contains the OCI provider definition and is also - by convention - the place for global variable definitions and constants that can be used throughout the other *.tf files*. The values of these variables can be determined by Terraform in several ways (in order of precedence):
 * taken from values passed on the command line through the `-var 'variable-name=value'` syntax 
 * in a `.tfvars` file (specified on the command line or automatically loaded)
 * read from an Environment Variable called *TF_VAR_name-of-variable*
-* taken from the default value
+* taken from the default value defined as part of the variable definition 
 
-Execute these statements to set environment variables that Terraform will read the values for some of its variables from:
+Execute these statements to set two environment variables -TF_VAR_compartment_id and TF_VAR_namespace - from which Terraform will read the values for some of its variables (*compartment_id* and *namespace*):
 ```
 export TF_VAR_compartment_id=$(oci iam compartment list | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
 export TF_VAR_namespace=$(oci os ns get| jq -r '.data')
 ```{{execute}}
 
-
-File `main.tf`{{open}} contains the definitions of the OCI resources we want Terraform to make happen. If they exist, Terraform should only update them where properties differ in definition and actual state and if they do not exist, Terraform should create them.
+File `main.tf`{{open}} contains the definitions of the OCI resources we want Terraform to manage. If they exist, Terraform should only update them where properties differ in definition and actual state and if they do not exist, Terraform should create them.
 
 In this file, a single bucket is defined. The name of the bucket is set through the variable *lab_bucket_name*. Its default value is *tf-bucket*. However, the name should be more specific. Execute this command to set an environment variable from which the variable will get its value:
 

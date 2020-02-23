@@ -50,7 +50,7 @@
     },
     {
       "course_id": "oci-terraform-provider",
-      "title": "UNDER CONSTRUCTION: Introduction to OCI Terraform Provider",
+      "title": "Preview: Introduction to OCI Terraform Provider",
       "description": "Infrastructure as Code on Oracle Cloud Infrastructure with Terraform."
     },
     
