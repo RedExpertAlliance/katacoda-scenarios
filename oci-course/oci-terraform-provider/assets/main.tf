@@ -1,12 +1,6 @@
-# inherits values from Environment Variable TF_VAR_compartment_id
-variable "compartment_id" {}
-
 variable "lab_bucket_name" {
 default = "tf-bucket"
 }
-
-# inherits values from Environment Variable TF_VAR_namespace
-variable "namespace" {}
 
 resource "oci_objectstorage_bucket" "lab_bucket" {
     #Required

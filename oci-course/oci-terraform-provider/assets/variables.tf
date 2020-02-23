@@ -5,6 +5,13 @@ provider "oci" {
  
 }
 
+# inherits values from Environment Variable TF_VAR_compartment_id
+variable "compartment_id" {}
+
+# inherits values from Environment Variable TF_VAR_namespace
+variable "namespace" {}
+
+
 
 variable "tags" {
   type = map(string)

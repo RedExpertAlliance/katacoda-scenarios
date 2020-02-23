@@ -1,8 +1,16 @@
 Managing a Function (including invoking the function)
 
-`cd terraform_details`{{execute}}
+In this step you will use a second Terraform configuration file to create a function and invoke that function. 
 
-In this directory, the file `functions.tf` defines a function resource as well as a function execution resource.
+```
+cp variables.tf terraform_details
+cd terraform_details
+terraform init
+```{{execute}}
+
+In this directory, the file `function.tf` defines a function resource as well as a function execution resource.
+
+`function.tf`{{open}}
 
 `terraform plan -out config.tfplan`{{execute}}
 
@@ -11,3 +19,8 @@ To make our plan real, use the following command. Terraform will apply the chang
 `terraform apply `{{execute}}
 
 Enter *yes* when prompted to confirm our desire.
+
+The output lists the response from the invoked function. You can check the results and output again using:
+
+`terraform show`{{execute}}
+
