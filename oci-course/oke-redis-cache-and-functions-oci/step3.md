@@ -272,8 +272,17 @@ Now we are ready to deploy our Go API.
 To deploy our Go API we need first to create a Kubernetes Secret to store our Docker Registry credentials, that kubernetes needs to know to pull the image 
 and deploy it to the cluster.
 
-Let's create the secret:
-kubectl create secret docker-registry ocilabsecret --docker-server=us-ashburn-1.ocir.io --docker-username='"'"$user"'"' --docker-password='"'"$pwd"'"' --docker-email='"'"$youremail"'"' -n $NAMESPACE
+Let's create the secret. But before that, set the following 03 environment variables.
+***(Note. For pwd and youremail, set your information. The password is the one you used for login to docker)*** 
+
+`export user=$ns/lab-user`{{execute}}
+
+`export pwd=mypwd`{{execute}}
+
+`export youremail=me@me.com`{{execute}}
+
+Now execute the following to create the secret:
+`kubectl create secret docker-registry ocilabsecret --docker-server=us-ashburn-1.ocir.io --docker-username=$user --docker-password=$pwd --docker-email=$youremail -n $NAMESPACE`{{execute}}
 
 Now let's edit our yaml file located in:
 
