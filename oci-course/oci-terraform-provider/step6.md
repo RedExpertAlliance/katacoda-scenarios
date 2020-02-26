@@ -19,13 +19,13 @@ This file contains several data sources that are used to retrieve the OCID of th
 
 Execute this command, to find out what Terraform thinks of the configuration. 
 
-`terraform plan -out config.tfplan -var lab_id=$LAB_ID  -var application_name=lab$LAB_ID  - var function_name=hello$LAB_ID`{{execute}}
+`terraform plan -out config.tfplan -var lab_id=$LAB_ID  -var application_name=lab$LAB_ID  -var function_name=hello$LAB_ID`{{execute}}
 
 Terraform reports the resources it needs to manipulate to take the existing state on OCI to the state described in the configuration file.
 
 To turn our plan into reality, use the following command. Terraform will apply the changes required to reach the desired state of the configuration, or the pre-determined set of actions generated in the terraform execution plan created through the *terraform plan* command.
 
-`terraform apply `{{execute}}
+`terraform apply -var lab_id=$LAB_ID  -var application_name=lab$LAB_ID  -var function_name=hello$LAB_ID`{{execute}}
 
 Enter *yes* when prompted to confirm your desire.
 
@@ -37,6 +37,6 @@ You can of course check in the Console if the function *my-hello-function-tf* ha
 
 Let's now remove the function that we had Terraform create in this scenario.
 
-`terraform destroy`{{execute}}
+`terraform destroy -var lab_id=$LAB_ID  -var application_name=lab$LAB_ID  -var function_name=hello$LAB_ID`{{execute}}
 
 Again, enter *yes* when prompted. Note: the OCI Terraform provider struggles a bit with deleting functions. The *destroy* command can take quite a long time to complete. You do not need to wait for completion of the command in order to finish this scenario.
