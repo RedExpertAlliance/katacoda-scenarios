@@ -4,7 +4,7 @@ You can publish your own metrics to Monitoring using the API. You can view chart
 
 Metrics are retained for 14 days.
 
-In this scenario, you will look at OCI Resource metrics as well as custom metrics. You will perform some activities that make sure some metrics are produced and then you will inspect these metrics through the OCI Monitoring facilities. Subsequently, you will look at Alarms and Notifications and cause these to be triggered.
+In this scenario, you will look at OCI Resource metrics as well as custom metrics. You will perform some activities that make sure some metrics are produced and then you will inspect these metrics through the OCI Monitoring facilities. Subsequently, you will look at Alarms and Notifications and cause these to be triggered. Notification topics can be subscribed to - by email subscribers, Slack and PagerDuty, WebHooks and OCI Functions. All of these channels can be triggered by a message publishe to the Notification Topic.
 
 # Resources
 [OCI Documentation on Metrics and Monitoring](https://docs.cloud.oracle.com/en-us/iaas/Content/Monitoring/Concepts/monitoringoverview.htm)
