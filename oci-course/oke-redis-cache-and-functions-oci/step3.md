@@ -107,7 +107,7 @@ spec:
 
 We apply the yaml file into our cluster within the namespace that we created steps before:
 
-`kubectl apply -f kubernetes/redis-deployment.yml -n $NAMESPACE` {{execute}}
+`kubectl apply -f kubernetes/redis-deployment.yml -n $NAMESPACE`{{execute}}
 
 Then wait for the redis cluster to be ready, issuing:
 
@@ -193,7 +193,7 @@ export ocirname=cloudlab
 
 Now let's tag it. 
 
-`docker tag lab-user/session-api:1.0.0 us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{export}} 
+`docker tag lab-user/session-api:1.0.0 us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}} 
 
 So far we have an image that contains our Go code, and is locally in our file system. Now we need to register in Oracle Container Registry
 
@@ -208,7 +208,7 @@ for the OCI Lab preparation https://www.katacoda.com/redexpertalliance/courses/o
 
 Now let's push the image to OCIR:
 
-`docker push lab-user/ocilab:latest us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`
+`docker push lab-user/ocilab:latest us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
 The result must me something like this:
 ~~~~
 docker push us-ashburn-1.ocir.io/idi66ekilhnr/spsocir/session-api:1.0.0
@@ -271,10 +271,10 @@ image: docker.io/rortegasps/redis-session:latest
 
 Now let's deploy our api, with:
 
-`kubectl apply -f session-api.yml -n $NAMESPACE` {{execute}}
+`kubectl apply -f session-api.yml -n $NAMESPACE`{{execute}}
 
 To find out if the service was properly deploy, execute:
 
-`kubectl get services $NAMESPACE` {{execute}}
+`kubectl get services $NAMESPACE`{{execute}}
 
 In the next step you will test the newly created service.

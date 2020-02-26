@@ -1,5 +1,3 @@
-# Test the API
-
 ## Service IP
 
 We need to expose the API to the world, so we created the session-api service with a diferent type than the Redis service, we used LoadBalancer type, 
@@ -7,7 +5,7 @@ this creates an OCI load balancer in front of our service, in this way we have a
 
 After some minutes we can retrieve the service IP with:
 
-`export SESSION_API=$(kubectl get svc session-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}')` {{execute}}
+`export SESSION_API=$(kubectl get svc session-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}')`{{execute}}
 
 ## Test the API
 
