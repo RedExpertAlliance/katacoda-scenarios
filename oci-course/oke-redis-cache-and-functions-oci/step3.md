@@ -107,9 +107,11 @@ spec:
 
 We apply the yaml file into our cluster within the namespace that we created steps before:
 
+`cd redis-session-api`{{execute}}
+
 `kubectl apply -f kubernetes/redis-deployment.yml -n $NAMESPACE`{{execute}}
 
-Then wait for the redis cluster to be ready, issuing:
+Then wait (around 30s) for the redis cluster to be ready, issuing:
 
 `kubectl get pods -n $NAMESPACE -w` {{execute}}
 
@@ -128,9 +130,18 @@ With our Redis instance up and running we will deploy the servie describe in the
 
 To deploy it, we will use the same thing as the previous step. That is:
 
-`kubectl apply -f kubernetes/redis-svc.yml -n $NAMESPACE` {{execute}}
+`kubectl apply -f kubernetes/redis-svc.yaml -n $NAMESPACE` {{execute}}
 
-To validate that our service is running properly, let's do this: <TBD>
+To validate that our service is running properly, let's do this:
+
+`kubectl get services -n $NAMESPACE` {{execute}}
+
+You should get something like this:
+
+~~~~
+NAME      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+redis     ClusterIP   10.96.195.244   <none>        6379/TCP   31s
+~~~~
 
 Now that we have our Redis cluster and our Redis service running properly, we will create a Docker image that contains our Go application (API) that will
 be deployed into our cluster and that will use the Redis Service.
@@ -208,7 +219,7 @@ for the OCI Lab preparation https://www.katacoda.com/redexpertalliance/courses/o
 
 Now let's push the image to OCIR:
 
-`docker push lab-user/ocilab:latest us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
+`docker push us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
 The result must me something like this:
 ~~~~
 docker push us-ashburn-1.ocir.io/idi66ekilhnr/spsocir/session-api:1.0.0
@@ -258,7 +269,20 @@ Let's create the secret. But before that, set the following 03 environment varia
 Now execute the following to create the secret:
 `kubectl create secret docker-registry ocilabsecret --docker-server=us-ashburn-1.ocir.io --docker-username=$user --docker-password=$pwd --docker-email=$youremail -n $NAMESPACE`{{execute}}
 
-Now let's edit our yaml file: session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.
+To validate that it was creted, execute:
+
+`kubectl get secrets -n $NAMESPACE`{{execute}}
+
+And you will get something like this:
+
+~~~~
+NAME                  TYPE                                  DATA      AGE
+default-token-bz52x   kubernetes.io/service-account-token   3         19m
+istio.default         istio.io/key-and-cert                 3         19m
+ocilabsecret          kubernetes.io/dockerconfigjson        1         5s
+~~~~
+
+Now let's edit our yaml file: kubernetes/session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.
 
 `export image=us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
 `echo $image`{{execute}}
@@ -271,7 +295,7 @@ image: docker.io/rortegasps/redis-session:latest
 
 Now let's deploy our api, with:
 
-`kubectl apply -f session-api.yml -n $NAMESPACE`{{execute}}
+`kubectl apply -f kubernetes/session-api.yml -n $NAMESPACE`{{execute}}
 
 To find out if the service was properly deploy, execute:
 
