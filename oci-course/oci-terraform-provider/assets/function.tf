@@ -3,15 +3,35 @@
     # - a function hello$LAB_ID in that application
     # - we can retrieve both application and function details using a data source in terraform    
 
+# inherits values from value passed on command line -var lab_id=$LAB_ID
+variable "lab_id" {
+}
+
+# inherits values from value passed on command line -var application_name=lab$LAB_ID
+variable "application_name" {  
+  type = string
+  default = "lab${var.lab_id}"
+  }
+}
+
+
+# inherits values from value passed on command line -var function_name=hello$LAB_ID
+variable "function_name" {  
+  type = string
+  default = "hello${var.lab_id}"
+  }
+}
 data "oci_functions_applications" "lab_application" {
     #Required
     compartment_id = "${var.compartment_id}"
     #Optional
-    display_name = "lab1"
+    display_name = "${var.application_name}"
     
+    # note: the effect of using the display_name property is similar to applying the filter
+    # the former is applied through  the OCI Provider inside the OCI REST API and the latter is applied by Terraform on the result returned from the REST API
     filter {
         name   = "display_name"
-        values  = [ "lab1" ]
+        values  = [ {var.application_name}]
     }
 }
 
@@ -38,7 +58,7 @@ data "oci_functions_functions" "hello_function" {
     application_id = "${local.lab_app.id}"
 
     #Optional
-    display_name = "hello1"
+    display_name = "${var.function_name}"
 }
 
 locals {
