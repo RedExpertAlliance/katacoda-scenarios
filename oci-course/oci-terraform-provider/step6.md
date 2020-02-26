@@ -13,7 +13,7 @@ terraform init
 
 In this directory, the file `function.tf` defines a function resource as well as a function execution resource. The function is called *my-hello-function-tf* and is created based on the same function (container) image as function *hello$LAB_ID*.  
 
-`function.tf`{{open}}
+`terraform_details/function.tf`{{open}}
 
 This file contains several data sources that are used to retrieve the OCID of the application *lab_$LAB_ID* and the function *hello$LAB_ID* as well as the image on which that function is based. 
 
