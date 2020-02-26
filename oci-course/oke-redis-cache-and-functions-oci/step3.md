@@ -16,7 +16,7 @@ We have our cluster up and running, now we are going to follow the next steps to
 
 To download the code execute this:
 
-`git clone https://github.com/muchacho/repo.git`{{execute}}
+`git clone https://github.com/manraog/redis-session-api.git`{{execute}}
 
 This code was created by Ricardo Ortega.
 
@@ -46,15 +46,15 @@ If you re-issue the `kubectl get namespaces`{{execute}}  you will see your newly
 
 ![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/10.jpg)
 
-In order to deploy your artifacts to the ocilab#LAB_ID namespace, you just need to include the option -n $NAMESPACE within the kubectl commands. 
+In order to deploy your artifacts to the ocilab$LAB_ID namespace, you just need to include the option -n $NAMESPACE within the kubectl commands. 
 
 For example, to get the list of pods in the $NAMESPACE, you will do:
 
-`kubectl get pods $NAMESPACE`{{execute}}
+`kubectl get pods -n $NAMESPACE`{{execute}}
 
 ![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/11.jpg)
 
-## Deploy Redis Cluster
+## Deploy Redis
 
 First of all, what is Redis?
 
@@ -71,36 +71,22 @@ We know is a simple scenario, but is a valid one.
 The yaml file for our Redis is the following:
 
 ~~~~
-# Copyright 2018 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-cart
+  name: redis
 spec:
   selector:
     matchLabels:
-      app: redis-cart
+      app: redis
   template:
     metadata:
       labels:
-        app: redis-cart
+        app: redis
     spec:
       containers:
       - name: redis
-        image: redis:alpine
+        image: redis:5.0
         ports:
         - containerPort: 6379
         readinessProbe:
@@ -114,38 +100,14 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: redis-data
-        resources:
-          limits:
-            memory: 256Mi
-            cpu: 125m
-          requests:
-            cpu: 70m
-            memory: 200Mi
       volumes:
       - name: redis-data
         emptyDir: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: redis-cart
-spec:
-  type: ClusterIP
-  selector:
-    app: redis-cart
-  ports:
-  - name: redis
-    port: 6379
-    targetPort: 6379
 ~~~~
 
-We need first to change directories to where the Redis service yaml file is located
+We apply the yaml file into our cluster within the namespace that we created steps before:
 
-`cd redisapp\yaml\redis`{{execute}}
-
-And then apply the yaml file into our cluster within the namespace that we created steps before:
-
-`kubectl apply -f redisCluster.yml -n $NAMESPACE` {{execute}}
+`kubectl apply -f kubernetes/redis-deployment.yml -n $NAMESPACE` {{execute}}
 
 Then wait for the redis cluster to be ready, issuing:
 
@@ -153,9 +115,7 @@ Then wait for the redis cluster to be ready, issuing:
 
 ~~~~
 NAME                                    READY     STATUS        RESTARTS   AGE
-kube-dns-664f6d6bcd-bs56r               3/3       Running       0          46h
-kube-dns-664f6d6bcd-d29mf               3/3       Running       0          133d
-kube-dns-664f6d6bcd-ks8bc               3/3       Running       0          21d
+redis-664f6d6bcd-bs56r                  1/1       Running       0          46h
 ~~~~
 (Note. The -w option is to make the command to keep running every second, we will use it to have for the status to turn into Running)
 
@@ -164,15 +124,11 @@ Wait for the status to turn into "Running", then do a ctrl+c, to get back at the
 
 ## Deploy Redis service
 
-With our cluster up and running we will deploy the servie describe in the file "redisapp\yaml\redis\redisService.yaml". 
+With our Redis instance up and running we will deploy the servie describe in the file "kubernetes\redis-svc.yaml". 
 
 To deploy it, we will use the same thing as the previous step. That is:
 
-`cd redisapp\yaml\redis`{{execute}}
-
-And then apply the yaml file into our cluster:
-
-`kubectl apply -f redisService.yml -n $NAMESPACE` {{execute}}
+`kubectl apply -f kubernetes/redis-svc.yml -n $NAMESPACE` {{execute}}
 
 To validate that our service is running properly, let's do this: <TBD>
 
@@ -182,30 +138,47 @@ be deployed into our cluster and that will use the Redis Service.
 ## Build Docker image for our Go application
 
 The Go application will represent the API that will be used as an authentication API. The idea of this API is to authenticate the user and return a session token,
-this session token will be stored in Redis for about 01 minute. After 01 minute the token will be invalidated and the user will have to re-authenticate.
+this session token will be stored in Redis for about 2 minutes. After 2 minutes the token will be invalidated and the user will have to re-authenticate.
 
-In order to buld the Docker image , let's go to the folder where is located our code and our Docker file.
-
-`cd redisapp\docker\goapp\`{{execute}}
-
-In this folder we will find the Dockerfile:
+Inside api folder we will find the Dockerfile and de go code:
 
 ~~~~
-<Include the Dockerfile>
+# Golang base image
+FROM golang:1.7.4
+
+# Set the current working directory
+WORKDIR /go/src/app
+
+# Copy code file
+COPY . .
+
+# Download all dependencies
+RUN go get -d -v ./...
+RUN go install -v ./...
+
+# Build the Go app
+RUN go build -o api .
+
+# Expose port
+EXPOSE 8080
+
+# Command to run the executable
+ENTRYPOINT ["./api"]
 ~~~~
 
 Now let's build the image:
 
-`docker build -t lab-user/ocilab:latest`{{execute}}
+`docker build api -t lab-user/session-api:1.0.0`{{execute}}
 
-Ather that, use `docker images`{{execute}} to see that the image is created and is register locally.
+After that, use `docker images`{{execute}} to see that the image is created and is registered locally.
 
 Before tagging it we need some environment variables to be set:
 
-cs=$(oci iam compartment list)
-export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
+`cs=$(oci iam compartment list)`{{execute}}
 
-~~~~
+`export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
+
+```
 cs=$(oci iam compartment list)
 export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
 
@@ -215,11 +188,12 @@ subnets=$(oci network subnet list  -c $compartmentId --vcn-id $vcnId)
 export subnetId=$(echo $subnets | jq -r --arg display_name "Public Subnet-vcn-lab" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
 nss=$(oci os ns get)
 export ns=$(echo $nss | jq -r '.data')
-~~~~
+export ocirname=cloudlab
+```{{execute}}
 
 Now let's tag it. 
 
-`docker tag lab-user/ocilab:latest us-ashburn-1.ocir.io/$ns/$ocirname/ocilab:latest`{{export}} 
+`docker tag lab-user/session-api:1.0.0 us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{export}} 
 
 So far we have an image that contains our Go code, and is locally in our file system. Now we need to register in Oracle Container Registry
 
@@ -234,10 +208,10 @@ for the OCI Lab preparation https://www.katacoda.com/redexpertalliance/courses/o
 
 Now let's push the image to OCIR:
 
-`docker push lab-user/ocilab:latest us-ashburn-1.ocir.io/$ns/$ocirname/ocilab:latest`
+`docker push lab-user/ocilab:latest us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`
 The result must me something like this:
 ~~~~
-docker push us-ashburn-1.ocir.io/idi66ekilhnr/spsocir/ocilab:latest
+docker push us-ashburn-1.ocir.io/idi66ekilhnr/spsocir/session-api:1.0.0
 The push refers to repository [us-ashburn-1.ocir.io/idi66ekilhnr/spsocir/ocilab]
 1112f2a480f2: Pushed
 5f230b75e4e6: Pushed
@@ -284,17 +258,23 @@ Let's create the secret. But before that, set the following 03 environment varia
 Now execute the following to create the secret:
 `kubectl create secret docker-registry ocilabsecret --docker-server=us-ashburn-1.ocir.io --docker-username=$user --docker-password=$pwd --docker-email=$youremail -n $NAMESPACE`{{execute}}
 
-Now let's edit our yaml file located in:
+Now let's edit our yaml file: session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.
 
-`cd redisapp\yaml\go`{{execute}}
+`export image=us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
+`echo $image`{{execute}}
 
-Edit the go.yaml file and include this entry:
+Find the image reference and change it for the value of the variable $image.
+
 ~~~~
-      imagePullSecrets:
-      - name: ocilabsecret
+image: docker.io/rortegasps/redis-session:latest
 ~~~~
 
-Now let's deploy our service, with:
+Now let's deploy our api, with:
 
-`kubectl apply -f go.yml -n $NAMESPACE` {{execute}}
+`kubectl apply -f session-api.yml -n $NAMESPACE` {{execute}}
 
+To find out if the service was properly deploy, execute:
+
+`kubectl get services $NAMESPACE` {{execute}}
+
+In the next step you will test the newly created service.
