@@ -56,10 +56,16 @@ curl -X POST \
 
 If after two minutes we hit again the profile endpoint we will get a 401 Unauthorized error
 ```
-curl -X POST \
-  http://"$SESSION_API"/refresh \
+curl -X GET \
+  http://"$SESSION_API"/profile \
   -H 'SessionID: d1762368-4ec2-453a-a77d-b11125ea4f14'
 ```{{execute}}
+
+Like this:
+
+~~~~
+{"message": "You need to login"}
+~~~~
 
 With those calls we have tested our Go API and also the Redis cache.
 
