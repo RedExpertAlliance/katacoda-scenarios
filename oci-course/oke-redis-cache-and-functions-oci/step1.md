@@ -18,7 +18,7 @@ Try out the following command to get a list of all namespaces you currently have
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
 Let's also test that kubectl install and working properly, execute the following:
-`kubectl version`
+`kubectl version`{{execute}}
 
 You should receive something like this:
 
