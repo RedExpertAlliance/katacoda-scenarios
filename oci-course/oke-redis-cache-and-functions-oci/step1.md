@@ -28,9 +28,8 @@ The connection to the server localhost:8080 was refused - did you specify the ri
 ~~~~
 
 Let´s also create the following environment variables, that we will use in the next steps:
-(Note. Change the tenantID value for the one that is in the ~/.oci/config file)
 
-`export TENANT_OCID=tenantID`{{execute}}
+`export TENANT_OCID=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=' | head -1)`{{execute}}
 
 ## Policy pre-requisite
 

@@ -60,7 +60,7 @@ First of all, what is Redis?
 
 Taken from their [webiste](https://redis.io "Redis Homepage") :
  
-![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/12.jpg)
+![REDIS](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/redis.jpg)
 
 Basically is an in-memory data structure store, that can be used as a database.
 
@@ -68,7 +68,7 @@ In our scenario we will use it to store a session of a user that wants to use an
 
 We know is a simple scenario, but is a valid one.
 
-The yml file for our Redis is the following:
+The yaml file for our Redis is the following:
 
 ~~~~
 apiVersion: apps/v1
@@ -105,7 +105,7 @@ spec:
         emptyDir: {}
 ~~~~
 
-We apply the yml file into our cluster within the namespace that we created steps before:
+We apply the yaml file into our cluster within the namespace that we created steps before:
 
 `cd redis-session-api`{{execute}}
 
@@ -113,7 +113,7 @@ We apply the yml file into our cluster within the namespace that we created step
 
 Then wait (around 30s) for the redis cluster to be ready, issuing:
 
-`kubectl get pods -n $NAMESPACE -w` {{execute}}
+`kubectl get pods -n $NAMESPACE -w`{{execute}}
 
 ~~~~
 NAME                                    READY     STATUS        RESTARTS   AGE
@@ -130,11 +130,11 @@ With our Redis instance up and running we will deploy the servie describe in the
 
 To deploy it, we will use the same thing as the previous step. That is:
 
-`kubectl apply -f kubernetes/redis-svc.yml -n $NAMESPACE` {{execute}}
+`kubectl apply -f kubernetes/redis-svc.yml -n $NAMESPACE`{{execute}}
 
 To validate that our service is running properly, let's do this:
 
-`kubectl get services -n $NAMESPACE` {{execute}}
+`kubectl get services -n $NAMESPACE`{{execute}}
 
 You should get something like this:
 
@@ -246,7 +246,7 @@ latest: digest: sha256:fdf4de48313d3c1715aed9266c58ab738c848a5919fddb895b0a505bb
 
 If you login to your OCI tenant and go to OCIR, you will see something like this:
 
-![OCIR](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/12.jpg)
+![OCIR](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/ocir.jpg)
 
 The image has been pushed to your OCI registry.
 
