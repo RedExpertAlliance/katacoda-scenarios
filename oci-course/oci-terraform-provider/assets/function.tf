@@ -10,17 +10,21 @@ variable "lab_id" {
 # inherits values from value passed on command line -var application_name=lab$LAB_ID
 variable "application_name" {  
   type = string
-  default = "lab${var.lab_id}"
-  }
+  
 }
+
 
 
 # inherits values from value passed on command line -var function_name=hello$LAB_ID
 variable "function_name" {  
   type = string
-  default = "hello${var.lab_id}"
-  }
 }
+
+
+
+
+
+
 data "oci_functions_applications" "lab_application" {
     #Required
     compartment_id = "${var.compartment_id}"
@@ -31,7 +35,7 @@ data "oci_functions_applications" "lab_application" {
     # the former is applied through  the OCI Provider inside the OCI REST API and the latter is applied by Terraform on the result returned from the REST API
     filter {
         name   = "display_name"
-        values  = [ {var.application_name}]
+        values  = [ var.application_name]
     }
 }
 
