@@ -8,7 +8,7 @@ We have our cluster up and running, now we are going to follow the next steps to
 4. On top of the Redis Cluster we will deploy a service (YML)
 5. We are going to use a Docker file that will contain our main.go application
 6. With the Docker image created, we will register it on Oracle Container Registry (OCIR)
-7. Once register, we are going to deploy our Go application (API) from a yaml file
+7. Once register, we are going to deploy our Go application (API) from a yml file
 8. We will expose the service
 
 
@@ -68,7 +68,7 @@ In our scenario we will use it to store a session of a user that wants to use an
 
 We know is a simple scenario, but is a valid one.
 
-The yaml file for our Redis is the following:
+The yml file for our Redis is the following:
 
 ~~~~
 apiVersion: apps/v1
@@ -105,7 +105,7 @@ spec:
         emptyDir: {}
 ~~~~
 
-We apply the yaml file into our cluster within the namespace that we created steps before:
+We apply the yml file into our cluster within the namespace that we created steps before:
 
 `cd redis-session-api`{{execute}}
 
@@ -126,11 +126,11 @@ Wait for the status to turn into "Running", then do a ctrl+c, to get back at the
 
 ## Deploy Redis service
 
-With our Redis instance up and running we will deploy the servie describe in the file "kubernetes\redis-svc.yaml". 
+With our Redis instance up and running we will deploy the servie describe in the file "kubernetes\redis-svc.yml". 
 
 To deploy it, we will use the same thing as the previous step. That is:
 
-`kubectl apply -f kubernetes/redis-svc.yaml -n $NAMESPACE` {{execute}}
+`kubectl apply -f kubernetes/redis-svc.yml -n $NAMESPACE` {{execute}}
 
 To validate that our service is running properly, let's do this:
 
@@ -282,7 +282,7 @@ istio.default         istio.io/key-and-cert                 3         19m
 ocilabsecret          kubernetes.io/dockerconfigjson        1         5s
 ~~~~
 
-Now let's edit our yaml file: kubernetes/session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.
+Now let's edit our yml file: kubernetes/session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.
 
 `export image=us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
 `echo $image`{{execute}}

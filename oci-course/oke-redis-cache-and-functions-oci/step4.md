@@ -23,13 +23,15 @@ curl -X GET \
 
 Let's request a session ID:
 ```
-curl -X POST \
+export SESSION_ID=$( \
+  curl -X POST \
   http://"$SESSION_API"/login \
   -H 'Content-Type: application/json' \
-  -d '{"username":"Hugo","password":"Hugo123"}'
+  -d '{"username":"Hugo","password":"Hugo123"}' \
+  | jq -r '.sessionID')
 ```{{execute}}
 
-The previous call will return to us a sessionID. Copy it, since we will use it in the next call:
+The previous call will return to us a sessionID and saved it on SESSION_ID variable. We are going to use this session to make the next calls:
 ~~~~
 {
     "sessionID": "3ad7e86d-7ef7-49ac-91f5-90de3a513580",
@@ -38,11 +40,11 @@ The previous call will return to us a sessionID. Copy it, since we will use it i
 }
 ~~~~
 
-Paste the sessionID as a header in our requests, to get the profile of the user:
+Now we can get the profile of the user:
 ```
 curl -X GET \
   http://"$SESSION_API"/profile \
-  -H 'SessionID: d1762368-4ec2-453a-a77d-b11125ea4f14'
+  -H 'SessionID: '"$SESSION_ID"''
 ```{{execute}}
 
 Every time we login a sessionID is created and saved to Redis with our username and expiration time of 2 minutes.
@@ -51,15 +53,21 @@ We can refresh our session and get a new sessionID for another 2 minutes, just c
 ```
 curl -X POST \
   http://"$SESSION_API"/refresh \
-  -H 'SessionID: d1762368-4ec2-453a-a77d-b11125ea4f14'
+  -H 'SessionID: '"$SESSION_ID"''
 ```{{execute}}
 
 If after two minutes we hit again the profile endpoint we will get a 401 Unauthorized error
 ```
-curl -X POST \
-  http://"$SESSION_API"/refresh \
-  -H 'SessionID: d1762368-4ec2-453a-a77d-b11125ea4f14'
+curl -X GET \
+  http://"$SESSION_API"/profile \
+  -H 'SessionID: '"$SESSION_ID"''
 ```{{execute}}
+
+Like this:
+
+~~~~
+{"message": "You need to login"}
+~~~~
 
 With those calls we have tested our Go API and also the Redis cache.
 
