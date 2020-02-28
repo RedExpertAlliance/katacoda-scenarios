@@ -6,11 +6,17 @@ With the next command, we ask Terraform to show in human-readable output the cur
 Check in the console if the resource was created as intended:
 https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets 
 
+Drill down into the new bucket to see its details and its contents; there should be a single file object.
+
 Or use
 
 `oci os bucket list --compartment-id=$compartmentId`{{execute}}
 
-to list all buckets and find the bucket created by Terraform: *tf-bucket*. 
+to list all buckets and find the bucket created by Terraform: *tf-bucket*. You can use 
+
+`oci os object list --bucket-name=$TF_VAR_lab_bucket_name`{{execute}}
+
+to list objects in the newly created bucket.
 
 The next command will generate an SVG visualization of the resources managed by Terraform, in a file called graph.svg.
 
@@ -24,7 +30,7 @@ Beginning with version 3.50, the terraform-oci-provider can be run as a command 
 
 See https://www.terraform.io/docs/providers/oci/guides/resource_discovery.html for details on discovery.
 
-The command to start discovery looks like this. Note: I have not been able to get it to work properly.
+The command to start discovery looks like this. Note: I have not been able to get it to work properly; perhaps this option requires special permissions.
 
 ```
 mkdir discovery_oci_tf

@@ -15,7 +15,7 @@ resource "oci_objectstorage_bucket" "lab_bucket" {
 
 resource "oci_objectstorage_object" "hello-world-object-in-bucket" {
     #Required
-    bucket = var.lab_bucket_name
+    bucket = oci_objectstorage_bucket.lab_bucket.name
     content = "Hello World"
     namespace = var.namespace
     object = "my-new-object"
@@ -27,7 +27,19 @@ output "show-new-bucket" {
   value = oci_objectstorage_bucket.lab_bucket.bucket_id
 }
 
-# report on the managed bucket resource by printing its OCID
+# report on the managed object resource by printing the full object
 output "show-new-object" {
   value = oci_objectstorage_object.hello-world-object-in-bucket
 }
+
+data "oci_objectstorage_object" "read-hello-world-object" {
+  bucket = oci_objectstorage_object.hello-world-object-in-bucket.bucket
+  namespace = oci_objectstorage_object.hello-world-object-in-bucket.namespace
+  object = oci_objectstorage_object.hello-world-object-in-bucket.object
+}
+
+# report on the managed object resource by printing the full object
+output "show-hello-world-object" {
+  value = data.oci_objectstorage_object.read-hello-world-object
+}
+

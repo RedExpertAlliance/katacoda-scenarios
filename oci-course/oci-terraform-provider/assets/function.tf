@@ -27,9 +27,9 @@ variable "function_name" {
 
 data "oci_functions_applications" "lab_application" {
     #Required
-    compartment_id = "${var.compartment_id}"
+    compartment_id = var.compartment_id
     #Optional
-    display_name = "${var.application_name}"
+    display_name = var.application_name
     
     # note: the effect of using the display_name property is similar to applying the filter
     # the former is applied through  the OCI Provider inside the OCI REST API and the latter is applied by Terraform on the result returned from the REST API
@@ -53,16 +53,16 @@ output "lab_app" {
 
 # purely debug info
 output "show-application_id" {
-  value = "${local.lab_app.id}"
+  value = local.lab_app.id
 }
 
 # retrieve function hello$LAB-ID in the application indicated by the application identifier held in the local variable
 data "oci_functions_functions" "hello_function" {
     #Required 
-    application_id = "${local.lab_app.id}"
+    application_id = local.lab_app.id
 
     #Optional
-    display_name = "${var.function_name}"
+    display_name = var.function_name
 }
 
 locals {
@@ -79,12 +79,12 @@ output "hello" {
 # retrieve the hello function into the data source using the local variable with the function OCID
 data "oci_functions_function" "hello_func" {
     #Required
-    function_id = "${local.hello_func.id}"
+    function_id = local.hello_func.id
 }
 
 # purely debug: show the image associated with the existing hello function
 output "show-function" {
-  value = "${data.oci_functions_function.hello_func.image}"
+  value = data.oci_functions_function.hello_func.image
 }
 
 
@@ -94,10 +94,10 @@ resource "oci_functions_function" "hello_function" {
     #Required
 
     # the OCID of a functions application that the current user can make use of
-    application_id = "${local.lab_app.id}"
+    application_id = local.lab_app.id
     display_name = "my-hello-function-tf"
     # image name is retrieved from the local variable
-    image = "${data.oci_functions_function.hello_func.image}"
+    image = data.oci_functions_function.hello_func.image
     memory_in_mbs = "256"
     freeform_tags = {"Department"= "Finance"}
 }
@@ -107,7 +107,7 @@ resource "oci_functions_invoke_function" "invoke_hello_function" {
 
     #Required
     # get the function_id from the hello_function resource - defined overhead 
-    function_id = "${oci_functions_function.hello_function.id}"
+    function_id = oci_functions_function.hello_function.id
 
     #Optional
     # send a JSON object with the input to the function
@@ -119,5 +119,5 @@ resource "oci_functions_invoke_function" "invoke_hello_function" {
 
 # report the response from the function call - by retrieving the content attribute from the resource
 output "show-function-result" {
-  value = "${oci_functions_invoke_function.invoke_hello_function.content}"
+  value = oci_functions_invoke_function.invoke_hello_function.content
 }

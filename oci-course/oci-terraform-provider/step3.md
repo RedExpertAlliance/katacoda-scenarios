@@ -14,6 +14,8 @@ In this file, a single bucket is defined. The name of the bucket is set through 
 
 `export TF_VAR_lab_bucket_name=tf_lab_bucket_$LAB_ID`{{execute}}
 
+The file also contains the definition of an (file) object called *hello-world-object-in-bucket*. This object resource refers to the bucket resource in which it should be created.  
+
 The following command *plan* is used to create an execution plan. Terraform first performs a refresh: it reads the actual state of affairs on OCI and creates or updates the statefile accordingly. Then it determines what actions are necessary to achieve the desired state specified in the configuration files.
 
 `terraform plan -out config.tfplan`{{execute}}
@@ -35,3 +37,5 @@ GitHub Repo with many sample Terraform configurations for OCI Resources https://
 Example OCI Terraform Provider - Bucket - https://www.terraform.io/docs/providers/oci/r/objectstorage_bucket.html
 
 Terraform Docs on Variables: https://www.terraform.io/docs/configuration/variables.html 
+
+Blog article describing first steps with OCI provider for Terraform - including introduction to variables and data sources: https://technology.amis.nl/2020/02/28/terraform/ 
