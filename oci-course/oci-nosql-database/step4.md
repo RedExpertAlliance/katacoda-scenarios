@@ -22,20 +22,15 @@ document='{ "staff":[{"name":"Sven","country":"Germany"},{"name":"José","countr
 oci nosql query execute --compartment-id $compartmentId --statement="INSERT INTO $docTableName  (id, document)  VALUES (2,$document)"
 ```{{execute}}
 
-And show to how utterly schemaless our database is, let's create an entirely different JSON document (a list of all NoSQL tables in the compartment as returned by the CLI), and insert that into the table too:
+And show to how utterly schemaless our database is, let's create an entirely different JSON document (the contents of document *special-doc.json*), and insert that into the table too:
 
 ```
-document=$(oci nosql table list --compartment-id $compartmentId)
+document=$(cat special-doc.json)
 echo $document
 oci nosql query execute --compartment-id $compartmentId --statement="INSERT INTO $docTableName  (id, document)  VALUES (5,$document)"
 ```{{execute}}
 
- 
-document=$(oci iam compartment list)
-echo $document
-oci nosql query execute --compartment-id $compartmentId --statement="INSERT INTO $docTableName  (id, document)  VALUES (5,"$document")"
-
-And query the table for all its data:
+Query the table for all its data:
 `oci nosql query execute --compartment-id $compartmentId --statement="SELECT * FROM $docTableName"`{{execute}}
 
-`oci nosql query execute --compartment-id $compartmentId --statement="delete FROM $docTableName where id = 5"`{{execute}}
+In the next step, let's see how we can query and manipulate the JSON document in the NoSQL database.
