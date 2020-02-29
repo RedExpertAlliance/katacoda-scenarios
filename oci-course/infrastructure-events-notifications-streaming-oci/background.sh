@@ -9,7 +9,7 @@ wget https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/mast
 wget https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/master/oci-course/infrastructure-events-notifications-streaming-oci/actions.json --no-check-certificate
 wget https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/master/oci-course/infrastructure-events-notifications-streaming-oci/actionsFunc.json --no-check-certificate
 
-chmod 777 installAll.sh
+chmod +777 installAll.sh
 
 # Install the OCI CLI in silent mode with default settings
 curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
