@@ -11,7 +11,7 @@ The next step is the creation of the table with the NoSQL Database service. Exec
 * name - string
 * country - string
 
-`oci nosql table create --compartment-id $compartmentId  --name $tableName --ddl-statement "CREATE TABLE IF NOT EXISTS $tableName (id INTEGER, name STRING, country STRING, PRIMARY KEY(SHARD(id)))" --table-limits="{\"maxReadUnits\": 5,  \"maxStorageInGBs\": 1,  \"maxWriteUnits\": 5 }" `{{execute}} 
+`oci nosql table create --compartment-id $compartmentId  --name $tableName --ddl-statement "CREATE TABLE IF NOT EXISTS $tableName (id INTEGER, name STRING, country STRING, PRIMARY KEY(SHARD(id)))" --table-limits="{\"maxReadUnits\": 15,  \"maxStorageInGBs\": 1,  \"maxWriteUnits\": 15 }" `{{execute}} 
 
 Check if the table has been created:
 `oci nosql table list --compartment-id $compartmentId `{{execute}}
