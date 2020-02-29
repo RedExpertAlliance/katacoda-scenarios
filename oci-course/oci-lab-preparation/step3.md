@@ -30,6 +30,10 @@ Allow group lab-participants to manage ons-subscriptions in tenancy
 Allow group lab-participants to manage alarms in tenancy
 Allow group lab-participants to read metrics in tenancy
 
+## NoSQL Database
+allow group lab-participants to manage nosql-tables in compartment lab-compartment
+allow group lab-participants to manage nosql-family in compartment lab-compartment
+
 
 ## Functions (FaaS) Policies
 

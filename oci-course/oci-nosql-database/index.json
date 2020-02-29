@@ -1,0 +1,69 @@
+{
+  "title": "Under Construction: First steps with NoSQL Database on Oracle Cloud Infrastructure",
+  "description": "Managing data through Relational Model and JSON with Oracle NoSQL.",
+  "difficulty": "beginner",
+  "time": "25 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Preparing the lab environment",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2 - Create a NoSQL Database table",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - Create and Query Data",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4 - more stuff",
+        "text": "step4.md"
+      },
+      {
+        "title": "Step 5 - and more",
+        "text": "step5.md"
+      },
+      {
+        "title": "Step 6 - clean up,
+        "text": "step6.md"
+      }    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "",
+      "courseData": "background.sh",
+      "code": "foreground.sh"
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "main.tf",
+          "target": "/root"
+        },
+        {
+          "file": "function.tf",
+          "target": "/root/terraform_details"
+        },
+        {
+          "file": "variables.tf",
+          "target": "/root"
+        },
+        {
+          "file": "environment.sh",
+          "target": "/root"
+        }
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "editor-terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "ubuntu1804"
+  }
+}
