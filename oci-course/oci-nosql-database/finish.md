@@ -6,4 +6,8 @@ One topic you may want to take a lookt at is the Oracle NoSQL Database Cloud Sim
 
 
 ## Resources
--
+[OCI Documentation on NoSQL Database Service](https://docs.cloud.oracle.com/en-us/iaas/nosql-database/index.html)
+
+[SQL Language Reference for Oracle NoSQL Database](https://docs.oracle.com/en/database/other-databases/nosql-database/19.5/sqlreferencefornosql/complex-data-types.html)
+
+[New Features in Oracle NoSQL Database Service](https://docs.oracle.com/en/cloud/paas/nosql-cloud/whats-new/index.html#CSNWN-GUID-F3883EAB-2E14-43E1-A989-5BC8D42BAEDD)
