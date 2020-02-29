@@ -40,22 +40,6 @@
     },
     "assets": {
       "host01": [
-        {
-          "file": "main.tf",
-          "target": "/root"
-        },
-        {
-          "file": "function.tf",
-          "target": "/root/terraform_details"
-        },
-        {
-          "file": "variables.tf",
-          "target": "/root"
-        },
-        {
-          "file": "environment.sh",
-          "target": "/root"
-        }
       ]
     }
   },
