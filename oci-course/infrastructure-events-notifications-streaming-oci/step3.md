@@ -18,7 +18,7 @@ The scenario is quite simple:
 - And the action will be: execute the function that translates the text document into a PDF
 - The PDF will get uploaded to the second bucket
 
-# Functions preparation
+## Functions preparation
 
 If  you have gone through [this](https://www.katacoda.com/redexpertalliance/courses/oci-course/functions-on-oci "Functions on OCI") you will be familiar
 with the upcomming steps to connect the Fn CLI with the Oracle Cloud Infrastructure. If this is your first time, then you will learn how to do it.
@@ -75,7 +75,7 @@ The username you have to provide is composed of `<tenancy-namespace>/<username>`
 
 Now let's create our function that will convert text into PDF and will upload it to our output bucket.
 
-# Function creation
+## Function creation
 
 We are going to leverage from this code, which was originally developed by Abhishek Gupta.
 https://github.com/rcarrascosps/fn-text2pdf-events
@@ -143,7 +143,7 @@ The actionsFunc.json file looks like this
 }
 ~~~~
 
-# Buckets creation
+## Buckets creation
 
 We are going to create two buckets:
 
@@ -154,7 +154,7 @@ We are going to create two buckets:
 
 `oci os bucket create -c $COMPARTMENT_OCID --name $OUT_BUCKET`{{execute}}
 
-# Rule creation using OCI CLI
+## Rule creation using OCI CLI
 
 For the rule creation, execute this:
 
@@ -200,9 +200,12 @@ To validate it, list the contents of the out bucket executing the following:
 
 `oci os object list -bn $OUT_BUCKET`{{execute}}
 
+
+## Extra (optional) step
+
 If you want to manually test the function, you can do it executing something like the following. If you want to do it, just replace the compartmentId, namespace
 and bucketId to reflect your environment. If you have any doubt, ask the instructor, or if you are doing this on your own, all those values are already set 
-in the environment variables that we have set until this point.
+in the environment variables that we have declared until this point.
 
 `export event= '{"eventType":"com.oraclecloud.objectstorage.createobject","cloudEventsVersion":"0.1","eventTypeVersion":"2.0","source":"ObjectStorage","eventTime":"2020-02-21T04:04:53.733Z","contentType":"application/json","data":{"compartmentId":"ocid1.compartment.oc1..aaaaaaaa4tjjg5nin3wslisvfygemkiem3f2azdapdrt5vhvunfg4a","compartmentName":"lab-compartment","resourceName":"lorem.txt","resourceId":"/n/idi66ekilhnr/b/in96/o/lorem.txt","availabilityDomain":"IAD-AD-2","additionalDetails":{"bucketName":"in1","archivalState":"Available","namespace":"idadsfilhnr","bucketId":"ocid1.bucket.oc1.iad.aaaaaaaagasgtwuzlgg4zg5vemzi3tginlvvh2przavniuknq3gv7mxrc3moasma","eTag":"f5293af9-f123-4e9f-ac4a-438d81a0464c"}},"eventID":"7b805085-83f4-9344-48b1-13b1a52bdfb4","extensions":{"compartmentId":"ocid1.compartment.oc1..adfafg5viv3wsnisvfegemkkin3nwzem3f2azdapdrt5vhvunfg4a"}}'`{{export}}
 
