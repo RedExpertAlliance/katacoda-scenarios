@@ -1,8 +1,11 @@
-Drop the table that was created in this scenario - to clean up after yourself:
+Drop the tables that were created in this scenario - to clean up after yourself:
 
-`oci nosql table delete  --compartment-id $compartmentId --table-name-or-id  $tableName --force`{{execute}}
+```
+oci nosql table delete  --compartment-id $compartmentId --table-name-or-id  $tableName --force
+oci nosql table delete  --compartment-id $compartmentId --table-name-or-id  $docTableName --force
+```{{execute}}
 
-Verify if the table has been dropped:
+Verify if the tables have been dropped:
 
 `oci nosql table list --compartment-id $compartmentId `{{execute}}
 
