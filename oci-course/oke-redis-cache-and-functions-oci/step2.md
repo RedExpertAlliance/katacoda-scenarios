@@ -13,7 +13,10 @@ Now let's create the kubeconfig file:
 
 Now let's get the cluster id of our cluster with this:
 
-`clusterlist=$(oci ce cluster list -c $TENANT_ID)`{{execute}}
+`clusterlist=$(oci ce cluster list -c $TENANT_OCID)`{{execute}}
+
+With the list of clusters, now let's get the clusterID of our particular cluster ($MY_CLUSTER_NAME):
+
 `export CLUSTER_ID=$(echo $clusterlist | jq -r --arg display_name $MY_CLUSTER_NAME '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
 
 And let's configure it:
