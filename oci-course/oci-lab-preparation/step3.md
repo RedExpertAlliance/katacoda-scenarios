@@ -19,7 +19,7 @@ oci iam policy create  --name "lab-participants-object-storage-in-lab-compartmen
 Allow group lab-participants to use tag-namespaces in tenancy
 
 
-# OCI Events
+## OCI Events
 allow group lab-participants to manage cloudevents-rules in tenancy
 
 ## NOtifications
@@ -121,6 +121,7 @@ oci iam policy create  --name "streaming-for-lab-participants" --compartment-id 
 
 ## Metrics and Monitoring
 
+```
 oci iam policy create  --name "monitoring-and-metrics-for-lab-participants" --compartment-id $compartmentId  --statements "[ \"Allow group lab-participants to use metrics in tenancy where target.metrics.namespace='mymetricsnamespace'\",\"Allow group lab-participants to inspect metrics in compartment  lab-compartment\",\"Allow group lab-participants to read metrics in compartment lab-compartment\",\"Allow group lab-participants to manage alarms in tenancy\",\"Allow group lab-participants to manage ons-topics in tenancy\" ]" --description "to allow lab-participants to work with Monitoring and Metrics and Alarms"
 ```{{execute}}
 

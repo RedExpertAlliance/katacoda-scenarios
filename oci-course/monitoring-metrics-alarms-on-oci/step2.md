@@ -1,5 +1,8 @@
 You will first make some noise: by taking several actions through the Object Storage service, you make sure that there are some metrics generated for us to inspect. Then you will first retrieve the metrics through the Command Line Interface.
 
+First you need to make sure that the bucket exists into which the files can be uploaded. Execute this command:
+`oci os bucket create -c $compartmentId --name bucket-$LAB_ID`{{execute}}
+
 Let's upload five new files to the bucket *bucket-$LAB_ID* - with some pauses in between. Note: the finest granularity at which the metrics are collected in OCI is one minute; all actions that take place within one minute of each other are aggregated together.
 ```
 FILENAME=helloWorldFile$LAB_ID
