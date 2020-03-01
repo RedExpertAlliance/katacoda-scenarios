@@ -16,3 +16,4 @@ In this scenario, you've learned:
 - OKE documentation https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengoverview.htm
 - OCIR lab https://www.oracle.com/webfolder/technetwork/tutorials/obe/oci/registry/index.html
 - REDIS https://redis.io
+- OCI CLI OKE reference https://docs.cloud.oracle.com/en-us/iaas/tools/oci-cli/2.9.4/oci_cli_docs/cmdref/ce.html
