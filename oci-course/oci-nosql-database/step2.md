@@ -18,6 +18,9 @@ Check if the table has been created:
 
 Note: the creation of the table happens asynchronously from the *oci nosql table create* command. It might be required to execute the list command a few times before the table is present.
 
+This is what your list of table(s) should look like:
+![Table List](/RedExpertAlliance/courses/oci-course/oci-nosql-database/assets/oci-nosql-tablelist.png)
+
 You can check the list of NoSQL Database tables in the current compartmant in the console: Database | NoSQL Database.
 https://console.us-ashburn-1.oraclecloud.com/nosql/tables
 
