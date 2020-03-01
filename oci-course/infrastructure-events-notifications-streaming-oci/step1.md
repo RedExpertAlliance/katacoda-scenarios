@@ -9,7 +9,7 @@ Paste the contents provided by the workshop instructor into these two files.
 
 Do not continue until you run the script installAll.sh:
 
-`./installAll.sh`{{execute}}
+`./installCLI.sh`{{execute}}
 
 Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
 
@@ -21,7 +21,7 @@ Set the environment variable LAB_ID to the number provided to you by the worksho
 
 `export LAB_ID=1`{{execute}}
 
-Now let'´s set the following enviornment variables.
+Now let's set the following environment variables.
 Note: the assumptions here are a compartment called *lab-compartment*, a VCN called *vcn-lab* and a subnet in that VCN called *Public Subnet-vcn-lab*. We need 
 to get references to these resources in order to create the Functions that we will use in step 3.  
 ```
