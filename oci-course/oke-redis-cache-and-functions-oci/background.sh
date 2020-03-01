@@ -4,6 +4,9 @@ mkdir ~/.oci
 touch  ~/.oci/config
 touch  ~/.oci/oci_api_key.pem
 
+curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/installCLI.sh
+chmod +777 installCLI.sh
+
 
 # Install the OCI CLI in silent mode with default settings
 curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh

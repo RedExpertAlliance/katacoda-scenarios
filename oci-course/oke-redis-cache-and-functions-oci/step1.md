@@ -9,6 +9,10 @@ If you do not have the OCI config file, nor the oci API key yet, you can go thro
 
 Once you have the config file and the api key, copy their contents in ~/.oci/config and ~/.oci/oci_api_key.pem respectively.
 
+Now let's install Oracle CLI and kubectl, execute this:
+
+`./installCLI.sh`{{execute}}
+
 Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and is connected to your tenant.
 
 Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
