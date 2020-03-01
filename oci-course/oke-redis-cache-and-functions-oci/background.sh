@@ -4,7 +4,7 @@ mkdir ~/.oci
 touch  ~/.oci/config
 touch  ~/.oci/oci_api_key.pem
 
-curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/installCLI.sh
+curl -L https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/master/oci-course/oke-redis-cache-and-functions-oci/installCLI.sh
 chmod +777 installCLI.sh
 
 
