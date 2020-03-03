@@ -14,16 +14,24 @@
         "text": "step2.md"
       },
 	  {
-        "title": "Step 3 - Deploy your first application to OKE",
+        "title": "Step 3 - Kubernetes namespace creation",
         "text": "step3.md"
       },
 	  {
-        "title": "Step 4 - Test your application",
+        "title": "Step 4 - Deploy REDIS",
         "text": "step4.md"
       },
 	  {
-        "title": "Step 5 - Scale your application",
+        "title": "Step 5 - Build and register image. Deploy the Golang API",
         "text": "step5.md"
+      },
+	  {
+        "title": "Step 6 - Test your application",
+        "text": "step6.md"
+      },
+	  {
+        "title": "Step 7 - Scale your application",
+        "text": "step7.md"
       }
     ],
     "intro": {
