@@ -7,9 +7,9 @@ You need to provide details on the OCI tenancy you will work in and the OCI user
 
 Paste the contents provided by the workshop instructor into these two files.
 
-Set the environment variable LAB_ID to the number provided to you by the workshop instructor.
-
 Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and you can continue.
+
+Set the environment variable LAB_ID to the number provided to you by the workshop instructor.
 
 `export LAB_ID=1`{{execute}}
 
@@ -20,7 +20,10 @@ Try out the following command to get a list of all namespaces you currently have
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
 Prepare a number of environment variables. Note: the assumptions here is a compartment called *lab-compartment*. In that compartment we will create our
-compute instance and we will use ASHBURN-AD-1 as our availability domain.
+compute instance and we will use **ASHBURN-AD-1** as our availability domain. We will use shape **VM.Standard2** for our compute instance. If you are interested
+on which other shapes exist, please take a look at [here](https://docs.cloud.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm "VM Shapes").
+The name of our compute instance is going to be ***nginxLAB+LAB_ID*** (e.g. **ngninxLAB1**).
+When creating your keys, please use the name **lab.pub**.
 
 ```
 export CS=$(oci iam compartment list)
