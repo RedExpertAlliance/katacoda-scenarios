@@ -1,7 +1,7 @@
 {
   "title": "OCI Compute Instance Creation",
   "description": "Provision an Oracle Compute Instance using OCI CLI",
-  "difficulty": "begginner",
+  "difficulty": "beginner",
   "time": "15 minutes",
   "details": {
     "steps": [

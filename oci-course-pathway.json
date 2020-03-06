@@ -44,6 +44,11 @@
       "description": "OCI Events are published whenever OCI resources are manipulated. These events can trigger notifications, invoke functions and publish streaming events"
     },
     {
+      "course_id": "oci-compute-nginx",
+      "title": "UNDER CONSTRUCTION: OCI Compute Instance Creation",
+      "description": "Provision an Oracle Compute Instance using OCI CLI"
+    },
+    {
       "course_id": "oke-redis-cache-and-functions-oci",
       "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine",
       "description": "Work with OKE, the OCI managed Kubernetes service."
@@ -53,13 +58,12 @@
       "title": "Preview: Introduction to OCI Terraform Provider",
       "description": "Infrastructure as Code on Oracle Cloud Infrastructure with Terraform."
     },
-    
     {
       "course_id": "oci-nosql-database",
       "title": "Preview: Introduction to OCI NoSQL Database",
       "description": "Managing data through Relational Model and JSON with Oracle NoSQL."
-    }
-    ,{
+    },
+    {
       "course_id": "oci-lab-preparation",
       "title": "Preparation for OCI Workshops",
       "description": "Manage OCI LAB environment for Katacoda Scenarios"
