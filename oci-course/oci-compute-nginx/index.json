@@ -1,29 +1,21 @@
 {
-  "title": "OCI (Event) Streaming, combined with Functions and API Gateway",
-  "description": "Getting started with OCI Streaming and combining with Functions and API Gateway.",
-  "difficulty": "intermediate",
-  "time": "30 minutes",
+  "title": "OCI Compute Instance Creation",
+  "description": "Provision an Oracle Compute Instance using OCI CLI",
+  "difficulty": "begginner",
+  "time": "15 minutes",
   "details": {
     "steps": [
       {
-        "title": "Step 1 - Check on Stream on Console and Prepare Environment Settings, Fn and OCI CLI",
+        "title": "Step 1 - Prepare the environment with OCI CLI",
         "text": "step1.md"
       },
       {
-        "title": "Step 2 - Listen to Stream through the OCI CLI",
+        "title": "Step 2 - Provision the Compute Instance",
         "text": "step2.md"
       },
       {
-        "title": "Step 3 - Node JS listener application to Consume Events from Stream",
+        "title": "Step 3 - Validate the Instance",
         "text": "step3.md"
-      },
-      {
-        "title": "Step 4 - Node JS publisher application to Publish Events to Stream",
-        "text": "step4.md"
-      },
-      {
-        "title": "Step 5 - Extend Hello Function to Publish Events to Stream",
-        "text": "step5.md"
       }
     ],
     "intro": {
