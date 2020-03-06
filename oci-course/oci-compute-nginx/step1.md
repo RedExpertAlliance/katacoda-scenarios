@@ -19,7 +19,8 @@ Try out the following command to get a list of all namespaces you currently have
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
-Prepare a number of environment variables. Note: the assumptions here is a compartment called *lab-compartment* .
+Prepare a number of environment variables. Note: the assumptions here is a compartment called *lab-compartment*. In that compartment we will create our
+compute instance and we will use ASHBURN-AD-1 as our availability domain.
 
 ```
 export CS=$(oci iam compartment list)
@@ -31,10 +32,18 @@ export SUBNETID=$(echo $SUBNETS | jq -r --arg display_name "Public Subnet-vcn-la
 export NSS=$(oci os ns get)
 export NAMESPACE=$(echo $NSS | jq -r '.data')
 export REGION=us-ashburn-1
+export DISPLAY_NAME=nginxLAB$LAB_ID
+export ADOMAINS=$(oci iam availability-domain list --compartment-id $COMPARTMENT_OCID)
+export AVAILABILITY_DOM=$(echo $ADOMAINS | jq -r '.data | .[0] | .name')
+export IMG_ID=ocid1.image.oc1.iad.aaaaaaaavzjw65d6pngbghgrujb76r7zgh2s64bdl4afombrdocn4wdfrwdq
+export SHAPE=VM.Standard2.1
+export KEY_PUB=/root/keys/lab.pub
+export CONFIG=/root/computeInstanceConfig.txt
 
 echo "Compartment OCID: $COMPARTMENT_OCID"
 echo "Namespace: $NAMESPACE"
 echo "SUBNETID: $SUBNETID"
+echo "AVAILABILITY DOMAIN to be used: $AVAILABILITY_DOM"
 ```{{execute}}
 
 ## Create Public and Private Key
