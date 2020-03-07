@@ -23,7 +23,7 @@ Prepare a number of environment variables. Note: the assumptions here is a compa
 compute instance and we will use **ASHBURN-AD-1** as our availability domain. We will use shape **VM.Standard2** for our compute instance. If you are interested
 on which other shapes exist, please take a look at [here](https://docs.cloud.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm "VM Shapes").
 The name of our compute instance is going to be ***nginxLAB+LAB_ID*** (e.g. **ngninxLAB1**).
-When creating your keys, please use the name **lab.pub**.
+When creating your keys, please use the path **/root/keys/lab**.
 
 ```
 export CS=$(oci iam compartment list)
@@ -51,7 +51,7 @@ echo "AVAILABILITY DOMAIN to be used: $AVAILABILITY_DOM"
 
 ## Create Public and Private Key
 
-For generating the public and private key that will be used to ssh to the compute instance, execute:
+For generating the public and private key that will be used to ssh to the compute instance, execute (remember to use ***/root/keys/lab***):
 
 `ssh-keygen -t rsa`{{execute}}
 

@@ -1,8 +1,12 @@
 #!/bin/bash
 
+wget https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/master/oci-course/oci-compute-nginx/computeInstanceConfig.txt 
+
 mkdir ~/.oci
 touch  ~/.oci/config
 touch  ~/.oci/oci_api_key.pem
+
+mkdir /root/keys
 
 # Install the OCI CLI in silent mode with default settings
 curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
