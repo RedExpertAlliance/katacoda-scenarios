@@ -55,7 +55,7 @@ For generating the public and private key that will be used to ssh to the comput
 
 `ssh-keygen -t rsa`{{execute}}
 
-This will prompt you for the location where the keys will be stored. Enter ***/root/keys***
+This will prompt you for the location where the keys will be stored. Enter ***/root/keys/lab***
 
 After that you will be prompted for a passphrase, you can leave it blank if you do not want to set one.
 

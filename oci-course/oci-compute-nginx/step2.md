@@ -14,7 +14,13 @@ The command receives all the following values:
 
 `oci compute instance launch --compartment-id $COMPARTMENT_OCID --display-name $DISPLAY_NAME --availability-domain $AVAILABILITY_DOM --subnet-id $SUBNETID --image-id $IMG_ID --shape $SHAPE --ssh-authorized-keys-file $KEY_PUB --assign-public-ip true --user-data-file $CONFIG --wait-for-state RUNNING > /dev/null`{{execute}}
 
-After some minutes the instance will be ready.
+You will receive a message like this:
+
+~~~~~
+Action completed. Waiting until the resource has entered state: ('RUNNING',)
+~~~~~
+
+After some minutes the instance will be ready and you will get the prompt back.
 
 You can use the following command to get the list of compute instances. You should see the one you've created with the name $DISPLAY_NAME:
 
@@ -28,25 +34,22 @@ We have installed **nginx** in the compute instance, we did it using a config fi
 #cloud-config
 write_files:
 -   content: |
-      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
-      <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-      <head>
-        <title>Nginx HTTP Server on Oracle Cloud Infrastructure</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      </head>
-      <body>
-        <div>Testing Oracle Cloud Infrastructure!</div>
-      </body>
-      </html>
-    owner: opc:opc
-    path: /home/opc/index.html
+      load_module '/usr/lib64/nginx/modules/ngx_stream_module.so';
+      events {}
+      stream {
+        server {
+          listen     443;
+          proxy_pass 147.154.28.140:6443;
+        }
+      }
+    owner: root:root
+    path: /home/opc/nginx.conf
 runcmd:
 -   /bin/yum install -y nginx
--   /bin/systemctl start nginx
--   /bin/firewall-offline-cmd --add-port=80/tcp
+-   mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bkp
+-   mv /home/opc/nginx.conf /etc/nginx/nginx.conf
+-   sudo setenforce 0
+-   /bin/firewall-offline-cmd --add-port=443/tcp
 -   /bin/systemctl restart firewalld
--   cp /usr/share/nginx/html/index.html /usr/share/nginx/html/index.original.html
--   cat /home/opc/index.html > /usr/share/nginx/html/index.html
+-   /bin/systemctl start nginx
 ~~~~
-
