@@ -50,6 +50,8 @@ To test it, let's use the kubectl command to validate that we are able to connec
 
 `kubectl get pods --insecure-skip-tls-verify`{{execute}}
 
+(**Note. We need to use the --insecure-skip-tls-verify flag, in order to use our reverse proxy**)
+
 The result should be something like this:
 ~~~~
 NAME                                    READY     STATUS        RESTARTS   AGE

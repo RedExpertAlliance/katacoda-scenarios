@@ -119,11 +119,11 @@ Let's create the secret. But before that, set the following 03 environment varia
 `export youremail=me@me.com`{{execute}}
 
 Now execute the following to create the secret:
-`kubectl create secret docker-registry ocilabsecret --docker-server=us-ashburn-1.ocir.io --docker-username=$user --docker-password=$pwd --docker-email=$youremail -n $NAMESPACE`{{execute}}
+`kubectl create secret docker-registry ocilabsecret --docker-server=us-ashburn-1.ocir.io --docker-username=$user --docker-password=$pwd --docker-email=$youremail -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 To validate that it was creted, execute:
 
-`kubectl get secrets -n $NAMESPACE`{{execute}}
+`kubectl get secrets -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 And you will get something like this:
 
@@ -134,7 +134,7 @@ istio.default         istio.io/key-and-cert                 3         19m
 ocilabsecret          kubernetes.io/dockerconfigjson        1         5s
 ~~~~
 
-Now let's edit our yml file: kubernetes/session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.
+Now let's edit our yml file: `kubernetes/session-api.yml`{{open}}. We will edit with the value of variable $image, that is going to be set with the following export.
 
 `export image=us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
 `echo $image`{{execute}}
@@ -147,10 +147,10 @@ image: docker.io/rortegasps/redis-session:latest
 
 Now let's deploy our api, with:
 
-`kubectl apply -f kubernetes/session-api.yml -n $NAMESPACE`{{execute}}
+`kubectl apply -f kubernetes/session-api.yml -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 To find out if the service was properly deploy, execute:
 
-`kubectl get services $NAMESPACE`{{execute}}
+`kubectl get services $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 In the next step you will test the newly created service.
