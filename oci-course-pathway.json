@@ -49,8 +49,13 @@
       "description": "Provision an Oracle Compute Instance using OCI CLI"
     },
     {
-      "course_id": "oke-redis-cache-and-functions-oci",
-      "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine",
+      "course_id": "oke-redis-cache-and-functions-oci_part1",
+      "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine - Part 1",
+      "description": "Work with OKE, the OCI managed Kubernetes service."
+    },
+	{
+      "course_id": "oke-redis-cache-and-functions-oci_part2",
+      "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine - Part 2",
       "description": "Work with OKE, the OCI managed Kubernetes service."
     },
     {
