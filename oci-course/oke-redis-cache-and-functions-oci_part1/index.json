@@ -1,0 +1,35 @@
+{
+  "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine",
+  "description": "Work with OKE, the OCI managed Kubernetes service.",
+  "difficulty": "beginner",
+  "time": "40 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Create your first OKE Cluster",
+        "text": "step1.md"
+      },
+	  {
+        "title": "Step 2 - Create the Kube config file and get the hostname of the API Server",
+        "text": "step2.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "",
+      "courseData": "background.sh",
+      "code": "foreground.sh"
+        },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {}
+  },
+  "environment": {
+    "uilayout": "editor-terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "ubuntu1804"
+  }
+}
