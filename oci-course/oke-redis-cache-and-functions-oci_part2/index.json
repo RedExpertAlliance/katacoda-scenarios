@@ -1,0 +1,55 @@
+{
+  "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine",
+  "description": "Work with OKE, the OCI managed Kubernetes service.",
+  "difficulty": "beginner",
+  "time": "40 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Create your first OKE Cluster",
+        "text": "step1.md"
+      },
+	  {
+        "title": "Step 2 - Connect to your OKE Cluster",
+        "text": "step2.md"
+      },
+	  {
+        "title": "Step 3 - Kubernetes namespace creation",
+        "text": "step3.md"
+      },
+	  {
+        "title": "Step 4 - Deploy REDIS",
+        "text": "step4.md"
+      },
+	  {
+        "title": "Step 5 - Build and register image. Deploy the Golang API",
+        "text": "step5.md"
+      },
+	  {
+        "title": "Step 6 - Test your application",
+        "text": "step6.md"
+      },
+	  {
+        "title": "Step 7 - Scale your application",
+        "text": "step7.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "",
+      "courseData": "background.sh",
+      "code": "foreground.sh"
+        },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {}
+  },
+  "environment": {
+    "uilayout": "editor-terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "ubuntu1804"
+  }
+}
