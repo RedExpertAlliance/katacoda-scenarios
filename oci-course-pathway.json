@@ -50,12 +50,12 @@
     },
     {
       "course_id": "oke-redis-cache-and-functions-oci_part1",
-      "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine - Part 1",
+      "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine - Part 1 - Create an OKE cluster",
       "description": "Work with OKE, the OCI managed Kubernetes service."
     },
 	{
       "course_id": "oke-redis-cache-and-functions-oci_part2",
-      "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine - Part 2",
+      "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine - Part 2 - Use an OKE cluster",
       "description": "Work with OKE, the OCI managed Kubernetes service."
     },
     {
