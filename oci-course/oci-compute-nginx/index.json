@@ -14,8 +14,12 @@
         "text": "step2.md"
       },
       {
-        "title": "Step 3 - Validate the Instance",
+        "title": "Step 3 - Only if you are using the scenario for the OKE reverse proxy",
         "text": "step3.md"
+      },
+	  {
+        "title": "Step 4 - Only if you are folliwing the scenario to lear how to use the OCI CLI to create a compute instance",
+        "text": "step4.md"
       }
     ],
     "intro": {
@@ -25,8 +29,7 @@
       "code": "foreground.sh"
         },
     "finish": {
-      "text": "finish.md",
-      "courseData": "teardown.sh"
+      "text": "finish.md"
     },
     "assets": {
       "client": [
