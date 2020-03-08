@@ -96,5 +96,5 @@ runcmd:
 -   cat /home/opc/index.html > /usr/share/nginx/html/index.html
 ~~~~
 
-If you are following this scenario for the Reverse Proxy of your OKE API Server, proceed to Step 3. If you are following just for learning how to install
-an OCI instance with NGINX you can go directly to Step 4.
+***If you are following this scenario for the Reverse Proxy of your OKE API Server, proceed to Step 3. If you are following just for learning how to install
+an OCI instance with NGINX you can go directly to Step 4.***

@@ -75,7 +75,7 @@ The key fingerprint is:
 Now let's create a Security List with an ingress rule that will allow TCP traffic through port 443 to the compute instance that we are about to create.
 This security list is going to be added to the VCN ($VCNID) that you created in the Preparation Lab scenario. To create it execute this:
 
-`oci network security-list create --compartment-id $COMPARTMENT_OCID --display-name nginxLabSecList --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "6", "isStateless": false, "tcpOptions": {"destinationPortRange": {"max": 443, "min": 443}, "sourcePortRange": null}}]' --vcn-id $VCNID --egress-security-rules '[]'`{{exeute}}
+`oci network security-list create --compartment-id $COMPARTMENT_OCID --display-name nginxLabSecList --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "6", "isStateless": false, "tcpOptions": {"destinationPortRange": {"max": 443, "min": 443}, "sourcePortRange": null}}]' --vcn-id $VCNID --egress-security-rules '[]'`{{execute}}
 
 The relevant thing here is:
 
