@@ -1,4 +1,4 @@
-# Oracle Kubernetes Engine
+# Oracle Kubernetes Engine - Create an OKE Clsuter
 INTRO
 
 Oracle Kubernetes Engine is the Oracle offering for a Kubernetes cluster. It is a pure Kubernetes offering with integration with the Oracle Cloud Infrastructure 
@@ -38,13 +38,7 @@ trial instance
 # Scenario Description
 
 In this scenario you will learn how to provision an Oracle Kubernetes Engine using the Quick Create Option.
-Once you have your cluster we will deploy an application based on Redis and Go.
 You will also learn:
 
 - How to configure your Oracle Cloud Infrastructure Command Line Interface (OCI CLI) to create the Kubernetes config file in order to manage your cluster 
 using kubectl
-- How to register a Docker image within OCIR (Oracle Cloud Infrastructure Registry).
-- How to configure a Load Balancer 
-- How to deploy an application to the Cluster
-- How to configure replicas for your application
-- How to dinamically scale your replicas, based on CPU consumption

@@ -49,7 +49,7 @@ LS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
   name: cluster-c3tgnzyga2t
 ~~~~
 
-Your file will have another hostname, just copy it and ping it. Get the IP address and go to the OCI Compute Instance scenario:
-https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-compute-nginx
+**Your file will have another hostname, just copy it and ping it. Get the IP address and go to the OCI Compute Instance scenario:
+https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-compute-nginx**
 
 You are done with the first part of the OKE scenario.
