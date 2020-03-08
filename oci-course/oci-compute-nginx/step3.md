@@ -13,4 +13,5 @@ export public_ip=$(echo $instance_vnics | jq -r '.data | .[0] | .["public-ip"]')
 
 Write that down, because you need it for changing the kube config file in the OKE Scenario.
 
-***With this, you are ready to get back for Step 3 for the OKE Scenario. You can close this scenario and start the OKE scenario and go directly to Step 3***.
+***With this, you are ready to get back for Step 3 for the OKE Scenario. You can close this scenario and start the OKE scenario and go directly to Part 2
+of the OKE scenario https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-cache-and-functions-oci_part2***.
