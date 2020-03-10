@@ -21,7 +21,8 @@ The following steps are very relevant depending on why you are following this sc
 `export CONFIG=/root/computeInstanceConfig.txt`{{execute}}
 
 Now, **only** if you are following this scenario for the **OKE API Server Reverse proxy**, edit the File `computeInstanceConfig.txt`{{open}} and change the 
-IP address (in the proxy pass element) to the one that you got in Step 2 of the OKE Scenario. It is very important that you do that before proceeding.
+**IP address** (in the **proxy pass element**) to the one that you got in Step 2 of the OKE Scenario. The port (**6443**) does not need to be changed. 
+**It is very important that you do that before proceeding.**
 
 Let's create the compute instance:
 
@@ -96,6 +97,6 @@ runcmd:
 -   cat /home/opc/index.html > /usr/share/nginx/html/index.html
 ~~~~
 
-***If you are following this scenario for the Reverse Proxy of your OKE API Server, proceed to Step 3.
+***If you are following this scenario for the Reverse Proxy of your OKE API Server, proceed to Step 3.***
 
-If you are following just for learning how to install an OCI instance with NGINX you can go directly to Step 4.***
+***If you are following just for learning how to install an OCI instance with NGINX you can go directly to Step 4.***
