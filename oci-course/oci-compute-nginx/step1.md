@@ -93,7 +93,9 @@ export ingress_rules=$(cat seclistupdated.json)
 export INGRESS_RULES_UPDATED=$(echo $ingress_rules | jq -r '.data | .["ingress-security-rules"]')
 echo $INGRESS_RULES_UPDATED
 oci network security-list update --security-list-id $seclistID --ingress-security-rules "$INGRESS_RULES_UPDATED"
-```
+```{{execute}}
+
+You will be prompted if you want to continue, choose yes.
 
 (Note. In the previous execution block, we first got the Securit List ID **seclistID** and then got the detail of it **seclist.json**. Then we added the rule and
 created a new json file -seclistupdated.json-. Then we got the ingress security rules element and with that updated the security list).
