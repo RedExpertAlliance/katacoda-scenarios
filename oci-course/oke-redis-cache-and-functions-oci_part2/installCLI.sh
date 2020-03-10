@@ -8,4 +8,6 @@ sudo snap install kubectl --classic
 
 touch /root/allSetInBackground
 
+export PATH=/root/bin/:$PATH
+
 export MY_VAR=jan

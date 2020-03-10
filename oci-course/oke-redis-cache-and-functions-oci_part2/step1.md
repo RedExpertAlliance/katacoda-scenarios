@@ -38,3 +38,10 @@ Let´s also create the following environment variables, that we will use in the 
 For the lab purposes you will be assigned with a LAB ID number, execute this with the ID that the instructor assigns to you:
 
 `export LAB_ID=1`{{execute}}
+
+In Part 1 of the OKE Scenario you wrote down the name of your cluster, if you've followed the instructions your cluster name is MyFirstOKE. Let's set that
+as an environment variable:
+
+`export MY_CLUSTER_NAME=MyFirstOKE`{{execute}}
+
+If you've set a different name, please set the variable accordingly.

@@ -1,6 +1,5 @@
 ## Create kube config file and connect to your cluster
 
-Once the cluster is in Active state, we can create the kubeconfig file in order to connect to it.
 If you want to learn more about the kubeconfig file, please take a look at here: https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengdownloadkubeconfigfile.htm
 
 Let's create the kubeconfig file using the following steps:
@@ -27,8 +26,9 @@ And finally, let's create an environment variable that points to our kubeconfig 
 
 `export KUBECONFIG=$HOME/.kube/config`{{execute}}
 
-**Before testing it, please use the IP address that you got from the OCI Compute instance creation scenario and open the File `/root/.kube/config`{{open}} to 
-change the current value for the hostname of the API Server to point to the IP address of your reverse proxy you've created in the mentioned scenario:**
+**Before testing it, please use the IP address that you got from the OCI Compute instance creation scenario and open the File** `/root/.kube/config`{{open}} **to 
+change the current value for the hostname of the API Server to point to the IP address of your reverse proxy you've created in the mentioned scenario.
+Also change the port from 6443 to 443:**
 
 ~~~~
 apiVersion: v1
@@ -42,7 +42,7 @@ MzFUclIwZmUvUUJnVkhwRlQzQVp0cnBCNU43VytqR0t3RStuCk1QU0ZocUNxbHpLVDhUV0ZXZnRYOEI4
 aU4KcGNrOGtsem51SmRHaGxaSzdJdTNISVF0RC9tREZqd3hKMjQyMmRTMThJNGMwY01kMGxVR3l0TnJKVnR0OVFXWgpvajB0YkRsY0liaEtsT1RVSTdybnplUGE0OEJZOFJC
 NjAyRWxtbGxoUmZQWFNEUDR1bHEvVjlnT2t1ZFlMaE1ECjVJYzZDKy9mZTUxZmpZM1M0T3prODkyWWRWOHdublM2Y2RQZkNiOGVIenhEMEI5cHhZWHVsdVpuN2tKbk1ZUVUK
 LS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-    server: https://<PLACE_HERE_THE_IP_ADDRESS>:6443
+    server: https://<PLACE_HERE_THE_IP_ADDRESS>:<CHANGE PORT TO 443>
   name: cluster-c3tgnzyga2t
 ~~~~
 
