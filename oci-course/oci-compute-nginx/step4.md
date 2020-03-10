@@ -1,4 +1,4 @@
-# Get the IP Address of our new created OCI compute instance
+# Validate your NGINX installation
 
 To get the IP address of our newly created OCI compute instance, let's execute the following.
 

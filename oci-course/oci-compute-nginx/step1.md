@@ -19,11 +19,16 @@ Try out the following command to get a list of all namespaces you currently have
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
-Prepare a number of environment variables. Note: the assumptions here is a compartment called *lab-compartment*. In that compartment we will create our
-compute instance and we will use **ASHBURN-AD-1** as our availability domain. We will use shape **VM.Standard2** for our compute instance. If you are interested
-on which other shapes exist, please take a look at [here](https://docs.cloud.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm "VM Shapes").
+Note: the assumptions here is a compartment called *lab-compartment*. In that compartment we will create our
+compute instance and we will use **ASHBURN-AD-1** as our availability domain. We will use shape **VM.Standard2** for our compute instance. 
+If you are interested on which other shapes exist, please 
+take a look at [here](https://docs.cloud.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm "VM Shapes").
+
 The name of our compute instance is going to be ***nginxLAB+LAB_ID*** (e.g. **ngninxLAB1**).
+
 When creating your keys, please use the path **/root/keys/lab**.
+
+Now let's prepare some environment variables:
 
 ```
 export CS=$(oci iam compartment list)
@@ -72,16 +77,28 @@ The key fingerprint is:
 11:3a:f8:f4:9o:d9:c7:dg:09:3b:e3:3f:c4:3f:44:95
 ~~~~
 
-Now let's create a Security List with an ingress rule that will allow TCP traffic through port 443 to the compute instance that we are about to create.
-This security list is going to be added to the VCN ($VCNID) that you created in the Preparation Lab scenario. To create it execute this:
+## Create an Ingress Rule to open port 443 in your VCN
 
-`oci network security-list create --compartment-id $COMPARTMENT_OCID --display-name nginxLabSecList --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "6", "isStateless": false, "tcpOptions": {"destinationPortRange": {"max": 443, "min": 443}, "sourcePortRange": null}}]' --vcn-id $VCNID --egress-security-rules '[]'`{{execute}}
+Now let's update the Security List (**Default Security List for vcn-lab**) with the ingress rule that will allow TCP traffic through port 443 to the compute 
+instance that we are about to create.
 
-The relevant thing here is:
+This Security List is part of the VCN ($VCNID) that you've created in the Preparation Lab Scenario. To update it execute this:
 
-- The compartmentID is the OCID for our lab-compartment that we created in the preparation lab
-- The vcnID, is the the OCID for the VCN that we created in the preparation lab
-- The rule is defined in a JSON object like this:
+```
+export securitylist=$(oci network security-list list --compartment-id $COMPARTMENT_OCID --vcn-id $VCNID)
+export seclistID=$(echo $securitylist | jq -r --arg name "Default Security List for vcn-lab" '.data | map(select(.["display-name"] == $name)) | .[0] | .id')
+oci network security-list get --security-list-id $seclistID > seclist.json
+jq --argjson ingressRule '{"source": "0.0.0.0/0", "protocol": "6", "isStateless": false, "tcpOptions": {"destinationPortRange": {"max": 443, "min": 443}, "sourcePortRange": null}}' '.data."ingress-security-rules" += [$ingressRule]' seclist.json > seclistupdated.json
+export ingress_rules=$(cat seclistupdated.json)
+export INGRESS_RULES_UPDATED=$(echo $ingress_rules | jq -r '.data | .["ingress-security-rules"]')
+echo $INGRESS_RULES_UPDATED
+oci network security-list update --security-list-id $seclistID --ingress-security-rules "$INGRESS_RULES_UPDATED"
+```
+
+(Note. In the previous execution block, we first got the Securit List ID **seclistID** and then got the detail of it **seclist.json**. Then we added the rule and
+created a new json file -seclistupdated.json-. Then we got the ingress security rules element and with that updated the security list).
+
+This is what we added to the Security List:
 
 ~~~~
 [
@@ -99,5 +116,9 @@ The relevant thing here is:
    }
 ]
 ~~~~
+
+In the Web Console you will see this:
+
+![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/ingress_rule.jpg)
 
 Now you have everything you need to create your compute instance within your lab-compartment. Let's go to the next step.

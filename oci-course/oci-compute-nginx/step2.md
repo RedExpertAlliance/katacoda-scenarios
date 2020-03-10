@@ -12,7 +12,7 @@ The command receives all the following values:
 
 (**Note. All the variables were set in the previous step.**)
 
-The following steps are very relevant depending on why you are following this scerio:
+The following steps are very relevant depending on why you are following this scenario:
 
 - If you are following the scenario for learning how to provision an OCI compute instance with an NGINX, set the following variable:
 `export CONFIG=/root/computeInstanceConfigNginx.txt`{{execute}}
@@ -21,7 +21,7 @@ The following steps are very relevant depending on why you are following this sc
 `export CONFIG=/root/computeInstanceConfig.txt`{{execute}}
 
 Now, **only** if you are following this scenario for the **OKE API Server Reverse proxy**, edit the File `computeInstanceConfig.txt`{{open}} and change the 
-IP address (in the proxy pass element) to the one that you got in Step 2 of the OKE Scenario. It is very important that you do that.
+IP address (in the proxy pass element) to the one that you got in Step 2 of the OKE Scenario. It is very important that you do that before proceeding.
 
 Let's create the compute instance:
 
@@ -96,5 +96,5 @@ runcmd:
 -   cat /home/opc/index.html > /usr/share/nginx/html/index.html
 ~~~~
 
-***If you are following this scenario for the Reverse Proxy of your OKE API Server, proceed to Part 2 of OKE Scenario https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-cache-and-functions-oci_part2. 
+***If you are following this scenario for the Reverse Proxy of your OKE API Server, proceed to Step 3.
 If you are following just for learning how to install an OCI instance with NGINX you can go directly to Step 4.***
