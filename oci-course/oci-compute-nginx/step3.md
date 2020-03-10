@@ -9,6 +9,7 @@ export instance_vnics=$(oci compute instance list-vnics --instance-id $INSTANCE_
 export public_ip=$(echo $instance_vnics | jq -r '.data | .[0] | .["public-ip"]')
 ```{{execute}}
 
+Let's print the IP address:
 `echo "The IP address is: $public_ip"`{{execute}}
 
 Write that down, because you need it for changing the kube config file in the OKE Scenario.
