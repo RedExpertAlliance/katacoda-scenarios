@@ -26,9 +26,9 @@ And finally, let's create an environment variable that points to our kubeconfig 
 
 `export KUBECONFIG=$HOME/.kube/config`{{execute}}
 
-**Before testing it, please use the IP address that you got from the OCI Compute instance creation scenario and open the File** `/root/.kube/config`{{open}} **to 
-change the current value for the hostname of the API Server to point to the IP address of your reverse proxy you've created in the mentioned scenario.
-Also change the port from 6443 to 443:**
+**Before testing it, please use the IP address that you got from the OCI Compute instance creation scenario and open the file /root/.kube/config from the 
+file explorer, to change the current value for the hostname of the API Server to point to the IP address of your reverse proxy you've created in the 
+mentioned scenario. Also change the port from 6443 to 443:**
 
 ~~~~
 apiVersion: v1

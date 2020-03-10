@@ -7,7 +7,9 @@ You need to provide details on the OCI tenancy you will work in and the OCI user
 
 If you do not have the OCI config file, nor the oci API key yet, you can go through these steps: https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
 
-Once you have the config file and the api key, copy their contents in ~/.oci/config and ~/.oci/oci_api_key.pem respectively.
+Once you have the config file and the api key, copy their contents in ~/.oci/config and ~/.oci/oci_api_key.pem respectively. 
+**Remember that in this scenario you will be working with a newly created 30 day free trial OCI instance, and you will be using the administrator of your
+tenant, which is the user you created when the tenant was provisioned**
 
 Now let's install Oracle CLI and kubectl, execute this:
 
