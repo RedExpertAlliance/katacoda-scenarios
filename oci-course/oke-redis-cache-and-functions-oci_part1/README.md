@@ -1,5 +1,8 @@
-# Oracle Kubernetes Engine - Create an OKE Clsuter
+# Oracle Kubernetes Engine - Create an OKE Cluster.
 INTRO
+
+This scenario is the first part of two. In this scenario you will provision a Kubernetes Engine and in the second part you will start using it.
+Second part is here: https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-cache-and-functions-oci_part2
 
 Oracle Kubernetes Engine is the Oracle offering for a Kubernetes cluster. It is a pure Kubernetes offering with integration with the Oracle Cloud Infrastructure 
 components, such as:
@@ -38,7 +41,4 @@ trial instance
 # Scenario Description
 
 In this scenario you will learn how to provision an Oracle Kubernetes Engine using the Quick Create Option.
-You will also learn:
-
-- How to configure your Oracle Cloud Infrastructure Command Line Interface (OCI CLI) to create the Kubernetes config file in order to manage your cluster 
-using kubectl
+We will use the Oracle OCI Web Console to provision our cluster. Most of the steps will be performed using the Web Console.
