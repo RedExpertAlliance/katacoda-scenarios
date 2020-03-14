@@ -74,7 +74,7 @@ Select the Quick Create option, and then Launch Workflow:
 Once in the workflow window, give ***MyFirstOKE*** as the name, select the compartment lab-compartment; **for number of nodes select 2** and leave 
 the rest of the fields as default:
 
-![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/04.jpg)
+![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/13.jpg)
 
 In the lower part of the window enable both Tiller and Kubernetes Dashboard:
 
