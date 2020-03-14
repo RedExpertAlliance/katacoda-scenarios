@@ -53,7 +53,7 @@ write_files:
       stream {
         server {
           listen     443;
-          proxy_pass 10.10.10.10:6443;
+          proxy_pass <IP_ADDRESS_OKE_API_SERVER>:6443;
         }
       }
     owner: root:root
