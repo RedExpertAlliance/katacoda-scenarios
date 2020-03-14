@@ -33,7 +33,7 @@ Now we need to get the IP address for our OKE API Server. Remember, katacoda is 
 We need to write down the IP address and then go to the OCI Compute instance creation scenario to configure the reverse proxy that we will use in Part 2 
 of this OKE scenario.
 
-Go to the File `/root/.kube/config`{{open}} and get the hostname. Is something like this:
+Go to the File /root/.kube/config and get the hostname. Is something like this:
 
 ~~~~
 apiVersion: v1

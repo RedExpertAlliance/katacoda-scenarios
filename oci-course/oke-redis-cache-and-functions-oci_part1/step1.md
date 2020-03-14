@@ -71,7 +71,8 @@ Select the Quick Create option, and then Launch Workflow:
 
 ![OKE Quick Create Option](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/03.jpg)
 
-Once in the workflow window, give ***MyFirstOKE*** as the name, select the compartment and leave the rest of the fields as default:
+Once in the workflow window, give ***MyFirstOKE*** as the name, select the compartment lab-compartment; **for number of nodes select 2** and leave 
+the rest of the fields as default:
 
 ![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/04.jpg)
 
