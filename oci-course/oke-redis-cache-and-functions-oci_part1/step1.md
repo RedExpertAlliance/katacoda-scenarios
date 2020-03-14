@@ -39,15 +39,15 @@ Let´s also create the following environment variables, that we will use in the 
 
 ## Policy pre-requisite
 
-Before creating the cluster, you need to apply a Policy to allow OKE to manage your tenant resources. This policy creation is described here:
-https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm#PolicyPrerequisitesService
+For the execution for the cluster creation we need to create the following set of policies:
 
-Please create that policy before continue with the next section.
+```
+cs=$(oci iam compartment list)
+export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
+echo "Compartment lab-compartment OCID=$compartmentId"
 
-In this scenario we will use both the Oracle Cloud Infrastructure Web Console and the Oracle CLI. In particular in this first step, most of the things 
-will be executed using the Web Console.
-
-Please create that policy and then continue with the next section.
+oci iam policy create  --name "lab-participants-oke-required-policy" --compartment-id $compartmentId  --statements "[ \"Allow group lab-participants to manage instance-family in compartment lab-compartment\",\"Allow group lab-participants to use subnets in compartment lab-compartment\",\"Allow group lab-participants to read virtual-network-family in compartment lab-compartment\", \"Allow group lab-participants to use vnics in compartment lab-compartment\", \"Allow group lab-participants to inspect compartments in compartment lab-compartment\", \"Allow group lab-participants to manage cluster-family in compartment lab-compartment\"]" --description "to allow group lab-participants to perform operations required for OKE management in compartment lab-compartment"
+```{{execute}}
 
 For the lab purposes you will be assigned with a LAB ID number, execute this with the ID that the instructor assigns to you:
 
@@ -85,10 +85,15 @@ And read the summary for your cluster:
 
 ![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/07.jpg)
 
-Click on Create Cluster and wait for the cluster to be created. In the home page for OKE, wait for the status to be Active:
+Click on Create Cluster and wait for the cluster to be created. In the home page for OKE, wait for the status to be Active (**it may take around 25 minutes**):
 
 ![OKE Ready](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/08.jpg)
 
-Once the status turned into Active, you are about to be able to use it.
+You just have to wait, do not go to any other section of the Web Console, just be patient. 
+Once the status turned into Active, you are about to be able to use it. **Do not proceed until the status goes to Active.**
+
+Let's set the following variable to identify the cluster name:
+
+`export MY_CLUSTER_NAME=MyFirstOKE`{{execute}} 
 
 Let's go the next step!

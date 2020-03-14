@@ -42,3 +42,5 @@ trial instance
 
 In this scenario you will learn how to provision an Oracle Kubernetes Engine using the Quick Create Option.
 We will use the Oracle OCI Web Console to provision our cluster. Most of the steps will be performed using the Web Console.
+We will also configure our kube config file to connect to our cluster using kubectl. Once created the kube config file, we will extract the hostname of the
+Kubernetes API server and wil use that information to configure a reverse proxy in order to connect to it. 

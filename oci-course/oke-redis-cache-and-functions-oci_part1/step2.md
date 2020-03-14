@@ -13,11 +13,13 @@ Now let's create the kubeconfig file:
 
 Now let's get the cluster id of our cluster with this:
 
-`clusterlist=$(oci ce cluster list -c $TENANT_OCID)`{{execute}}
+`clusterlist=$(oci ce cluster list -c $compartmentId)`{{execute}}
 
 With the list of clusters, now let's get the clusterID of our particular cluster ($MY_CLUSTER_NAME):
 
 `export CLUSTER_ID=$(echo $clusterlist | jq -r --arg display_name $MY_CLUSTER_NAME '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
+
+`echo "The cluster ID is $CLUSTER_ID"`{{execute}}
 
 And let's configure it:
 
@@ -27,8 +29,8 @@ And finally, let's create an environment variable that points to our kubeconfig 
 
 `export KUBECONFIG=$HOME/.kube/config`{{execute}}
 
-Now we need to get the hostname for our OKE API Server. Remember, katacoda is blocking port 6443, and that is the port where our API Server is serving.
-We need to write down the hostname/ip and then go to the OCI Compute instance creation scenario to configure the reverse proxy that we will use in Part 2 
+Now we need to get the IP address for our OKE API Server. Remember, katacoda is blocking port 6443, and that is the port where our API Server is serving.
+We need to write down the IP address and then go to the OCI Compute instance creation scenario to configure the reverse proxy that we will use in Part 2 
 of this OKE scenario.
 
 Go to the File `/root/.kube/config`{{open}} and get the hostname. Is something like this:
@@ -45,11 +47,13 @@ MzFUclIwZmUvUUJnVkhwRlQzQVp0cnBCNU43VytqR0t3RStuCk1QU0ZocUNxbHpLVDhUV0ZXZnRYOEI4
 aU4KcGNrOGtsem51SmRHaGxaSzdJdTNISVF0RC9tREZqd3hKMjQyMmRTMThJNGMwY01kMGxVR3l0TnJKVnR0OVFXWgpvajB0YkRsY0liaEtsT1RVSTdybnplUGE0OEJZOFJC
 NjAyRWxtbGxoUmZQWFNEUDR1bHEvVjlnT2t1ZFlMaE1ECjVJYzZDKy9mZTUxZmpZM1M0T3prODkyWWRWOHdublM2Y2RQZkNiOGVIenhEMEI5cHhZWHVsdVpuN2tKbk1ZUVUK
 LS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-    server: https://a3tasdfzyga2t.us-ashburn-1.clusters.oci.oraclecloud.com:6443
+    server: https://<IP_ADDRESS>:6443
   name: cluster-c3tgnzyga2t
 ~~~~
 
-**Your file will have another hostname, just copy it and ping it. Get the IP address and go to the OCI Compute Instance scenario:
+**Write down the IP Address and you can proceed to scenario:
 https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-compute-nginx**
 
-You are done with the first part of the OKE scenario.
+Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. Is a kubernetes cluster with 03 nodes. Those nodes
+are OCI compute instances that were created automatically with the quick creation wizard.
+The Kubernetes API Server is serving in the IP address that you've checked in the ~/kube/config file and listening on port 6443.
