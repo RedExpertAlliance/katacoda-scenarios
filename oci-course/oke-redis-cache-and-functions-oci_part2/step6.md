@@ -5,7 +5,7 @@ this creates an OCI load balancer in front of our service, in this way we have a
 
 After some minutes we can retrieve the service IP with:
 
-`export SESSION_API=$(kubectl get svc session-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}') -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
+`export SESSION_API=$(kubectl get svc session-api -o jsonpath='{.status.loadBalancer.ingress[0].ip}' -n $NAMESPACE --insecure-skip-tls-verify)`{{execute}}
 
 ## Test the API
 

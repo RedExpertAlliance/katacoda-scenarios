@@ -12,7 +12,7 @@ Now let's create the kubeconfig file:
 
 Now let's get the cluster id of our cluster with this:
 
-`clusterlist=$(oci ce cluster list -c $TENANT_OCID)`{{execute}}
+`clusterlist=$(oci ce cluster list -c $compartmentId)`{{execute}}
 
 With the list of clusters, now let's get the clusterID of our particular cluster ($MY_CLUSTER_NAME):
 
@@ -54,22 +54,7 @@ To test it, let's use the kubectl command to validate that we are able to connec
 
 The result should be something like this:
 ~~~~
-NAME                                    READY     STATUS        RESTARTS   AGE
-kube-dns-664f6d6bcd-d29mf               3/3       Running       0          128d
-kube-dns-664f6d6bcd-hx4wm               3/3       Running       0          2d14h
-kube-dns-664f6d6bcd-ks8bc               3/3       Running       0          16d
-kube-dns-autoscaler-658fbb9654-5bljm    1/1       Running       0          128d
-kube-flannel-ds-2wtbt                   1/1       Running       1          191d
-kube-flannel-ds-nmv28                   1/1       Running       1          191d
-kube-flannel-ds-v2z8l                   1/1       Running       1          191d
-kube-proxy-h7cn8                        1/1       Running       0          191d
-kube-proxy-rk87x                        1/1       Running       0          191d
-kube-proxy-vjjsq                        1/1       Running       0          191d
-kubernetes-dashboard-78ccc578b6-mmfzf   1/1       Running       16         2d14h
-proxymux-client-10.0.10.2               1/1       Running       0          191d
-proxymux-client-10.0.11.2               1/1       Running       0          191d
-proxymux-client-10.0.12.2               1/1       Running       0          191d
-tiller-deploy-5d6cc99fc-45mwd           1/1       Running       0          128d
+No resources found in default namespace.
 ~~~~
 
 (Note. You will get different names and ages, but a similar output should be shown)

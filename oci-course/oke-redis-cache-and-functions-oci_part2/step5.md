@@ -134,9 +134,10 @@ istio.default         istio.io/key-and-cert                 3         19m
 ocilabsecret          kubernetes.io/dockerconfigjson        1         5s
 ~~~~
 
-Now let's edit our yml file: `kubernetes/session-api.yml`{{open}}. We will edit with the value of variable $image, that is going to be set with the following export.
+Now let's edit our yml file: kubernetes/session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.
 
 `export image=us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
+
 `echo $image`{{execute}}
 
 Find the image reference and change it for the value of the variable $image.
@@ -152,5 +153,7 @@ Now let's deploy our api, with:
 To find out if the service was properly deploy, execute:
 
 `kubectl get services -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
+
+Wait for the External IP address to be assigned, after executing the command it should be in <pending> state.
 
 In the next step you will test the newly created service.
