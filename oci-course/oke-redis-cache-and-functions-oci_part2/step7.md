@@ -12,7 +12,7 @@ And listing our pods
 `kubectl get pods -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 If we have too much requests we can can create more instances or pods to handle it.
-`kubectl scale --replicas=10 deployment session-api --insecure-skip-tls-verify`{{execute}}
+`kubectl scale --replicas=10 deployment session-api -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 Now we have 10 session-api pods:
 `kubectl get pods -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
@@ -48,7 +48,7 @@ The origin field must be different on every response.
 
 If you want to dynamically scale your deployment, you can try the following:
 
-`kubectl autoscale deployment session-api --cpu-percent=5 --min=10 --max=16 --insecure-skip-tls-verify`{{execute}}
+`kubectl autoscale deployment session-api --cpu-percent=5 --min=10 --max=16 --insecure-skip-tls-verify -n $NAMESPACE`{{execute}}
 
 The previous command means that the deployment by the name session-api, will autoscale when it goes above 5% of CPU usage, and it will go to a maximum
 of  16 pods, and remain at 10 pods as a minimum.

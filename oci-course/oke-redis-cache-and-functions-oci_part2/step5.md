@@ -151,6 +151,6 @@ Now let's deploy our api, with:
 
 To find out if the service was properly deploy, execute:
 
-`kubectl get services $NAMESPACE --insecure-skip-tls-verify`{{execute}}
+`kubectl get services -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 In the next step you will test the newly created service.
