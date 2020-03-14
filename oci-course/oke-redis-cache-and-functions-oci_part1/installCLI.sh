@@ -11,3 +11,8 @@ touch /root/allSetInBackground
 export MY_VAR=jan
 
 export PATH=/root/bin:$PATH
+
+echo 'oci() { /root/bin/oci "$@"; }' >> ~/.profile
+# reload ~/.profile
+. /root/.profile
+# now oci is recognized as a command

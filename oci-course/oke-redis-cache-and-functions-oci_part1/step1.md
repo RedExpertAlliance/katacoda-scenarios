@@ -39,15 +39,17 @@ Let´s also create the following environment variables, that we will use in the 
 
 ## Policy pre-requisite
 
-For the execution for the cluster creation we need to create the following set of policies:
+For the policy creation we will set the following variables:
 
 ```
 cs=$(oci iam compartment list)
 export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
 echo "Compartment lab-compartment OCID=$compartmentId"
-
-oci iam policy create  --name "lab-participants-oke-required-policy" --compartment-id $compartmentId  --statements "[ \"Allow group lab-participants to manage instance-family in compartment lab-compartment\",\"Allow group lab-participants to use subnets in compartment lab-compartment\",\"Allow group lab-participants to read virtual-network-family in compartment lab-compartment\", \"Allow group lab-participants to use vnics in compartment lab-compartment\", \"Allow group lab-participants to inspect compartments in compartment lab-compartment\", \"Allow group lab-participants to manage cluster-family in compartment lab-compartment\"]" --description "to allow group lab-participants to perform operations required for OKE management in compartment lab-compartment"
 ```{{execute}}
+
+For the execution for the cluster creation we need to create the following set of policies:
+
+`oci iam policy create  --name "lab-participants-oke-required-policy" --compartment-id $compartmentId  --statements "[ \"Allow group lab-participants to manage instance-family in compartment lab-compartment\",\"Allow group lab-participants to use subnets in compartment lab-compartment\",\"Allow group lab-participants to read virtual-network-family in compartment lab-compartment\", \"Allow group lab-participants to use vnics in compartment lab-compartment\", \"Allow group lab-participants to inspect compartments in compartment lab-compartment\", \"Allow group lab-participants to manage cluster-family in compartment lab-compartment\"]" --description "to allow group lab-participants to perform operations required for OKE management in compartment lab-compartment"`{{execute}}
 
 For the lab purposes you will be assigned with a LAB ID number, execute this with the ID that the instructor assigns to you:
 
@@ -59,35 +61,35 @@ For the lab purposes you will be assigned with a LAB ID number, execute this wit
 With your 30-days free trial account you can create an OKE instance, so let's do it. We will use the quick-create wizard, that simplifies the steps.
 In order to do that, go to your Tenant Dashboard and then go to this menu:
 
-![OKE Menu](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/1.jpg)
+![OKE Menu](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/1.jpg)
 
 Once there, click on the Create Cluster blue button:
 
-![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/02.jpg)
+![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/02.jpg)
 
 Select the Quick Create option, and then Launch Workflow:
 
-![OKE Quick Create Option](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/03.jpg)
+![OKE Quick Create Option](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/03.jpg)
 
 Once in the workflow window, give ***MyFirstOKE*** as the name, select the compartment and leave the rest of the fields as default:
 
-![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/04.jpg)
+![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/04.jpg)
 
 In the lower part of the window enable both Tiller and Kubernetes Dashboard:
 
-![OKE Enable Tiller](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/05.jpg)
+![OKE Enable Tiller](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/05.jpg)
 
 Finally, click on Next:
 
-![OKE Click on Next](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/06.jpg)
+![OKE Click on Next](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/06.jpg)
 
 And read the summary for your cluster:
 
-![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/07.jpg)
+![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/07.jpg)
 
 Click on Create Cluster and wait for the cluster to be created. In the home page for OKE, wait for the status to be Active (**it may take around 25 minutes**):
 
-![OKE Ready](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/8.jpg)
+![OKE Ready](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/8.jpg)
 
 You just have to wait, do not go to any other section of the Web Console, just be patient. 
 Once the status turned into Active, you are about to be able to use it. **Do not proceed until the status goes to Active.**
