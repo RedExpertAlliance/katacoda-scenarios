@@ -1,6 +1,7 @@
 #!/bin/bash
 
 wget https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/master/oci-course/oke-redis-cache-and-functions-oci_part1/installCLI.sh
+chmod +777 installCLI.sh
 
 wget https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/master/oci-course/oci-compute-nginx/computeInstanceConfig.txt 
 wget https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/master/oci-course/oci-compute-nginx/computeInstanceConfigNginx.txt
