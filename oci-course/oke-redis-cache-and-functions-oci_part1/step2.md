@@ -54,9 +54,9 @@ LS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
 **Write down the IP Address and you can proceed to scenario:
 https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-compute-nginx**
 
-Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. Is a kubernetes cluster with 3 nodes. Those nodes
+Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. It is a Kubernetes cluster with 2 nodes. Those nodes
 are OCI compute instances that were created automatically by the quick creation wizard.
 The Kubernetes API Server is serving at the IP address that you've checked in the ~/kube/config file and listening on port 6443.
 
 ## OCI Cloud Shell
-The OCI Cloud Shell us a browser based command line interface that is available in the OCI Console. The Cloud Shell environment is configured for accessing OCI resources. It provides many tools - including the OCI CLI, Terraform, Fn CLI and also kubectl. The OKE Cluster instance that you have created can be accessed using kubectl in the Cloud Shell. Copy and paste the contents of the ~/kube/config file to a kubeconfig file in the Cloud Shell environment and run *kubectl* with the environment variable KUBECONFIG referring to this file. 
+The OCI Cloud Shell us a browser based command line interface that is available in the OCI Console. The Cloud Shell environment is configured for accessing OCI resources. It provides many tools - including the OCI CLI, Terraform, Fn CLI and also kubectl. The OKE Cluster instance that you have created can be accessed using kubectl in the Cloud Shell. You can try this out in the next (Bonus) step/

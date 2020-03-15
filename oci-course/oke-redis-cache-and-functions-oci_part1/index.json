@@ -2,17 +2,21 @@
   "title": "UNDER CONSTRUCTION: Introduction to Oracle Kubernetes Engine - Part 1 - Create an OKE Cluster",
   "description": "Work with OKE, the OCI managed Kubernetes service.",
   "difficulty": "beginner",
-  "time": "25 minutes",
+  "time": "35 minutes",
   "details": {
     "steps": [
       {
-        "title": "Step 1 - Create your first OKE Cluster",
+        "title": "Step 1 - Create your first OKE Kubernetes Cluster",
         "text": "step1.md"
       },
 	  {
-        "title": "Step 2 - Create the Kube config file and get the hostname of the API Server",
+        "title": "Step 2 - Create the Kube config file and get the hostname of the Kubernetes API Server",
         "text": "step2.md"
-      }
+      },
+      {
+          "title": "Step 3 - Bonus: Interact with Kubernetes Cluster in OCI Cloud Shell",
+          "text": "step3.md"
+        }
     ],
     "intro": {
       "text": "intro.md",
