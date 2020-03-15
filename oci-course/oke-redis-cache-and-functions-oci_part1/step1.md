@@ -82,7 +82,7 @@ the rest of the fields as default:
 
 In the lower part of the window enable both Tiller and Kubernetes Dashboard:
 
-![OKE Enable Tiller](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/05.jpg)
+![OKE Enable Tiller](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/5.jpg)
 
 Finally, click on Next:
 
@@ -90,7 +90,7 @@ Finally, click on Next:
 
 And read the summary for your cluster:
 
-![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/07.jpg)
+![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/7.jpg)
 
 Click on Create Cluster and wait for the cluster to be created. In the home page for OKE, wait for the status to be Active (**it may take around 25 minutes**):
 
