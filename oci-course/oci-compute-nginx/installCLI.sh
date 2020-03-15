@@ -3,9 +3,6 @@ curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/
 chmod +777 install-oci-cli.sh
 ./install-oci-cli.sh --accept-all-defaults
 
-# install kubectl
-sudo snap install kubectl --classic
-
 touch /root/allSetInBackground
 
 export MY_VAR=jan
