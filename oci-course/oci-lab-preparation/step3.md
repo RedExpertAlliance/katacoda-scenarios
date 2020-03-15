@@ -65,6 +65,14 @@ oci iam policy create  --name $FN_GROUP_USE_VCN_POLICY --compartment-id $compart
 ```{{execute}}
 
 
+## Policies for using OKE - Kubernetes Container Engine
+(see: https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm#PolicyPrerequisitesService)
+
+
+```
+oci iam policy create  --name "lab-participants-oke-required-policy" --compartment-id $compartmentId  --statements "[ \"Allow group lab-participants to manage instance-family in compartment lab-compartment\",\"Allow group lab-participants to use subnets in compartment lab-compartment\",\"Allow group lab-participants to read virtual-network-family in compartment lab-compartment\", \"Allow group lab-participants to use vnics in compartment lab-compartment\", \"Allow group lab-participants to inspect compartments in compartment lab-compartment\", \"Allow group lab-participants to manage cluster-family in compartment lab-compartment\"]" --description "to allow group lab-participants to perform operations required for OKE management in compartment lab-compartment"
+```{{execute}}
+
 ## Policies on API Gateway
 
 Policy: to allow lab apigw dynamic group access to lab-compartment
