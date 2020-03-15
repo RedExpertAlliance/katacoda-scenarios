@@ -11,7 +11,7 @@ Now let's install Oracle CLI, execute this:
 
 `./installCLI.sh`{{execute}}
 
-Let's ensure that the oci cli is in our PATH:
+Let's ensure that the oci cli is in our PATH environment variable:
 
 `export PATH=/root/bin:$PATH`{{execute}}
 
