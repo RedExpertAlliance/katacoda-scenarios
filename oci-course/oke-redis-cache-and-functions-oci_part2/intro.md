@@ -24,7 +24,7 @@ Plus the option to provision Kubernetes Administration Dashboard, as well as Til
 
 - For this scenario you need to finalize the scenario: https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1
 
-- You need to execute the scenario https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation before trying this one. Because there
+- You need to execute the scenario https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-compute-nginx before trying this one. Because there
 you will create the OCI compute instance that will server as a reverse proxy for your API Server. That scenario will give you an IP address that you will
 use in this one.
 
