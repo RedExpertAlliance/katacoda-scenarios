@@ -1,6 +1,6 @@
 ## Create kube config file and connect to your cluster
 
-Once the cluster is in Active state, we can create the kubeconfig file in order to connect to it.
+Once the cluster is in Active state, we can create the kubeconfig file in order to connect to the cluster usin *kubectl*.
 If you want to learn more about the kubeconfig file, please take a look at here: https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengdownloadkubeconfigfile.htm
 
 Let's create the kubeconfig file using the following steps:
@@ -54,6 +54,9 @@ LS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
 **Write down the IP Address and you can proceed to scenario:
 https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-compute-nginx**
 
-Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. Is a kubernetes cluster with 03 nodes. Those nodes
-are OCI compute instances that were created automatically with the quick creation wizard.
-The Kubernetes API Server is serving in the IP address that you've checked in the ~/kube/config file and listening on port 6443.
+Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. Is a kubernetes cluster with 3 nodes. Those nodes
+are OCI compute instances that were created automatically by the quick creation wizard.
+The Kubernetes API Server is serving at the IP address that you've checked in the ~/kube/config file and listening on port 6443.
+
+## OCI Cloud Shell
+The OCI Cloud Shell us a browser based command line interface that is available in the OCI Console. The Cloud Shell environment is configured for accessing OCI resources. It provides many tools - including the OCI CLI, Terraform, Fn CLI and also kubectl. The OKE Cluster instance that you have created can be accessed using kubectl in the Cloud Shell. Copy and paste the contents of the ~/kube/config file to a kubeconfig file in the Cloud Shell environment and run *kubectl* with the environment variable KUBECONFIG referring to this file. 
