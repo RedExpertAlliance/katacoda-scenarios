@@ -15,6 +15,10 @@ Now let's install Oracle CLI and kubectl, execute this:
 
 `./installCLI.sh`{{execute}}
 
+Let's ensure that the oci cli is in our PATH:
+
+`export PATH=/root/bin:$PATH`{{execute}}
+
 Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and is connected to your tenant.
 
 Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
