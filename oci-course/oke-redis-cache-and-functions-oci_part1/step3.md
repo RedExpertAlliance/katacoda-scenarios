@@ -1,5 +1,7 @@
 To quickly assess our new Kubernetes cluster, we can make use of OCI Cloud Shell with its preinstalled kubectl CLI tool. 
 
+Note: All commands in this step need to be executed in Cloud Shell - not in the Katacoda terminal environment.
+
 To access the Kubernetes cluster through Cloud Shell, go through these steps:
 1. Copy the contents of file ~/.kube/config to the clipboard
 2. Open Cloud Shell in OCI Console
