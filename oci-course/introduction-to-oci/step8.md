@@ -11,6 +11,24 @@ Please proceed now by providing details on the OCI tenancy you are working in an
 
 Paste the respective snippets of contents provided by the workshop instructor into these two files.
 
+The file *config* should look like this (with your specific environment details filled in):
+```
+[DEFAULT]
+user=ocid1.user.oc1..aaaaaa
+fingerprint=69:7f:92
+key_file=/root/.oci/oci_api_key.pem
+tenancy=ocid1.tenancy.oc1..aaaaa
+region=us-ashburn-1
+```
+The file oci_api_key.pem contains the private key half of a key pair that has been generated for the user and for which the public key half has been uploaded to OCI. This files looks like this:
+```
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEA3xviQyh+0ufLy1W9qb3WdMTmX1+fFxWjamFJqehjWYdWQ5VH
+xAvgAWOPXDtNPhY/8oI2qc6XFCnTpljJJ2JmvRdS+6rt7hFOhKk6MWdR4aFrsVg5
+quEsUUF58N2fju7PBcQXxGtrDYr8QuAixOAEZs4d9YKP5WZVfsM=
+-----END RSA PRIVATE KEY-----
+```
+
 Execute this statement that will install the OCI Command Line Interface into the Katacoda scenario's Ubuntu environment:
 ```
 ~/install-oci-cli.sh --accept-all-defaults

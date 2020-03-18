@@ -2,13 +2,13 @@
 
 When you sign up for Oracle Cloud Infrastructure, a *tenancy* is created for you - or your company. This is a secure and isolated partition within Oracle Cloud Infrastructure where you can create, organize, and administer your cloud resources. Everything you do happens inside the tenancy.
 
+![A tenancy with a compartment with resources in different regions](https://docs.cloud.oracle.com/en-us/iaas/Content/Resources/Images/gsg-using-the-console_thumb_400_0.png)
+
 The tenancy is organized in *compartments*, somewhat similar to folders on a file system. A compartment is a collection of related resources (such as compute instances, virtual cloud networks, block volumes, functions, API Gateway) that can be accessed only by certain groups that have been given permission by an administrator. A compartment should be thought of as a logical group and not a physical container. Compartments can be nested, to six levels deep. Compartments do not cost money - you can create many of them. The tenancy itself is the root compartment that holds all your cloud resources. When you create a cloud resource such as a VM, database, or data catalog, you must specify to which compartment you want the resource to belong. As an example: many tenancies contain a *Sandbox*  compartment, used for experiments and early development work. Security policies in this compartment are fairly relaxed compared for example to the *Production* compartment.
 
 Oracle Cloud Infrastructure is physically hosted in *regions* and *availability domains*. A region is a localized geographic area - such as Amsterdam, Ashburn, Sao Paolo, Melbourne and Tokyo, and an availability domain is one or more data centers located within a region. A region is composed of one or more availability domains. Availability domains are isolated from each other, fault tolerant, and very unlikely to fail simultaneously or be impacted by the failure of another availability domain. When you configure your cloud services, use multiple availability domains to ensure high availability and to protect against resource failure. Availability Domains within a Region have very fast network connections; they should be thought of as very closely co-located. 
 
 A tenancy has a home region - and can also subscribe to other regions. A tenancy therefore can have OCI resources in multiple regions. IAM resources (compartments, users, groups, policies, tags, and federation providers) are global - they exist across regions and are available in every region. This is visualized in the next figure: a tenancy with a compartment that contains resources in two different regions. 
-
-![A tenancy with a compartment with resources in different regions](https://docs.cloud.oracle.com/en-us/iaas/Content/Resources/Images/gsg-using-the-console_thumb_400_0.png)
 
 In the OCI Console, you usually work in the context of a single region. The *compartment explorer* is the only tool that shows *all* your OCI resources across *all* regions .
 

@@ -1,8 +1,8 @@
 {
   "title": "UNDER CONSTRUCTION: An introduction to Oracle Cloud Infrastructure core concepts",
-  "description": "First steps on OCI - learn about tenancy, compartments, groups, policies, console, OCI Command Line Interface, Object Storage, Resource Tags and Search.",
+  "description": "First steps on OCI - learn about tenancy, compartments, groups, policies, console, cloud shell, OCI Command Line Interface, Object Storage, Resource Tags and Search.",
   "difficulty": "beginner",
-  "time": "40 minutes",
+  "time": "50 minutes",
   "details": {
     "steps": [
       {
@@ -38,12 +38,16 @@
         "text": "step8.md"
       },
       {
-        "title": "Step 9 - Users, Groups and Policies",
+        "title": "Step 9 - OCI Cloud Shell",
         "text": "step9.md"
       },
       {
-        "title": "Step 10 - Audit - trail of all OCI Resource manipulations",
+        "title": "Step 10 - Users, Groups and Policies",
         "text": "step10.md"
+      },
+      {
+        "title": "Step 11 - Audit - trail of all OCI Resource manipulations",
+        "text": "step11.md"
       }
     ],
     "intro": {

@@ -15,6 +15,3 @@ chmod +777 install-oci-cli.sh
 ./install-oci-cli.sh --accept-all-defaults
 
 
-
-echo "Wait for the file /root/allSetInBackground to appear"
-

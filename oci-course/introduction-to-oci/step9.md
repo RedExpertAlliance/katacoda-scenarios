@@ -1,51 +1,34 @@
-Access to OCI resources is arranged through common mechanisms: every actor interacting with OCI uses a user account with associated credentials (such as username and password for Console login and public/private key pair for CLI and REST API access). Users are member of groups and from these groups they inherit permissions to access OCI resources. These permissions are defined through policies. Policies contain statements that describe which permissions on which resources are granted to which actors. You will see some examples of policies.
+The Cloud Shell is a pretty versatile tool for OCI Administrators and Developers - packed with tools and run time engines that be used for easy interaction with OCI resources.
+![Cloud Shell](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-cloud-shell.png)
 
-![Users, Groups and Policies](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-users-groups-policies.png)
+Cloud Shell has the OCI CLI pre-installed en pre-configured - ready to run. No need to install nor to edit the config file and private key pem.file. In addition to the command line interface, Cloud Shell comes with Terraform (an infrastructure as code provisioning tools that is discussed in a later scenario), Ansible, kubectl (for managing a Kubernetes Cluster), fn (the command line tool for working with serverless functions on OCI, also the subject of several later scenarios), git, vi & nano and language runtimes for Node, Java, Ruby, Perl, PHP, Python and Go. The database clients SQL*Plus and MySQL are also part of the Cloud Shell. Read this article [Oracle Cloud Infrastructure Cloud Shell – integrated OCI CLI, kubectl, terraform, SQL Plus, Docker and Maven](https://technology.amis.nl/2020/03/15/oracle-cloud-infrastructure-cloud-shell-integrated-oci-cli-kubectl-terraform-sql-plus-docker-and-maven/) for an introduction to Cloud Shell.
 
-Policies can grant access on specific resources or on a type of resource - for example buckets or objects. In the latter case, the policy will usually grant a permission in the context of a specific compartment - and all its nested compartments. Some policies are defined to have an effect throughout the tenancy, for example the policy to manage users.  A basic feature of policies is the concept of inheritance: Compartments inherit any policies from their parent compartment. The simplest example is the Administrators group, which automatically comes with an OCI tenancy (see The Administrators Group and Policy). There's a built-in policy that enables the Administrators group to do anything in the tenancy:
-`Allow group Administrators to manage all-resources in tenancy`. 
+Cloud Shell is opened from the OCI Console.
+![Cloud Shell](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-cloud-shell-open.png)
+Go ahead and open Cloud Shell from the Console.
 
-To check the details for user *lab-user* in the console, click on the person icon in the upper right hand corner. Open the drop down menu and click on *lab-user*. 
-![Users, Groups and Policies](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-check-user-details.png)
-You are taken to the page with user details.
+A console will open in the bottom section of the page. You will see a number of messages regarding starting up and attaching the Cloud Shell environment. Cloud Shell is implemented as a Compute VM with attached storage. Anything you save in Cloud Shell is saved on persistent storage (5 GB of user storage) that is available across Cloud Shell sessions.
 
-![Users, Groups and Policies](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-lab-user-details.png)
+After a little wait, Cloud Shell will be available and you can start working on the command line. Note: you can maximimize the console. 
 
-Copy the OCI for user *lab-user* to the clipboard. Back in the Katacoda terminal, execute this command:
-`USER_OCID=ocidFromClipboard`{{execute}}
+![Cloud Shell](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-cloud-shell-opened.png)
 
-Then you can retrieve the user details with:
+Very relevant: you can paste text to the command line or to files opened in *vi* using `shift + Insert` (on Windows) or `Cmd+V` (on Mac). To copy text from the Cloud Shell, use `Ctrl + C` (on Windows) and `Cmd + C`.
 
-`oci iam user get --user-id=$USER_OCID`{{execute}}
+Paste the following statement into the Cloud Shell (`Shift + Insert` or `Cmd + V`):
+`oci iam compartment list`
+and press enter.
 
-The user is member of a group called *lab-participants*. As user *lab-user* you cannot see this - as it is the administrator's turf. The user *lab-user* can perform different types of operations - such as creating buckets and uploading files - because of policies that were set up to grant permissions to group *lab-participants*. Some of these policies are listed here:
+The list of compartments should be shown, just as in the previous step. However, in the previous step, we first had to install OCI CLI and prepare the configuration and private key files. In Cloud Shell, all of that is configured for us.
 
-```
-Allow group lab-participants to manage compartments in compartment lab-compartment
-Allow group lab-participants to use object-family in compartment lab-compartment
-Allow group lab-participants to manage buckets in compartment lab-compartment
-Allow group lab-participants to manage objects in compartment lab-compartment
-Allow group lab-participants to use tag-namespaces in tenancy
-Allow group lab-participants to read audit-events in compartment lab-compartment
-```
+The *jq* tool is also part of Cloud Shell, so to get details for the *lab-compartment*, the following command can be pasted into Cloud Shell and executed:
 
-### Dynamic Group
+`oci iam compartment list | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] '`
 
-A special type of group is a Dynamic Group. Dynamic groups allow you to group Oracle Cloud Infrastructure computer instances or other resources as "principal" actors (similar to user groups). Instead of a static collection of users, the composition of a Dynamic Group is dynamically determined based on conditions. Any resource that satisfies the condition is considered part of the group - for as long as the condition holds true. For example, a rule could specify that all compute instances in a particular compartment are members of the dynamic group. During the time that the condition holds true, the resource inherits the permissions granted to the Dynamic Group through policy statements. A dynamic group is also used to grant an API Gateway the right to invoke functions in a specific compartment. 
-
-### Instance Principal
-
-Dynamic groups allow you to group Oracle Cloud Infrastructure instances as principal actors. You can then create policies to permit instances in these groups to make API calls against Oracle Cloud Infrastructure services. Membership in the group is determined by a set of criteria you define, called matching rules. *Instance Principals* are compute instances (typically VMs) that are members of a dynamic group and inherit from that group membership permissions. Sometimes the term *jumpbox* is used instead to identify a VM from which cloud resources can be accessed. This allows any process or user on that VM to make calls to OCI REST APIs leveraging the inherited permissions. Any user who has access to the instance (who can SSH to the instance), automatically inherits the privileges granted to the instance. 
-
-The OCI CLI as well as SDKs and the Terraform Provider understand the notion of Instance Principal. OCI CLI commands for example can be executed from within an instance principal without additional authentication. This mechanism is used in CloudShell.
-
-For each API call made by an instance principal, the Audit service - discussed in the next step - logs the event, recording the OCID of the instance as the value of principalId in the event log.
-
+Feel free to explore some of the other features of Cloud Shell - for example the Node or Java runtimes or the git client.
 
 ## Resources
 
-OCI Documentation [Getting Started with Policies](https://docs.cloud.oracle.com/en-us/iaas/Content/Identity/Concepts/policygetstarted.htm)
+OCI Docs [OCI Cloud Shell])(https://docs.cloud.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellintro.htm)
 
-OCI Documentation [Dynamic Groups](https://docs.cloud.oracle.com/en-us/iaas/Content/Identity/Tasks/managingdynamicgroups.htm)
-
-OCI Documentation [Instance Principal](https://docs.cloud.oracle.com/en-us/iaas/Content/Identity/Tasks/callingservicesfrominstances.htm)
+3 minute video – introducing Cloud Shell: https://www.youtube.com/watch?v=J51BXxlCbOY
