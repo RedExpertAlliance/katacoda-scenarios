@@ -37,10 +37,6 @@ After that, use `docker images`{{execute}} to see that the image is created and 
 
 Before tagging it we need some environment variables to be set:
 
-`cs=$(oci iam compartment list)`{{execute}}
-
-`export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
-
 ```
 cs=$(oci iam compartment list)
 export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
@@ -134,7 +130,7 @@ istio.default         istio.io/key-and-cert                 3         19m
 ocilabsecret          kubernetes.io/dockerconfigjson        1         5s
 ~~~~
 
-Now let's edit our yml file: kubernetes/session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.
+**Now let's edit our yml file: kubernetes/session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.**
 
 `export image=us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
 
@@ -150,10 +146,26 @@ Now let's deploy our api, with:
 
 `kubectl apply -f kubernetes/session-api.yml -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
-To find out if the service was properly deploy, execute:
+To find out if the service was properly deployed, execute:
 
 `kubectl get services -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
-Wait for the External IP address to be assigned, after executing the command it should be in <pending> state.
+Wait for the External IP address to be assigned (and do not proceed until that happens). After executing the previous command it should be in **pending** state:
+
+~~~~
+NAME          TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+redis         ClusterIP      10.96.223.56    <none>        6379/TCP       16m
+session-api   LoadBalancer   10.96.207.217   <pending>     80:31039/TCP   38s
+~~~~
+
+And after some seconds, you should get something like this:
+
+~~~~
+NAME          TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)        AGE
+redis         ClusterIP      10.96.223.56   <none>         6379/TCP       30m
+session-api   LoadBalancer   10.96.31.202   150.111.2.49   80:31548/TCP   82s
+~~~~
+
+(Note. **Do not proceed until you get an IP address assgined**)
 
 In the next step you will test the newly created service.

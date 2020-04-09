@@ -17,9 +17,28 @@ If we have too much requests we can can create more instances or pods to handle 
 Now we have 10 session-api pods:
 `kubectl get pods -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
-And our load balancer service is going distribute the requests to all our pods. 
+You should get something like this:
 
-To verify this, we are gona hit 3 times our login endpoint and validate the origin field of the response. 
+~~~~
+NAME                           READY     STATUS    RESTARTS   AGE
+redis-656759dbd4-2dzgh         1/1       Running   0          43m
+session-api-5d497db7f6-4q7zw   1/1       Running   0          73s
+session-api-5d497db7f6-682wc   1/1       Running   0          73s
+session-api-5d497db7f6-99bfn   1/1       Running   0          73s
+session-api-5d497db7f6-bz682   1/1       Running   0          73s
+session-api-5d497db7f6-dhl4v   1/1       Running   0          73s
+session-api-5d497db7f6-ljs97   1/1       Running   0          73s
+session-api-5d497db7f6-mp299   1/1       Running   0          5m26s
+session-api-5d497db7f6-rb75g   1/1       Running   0          73s
+session-api-5d497db7f6-tdbtq   1/1       Running   0          73s
+session-api-5d497db7f6-zfpmr   1/1       Running   0          73s
+~~~~
+
+(**Wait until you get Running in all pods' status**)
+
+Our load balancer service is going distribute the requests to all our pods. 
+
+To verify this, we are going hit 3(three) times our login endpoint and validate the origin field of the response. 
 The origin field is the name of the pod that is responding.
 ```
 curl -X POST \
@@ -28,12 +47,24 @@ curl -X POST \
   -d '{"username":"Hugo","password":"Hugo123"}'
 ```{{execute}}
 
+And you should get something like this:
+
+~~~~
+{"sessionID":"c964eac7-8adb-47fd-a2f8-9badbb745b75","expiration":1586453914,"origin":"session-api-5d497db7f6-tdbtq"}
+~~~~
+
 ```
 curl -X POST \
   http://"$SESSION_API"/login \
   -H 'Content-Type: application/json' \
   -d '{"username":"Paco","password":"Paco123"}'
 ```{{execute}}
+
+And you should get something like this:
+
+~~~~
+{"sessionID":"c964eac7-8adb-47fd-a2f8-9badbb745b75","expiration":1586453914,"origin":"session-api-5d497db7f6-zfpmr"}
+~~~~
 
 ```
 curl -X POST \
@@ -42,7 +73,13 @@ curl -X POST \
   -d '{"username":"Luis","password":"Luis123"}'
 ```{{execute}}
 
-The origin field must be different on every response.
+And you should get something like this:
+
+~~~~
+{"sessionID":"c964eac7-8adb-47fd-a2f8-9badbb745b75","expiration":1586453914,"origin":"session-api-5d497db7f6-rb75g"}
+~~~~
+
+**The origin field must be different in every response.**
 
 ## Extra step
 
