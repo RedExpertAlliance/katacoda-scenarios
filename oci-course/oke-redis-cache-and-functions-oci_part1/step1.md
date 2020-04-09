@@ -41,22 +41,6 @@ Let´s also create the following environment variables, that we will use in the 
 
 `export TENANT_OCID=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=' | head -1)`{{execute}}
 
-## Policy pre-requisite
-
-For the policy creation we will set the following variables:
-
-```
-cs=$(oci iam compartment list)
-export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
-echo "Compartment lab-compartment OCID=$compartmentId"
-```{{execute}}
-
-For the execution for the cluster creation we need to create the following set of policies:
-
-`oci iam policy create  --name "lab-participants-oke-required-policy" --compartment-id $compartmentId  --statements "[ \"Allow group lab-participants to manage instance-family in compartment lab-compartment\",\"Allow group lab-participants to use subnets in compartment lab-compartment\",\"Allow group lab-participants to read virtual-network-family in compartment lab-compartment\", \"Allow group lab-participants to use vnics in compartment lab-compartment\", \"Allow group lab-participants to inspect compartments in compartment lab-compartment\", \"Allow group lab-participants to manage cluster-family in compartment lab-compartment\"]" --description "to allow group lab-participants to perform operations required for OKE management in compartment lab-compartment"`{{execute}}
-
-For the lab purposes you will be assigned with a LAB ID number, execute this with the ID that the instructor assigns to you:
-
 `export LAB_ID=1`{{execute}}
 
 
