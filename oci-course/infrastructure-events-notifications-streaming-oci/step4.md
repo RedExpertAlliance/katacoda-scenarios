@@ -50,7 +50,7 @@ subnets=$(oci network subnet list  -c $compartmentId --vcn-id $vcnId)
 export subnetId=$(echo $subnets | jq -r --arg display_name "Public Subnet-vcn-lab" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
 nss=$(oci os ns get)
 export ns=$(echo $nss | jq -r '.data')
-export file=lorem.txt
+export file=lorem.pdf
 ```{{execute}}
 
 Update the *fn* context with the settings relevant for this workshop. Note: the compartment used here is the lab-compartment 
@@ -219,10 +219,13 @@ again. Then click on the Save Changes button.
 ![Events Menu](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/eventObjectSelect.jpg)
 After that upload a new file to the IN bucket:
 **
-`export file=lorem2.txt`{{execute}}
-`oci os object put -ns $(oci os ns get | jq -r '.data') -bn $IN_BUCKET --name $file --file ./lorem2.txt`{{execute}}
 
-Wait for some seconds and list the contents of the OUT_BUCKET bucket:
+```
+export file=lorem2.pdf
+oci os object put -ns $(oci os ns get | jq -r '.data') -bn $IN_BUCKET --name lorem2.txt --file ./lorem2.txt
+```{{execute}}
+
+Wait for around 30 seconds and list the contents of the OUT_BUCKET bucket:
 `oci os object list -bn $OUT_BUCKET`{{execute}}
 
 You should see something like this:
@@ -244,7 +247,7 @@ You should see something like this:
 
 ## Get PDF file
 
-That is the file but now converted in PDF. If you want to download it to validate that is a true PDF file, executes this:
+That is the file but now converted in PDF. If you want to download it to validate that is a true PDF file, execute this:
 
 `oci os object get -bn $OUT_BUCKET --file $file --name $file`{{execute}}
 

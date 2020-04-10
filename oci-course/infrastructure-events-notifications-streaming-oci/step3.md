@@ -11,6 +11,7 @@ Now, we are going to create our first rule, that will be triggered after a Objec
 Set the value of the variable $MY_BUCKET:
 
 `export MY_BUCKET=myBucket$LAB_ID`{{execute}}
+
 `echo $MY_BUCKET`{{execute}}
 
 Then, to create the rule, execute the following:
