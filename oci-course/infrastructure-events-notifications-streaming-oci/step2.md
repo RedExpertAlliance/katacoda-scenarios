@@ -14,9 +14,10 @@ For the Topic, execute this:
 Now let's get the Topic OCID:
 
 ```
-export TOPIC_LIST=$(oci ons topic list -c $COMPARTMENT_OCID)
+export TOPIC_LIST=$(oci ons topic list -c $COMPARTMENT_OCID --all)
 export TOPIC_NAME=Topic$LAB_ID
 export TOPIC_ID=$(echo $TOPIC_LIST | jq -r --arg name $TOPIC_NAME '.data | map(select(."name" == $name)) | .[0] | .["topic-id"]')
+echo "The TopicID is: $TOPIC_ID"
 ```{{execute}}
 
 
