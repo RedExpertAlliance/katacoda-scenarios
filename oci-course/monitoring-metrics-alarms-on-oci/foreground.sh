@@ -6,13 +6,7 @@ echo 'oci() { /root/bin/oci "$@"; }' >> ~/.profile
 . /root/.profile
 # now oci is recognized as a command
 
-echo "Installing OCI CLI"
-
-# Install the OCI CLI in silent mode with default settings
-curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
-chmod +777 install-oci-cli.sh
-./install-oci-cli.sh --accept-all-defaults
-
+echo "Installing OCI CLI in background"
 
 echo "Installing Project Fn - in the background"
 
