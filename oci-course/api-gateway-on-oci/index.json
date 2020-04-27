@@ -24,7 +24,7 @@
     ],
     "intro": {
       "text": "introduction.md",
-      "credits": "AMIS | Conclusion",
+      "credits": "REAL - Red Expert Alliance",
       "courseData": "background.sh",
       "code": "foreground.sh"
         },
@@ -43,6 +43,6 @@
     "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
   },
   "backend": {
-    "imageid": "ubuntu1804"
+    "imageid": "ubuntu1904"
   }
 }

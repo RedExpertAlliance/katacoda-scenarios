@@ -2,7 +2,7 @@ This scenario introduces the OCI Application Gateway. It is used to provide acce
 
 You will use the OCI Console to verify the creation of API Deployment with Routes and to monitor the calls to API Gateway. You can inspect the logging from the API Deployment on Object Storage - although it will take some time for the logging to arrive in the OCI Object Storage Bucket. 
 
-The scenario uses an Ubuntu 18.04 environment with Docker and OCI CLI. Before you can start the steps in the scenario, the OCI Command Line interface is downloaded and installed. This will take about one minute. You will need Postman as well, if you want to invoke the routes on API Gateway directly from your computer.
+The scenario uses an Ubuntu 19.04 environment with Docker and OCI CLI. Before you can start the steps in the scenario, the OCI Command Line interface is downloaded and installed. This will take about one minute. You will need Postman as well, if you want to invoke the routes on API Gateway directly from your computer.
 
 The scenario expects a number of preparations:
 * you already have deployed a function called *hello* in an application called lab# where # is a number assigned to you (in OCI compartment lab-compartment)
