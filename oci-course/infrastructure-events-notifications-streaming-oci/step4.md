@@ -20,7 +20,7 @@ The scenario is quite simple:
 
 ## Functions preparation
 
-If  you have gone through [this](https://www.katacoda.com/redexpertalliance/courses/oci-course/functions-on-oci "Functions on OCI") you will be familiar
+If  you have gone through [this scenario](https://www.katacoda.com/redexpertalliance/courses/oci-course/functions-on-oci "Functions on OCI") you will be familiar
 with the upcomming steps to connect the Fn CLI with the Oracle Cloud Infrastructure. If this is your first time, then you will learn how to do it.
 
 Check the installed version of Fn CLI.  
@@ -50,6 +50,7 @@ subnets=$(oci network subnet list  -c $compartmentId --vcn-id $vcnId)
 export subnetId=$(echo $subnets | jq -r --arg display_name "Public Subnet-vcn-lab" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
 nss=$(oci os ns get)
 export ns=$(echo $nss | jq -r '.data')
+export file=lorem.pdf
 ```{{execute}}
 
 Update the *fn* context with the settings relevant for this workshop. Note: the compartment used here is the lab-compartment 
@@ -198,11 +199,59 @@ A sample event envelope is like this:
 }
 ~~~~
 
-
-To validate it, list the contents of the out bucket executing the following:
+To validate it, list the contents of the output bucket executing the following:
 
 `oci os object list -bn $OUT_BUCKET`{{execute}}
 
+**Important Note:
+If you get the list with the PDF, then proceed to the section Get PDF File. If not, follow these steps:
+Please wait some seconds to get the output. But in case you've waited more than 2 minutes, please go to your tenant console and look for the Rule.
+Go to this menu:
+![Events Menu](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/eventsMenu.jpg)
+Once in Rules Sections, be sure you in the compartment lab-compartment and look for the rule we created in previous steps (text2PDF$LAB_ID) and click on it.
+![Events Menu](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/rulesSection.jpg)
+Then go to the Event Matching section at the left of the screen and click on it:
+![Events Menu](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/eventMatch.jpg)
+Once on the Event Page, look for the Event Type section and click on the three dots at the right of the screen:
+![Events Menu](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/eventType.jpg)
+Once on the Event Type window, just re-select the option for Object-Create within the combo. It is already selected, but just click on the combo and select it
+again. Then click on the Save Changes button.
+![Events Menu](/RedExpertAlliance/courses/oci-course/infrastructure-events-notifications-streaming-oci/assets/eventObjectSelect.jpg)
+After that upload a new file to the IN bucket:
+**
+
+```
+export file=lorem2.pdf
+oci os object put -ns $(oci os ns get | jq -r '.data') -bn $IN_BUCKET --name lorem2.txt --file ./lorem2.txt
+```{{execute}}
+
+Wait for around 30 seconds and list the contents of the OUT_BUCKET bucket:
+`oci os object list -bn $OUT_BUCKET`{{execute}}
+
+You should see something like this:
+
+~~~~
+{
+  "data": [
+    {
+      "etag": null,
+      "md5": "ailgJhour7O+/2p58Hc9oQ==",
+      "name": "lorem2.pdf",
+      "size": 1460,
+      "time-created": "2020-04-10T14:27:02.551000+00:00"
+    }
+  ],
+  "prefixes": []
+}
+~~~~
+
+## Get PDF file
+
+That is the file but now converted in PDF. If you want to download it to validate that is a true PDF file, execute this:
+
+`oci os object get -bn $OUT_BUCKET --file $file --name $file`{{execute}}
+
+`more $file`{{execute}}
 
 ## Extra (optional) step
 

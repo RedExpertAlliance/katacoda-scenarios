@@ -6,7 +6,7 @@
   "details": {
     "steps": [
       {
-        "title": "Step 1 - Create your first OKE Cluster",
+        "title": "Step 1 - Install CLI and set the required environment variables",
         "text": "step1.md"
       },
 	  {
