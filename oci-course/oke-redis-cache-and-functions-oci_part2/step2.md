@@ -16,7 +16,7 @@ Now let's get the cluster id of our cluster with this:
 
 With the list of clusters, now let's get the clusterID of our particular cluster ($MY_CLUSTER_NAME):
 
-`export CLUSTER_ID=$(echo $clusterlist | jq -r --arg display_name $MY_CLUSTER_NAME '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
+`export CLUSTER_ID=$(echo $clusterlist | jq -r --arg display_name $MY_CLUSTER_NAME '.data[] | select ((.name == $display_name) and (."lifecycle-state" == "ACTIVE")) | .id')`{{execute}}
 
 And let's configure it:
 
