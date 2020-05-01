@@ -7,15 +7,7 @@ You need to provide details on the OCI tenancy you will work in and the OCI user
 
 Paste the contents provided by the workshop instructor into these two files.
 
-Now let's install Oracle CLI, execute this:
-
-`./installCLI.sh`{{execute}}
-
-Let's ensure that the oci cli is in our PATH environment variable:
-
-`export PATH=/root/bin:$PATH`{{execute}}
-
-Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and you can continue.
+**Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and you can continue.**
 
 Set the environment variable LAB_ID to the number provided to you by the workshop instructor.
 
