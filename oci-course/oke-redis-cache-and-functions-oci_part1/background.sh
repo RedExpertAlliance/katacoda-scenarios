@@ -15,8 +15,13 @@ chmod +777 install-oci-cli.sh
 ./install-oci-cli.sh --accept-all-defaults
 
 # install kubectl
-sudo snap install kubectl --classic
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
 
 touch /root/allSetInBackground
 
 export MY_VAR=jan
+export PATH=/root/bin/:$PATH

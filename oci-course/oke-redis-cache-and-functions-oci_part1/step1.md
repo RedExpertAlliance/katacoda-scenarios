@@ -37,7 +37,11 @@ Let´s also create the following environment variables, that we will use in the 
 `export LAB_ID=1`{{execute}}
 
 `cs=$(oci iam compartment list)`{{execute}}
+
+Let's get the compartment ID first:
 `export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
+
+Let's just echo it:
 `echo "Compartment lab-compartment OCID=$compartmentId"`{{execute}}
 
 
