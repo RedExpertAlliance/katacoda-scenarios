@@ -18,7 +18,7 @@ Write that down, because you need it for changing the kube config file in the OK
 
 To validate that the newly created server is listening (TCP) on port 443, let's try a simple telnet:
 
-`echo "telnet $public_ip 443"`{{execute}}
+`telnet $public_ip 443`{{execute}}
 
 You should get something like this (instead X.X.X.X you should get the value of the public IP address):
 
