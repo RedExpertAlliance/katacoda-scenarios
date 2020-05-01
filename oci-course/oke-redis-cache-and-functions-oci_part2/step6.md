@@ -31,6 +31,8 @@ export SESSION_ID=$( \
   | jq -r '.sessionID')
 ```{{execute}}
 
+`echo "The sessionID is $SESSION_ID"`{{execute}}
+
 The previous call will return to us a sessionID and saved it on SESSION_ID variable. We are going to use this session to make the next calls:
 ~~~~
 {

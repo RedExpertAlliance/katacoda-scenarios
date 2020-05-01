@@ -39,9 +39,15 @@ Let´s also create the following environment variables, that we will use in the 
 
 `export TENANT_OCID=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=' | head -1)`{{execute}}
 
-For the lab purposes you will be assigned with a LAB ID number, execute this with the ID that the instructor assigns to you:
-
 `export LAB_ID=1`{{execute}}
+
+`cs=$(oci iam compartment list)`{{execute}}
+
+Let's get the compartment ID first:
+`export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
+
+Let's just echo it:
+`echo "Compartment lab-compartment OCID=$compartmentId"`{{execute}}
 
 In Part 1 of the OKE Scenario you wrote down the name of your cluster, if you've followed the instructions your cluster name is MyFirstOKE. Let's set that
 as an environment variable:

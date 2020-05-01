@@ -27,7 +27,14 @@ After you created your cluster, you will have a set of default namespaces. Exeut
 
 `kubectl get namespaces --insecure-skip-tls-verify`{{execute}}
 
-![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/09.jpg)
+~~~~
+NAME              STATUS   AGE
+default           Active   17d
+kube-node-lease   Active   17d
+kube-public       Active   17d
+kube-system       Active   17d
+webinar           Active   17d
+~~~~
 
 Those are the default namespaces. 
 
@@ -41,7 +48,15 @@ Now let's create the namespace:
 
 If you re-issue the `kubectl get namespaces --insecure-skip-tls-verify`{{execute}}  you will see your newly created namespace listed:
 
-![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/10.jpg)
+~~~~
+NAME              STATUS   AGE
+default           Active   17d
+kube-node-lease   Active   17d
+kube-public       Active   17d
+kube-system       Active   17d
+ocilab$LAB_ID     Active   11s    <---
+webinar           Active   17d
+~~~~
 
 In order to deploy your artifacts to the ocilab$LAB_ID namespace, you just need to include the option -n $NAMESPACE within the kubectl commands. 
 

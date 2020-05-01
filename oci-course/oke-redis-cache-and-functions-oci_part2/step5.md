@@ -35,6 +35,17 @@ Now let's build the image:
 
 After that, use `docker images`{{execute}} to see that the image is created and is registered locally.
 
+~~~~
+REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
+lab-user/session-api   1.0.0               d92490bd187e        40 seconds ago      688MB      <---
+alpine                 latest              cdf98d1859c1        12 months ago       5.53MB
+redis                  latest              a55fbf438dfd        13 months ago       95MB
+ubuntu                 latest              94e814e2efa8        13 months ago       88.9MB
+weaveworks/scope       1.10.1              b0d8090d0e91        17 months ago       75.7MB
+weaveworks/scope       1.9.1               4b07159e407b        21 months ago       68MB
+golang                 1.7.4               f3bdc5e851ce        3 years ago         674MB
+~~~~
+
 Before tagging it we need some environment variables to be set:
 
 ```
