@@ -21,6 +21,10 @@ With the list of clusters, now let's get the clusterID of our particular cluster
 
 `echo "The cluster ID is $CLUSTER_ID"`{{execute}}
 
+Now let's just be sure that our PATH environment variable is well set:
+
+`export PATH=/root/bin/:$PATH`{{execute}}
+
 And let's configure it:
 
 `oci ce cluster create-kubeconfig --cluster-id $CLUSTER_ID --file $HOME/.kube/config --region us-ashburn-1 --token-version 2.0.0`{{execute}}
