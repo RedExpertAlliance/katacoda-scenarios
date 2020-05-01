@@ -1,30 +1,27 @@
 #!/bin/bash
 
+wget https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/master/oci-course/oke-redis-cache-and-functions-oci_part1/installCLI.sh
+chmod +777 installCLI.sh
+
 mkdir ~/.oci
 touch  ~/.oci/config
 touch  ~/.oci/oci_api_key.pem
 
-wget https://raw.githubusercontent.com/RedExpertAlliance/katacoda-scenarios/master/oci-course/oke-redis-cache-and-functions-oci_part2/installCLI.sh
-chmod +777 installCLI.sh
-
+mkdir /root/keys
 
 # Install the OCI CLI in silent mode with default settings
 curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
 chmod +777 install-oci-cli.sh
 ./install-oci-cli.sh --accept-all-defaults
 
-
-# docker pull stephenpearson/oci-cli:latest
-#docker run --rm --mount type=bind,source=$HOME/.oci,target=/root/.oci  stephenpearson/oci-cli:latest 
-#setup config
-#
-# add this line to ~/.profile
-# oci() { docker run --rm --mount type=bind,source=$HOME/.oci,target=/root/.oci stephenpearson/oci-cli:latest "$@"; }
-
-
 # install kubectl
-sudo snap install kubectl --classic
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
 
 touch /root/allSetInBackground
 
 export MY_VAR=jan
+export PATH=/root/bin/:$PATH
