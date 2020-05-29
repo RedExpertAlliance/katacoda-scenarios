@@ -11,8 +11,8 @@ export public_ip=$(echo $instance_vnics | jq -r '.data | .[0] | .["public-ip"]')
 
 Let's print the IP address:
 `echo "The IP address is: $public_ip"`{{execute}}
-
-Write that down, open a browser and [go to](http://$public:ip:80) and you will get the html that we used in the config while creating the compute instance.
+ 
+[Click here](http://$public:ip:80) and you will get the html that we used in the config while creating the compute instance.
 
 
 ## Extra step
