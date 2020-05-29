@@ -82,7 +82,8 @@ The key fingerprint is:
 Now let's update the Security List (**Default Security List for vcn-lab**) with the ingress rule that will allow TCP traffic through port 443 to the compute 
 instance that we are about to create.
 
-This Security List is part of the VCN ($VCNID) that you've created in the Preparation Lab Scenario. To update it execute this:
+This Security List is part of the VCN ($VCNID) that you've created in the Preparation Lab Scenario. **Execute the following in case you are using the compute instance
+to provision the reverse proxy for OKE:**
 
 ```
 export securitylist=$(oci network security-list list --compartment-id $COMPARTMENT_OCID --vcn-id $VCNID)
@@ -94,6 +95,20 @@ export INGRESS_RULES_UPDATED=$(echo $ingress_rules | jq -r '.data | .["ingress-s
 echo $INGRESS_RULES_UPDATED
 oci network security-list update --security-list-id $seclistID --ingress-security-rules "$INGRESS_RULES_UPDATED"
 ```{{execute}}
+
+Or, **execute the following if you are using the scenario to provision a compute instance with NGINX:**
+
+```
+export securitylist=$(oci network security-list list --compartment-id $COMPARTMENT_OCID --vcn-id $VCNID)
+export seclistID=$(echo $securitylist | jq -r --arg name "Default Security List for vcn-lab" '.data | map(select(.["display-name"] == $name)) | .[0] | .id')
+oci network security-list get --security-list-id $seclistID > seclist.json
+jq --argjson ingressRule '{"source": "0.0.0.0/0", "protocol": "6", "isStateless": false, "tcpOptions": {"destinationPortRange": {"max": 80, "min": 80}, "sourcePortRange": null}}' '.data."ingress-security-rules" += [$ingressRule]' seclist.json > seclistupdated.json
+export ingress_rules=$(cat seclistupdated.json)
+export INGRESS_RULES_UPDATED=$(echo $ingress_rules | jq -r '.data | .["ingress-security-rules"]')
+echo $INGRESS_RULES_UPDATED
+oci network security-list update --security-list-id $seclistID --ingress-security-rules "$INGRESS_RULES_UPDATED"
+```{{execute}}
+
 
 You will be prompted if you want to continue, choose yes.
 
