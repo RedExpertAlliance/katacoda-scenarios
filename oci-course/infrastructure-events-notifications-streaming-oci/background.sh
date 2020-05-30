@@ -17,6 +17,9 @@ chmod +777 install-oci-cli.sh
 ./install-oci-cli.sh --accept-all-defaults
 
 
+#install Project Fn CLI
+curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
+
 # docker pull stephenpearson/oci-cli:latest
 #docker run --rm --mount type=bind,source=$HOME/.oci,target=/root/.oci  stephenpearson/oci-cli:latest 
 #setup config
@@ -24,5 +27,6 @@ chmod +777 install-oci-cli.sh
 # add this line to ~/.profile
 # oci() { docker run --rm --mount type=bind,source=$HOME/.oci,target=/root/.oci stephenpearson/oci-cli:latest "$@"; }
 
-
 touch /root/allSetInBackground
+
+docker pull fnproject/node:latest
