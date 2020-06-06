@@ -5,8 +5,18 @@
   "courses": [
     {
       "course_id": "introduction-to-oci",
-      "title": "Preview: An introduction to Oracle Cloud Infrastructure core concepts",
+      "title": "An introduction to Oracle Cloud Infrastructure core concepts",
       "description": "First steps on OCI - learn about tenancy, compartments, console, CLI, Object Storage, resource management"
+    },
+    {
+      "course_id": "oci-compute-nginx",
+      "title": "OCI Compute Instance Creation",
+      "description": "Provision an Oracle Compute Instance using OCI CLI"
+    },
+    {
+      "course_id": "infrastructure-events-notifications-streaming-oci",
+      "title": "Responding to OCI Events",
+      "description": "OCI Events are published whenever OCI resources are manipulated. These events can trigger notifications, invoke functions and publish streaming events"
     },
     {
       "course_id": "introduction-fn",
@@ -30,23 +40,13 @@
     },
     {
       "course_id": "monitoring-metrics-alarms-on-oci",
-      "title": "Preview: Monitoring, Metrics, Alarms and Notifications",
+      "title": "Monitoring, Metrics, Alarms and Notifications",
       "description": "On monitoring OCI metrics and creating automated alarms to publish notifications upon relevant situations"
     },
     {
       "course_id": "oci-streaming",
       "title": "OCI (Event) Streaming, combined with Functions and API Gateway",
       "description": "Getting started with OCI Streaming and combining with Functions and API Gateway."
-    },
-    {
-      "course_id": "infrastructure-events-notifications-streaming-oci",
-      "title": "Preview: Responding to OCI Events",
-      "description": "OCI Events are published whenever OCI resources are manipulated. These events can trigger notifications, invoke functions and publish streaming events"
-    },
-    {
-      "course_id": "oci-compute-nginx",
-      "title": "OCI Compute Instance Creation",
-      "description": "Provision an Oracle Compute Instance using OCI CLI"
     },
     {
       "course_id": "oke-redis-cache-and-functions-oci_part1",
@@ -60,12 +60,12 @@
     },
     {
       "course_id": "oci-terraform-provider",
-      "title": "Preview: Introduction to OCI Terraform Provider",
+      "title": "Introduction to OCI Terraform Provider",
       "description": "Infrastructure as Code on Oracle Cloud Infrastructure with Terraform."
     },
     {
       "course_id": "oci-nosql-database",
-      "title": "Preview: Introduction to OCI NoSQL Database",
+      "title": "Introduction to OCI NoSQL Database",
       "description": "Managing data through Relational Model and JSON with Oracle NoSQL."
     },
     {
