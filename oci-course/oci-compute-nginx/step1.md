@@ -77,7 +77,7 @@ The key fingerprint is:
 11:3a:f8:f4:9o:d9:c7:dg:09:3b:e3:3f:c4:3f:44:95
 ~~~~
 
-## Create an Ingress Rule to open port 443 in your VCN
+## Create an Ingress Rule to open port 443/80 in your VCN
 
 Now let's update the Security List (**Default Security List for vcn-lab**) with the ingress rule that will allow TCP traffic through port 443 to the compute 
 instance that we are about to create.
@@ -134,8 +134,14 @@ This is what we added to the Security List:
 ]
 ~~~~
 
-In the Web Console you will see this:
+In the Web Console you will see this, in the case you opened port 80:
+
+![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/ingress_rule_80.jpg)
+
+
+In the Web Console you will see this, in the case you opened port 443 (OKE scenario):
 
 ![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/ingress_rule.jpg)
+
 
 Now you have everything you need to create your compute instance within your lab-compartment. Let's go to the next step.
