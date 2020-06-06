@@ -134,10 +134,14 @@ This is what we added to the Security List:
 ]
 ~~~~
 
-In the Web Console you will see this:
+In the Web Console you will see this, in the case you opened port 80:
+
+![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/ingress_rule_80.jpg)
+
+
+In the Web Console you will see this, in the case you opened port 443 (OKE scenario):
 
 ![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/ingress_rule.jpg)
 
-**NOTE: If you executed the command to open port 80, then in the list you will see 80, instead of 443.**
 
 Now you have everything you need to create your compute instance within your lab-compartment. Let's go to the next step.
