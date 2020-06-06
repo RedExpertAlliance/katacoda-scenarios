@@ -39,13 +39,12 @@ export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"
 export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
 </pre>
 
-Let's see if all values have been set as expected:
+Let's see if all values have been set as expected; execute this command in Cloud Shell:
 
 <pre class="file" data-target="clipboard">
 __config="user=$USER_OCID
 tenancy=$TENANCY_OCID
 region=$REGION
-key_file=/root/.oci/oci_api_key.pem
 "
 echo "$__config"
 </pre>
@@ -84,16 +83,18 @@ echo "$__config"
 </pre>
 
 Select the output from this command in Cloud Shell and copy it to the clipboard (through right mouse menu or using Ctrl-C or Ctrl-Insert in Windows and Cmd-C on Mac OS).
+![](assets/copy-config-file-values.png)
 
 Back in the Katacoda scenario: open file *~/.oci/config* in the text editor, and paste the contents from the clipboard into the file.
 
 ### Private Key File
-In Cloud Shell, execute this command to list the contents of the private key and copy the contents to the clipboard. Note: this is the private key that no one but you should have access to. We only need to show the contents so you can copy it to the clipboard and paste into a file in the Katacoda scenario.
+In Cloud Shell, execute this command to list the contents of the private key and copy the contents to the clipboard. 
 
 <pre class="file" data-target="clipboard">
 cat ~/oci-keys/oci_api_key.pem
 </pre>
 
+Note: this is the private key that no one but you should have access to. We only need to show the contents so you can copy it to the clipboard and paste into a file in the Katacoda scenario.
 ![](assets/copy-private-key.png)
 
 Back in the Katacoda scenario: open file *~/.oci/oci-api-key.pem* in the text editor, and paste the contents from the clipboard into the file.
@@ -110,6 +111,21 @@ Another test - listing all users in your OCI tenancy:
 
 `oci iam user list --all`{{execute}}
 
-Set an environment variable in the Katacoda environment with the Tenancy OCID:
+Set environment variables in the Katacoda environment with the Tenancy OCID, the region name and the region key:
 
-`export TENANCY_OCID=$(oci iam user list --all | jq -r  '.data[0]."compartment-id"')`{{execute}}
+```
+export TENANCY_OCID=$(oci iam user list --all | jq -r  '.data[0]."compartment-id"')
+export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
+export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
+```{{execute}}
+
+Note: the following syntax will be used to use the lowercase value for region:
+`echo ${REGION,,}`{execute}
+
+## Create Local Copies of Files config and oci-api-key.pem
+You will need *config* and *oci-api-key.pem* files in almost every REAL Katacoda OCI scenario. You will be copying and pasting the contents of these files in each scenario. Therefore, now is a good time to prepare copies of these files, locally on your laptop. Note that the Katacoda environment is ephemeral: in less than 50 minutes, it will vanish.
+
+Open file *~/.oci/config* in the text editor, copy the contents and paste it to a local file on your laptop's file system. Make sure you will be able to find this file for the subsequent Katacoda scenarios.
+
+In the same vein, Open file *~/.oci/oci-api-key.pem* in the text editor, copy the contents and paste it to a local file on your laptop's file system. Make sure you will be able to find this file too for the subsequent Katacoda scenarios. Note: do not share this file with anyone: it contains the private key to your tenancy.
+

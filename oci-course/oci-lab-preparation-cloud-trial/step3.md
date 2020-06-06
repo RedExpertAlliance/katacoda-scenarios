@@ -19,15 +19,19 @@ export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.d
 Create tags namespace lab-tags in compartment lab-compartment
 TODO
 
- (Compartment, VCN, API Gateway, Stream)
 
-## Create VCN
+## Create Virtual Cloud Network - aka VCN
 
-Run OCI Networking Quickstart wizard in the context of compartment *lab-compartment*  – to create VCN, subnets, internet gateway, NAT gateway, service gateway.
+Run the OCI Networking Quickstart wizard in the context of compartment *lab-compartment*  – to create VCN, subnets, internet gateway, NAT gateway, service gateway.
 
 Note: this wizard is available in the OCI Console: https://console.us-ashburn-1.oraclecloud.com/networking/vcns 
+![](assets/run-vcn-wizard.png)
+
+Select the default option in th VCN wizard "VCN with Internet Connectivity" and press *Start VCN Wizard*.
+![](assets/stepone-vcn-wizard.png)
 
 Use as the name of the VCN: *vcn-lab*. Accept all examples for CIDR blocks and default settings elsewhere. 
+![](assets/run-vcn-wizard.png)
 
 When the wizard is done, run this statement to retrieve the OCID:
 ```
@@ -42,11 +46,14 @@ export slOCID=$(echo $sls | jq -r '.data | .[0] | .id')
 
 ```{{execute}}
 
-Add network security rule to allow inbound traffic to public subnet on port 443
-(https://technology.amis.nl/2019/12/23/my-first-steps-with-oracle-cloud-api-gateway-the-stock-response/)
+## Define Network Security Rule to allow Inbound Traffic to Port 443 
 
-Open the console for the security list:
-`echo "Open the console at https://console.us-ashburn-1.oraclecloud.com/networking/vcns/$vcnId/security-lists/$slOCID"
+Note: this step is required for the use of the API Gateway. 
+
+Add network security rule to allow inbound traffic to public subnet on port 443. 
+
+Open the OCI Console for the security list:
+`echo "Open the console at https://console.${REGION,,}.oraclecloud.com/networking/vcns/$vcnId/security-lists/$slOCID"
 `{{execute}}
 
 Press *Add Ingress Rule*. Specify source CIDR as 0.0.0.0/0 (anything goes) and set *Source Port Range* to *All*. Set *Destination Port Range* to *443*. Leave the IP protocol at the default of *TCP*. Press *Add Ingress Rule*.
