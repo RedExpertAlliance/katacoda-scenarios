@@ -138,4 +138,6 @@ In the Web Console you will see this:
 
 ![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/ingress_rule.jpg)
 
+**NOTE: If you executed the command to open port 80, then in the list you will see 80, instead of 443.**
+
 Now you have everything you need to create your compute instance within your lab-compartment. Let's go to the next step.
