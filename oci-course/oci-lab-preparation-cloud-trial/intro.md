@@ -12,5 +12,5 @@ During the labs, you will create additional OCI resources, neatly organized in t
 
 It is assumed that you do the handson scenarios as an administrator for the tenancy. This means that you do not need to create a user, groups nor policies.  
 
-![The Lab Environment on OCI](/lucasjellema/scenarios/oci-lab-preparation/assets/oci-lab-environment.jpg)
+![](assets/layout-lab-compartment.png)
 
