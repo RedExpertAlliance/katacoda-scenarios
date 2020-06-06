@@ -77,7 +77,7 @@ The key fingerprint is:
 11:3a:f8:f4:9o:d9:c7:dg:09:3b:e3:3f:c4:3f:44:95
 ~~~~
 
-## Create an Ingress Rule to open port 443 in your VCN
+## Create an Ingress Rule to open port 443/80 in your VCN
 
 Now let's update the Security List (**Default Security List for vcn-lab**) with the ingress rule that will allow TCP traffic through port 443 to the compute 
 instance that we are about to create.
