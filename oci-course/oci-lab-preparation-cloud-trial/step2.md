@@ -125,9 +125,12 @@ export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-k
 Note: the following syntax will be used to use the lowercase value for region:
 `echo ${REGION,,}`{{execute}}
 
-## Authorization Token for OCIR (Container Registry)
+## Auth Token for OCIR (Container Registry)
 
-For working with Functions, you need an authorization token for working with the OCI Container Registry. The next script generates such a token for the tenancy owner (the oldest user in the tenancy). Please record this token for use in the scenarios that work with functions. Note: you can find these tokens in the console as well: https://console.us-ashburn-1.oraclecloud.com/identity/users/<user-ocid>/swift-credentials. 
+For working with Functions, you need an auth token for working with the OCI Container Registry. The next script generates such a token for the tenancy owner (the oldest user in the tenancy). Please record this token for use in the scenarios that work with functions. Note: you can find these tokens in the console as well: https://console.us-ashburn-1.oraclecloud.com/identity/users/<user-ocid>/swift-credentials. 
+![](assets/auth-tokens.png)
+
+Execute this command to generate the Auth Token
 
 ```
 USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."id"')
@@ -135,9 +138,13 @@ authTokenJS=$(oci iam auth-token create --description "Token for logging in into
 echo $authTokenJS
 authToken=$(echo $authTokenJS | jq --raw-output .data.token)
 echo "Token for logging in into Container Registry $authToken"
+NAMESPACE=$(oci os ns get| jq -r  '.data')
 USER_USERNAME=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."name"')
-echo "Username for logging in into Container Registry is <namespace>/$USER_USERNAME"
+echo "Username for logging in into Container Registry is $NAMESPACE/$USER_USERNAME"
 ```{{execute}}
+
+Note: Record the Auth Token and the Username for logging in into the Container Registry for future use.
+
 
 ## Create Local Copies of Files config and oci-api-key.pem
 You will need *config* and *oci-api-key.pem* files in almost every REAL Katacoda OCI scenario. You will be copying and pasting the contents of these files in each scenario. Therefore, now is a good time to prepare copies of these files, locally on your laptop. Note that the Katacoda environment is ephemeral: in less than 50 minutes, it will vanish.

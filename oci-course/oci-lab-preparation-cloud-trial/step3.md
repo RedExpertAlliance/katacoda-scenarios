@@ -40,9 +40,7 @@ oci iam tag-namespace create --compartment-id $compartmentId --name "lab-tags"  
 The Virtual Cloud Network defines the connections within and two resources in the *lab-compartment*. It consists of quite a few moving parts. Fortunately, the OCI Console provides a wizard that creates all these parts for us. Run the OCI Networking Quickstart wizard in the context of compartment *lab-compartment*  – to create VCN, subnets, internet gateway, NAT gateway, service gateway.
 
 Note: this wizard is available in the OCI Console: https://console.us-ashburn-1.oraclecloud.com/networking/vcns ; replace the section *us-ashburn-1* with your tenancy's home region. If you execute the next command, the proper URL is printed in the terminal window *and* the url is clickable in the terminal 
-```
-echo "Open the console at https://console.${REGION,,}.oraclecloud.com/networking/vcns"
-```{execute}
+`echo "Open the console at https://console.${REGION,,}.oraclecloud.com/networking/vcns"`{{execute}}
 
 Make sure that the List Scope element in the lower left hand corner of the OCI Console window is set to *lab-compartment*.
 ![](assets/compartment-scope.png)
