@@ -5,29 +5,27 @@ Access to OCI resources is arranged through common mechanisms: every actor inter
 Policies can grant access on specific resources or on a type of resource - for example buckets or objects. In the latter case, the policy will usually grant a permission in the context of a specific compartment - and all its nested compartments. Some policies are defined to have an effect throughout the tenancy, for example the policy to manage users.  A basic feature of policies is the concept of inheritance: Compartments inherit any policies from their parent compartment. The simplest example is the Administrators group, which automatically comes with an OCI tenancy (see The Administrators Group and Policy). There's a built-in policy that enables the Administrators group to do anything in the tenancy:
 `Allow group Administrators to manage all-resources in tenancy`. 
 
-To check the details for user *lab-user* in the console, click on the person icon in the upper right hand corner. Open the drop down menu and click on *lab-user*. 
+We assume in these scenarios that you are using an administrator account who can do anything.
+
+To check the details for your current user in the console, click on the person icon in the upper right hand corner. Open the drop down menu and click on the top entry (in the screenshot, this is *lab-user*). 
 ![Users, Groups and Policies](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-check-user-details.png)
 You are taken to the page with user details.
 
 ![Users, Groups and Policies](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-lab-user-details.png)
 
-Copy the OCI for user *lab-user* to the clipboard. Back in the Katacoda terminal, execute this command:
+Copy the OCI for user the user to the clipboard. Back in the Katacoda terminal, execute this command:
 `USER_OCID=ocidFromClipboard`{{execute}}
 
 Then you can retrieve the user details with:
-
 `oci iam user get --user-id=$USER_OCID`{{execute}}
 
-The user is member of a group called *lab-participants*. As user *lab-user* you cannot see this - as it is the administrator's turf. The user *lab-user* can perform different types of operations - such as creating buckets and uploading files - because of policies that were set up to grant permissions to group *lab-participants*. Some of these policies are listed here:
+Note: the user's OCID is also in the OCI Configuration file that you configured in step 8 of this scenario. And it can be queried (provided your user is the tenancy owener) using this little snippet that queries the OCI REST APIs through the OCI CLI and used the *jq* JSON query tool to extract the desired pieces of information:
+```
+USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."id"')
+USER_USERNAME=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."name"')
+echo "Username and User OCID are $USER_USERNAME and $USER_OCID"
+```{{execute}} 
 
-```
-Allow group lab-participants to manage compartments in compartment lab-compartment
-Allow group lab-participants to use object-family in compartment lab-compartment
-Allow group lab-participants to manage buckets in compartment lab-compartment
-Allow group lab-participants to manage objects in compartment lab-compartment
-Allow group lab-participants to use tag-namespaces in tenancy
-Allow group lab-participants to read audit-events in compartment lab-compartment
-```
 
 ### Dynamic Group
 

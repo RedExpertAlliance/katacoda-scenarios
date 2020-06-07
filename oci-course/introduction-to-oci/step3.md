@@ -4,7 +4,9 @@ Open the OCI Console - for tenancies subscribed to the Ashburn region, the URL i
 
 https://console.us-ashburn-1.oraclecloud.com/
 
-Login using the console credentials provided by the lab instructor.
+The URL for the console for tenancys with a different home region is composed of: https://console.<region>.oracle.cloud.
+
+Login using the console credentials you defined when provisioning the tenancy.
 
 In the upper right hand corner of the console, you will find the region that we are currently in the context of, as well as our help-lines to Live Chat and the Help menu that has links to create a My Oracle Support ticket and submit a request for increasing limits on cloud resources. The Person icon links to our account settings. Through the *globe* icon, you can change the language of the console. 
 

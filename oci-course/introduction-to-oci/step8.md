@@ -9,7 +9,7 @@ Please proceed now by providing details on the OCI tenancy you are working in an
 * ~/.oci/config - the configuration file for OCI CLI to connect to correct tenancy
 * ~/.oci/oci_api_key.pem - the private key for the OCI user as whom you will connect to the OCI tenancy
 
-Paste the respective snippets of contents provided by the workshop instructor into these two files.
+Paste the respective snippets of contents that you record in the preparation scenario that you went through earlier.
 
 The file *config* should look like this (with your specific environment details filled in):
 ```
@@ -29,12 +29,7 @@ quEsUUF58N2fju7PBcQXxGtrDYr8QuAixOAEZs4d9YKP5WZVfsM=
 -----END RSA PRIVATE KEY-----
 ```
 
-Execute this statement that will install the OCI Command Line Interface into the Katacoda scenario's Ubuntu environment:
-```
-~/install-oci-cli.sh --accept-all-defaults
-```{{execute}}
-
-Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
+The OCI Command Line Interface was installed into the Katacoda scenario's Ubuntu environment when you started the scenario. You can now try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
 
 `oci os ns get`{{execute}} 
 
@@ -66,13 +61,13 @@ The search service that you used in step 6 in the console is also available on t
 
 ### Find Bucket and File
 
-Set the environment variable LAB_ID to the number provided to you by the workshop instructor.
+Set the environment variable LAB_ID to the value 01. 
 
-`export LAB_ID=1`{{execute}}
+`export LAB_ID=01`{{execute}}
 
-(replace the 1 with whatever identifier you have been given and using)
+(note: you can replace the 01 with other values when in a workshop with multiple users in the same cloud tenancy)
 
-To find the bucket *bucket-LAB_ID* that you created earlier on, use this command:
+To find the bucket *bucket-LAB_ID* (or *LAB-01*) that you created earlier on, use this command:
 
 `oci os bucket list --compartment-id=$compartmentId`{{execute}}
 

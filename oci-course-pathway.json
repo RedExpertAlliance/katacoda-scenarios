@@ -20,7 +20,7 @@
     },
     {
       "course_id": "infrastructure-events-notifications-streaming-oci",
-      "title": "Responding to OCI Events",
+      "title": "OCI Cloud Events and Notifications",
       "description": "OCI Events are published whenever OCI resources are manipulated. These events can trigger notifications, invoke functions and publish streaming events"
     },
     {

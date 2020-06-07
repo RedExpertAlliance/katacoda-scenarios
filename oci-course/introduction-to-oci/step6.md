@@ -1,6 +1,6 @@
 It is easy to find resources, using the Search tool in the console. You can search by name, and by several other attributes. Or by user defined tags: any OCI resource can be further labeled using tags. These help with searching and grouping and also with billing, monitoring and security policies. You will create custom tags - and use them in searching. 
 
-Type *innovation* in the search bar at the top of the console. Then press `enter`. The search is performed. The search tool looks at names and tags associated with resources as it performs the search. In this case, the bucket *bucket-LABID* that you created in the previous step with a *department* tag should be found.  
+Type *innovation* in the search bar at the top of the console. Then press `enter`. The search is performed. The search tool looks at names and tags associated with resources as it performs the search. In this case, the bucket *bucket-1* that you created in the previous step with a *department* tag should be found.  
 ![Search](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-intro-search.png)
 
 Click on the search result to be taken to the bucket details page. One of the details shown is the *OCID*, the identifier for the bucket. In the next step, you will learn more about OCIDs. Another element on this page is the button *Add Tags*. When you press this button, a popup page appears that allows you to add tags that further describe and categorize the bucket. 
@@ -25,13 +25,13 @@ Defined tag values are case sensitive. For example, "alpha" and "Alpha" are dist
 
 Click on button *Create Tag Definition*. The tag definition is created in the tag namespace.
 
-Return to the bucket that you created in the previous step: navigate to Core Infrastructure | Object Storage | Object Storage, or use the direct URL for Ashburn: https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets. Drill down to the bucket details page for *bucket-*LAB_ID*. Click on the button *Add Tags*. Now specify using the new defined tag *region* that this bucket is created specifically for region *americas*. 
+Return to the bucket that you created in the previous step: navigate to Core Infrastructure | Object Storage | Object Storage, or use the direct URL for Ashburn: https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets. Drill down to the bucket details page for *bucket-01*. Click on the button *Add Tags*. Now specify using the new defined tag *region* that this bucket is created specifically for region *americas*. 
 
 ![Add Tag to Bucket](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-apply-tag-to-bucket.png)
 
 After clicking *Add Tags*, the tag is added to the bucket. When you no inspect tab *Tags*, you will find three Defined Tags on the bucket and one free format tag. 
 
-You can now search for *americas* and as expected, *bucket-LABID* would be returned. Through the Advanced Search facility, you can construct queries that search specifically for tags, for example:
+You can now search for *americas* and as expected, *bucket-01* would be returned. Through the Advanced Search facility, you can construct queries that search specifically for tags, for example:
 ```
 query
   all resources

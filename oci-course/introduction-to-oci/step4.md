@@ -6,9 +6,9 @@ In the console, navigate to the menu option Governance and Administration | Iden
 
 https://console.us-ashburn-1.oraclecloud.com/identity/compartments  
 
-You will see a flattened list all compartments in the tenancy *that you have access to*. You should at least see the tenancy's root compartment (that has at least two subcompartments) as well as the *lab-compartment* that was prepared for this scenario. Inspect the *lab-compartment* by clicking on it.
+You will see a flattened list of all compartments in the tenancy *that you have access to*. You should at least see the tenancy's root compartment (that has at least two subcompartments) as well as the *lab-compartment* that was prepared for this scenario. Inspect the *lab-compartment* by clicking on it.
 
-Click on *Create Compartment*. Type `lab-LAB_ID` where LAB_ID is the number assigned to you by the instructor. For example: `lab-01`. Type *compartment for personal lab resources* as description. Create the new compartment by clicking on *Create Compartment*.
+Click on *Create Compartment*. Type `lab-01`. Type *compartment for personal lab resources* as description. Create the new compartment by clicking on *Create Compartment*.
 ![After Create Compartment](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-intro-after-create-compartment.png)
 
 You have now created a new compartment, nested under *lab-compartment* that itself is nested under the *root-compartment*. 

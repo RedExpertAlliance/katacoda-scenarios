@@ -14,6 +14,8 @@ Some of the concepts in this scenario:
 * Users, Groups, Dynamic Groups, Policies
 * Audit Trail
 
+Note: in order to successfully negotiate this scenario, you should first have prepared your OCI tenancy as described in [this scenario](https://katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation-cloud-trial) . This preparation ensures that the *lab-compartment* is created and a number of OCI resources required for this and subsequent scenarios are prepared in this compartment.  
+
 # Resource
 
 Oracle Cloud Infrastructure - [Key Concepts and terminology](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/concepts.htm)
