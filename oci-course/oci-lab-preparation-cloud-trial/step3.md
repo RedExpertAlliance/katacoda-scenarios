@@ -75,14 +75,12 @@ Add a network security rule to allow inbound traffic to public subnet on port 44
 
 `oci network security-list update --security-list-id $slOCID --ingress-security-rules file://./network-security-list-ingress-rules.json --force`{{execute}}
 
-Open the OCI Console for the security list:
+If you are curious, you can verify the network security list in the OCI Console:
 `echo "Open the console at https://console.${REGION,,}.oraclecloud.com/networking/vcns/$vcnId/security-lists/$slOCID"
 `{{execute}}
 ![](assets/security-list-overview.png)
 
-Press *Add Ingress Rule*. 
-
-Specify source CIDR as 0.0.0.0/0 (anything goes) and set *Source Port Range* to *All*. Set *Destination Port Range* to *443*. Leave the IP protocol at the default of *TCP*. Press *Add Ingress Rule*.
+and the specific new ingress rule for incoming traffic on port 443:
 ![](assets/define-ingress-rule.png)
 
 ## Create API Gateway

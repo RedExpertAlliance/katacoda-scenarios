@@ -39,6 +39,12 @@
         "file": "network-security-list-ingress-rules.json",
         "target": "~/"
       }
+    ],
+    "host01": [
+      {
+        "file": "network-security-list-ingress-rules.json",
+        "target": "~/"
+      }
     ]
   },
   "environment": {
