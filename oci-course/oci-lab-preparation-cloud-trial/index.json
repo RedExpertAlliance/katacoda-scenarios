@@ -31,29 +31,29 @@
     "finish": {
       "text": "finish.md",
       "courseData": "teardown.sh"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "network-security-list-ingress-rules.json",
+          "target": "/root/"
+        },
+        {
+          "file": "network-security-list-ingress-rules.json",
+          "target": "/root/myfile.md"
+        }
+      ],
+      "client": [
+        {
+          "file": "network-security-list-ingress-rules.json",
+          "target": "/root/"
+        },
+        {
+          "file": "network-security-list-ingress-rules.json",
+          "target": "/root/myfile.md"
+        }
+      ]
     }
-  },
-  "assets": {
-    "host01": [
-      {
-        "file": "network-security-list-ingress-rules.json",
-        "target": "/root/"
-      },
-      {
-        "file": "network-security-list-ingress-rules.json",
-        "target": "/root/myfile.md"
-      }
-    ],
-    "client": [
-      {
-        "file": "network-security-list-ingress-rules.json",
-        "target": "/root/"
-      },
-      {
-        "file": "network-security-list-ingress-rules.json",
-        "target": "/root/myfile.md"
-      }
-    ]
   },
   "environment": {
     "uilayout": "editor-terminal",
