@@ -69,9 +69,7 @@ export slOCID=$(echo $sls | jq -r '.data | .[0] | .id')
 
 ## Define Network Security Rule to allow Inbound Traffic to Port 443 
 
-Note: this step is required for the use of the API Gateway. 
-
-Add a network security rule to allow inbound traffic to public subnet on port 443. 
+Add a network security rule to allow inbound traffic to public subnet on port 443. Note: this step is required for the use of the API Gateway. 
 
 `oci network security-list update --security-list-id $slOCID --ingress-security-rules file://./network-security-list-ingress-rules.json --force`{{execute}}
 

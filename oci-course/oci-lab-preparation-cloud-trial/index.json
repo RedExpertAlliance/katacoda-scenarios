@@ -33,20 +33,10 @@
       "courseData": "teardown.sh"
     },
     "assets": {
-      "host01": [
-        {
-          "file": "network-security-list-ingress-rules.json",
-          "target": "/root/"
-        }
-      ],
       "client": [
         {
           "file": "network-security-list-ingress-rules.json",
           "target": "/root/"
-        },
-        {
-          "file": "network-security-list-ingress-rules.json",
-          "target": "/root/myfile-client.md"
         }
       ]
     }
