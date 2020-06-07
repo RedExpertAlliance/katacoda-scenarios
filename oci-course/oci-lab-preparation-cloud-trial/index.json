@@ -36,11 +36,21 @@
   "assets": {
     "host01": [
       {
-        "file": "assets/network-security-list-ingress-rules.json",
-        "target": "/root"
+        "file": "network-security-list-ingress-rules.json",
+        "target": "/root/"
       },
       {
-        "file": "intro.md",
+        "file": "network-security-list-ingress-rules.json",
+        "target": "/root/myfile.md"
+      }
+    ],
+    "client": [
+      {
+        "file": "network-security-list-ingress-rules.json",
+        "target": "/root/"
+      },
+      {
+        "file": "network-security-list-ingress-rules.json",
         "target": "/root/myfile.md"
       }
     ]
