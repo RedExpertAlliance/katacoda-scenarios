@@ -1,0 +1,60 @@
+[
+    {
+      "description": null,
+      "icmp-options": null,
+      "is-stateless": false,
+      "protocol": "6",
+      "source": "10.0.0.0/16",
+      "source-type": "CIDR_BLOCK",
+      "tcp-options": {
+        "destination-port-range": {
+          "max": 22,
+          "min": 22
+        },
+        "source-port-range": null
+      },
+      "udp-options": null
+    },
+    {
+      "description": null,
+      "icmp-options": {
+        "code": 4,
+        "type": 3
+      },
+      "is-stateless": false,
+      "protocol": "1",
+      "source": "0.0.0.0/0",
+      "source-type": "CIDR_BLOCK",
+      "tcp-options": null,
+      "udp-options": null
+    },
+    {
+      "description": null,
+      "icmp-options": {
+        "code": null,
+        "type": 3
+      },
+      "is-stateless": false,
+      "protocol": "1",
+      "source": "10.0.0.0/16",
+      "source-type": "CIDR_BLOCK",
+      "tcp-options": null,
+      "udp-options": null
+    },
+    {
+      "description": "To allow incoming HTTPS requests to for example the API Gateway",
+      "icmp-options": null,
+      "is-stateless": false,
+      "protocol": "6",
+      "source": "0.0.0.0/0",
+      "source-type": "CIDR_BLOCK",
+      "tcp-options": {
+        "destination-port-range": {
+          "max": 443,
+          "min": 443
+        },
+        "source-port-range": null
+      },
+      "udp-options": null
+    }
+  ]

@@ -33,6 +33,14 @@
       "courseData": "teardown.sh"
     }
   },
+  "assets": {
+    "client": [
+      {
+        "file": "network-security-list-ingress-rules.json",
+        "target": "~/"
+      }
+    ]
+  },
   "environment": {
     "uilayout": "editor-terminal",
     "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
