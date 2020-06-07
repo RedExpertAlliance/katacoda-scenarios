@@ -34,7 +34,7 @@
     }
   },
   "assets": {
-    "client": [
+    "host01": [
       {
         "file": "assets/network-security-list-ingress-rules.json",
         "target": "/root"
