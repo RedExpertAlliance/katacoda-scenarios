@@ -35,6 +35,12 @@ The OCI Command Line Interface was installed into the Katacoda scenario's Ubuntu
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
+Now please set the Region environment variable using this command:
+
+```
+export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
+```{{execute}}
+
 ### Exploring Compartments
 
 To get a list of all compartments in the tenancy (that you can see), use the next command:
@@ -98,6 +104,9 @@ oci os object put --bucket-name="bucket-$LAB_ID" --name $FILENAME --file ./$FILE
 ```{{execute}}
 
 Check in OCI Console that a new file is created in your bucket *bucket-$LAB_ID*: Core Infrastructure | Object Storage | Object Storage or follow this link to the console for the list of buckets: https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets
+
+This command provides you in the terminal with a clickable link for the OCI console in your home region:
+`echo "Open the console at https://console.${REGION,,}.oraclecloud.com/object-storage/buckets"`{{execute}}
 
 Inspect Object Details for the file; verify that the tags were associated with the file.
 ![Uploaded File Details](/RedExpertAlliance/courses/oci-course/introduction-to-oci/assets/oci-uploaded-file-details.png)
