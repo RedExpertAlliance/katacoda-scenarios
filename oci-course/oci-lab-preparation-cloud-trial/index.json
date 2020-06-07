@@ -36,13 +36,13 @@
   "assets": {
     "client": [
       {
-        "file": "network-security-list-ingress-rules.json",
+        "file": "assets/network-security-list-ingress-rules.json",
         "target": "~/"
       }
     ],
     "host01": [
       {
-        "file": "network-security-list-ingress-rules.json",
+        "file": "assets/network-security-list-ingress-rules.json",
         "target": "~/"
       }
     ]
