@@ -1,5 +1,5 @@
 {
-  "title": "Preparation for OCI Workshops",
+  "title": "Preparation for REAL OCI scenarios",
   "description": "Manage OCI LAB environment for Katacoda Scenarios",
   "difficulty": "intermediate",
   "time": "15 minutes",
@@ -18,12 +18,8 @@
         "text": "step3.md"
       },
       {
-        "title": "Step 4 - Create Group and Policies",
+        "title": "Step 4 - Create Policies",
         "text": "step4.md"
-      },
-      {
-        "title": "Step 5 - Prepare lab-user ",
-        "text": "step5.md"
       }
     ],
     "intro": {

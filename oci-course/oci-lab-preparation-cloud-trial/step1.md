@@ -1,4 +1,4 @@
-# Prepare an OCI Tenancy
+# Free Oracle Cloud Trial or existing regular OCI Tenancy 
 
 The Katacoda workshop scenarios on OCI require an OCI environment to be prepared. This environment is set up in an OCI Tenancy. This can be an existing, paid for OCI Tenancy, or a Tenancy created as a Free Trial.
 

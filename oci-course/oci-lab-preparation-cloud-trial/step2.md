@@ -22,7 +22,7 @@ region=HOME REGION OF YOUR TENANCY
 key_file=/root/.oci/oci_api_key.pem
 </pre>
 
-The OCI user that you who use for these scenarios and for creating the setup of the workshop environment needs to be configured in OCI with a (newly generated) key pair; the public key should be added to the user definition (uploaded into the OCI Console or though the OCI CLI). The private key should be kept private (not stored in OCI). You need this private key to make the OCI CLI work with OCI as the intended user (in file oci-api-key.pem). You also need the fingerprint for the user's key.
+This step in the scenario will help you prepare these files and to add the public key half of the key pair you will generate to the OCI user. The private key half is used to make the OCI CLI work with OCI as the user. 
 
 ### Gather Configuration Values in Cloud Shell
 
@@ -50,6 +50,7 @@ region=$REGION
 "
 echo "$__config"
 </pre>
+You should now see values for user, tenancy and region. If not all of these three have a value, please repeat the the previous commands. 
 
 ### Generate Public & Private Key pair in Cloud Shell
 
@@ -122,7 +123,21 @@ export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-k
 ```{{execute}}
 
 Note: the following syntax will be used to use the lowercase value for region:
-`echo ${REGION,,}`{execute}
+`echo ${REGION,,}`{{execute}}
+
+## Authorization Token for OCIR (Container Registry)
+
+For working with Functions, you need an authorization token for working with the OCI Container Registry. The next script generates such a token for the tenancy owner (the oldest user in the tenancy). Please record this token for use in the scenarios that work with functions. Note: you can find these tokens in the console as well: https://console.us-ashburn-1.oraclecloud.com/identity/users/<user-ocid>/swift-credentials. 
+
+```
+USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."id"')
+authTokenJS=$(oci iam auth-token create --description "Token for logging in into Docker/OCIR" --user-id $USER_OCID)
+echo $authTokenJS
+authToken=$(echo $authTokenJS | jq --raw-output .data.token)
+echo "Token for logging in into Container Registry $authToken"
+USER_USERNAME=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."name"')
+echo "Username for logging in into Container Registry is <namespace>/$USER_USERNAME"
+```{{execute}}
 
 ## Create Local Copies of Files config and oci-api-key.pem
 You will need *config* and *oci-api-key.pem* files in almost every REAL Katacoda OCI scenario. You will be copying and pasting the contents of these files in each scenario. Therefore, now is a good time to prepare copies of these files, locally on your laptop. Note that the Katacoda environment is ephemeral: in less than 50 minutes, it will vanish.

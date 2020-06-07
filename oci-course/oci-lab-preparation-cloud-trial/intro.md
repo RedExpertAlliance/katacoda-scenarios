@@ -7,10 +7,11 @@ The fully prepared handson environment will live in a single compartment called 
 * a Stream
 * a Dynamic Group 
 * a VCN with subnets and an Internet Gateway
+* a Tag Namespace
 
 During the labs, you will create additional OCI resources, neatly organized in the *lab-compartment*.
 
 It is assumed that you do the handson scenarios as an administrator for the tenancy. This means that you do not need to create a user, groups nor policies.  
 
-![](assets/layout-lab-compartment.png)
+![](assets/lab-compartment-layout.png)
 

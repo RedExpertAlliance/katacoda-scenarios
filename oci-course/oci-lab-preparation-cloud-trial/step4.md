@@ -1,30 +1,22 @@
-# Create Policies
+# Create Policies to allow access on Lab Compartment 
 
-Create policies to allow services to make use of resources in specific compartments 
+Policies in OCI are used to define permissions - rules about accessing resources or capabilities. In this step, you will create a few policies that allow the Functions service to access repositories and to use the Virtual Cloud Network in the *lab-compartment*. An additional policy is created to provide necessary access privileges to dynamic group *lab-apigw-dynamic-group* (and indirectly to the API Gateway); this access is limited to *lab-compartment* (the functions and virtual network in the compartment)
 
-## Functions (FaaS) Policies
+## Policies to enable the Functions Services 
 
-Prepare some environment variables
+Run this command to create two policies for the Functions service with regard to the Lab Compartments network and the Function Repos in the OCI container registry
 ```
-FN_MANAGE_APP_POLICY=lab-app-management
-FN_GROUP_USE_VCN_POLICY=lab-group-use-network-family
-FN_FAAS_USE_VCN_POLICY=lab-faas-use-network-family
-FN_FAAS_READ_REPOS_POLICY=lab-faas-read-repos
+echo creating policy lab-faas-use-network-family
+oci iam policy create  --name lab-faas-use-network-family --compartment-id $TENANCY_OCID  --statements "[ \"Allow service FaaS to use virtual-network-family in compartment lab-compartment\"]"  --description "Create a Policy to Give the Oracle Functions Service Access to Network Resources"
 
-echo creating policy $FN_FAAS_USE_VCN_POLICY
-oci iam policy create  --name $FN_FAAS_USE_VCN_POLICY --compartment-id $TENANCY_OCID  --statements "[ \"Allow service FaaS to use virtual-network-family in compartment lab-compartment\"]"  --description "Create a Policy to Give the Oracle Functions Service Access to Network Resources"
-
-echo creating policy $FN_FAAS_READ_REPOS_POLICY
-oci iam policy create  --name $FN_FAAS_READ_REPOS_POLICY --compartment-id $TENANCY_OCID  --statements "[ \"Allow service FaaS to read repos in tenancy\"]"  --description "Create a Policy to Give the Oracle Functions Service Access to Repositories in Oracle Cloud Infrastructure Registry"
-
+echo creating policy lab-faas-read-repos
+oci iam policy create  --name lab-faas-read-repos --compartment-id $TENANCY_OCID  --statements "[ \"Allow service FaaS to read repos in tenancy\"]"  --description "Create a Policy to Give the Oracle Functions Service Access to Repositories in Oracle Cloud Infrastructure Registry"
 ```{{execute}}
 
 
-## Policies on API Gateway
+## Policies to enable API Gateway
 
-Policy: to allow lab apigw dynamic group access to lab-compartment
-https://console.us-ashburn-1.oraclecloud.com/a/identity/policies
-dyn-group-gateway-access-lab-compartment
+The next policy provides necessary access privileges to dynamic group *lab-apigw-dynamic-group* (and indirectly to the API Gateway dynamically included in that group). This access is limited to *lab-compartment* (the functions and virtual network in the compartment).
 
 ```
 oci iam policy create  --name "dyn-group-gateway-access-lab-compartment" --compartment-id $compartmentId  --statements "[ \"allow dynamic-group lab-apigw-dynamic-group to use virtual-network-family in compartment lab-compartment\",\"allow dynamic-group lab-apigw-dynamic-group to manage public-ips in compartment lab-compartment\",\"allow dynamic-group lab-apigw-dynamic-group to use functions-family in compartment lab-compartment\"]" --description "to allow lab apigw dynamic group access to lab-compartment"
