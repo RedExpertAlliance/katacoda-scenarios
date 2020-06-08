@@ -1,0 +1,51 @@
+{
+  "title": "Preparation for REAL OCI scenarios",
+  "description": "Manage OCI LAB environment for Katacoda Scenarios",
+  "difficulty": "intermediate",
+  "time": "15 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Get hold of an OCI Tenancy",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2 - Key Pair/Config FIles",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - Create OCI Resources (Compartment, VCN, API Gateway, Stream)",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4 - Create Policies",
+        "text": "step4.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "",
+      "courseData": "background.sh",
+      "code": "foreground.sh"
+        },
+    "finish": {
+      "text": "finish.md",
+      "courseData": "teardown.sh"
+    },
+    "assets": {
+      "client": [
+        {
+          "file": "network-security-list-ingress-rules.json",
+          "target": "/root/"
+        }
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "editor-terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "ubuntu1904"
+  }
+}
