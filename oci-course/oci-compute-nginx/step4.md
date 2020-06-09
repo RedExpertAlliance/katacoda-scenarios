@@ -12,7 +12,9 @@ export public_ip=$(echo $instance_vnics | jq -r '.data | .[0] | .["public-ip"]')
 Let's print the IP address:
 `echo "The IP address is: $public_ip"`{{execute}}
  
-Open a browser and go to: http://$public:ip:80 and you will get the html that we used in the config while creating the compute instance.
+To validate the NGINX installation, please execute this:
+`echo "http://${public_ip}:80"`{{execute}}
+
 ** It may take two minutes to respond. Please wait**
 
 
