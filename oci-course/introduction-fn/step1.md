@@ -27,7 +27,7 @@ Set context to *default* - this is a local context that uses the locally running
 
 Before we start using Fn, we need to configure Fn to point to an appropriate Docker registry so it knows where to push your function images to. Normally Fn points to your Docker Hub account by specifying your Docker Hub username. However, for pure local development we can simply configure Fn with an arbitrary value
 
-So now update the registry setting for the default content to something meaningless.
+So now update the registry setting for the default context to something meaningless.
 
 `fn update context registry something-meaningless`{{execute}}
 
