@@ -22,7 +22,7 @@ Allow group lab-participants to use tag-namespaces in tenancy
 ## OCI Events
 allow group lab-participants to manage cloudevents-rules in tenancy
 
-## NOtifications
+## Notifications
 Allow group lab-participants to manage ons-topics in tenancy
 Allow group lab-participants to manage ons-subscriptions in tenancy
 
