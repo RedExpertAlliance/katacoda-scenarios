@@ -32,9 +32,11 @@ You could open func.js in the text editor to see the generated functionality of 
 
 ## Deploy and Invoke the Function
 
-Create an Fn application - a container for multiple related functions:  
+Create an Fn application - a container for multiple related functions. 
 
 `fn create app hello-app`{{execute}}
+
+An application acts as a namespace for functions. Some management actions are performed on applications. The number of applications allowed in an OCI tenancy is limited to 10; this number can (potentially) be increased.  
 
 Deploy the Function Hello locally, into the app that was just created
 
@@ -44,7 +46,7 @@ When you deploy a function like this, Fn is dynamically generating a Dockerfile 
 
 Note: Fn is actually using two images. The first contains the necessary build tools and produces the runtime artefact. The second image packages all dependencies and any necessary language runtime components. Using this strategy, the final function image size can be kept as small as possible.
 
-When using fn deploy --local, fn server builds and packages your function into a container image which resides on your local machine. You can now verify that a Docker Container Image has been built for Fn Function Hello:
+When using `fn deploy --local`, fn server builds and packages your function into a container image which resides on your local machine. You can now verify that a Docker Container Image has been built for Fn Function Hello:
 
 `docker images | grep hello`{{execute}}
 

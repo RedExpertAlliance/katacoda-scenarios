@@ -24,6 +24,10 @@
         "text": "step4.md",
         "courseData": "step4-background.sh",
         "code": "step4-foreground.sh"
+      },
+      {
+        "title": "Step 5 - Bonus: Custom Docker Images as Function Implementation",
+        "text": "step5.md"
       }
     ],
     "intro": {

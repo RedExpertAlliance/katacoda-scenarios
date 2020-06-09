@@ -47,7 +47,15 @@ To send input to the function, use the following command:
 Again, a friendly, this time personalized, welcome message should be your reward.
 
 ## Further Explorations
-To try out other languages, simply replace *java* as runtime with *go* or *python*.
+To try out other languages, simply replace *java* as runtime with *go* or *python* in the call to `fn init`. For example:
+```
+cd ~
+
+fn init --runtime go hello-go
+```{{execute}}
+
+### Custom Docker Containers as Function implementation
+It is possible to take any Docker Container and use it as the implementation of a function. In that case the runtime is *docker*. The next step in this scenario demonstrates this compelling feature of Fn.
 
 ### GraalVM
 

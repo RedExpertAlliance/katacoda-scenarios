@@ -10,16 +10,31 @@ In addition to using the Fn invoke command, we can call a function by using a UR
 
 Get the value from the annotation `fnproject.io/fn/invokeEndpoint` in the result of this inspect command. 
 
-You can invoke the function using *curl* at this endpoint. Please set an environment variable HELLO_FUNCTION_ENDPOINT with the value from the endpoint.  
+You can invoke the function using *curl* at this endpoint. Set an environment variable HELLO_FUNCTION_ENDPOINT with the value of the endpoint.  
 
-`export HELLO_FUNCTION_ENDPOINT=<the invokeEndpoint>`{{execute}}
-
-For example: `export HELLO_FUNCTION_ENDPOINT=http://localhost:8080/invoke/01DY4P5ZSFNG9000GZJ0000002`.
+`HELLO_FUNCTION_ENDPOINT=$(fn inspect f hello-app hello | jq -r '.annotations."fnproject.io/fn/invokeEndpoint"')`
 
 Now with the variable set you should be able to invoke the function using curl:
 
 `curl -X "POST" -H "Content-Type: application/json" -d '{"name":"Bob"}' $HELLO_FUNCTION_ENDPOINT`{{execute}}
 
+## Trigger Function Execution (through HTTP)
+
+If we would add a trigger of type *http* to the func.yaml for function hello, we can trigger the execution of a function even more directly.
+
+Open the file `func.yaml` and this snippet at the end of the file:
+<pre class="file" data-target="clipboard">
+triggers:
+- name: hello
+  type: http
+  source: /hello 
+</pre>
+
+Deploy the Function Hello locally, into the app that was just created
+`fn -v deploy --app hello-app --local `{{execute}}
+
+Now to invoke the function:
+`curl --data '{"name":"Bob"}' -H "Content-Type: text/plain" -X POST http://localhost:8080/t/hello-app/hello`{{execute}}
 
 ## Context available to a Function when processing a Request.
 
@@ -56,7 +71,7 @@ Or using CURL.
 
 `curl -X "POST" -H "Content-Type: application/json" -H "my-special-header: my-value" -d '{"name":"Johanna"}' $HELLO_FUNCTION_ENDPOINT`{{execute}}
 
-The custom header should now be visible in the response from the function because it is visible in the context sent to the function by Fn.
+The custom HTTP header in this CURL call should now be visible in the response from the function because it is visible in the context sent to the function by Fn.
 
 By inspecting the *ctx* input parameter, you can make your function interpret the request in a more encompassing way than by only inspecting the input parameter. 
 
