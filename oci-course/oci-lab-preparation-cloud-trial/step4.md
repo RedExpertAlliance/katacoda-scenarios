@@ -2,7 +2,7 @@
 
 Policies in OCI are used to define permissions - rules about accessing resources or capabilities. In this step, you will create a few policies that allow the Functions service to access repositories and to use the Virtual Cloud Network in the *lab-compartment*. An additional policy is created to provide necessary access privileges to dynamic group *lab-apigw-dynamic-group* (and indirectly to the API Gateway); this access is limited to *lab-compartment* (the functions and virtual network in the compartment)
 
-## Policies to enable the Functions Services 
+## Policies to enable the Functions Services. Policies to manage OKE, Events, Notifications & Compute Instances 
 
 Run this command to create two policies for the Functions service with regard to the Lab Compartments network and the Function Repos in the OCI container registry
 ```
@@ -23,7 +23,7 @@ oci iam policy create  --name "dyn-group-gateway-access-lab-compartment" --compa
 ```{{execute}}
 
 
-### Policies to manage Compute Instances 
+## Policies to manage Compute Instances 
 
 Run this command to create two policies for managing Compute Instances
 ```
