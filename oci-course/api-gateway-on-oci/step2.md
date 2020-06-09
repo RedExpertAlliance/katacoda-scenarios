@@ -4,11 +4,6 @@ Let's find out about the API Gateway *lab-apigw* that we will be using in this s
 
 `oci api-gateway gateway get --gateway-id $apiGatewayId`{{execute}}
 
-Alternatively, you could inspect the gateway in the OCI Console:
-
-```echo "Your OCI Console Endpoint to inspect API Gateway lab-apigw : https://console.us-ashburn-1.oraclecloud.com/api-gateway/gateways/$apiGatewayId"```{{execute}}
-
-
 There should not be an API Deployment called MY_API_DEPL_$LAB_ID at this stage - because you will be creating that one. Let's list all gateway deployments in the API Gateway:
 
 `oci api-gateway deployment list -c $compartmentId  --gateway-id $apiGatewayId`{{execute}}
@@ -25,7 +20,7 @@ Exit vi using <kbd>Esc</kbd><kbd>:q</kbd>.
 
 Create your own API Deployment - with a single route, to a stock response (a route with a static response object).
 
-Create a file called api_deployment.json in the current directory with this contents. Note: replace $funId with the actual OCID for the function.
+Create a file called api_deployment.json in the current directory with this contents. 
 
 `touch api_deployment.json`{{execute}}
 
@@ -68,25 +63,38 @@ curl $deploymentEndpoint/stock
 
 Open the URL shown in the terminal window after executing the next command in a browser:
 `echo "Open this URL in your browser or in Postman: $deploymentEndpoint/stock"`{{execute}}
+![](assets/stock-api-postman.png)
 
 ## API Gateway in the OCI Console - Metrics and Logging
 
 Now is a good time to check out the API Deployment on the API Gateway in the OCI Console. The endpoint you can copy and paste into your browser is shown in the terminal window when you execute the next command:
 
-```echo "Your OCI Console Endpoint to inspect your API Deployment: https://console.us-ashburn-1.oraclecloud.com/api-gateway/gateways/$apiGatewayId/deployments/$apiDeploymentId"```{{execute}}
+```echo "Your OCI Console Endpoint to inspect your API Deployment: https://console.$REGION.oraclecloud.com/api-gateway/gateways/$apiGatewayId/deployments/$apiDeploymentId"```{{execute}}
 
-Open the OCI Console in your browser. Login with username *lab-user* and the password provided by the workshop instructor.
-
-The console page opened in the browser shows the metrics for the API Deployment. Each call to a route in the API Deployment is recorded, including timestamp, latency and bytes transferred in and out.
+Open the OCI Console in your browser. The console page when opened in the browser shows the metrics for the API Deployment. Each call to a route in the API Deployment is recorded, including timestamp, latency and bytes transferred in and out.
+![](assets/stock-api-console.png)
 
 Click on the Edit button to bring up the definition of the API Deployment. On the bottom of the first step - *Basic Information* - is a section where API Logging Policies can be configured:
 * Enable Access Log setting
 * Enable Execution Log setting
 * Set Log Level to Information
+![](assets/api-deployment-logsettings.png)
 
 Press Next - to inspect the Routes. Press Next to see an overview of the entire API deployment definition. Press *Save Changes*. It will take about 10 seconds for the API Deployment to absorb the changes.
 
-Each call from now on is recorded in a log file. The log files are written once every 15 minutes to Object Storage. So after about 15 minutes, a new bucket is created on object storage. Check this URL: [https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets] for a new bucket. In that bucket, you will find two objects: the access log file and the execution log file. 
+Each call from now on is recorded in a log file. The log files are written once every 15 minutes to Object Storage. So after about 15 minutes, a new bucket is created on object storage. Make a few more calls to the Stock API.
+
+```
+curl $deploymentEndpoint/stock
+```{{execute}}
+
+Check this URL: [https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets] for a new bucket. In that bucket, you will find two objects: the access log file and the execution log file. 
+
+```echo "Your OCI Console Endpoint to inspect the Object Storage buckets: https://console.$REGION.oraclecloud.com/object-storage/buckets"```{{execute}}
+![](assets/storage-buckets.png)
+When the bucket is created, at least one log file should appear in the bucket, with details about the requests handled by the API Gateway.
+![](assets/log-file-details.png) 
+
 
 ## Resources
 

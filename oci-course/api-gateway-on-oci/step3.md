@@ -1,12 +1,14 @@
-# Adding a Route in an API Deployment to am HTTP Backend
+# Adding Multiple Routes in an API Deployment to an HTTP Backend
 
-In this step, we will add a route to the API Deployment. This route will expose an HTTP_BACKEND. AN HTTP_BACKEND can be any HTTP endpoint, both within OCI or outside of it. API Gateway is in this case a simple router or reverse proxy.
+In this step, we will add several routes to the API Deployment. These routes will expose HTTP_BACKENDs. AN HTTP_BACKEND can be any HTTP endpoint, both within OCI or outside of it. API Gateway is in this case a simple *router* or *reverse proxy*.
+
+Create the JSON file that will contain the definition of the API Deployment:
 
 `touch api_deployment_2.json`{{execute}}
 
 Open file api_deployment_2.json in the text editor.
 
-Copy the definitions of the routes */stock*, */search* and */countries* to the api_deployment_2.json file. You can open the file to check whether the change is applied correctly. Notice the second and third route, with path set to */search*. These routes are of type HTTP_BACKEND: it can route requests to a specific HTTP(S) endpoint, similar to what NGINX for exampe can do. 
+Copy the definitions of the routes */stock*, */search* and */countries* to the api_deployment_2.json file. Notice the second and third route, with path set to */search*. These routes are of type HTTP_BACKEND: it can route requests to a specific HTTP(S) endpoint, similar to what NGINX for example can do. 
 
 <pre class="file" data-filename="api_deployment_2.json" data-target="append">
 {
@@ -50,9 +52,9 @@ Confirm - when prompted in the terminal - that you want to update, overwriting t
 
 It will take a few seconds (up to 15 seconds) for the API Gateway to synchronize its definition with the new specification. When the API Gateway deployment is updated, you can start using the new routes. 
 
-You can check on the state of the API Deployment and the current update (called a *workrequest*) in the OCI Console. Execute this command to get the URL to the Console:
+You can check the state of the API Deployment and the current update (called a *workrequest*) in the OCI Console. Execute this command to get the URL to the Console:
 
-```echo "Your OCI Console Endpoint to inspect your API Deployment's current state: https://console.us-ashburn-1.oraclecloud.com/api-gateway/gateways/$apiGatewayId/deployments/$apiDeploymentId/workrequests"```{{execute}}
+```echo "Your OCI Console Endpoint to inspect your API Deployment's current state: https://console.$REGION.oraclecloud.com/api-gateway/gateways/$apiGatewayId/deployments/$apiDeploymentId/workrequests"```{{execute}}
 
 
 ## Invoke the new routes on the API Deployment
