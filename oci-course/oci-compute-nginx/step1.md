@@ -60,6 +60,7 @@ echo "AVAILABILITY DOMAIN to be used: $AVAILABILITY_DOM"
 
 `echo "My region is: $REGION`{{execute}}
 
+
 ## Create Public and Private Key
 
 For generating the public and private key that will be used to ssh to the compute instance, execute (remember to use ***/root/keys/lab***):
