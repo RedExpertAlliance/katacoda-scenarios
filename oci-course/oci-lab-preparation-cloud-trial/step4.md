@@ -23,7 +23,7 @@ oci iam policy create  --name "dyn-group-gateway-access-lab-compartment" --compa
 ```{{execute}}
 
 
-## Policies to manage Compute Instances 
+### Policies to manage Compute Instances 
 
 Run this command to create two policies for managing Compute Instances
 ```
