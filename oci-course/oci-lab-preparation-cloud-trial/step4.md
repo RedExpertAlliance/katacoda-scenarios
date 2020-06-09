@@ -23,3 +23,58 @@ oci iam policy create  --name "dyn-group-gateway-access-lab-compartment" --compa
 ```{{execute}}
 
 
+## Policies to manage Compute Instances 
+
+Run this command to create two policies for managing Compute Instances
+```
+echo creating policy lab-faas-use-network-family
+oci iam policy create  --name lab-compute-manage-instance-family --compartment-id $TENANCY_OCID  --statements "[ \"Allow group lab-participants to manage instance-family in compartment lab-compartment\"]"  --description "Create a Policy to manage instances"
+
+echo creating policy lab-faas-read-repos
+oci iam policy create  --name lab-compute-manage-virtual-network-family --compartment-id $TENANCY_OCID  --statements "[ \"Allow group lab-participants to manage virtual-network-family in compartment lab-compartment\"]"  --description "Create a Policy to manage virtual network family"
+```{{execute}}
+
+
+## Policies to manage OKE 
+
+Run this command to create a policy for managing OKE
+```
+echo creating policy lab-oke-manage-cluster-family
+oci iam policy create  --name lab-compute-manage-instance-family --compartment-id $TENANCY_OCID  --statements "[ \"Allow group lab-participants to manage cluster-family in compartment lab-compartment\"]"  --description "Create a Policy to manage cluster family"
+```{{execute}}
+
+
+## Policies to manage Events and Notifications
+
+Run this command to create a set of policies for managing ons-topics, cloudevents, streaming
+```
+echo creating policy lab-manage-ons-topics
+oci iam policy create  --name lab-manage-ons-topics --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to manage ons-topics in compartment lab-compartment\"]"  --description "Create a Policy to manage ons-topics"
+
+echo creating policy lab-inspect-compartments
+oci iam policy create  --name lab-inspect-compartments --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to inspect compartments in compartment lab-compartment\"]"  --description "Create a Policy to inspect compartments"
+
+echo creating policy lab-use-tag-namespaces
+oci iam policy create  --name lab-use-tag-namespaces --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to use tag-namespaces in compartment lab-compartment\"]"  --description "Create a Policy to use tag-namespaces"
+
+echo creating policy lab-inspect-streams
+oci iam policy create  --name lab-inspect-streams --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to inspect streams in compartment lab-compartment\"]"  --description "Create a Policy to inspect streams"
+
+echo creating policy lab-use-stream-push
+oci iam policy create  --name lab-use-stream-push --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to use stream-push in compartment lab-compartment\"]"  --description "Create a Policy to use stream-push"
+
+echo creating policy lab-use-stream-pull
+oci iam policy create  --name lab-use-stream-pull --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to use stream-pull in compartment lab-compartment\"]"  --description "Create a Policy to use stream-pull"
+
+echo creating policy lab-use-virtual-network-family
+oci iam policy create  --name lab-use-virtual-network-family --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to use virtual-network-family in compartment lab-compartment\"]"  --description "Create a Policy to use virtual-network-family"
+
+echo creating policy lab-manage-functions
+oci iam policy create  --name lab-manage-functions --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to manage function-family in compartment lab-compartment\"]"  --description "Create a Policy to manage function-family"
+
+echo creating policy lab-use-ons-topic
+oci iam policy create  --name lab-use-ons-topic --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to use ons-topic in compartment lab-compartment\"]"  --description "Create a Policy to use ons-topic"
+
+echo creating policy lab-manage-cloudevents
+oci iam policy create  --name lab-manage-cloudevents --compartment-id $TENANCY_OCID  --statements "[ \"allow group lab-participants to manage cloudevents-rules in compartment lab-compartment\"]"  --description "Create a Policy to manage cloudevents-rules"
+```{{execute}}
