@@ -44,14 +44,14 @@
       "description": "Next steps with Serverless Functions on OCI, Object Storage and API Gateway."
     },
     {
-      "course_id": "monitoring-metrics-alarms-on-oci",
-      "title": "Monitoring, Metrics, Alarms and Notifications",
-      "description": "On monitoring OCI metrics and creating automated alarms to publish notifications upon relevant situations"
-    },
-    {
       "course_id": "oci-streaming",
       "title": "OCI (Event) Streaming, combined with Functions and API Gateway",
       "description": "Getting started with OCI Streaming and combining with Functions and API Gateway."
+    },
+    {
+      "course_id": "oci-nosql-database",
+      "title": "Introduction to OCI NoSQL Database",
+      "description": "Managing data through Relational Model and JSON with Oracle NoSQL."
     },
     {
       "course_id": "oke-redis-cache-and-functions-oci_part1",
@@ -64,14 +64,14 @@
       "description": "Work with OKE, the OCI managed Kubernetes service."
     },
     {
+      "course_id": "monitoring-metrics-alarms-on-oci",
+      "title": "Monitoring, Metrics, Alarms and Notifications",
+      "description": "On monitoring OCI metrics and creating automated alarms to publish notifications upon relevant situations"
+    },
+    {
       "course_id": "oci-terraform-provider",
       "title": "Introduction to OCI Terraform Provider",
       "description": "Infrastructure as Code on Oracle Cloud Infrastructure with Terraform."
-    },
-    {
-      "course_id": "oci-nosql-database",
-      "title": "Introduction to OCI NoSQL Database",
-      "description": "Managing data through Relational Model and JSON with Oracle NoSQL."
     },
     {
       "course_id": "oci-lab-preparation",

@@ -8,6 +8,8 @@ OCI has a consistent user experience throughout all services - in the Console, t
 
 In this scenario, you will be introduced to a number of generic concepts and cross cutting facilities in Oracle Cloud Infrastructure. You will not yet be using specific services - this is done in later scenarios. You will lay a foundation on which to later build on.
 
+Note: in order to successfully negotiate this scenario, you should first have prepared your OCI tenancy as described in [this scenario](https://katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation-cloud-trial).  
+
 ## Resources
 [Brief introduction of all OCI Services](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/baremetalintro.htm#one)
 
