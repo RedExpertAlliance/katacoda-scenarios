@@ -26,7 +26,7 @@ and change into the directory:
 `cd revfunc`{{execute}}
 
 In the folder , create a func.yaml file 
-`touch func.yaml`
+`touch func.yaml`{{execute}}
 
 Open this file in the text editor and copy/paste the following as its content:
 <pre class="file" data-target="clipboard">
