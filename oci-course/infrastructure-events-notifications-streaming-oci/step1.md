@@ -35,6 +35,12 @@ export REGION=us-ashburn-1
 export MY_BUCKET=$(echo myBucket$LAB_ID)
 ```{{execute}}
 
+**If you are not using ASHBURN as your region, please change the value of the following variable:**
+
+`export REGION=us-ashburn-1`{{execute}}
+
+`echo "My region is: $REGION"`{{execute}}
+
 The following variables will be set using the information contained in the OCI config file ($HOME/.oci/config)
 ```
 export TENANT_OCID=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
