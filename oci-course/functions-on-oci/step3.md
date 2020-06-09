@@ -8,12 +8,12 @@ Execute this next script to learn the URL Endpoint to Invoke the Function and to
 
 ```
 funsJ=$(fn inspect f  "lab$LAB_ID" "hello$LAB_ID")
-funInvokeEndpoint=$(echo $funsJ | jq '."annotations"."fnproject.io/fn/invokeEndpoint"')
+funInvokeEndpoint=$(echo $funsJ | jq '."annotations"."fnproject.io/fn/invokeEndpoint"[8:]')
 funId=$(echo $funsJ | jq --raw-output .id)
 appId=$(echo $funsJ | jq --raw-output .app_id)
 
 echo "Function Invoke Endpoint $funInvokeEndpoint"
-echo "OCI Functions Console URL for Application lab$LAB_ID: https://console.us-ashburn-1.oraclecloud.com/functions/apps/$appId/fns"
+echo "OCI Functions Console URL for Application lab$LAB_ID: https://console.${REGION,,}.oraclecloud.com/functions/apps/$appId/fns"
 ```{{execute}}
 
 Open the OCI Console in your browser using the URL shown in the terminal window. 
@@ -27,7 +27,9 @@ See [OCI CLI Command Reference for Functions](https://docs.cloud.oracle.com/iaas
 
 List all functions in application:
 
-`oci fn application list --compartment-id $compartmentId`{{execute}}
+`oci fn function list --application-id $appId`{{execute}}
+
+echo ${funInvokeEndpoint:7:}
 
 Invoke function hello through the OCI CLI:
 

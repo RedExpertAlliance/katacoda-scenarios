@@ -20,12 +20,11 @@
         "text": "step3.md"
       },
       {
-        "title": "Step 4 - Invoke Functions using Postman",
-        "text": "step4.md",
-        "courseData": "step4-background.sh"
+        "title": "Step 4 - Configuring Functions",
+        "text": "step4.md"
       },
       {
-        "title": "Step 5 - Configuring Functions",
+        "title": "Step 5 - Bonus: Invoke Functions using Postman",
         "text": "step5.md"
       }
     ],

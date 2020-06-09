@@ -26,7 +26,7 @@
     {
       "course_id": "introduction-fn",
       "title": "An introduction to Project Fn",
-      "description": "Create, deploy and run serverless functions using Project Fn, in JavaScript, Java, Python and more."
+      "description": "Create, deploy and run serverless functions using Project Fn, in JavaScript, Java, Python and more. No Cloud environment needed."
     },
     {
       "course_id": "functions-on-oci",
