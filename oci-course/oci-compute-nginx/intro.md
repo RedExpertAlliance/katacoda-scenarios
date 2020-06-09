@@ -1,6 +1,6 @@
 In this scenario you will create a compute instance using the OCI CLI. This compute instance will host an NGINX web server. The compute instance will live
 in the compartment that we are using in all our scenarios: lab-compartment.
-The compute instance will live in ASHBURN-AD-1 availability domain and will use a VM with shape VM.Standard2.1.
+The compute instance will live in the region you decide it, and will use a VM with shape VM.Standard2.1.
 
 This scenario will help you to understand:
 

@@ -20,7 +20,8 @@ Try out the following command to get a list of all namespaces you currently have
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
 Note: the assumptions here is a compartment called *lab-compartment*. In that compartment we will create our
-compute instance and we will use **ASHBURN-AD-1** as our availability domain. We will use shape **VM.Standard2** for our compute instance. 
+compute instance and we will use **ASHBURN-AD-1** (you can use your own region, just set the value in variable **REGION**) just as our availability domain. 
+We will use shape **VM.Standard2** for our compute instance. 
 If you are interested on which other shapes exist, please 
 take a look at [here](https://docs.cloud.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm "VM Shapes").
 
@@ -53,6 +54,12 @@ echo "Namespace: $NAMESPACE"
 echo "SUBNETID: $SUBNETID"
 echo "AVAILABILITY DOMAIN to be used: $AVAILABILITY_DOM"
 ```{{execute}}
+
+**To set your own region, change the value for the following variable:**
+`export REGION=us-ashburn-1`{{execute}}
+
+`echo "My region is: $REGION"`{{execute}}
+
 
 ## Create Public and Private Key
 
