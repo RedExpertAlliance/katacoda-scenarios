@@ -26,11 +26,11 @@
         "code": "step4-foreground.sh"
       },
       {
-        "title": "Step 5 - Bonus: Custom Docker Images as Function Implementation",
+        "title": "Step 5 - Bonus: Ahead of Time Function Compilation with GraalVM",
         "text": "step5.md"
       },
       {
-        "title": "Step 6 - Bonus: Ahead of Time Function Compilation with GraalVM",
+        "title": "Step 6 - Bonus: Custom Docker Images as Function Implementation",
         "text": "step6.md"
       }
     ],

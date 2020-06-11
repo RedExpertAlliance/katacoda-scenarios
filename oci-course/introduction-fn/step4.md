@@ -61,4 +61,4 @@ It is possible to take any Docker Container and use it as the implementation of 
 
 ### GraalVM
 
- Project Fn also supports binary executables with GraalVM; there is a special runtime available that takes a Java application and builds it all the way into a container image with just a binary executable. This results in an even smaller image and even faster function warmup and execution. Read this article for details: [https://medium.com/fnproject/serverless-functions-some-like-it-aot-ea8b46951335](https://medium.com/fnproject/serverless-functions-some-like-it-aot-ea8b46951335)
+ Project Fn also supports binary executables with GraalVM; there is a special runtime available that takes a Java application and builds it all the way into a container image with just a binary executable. This results in an even smaller image and even faster function warmup and execution. In step 5 of this scenario, you can check out this approach to packaging Java applications.

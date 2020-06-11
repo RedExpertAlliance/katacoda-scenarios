@@ -12,7 +12,7 @@ Get the value from the annotation `fnproject.io/fn/invokeEndpoint` in the result
 
 You can invoke the function using *curl* at this endpoint. Set an environment variable HELLO_FUNCTION_ENDPOINT with the value of the endpoint.  
 
-`HELLO_FUNCTION_ENDPOINT=$(fn inspect f hello-app hello | jq -r '.annotations."fnproject.io/fn/invokeEndpoint"')`
+`HELLO_FUNCTION_ENDPOINT=$(fn inspect f hello-app hello | jq -r '.annotations."fnproject.io/fn/invokeEndpoint"')`{{execute}}
 
 Now with the variable set you should be able to invoke the function using curl:
 

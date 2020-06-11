@@ -1,77 +1,101 @@
-# Bonus: Ahead of Time Function Compilation with GraalVM
+# Bonus: Custom Docker Images as Function Implementation
 
-Note: this step is based very heavily on this article on Medium [Serverless Functions — Some Like It AOT!](https://medium.com/fnproject/serverless-functions-some-like-it-aot-ea8b46951335)
+Note: this step is based very heavily on this tutorial on the Fn Project Website [Make your own Linux command Function with HotWrap and a Customer Docker Image](https://fnproject.io/tutorials/docker/CustomLinuxContainer/)
 
-This tutorial walks through how to perform Ahead of Time compilation on an Fn function implemented with Java- to produce a function container image that is very small and has very rapid startup time.
+This tutorial walks through how to use a custom Docker image to define an Fn function. Although Fn functions are packaged as Docker images, when developing functions using the Fn CLI developers are not directly exposed to the underlying Docker platform. Docker isn’t hidden (you can see Docker build output and image names and tags), but you aren’t required to be very Docker-savvy to develop functions with Fn.
 
-## GraalVM
+What if you want to make a function using Linux command line tools, or a script that does not involve one of the supported Fn languages? Can you use your Docker image as a function? Fortunately the design and implementation of Fn enables you to do exactly that. Let’s build a simple custom function container image to see how it’s done.
 
-GraalVM is an open source high-performance embeddable polyglot virtual machine that recently sparked a lot of interests in the Java community as it supports Java and other JVM languages such as Groovy, Kotlin, Scala, etc. In addition, GraalVM also supports JavaScript (including the ability to run Node.js applications), Ruby, R, Python and even native languages that have an LLVM backend such as C or C++. GraalVM is incredibly powerful and versatile, it can help in many ways from boosting the performance of Java applications to enabling polyglot applications development that combine different languages in order to to get the best tools and features from different ecosystems. For example, using GraalVM, it is possible to use R for data visualization, Python for machine learning and JavaScript to combine those two functionalities together.
+The *Fn HotWrap* tool allows you to create functions using conventional Unix command line tools and a Docker container. The tool provides the FDK contract for any command that can be run on the command line. Once wrapped, event data is passed to your function via STDIN and the output is returned through STDOUT.
 
-This step will focus on a specific GraalVM capability, i.e. GraalVM Ahead-of-time Compilation (AOT) and more specifically on GraalVM native-image feature with Java functions.
+## Initial Linux Command
 
-## Create a Native Java Function 
+Try out this command - that simply reverses text.
+`echo "Hello World" | rev`{{execute}}
 
-Return to the home directory. Bootstrap a GraalVM based Java function called *hello-java-aot* with Java Native (aka GraalVM Ahead of Time compilation) as its runtime engine.
+Our function implementation is simple: we only need to call the command /bin/rev with the input to the function and produce the result of the rev* command as output.
 
+## Initialize Function
+
+We need a directory for our project.
 ```
 cd ~
-
-fn init --init-image fnproject/fn-java-native-init hello_java_aot
+mkdir revfunc
 ```{{execute}}
+and change into the directory:
+`cd revfunc`{{execute}}
 
-If you compare this to the approach used for generating a "regular" Java function, the key difference is that we instruct the Fn CLI to rely the fnproject/fn-java-native-init Docker init-image (see here for more details on init-image) to generate a boilerplate GraalVM based Java function (instead of relying on the regular java runtime option).
+In the folder , create a func.yaml file 
+`touch func.yaml`{{execute}}
 
-Check out the generated directory structure and Java Classes:
+Open this file in the text editor and copy/paste the following as its content:
+<pre class="file" data-target="clipboard">
+schema_version: 20180708
+name: revfunc
+version: 0.0.1
+runtime: docker
+triggers:
+- name: revfunc
+  type: http
+  source: /revfunc
+</pre>
 
-`ls -R`{{execute}}
+This is a typical func.yaml except that instead of declaring the runtime as a programming language we've specified *docker*. If you were to type fn build right now you'd get the error:
 
-The func.yaml contains some meta-data related to the function (its version, its name, etc.). It is very similar to a regular Java func.yaml, the only difference being the runtime entry. The Java function uses the java runtime while the GraalVM native-image function rely on the default Docker runtime which also explains the presence of a Dockerfile.
+`Fn: Dockerfile does not exist for 'docker' runtime`
 
-Now inspect the generated files and notice the Docker file. 
-```
-cd hello_java_aot
-ls -R
-cat Dockerfile
-```{{execute}}
+This is because when you set the runtime type to *docker*. The `fn build` command defers to your Dockerfile to build the function container image–and you haven’t defined one yet!
 
-To generate the Docker image of the function, the Fn CLI is relying on the Dockerfile that was generated during the previous init phase. If you inspect this Dockerfile or if you look at the verbose output of the depoyment, you will notice that one of the step is using GraalVM's native-image utility to compile the Java function ahead-of-time into a native executable.
+## Create the Dockerfile for the Function
+Create a file named Dockerfile 
+`touch Dockerfile`{{execute}}
+and copy/paste the following as its content:
+<pre class="file" data-target="clipboard">
+FROM alpine:latest
 
-The resulting function does not run on a "regular" Java virtual machine but uses the necessary components like memory management, thread scheduling from a different virtual machine called Substrate VM (SVM). SVM, which is a part of the GraalVM project, is written in Java and is embedded into the generated native executable of the function. Given it is a small native executable, this native function has a faster startup time and a lower runtime memory overhead compared to the same function compiled to Java bytecode running on top of a "regular" JVM.
+# Install hotwrap binary in your container
+COPY --from=fnproject/hotwrap:latest  /hotwrap /hotwrap
+CMD "/bin/rev"
+ENTRYPOINT ["/hotwrap"]
+</pre>
 
-That native function executable is finally added to a base lightweight image (busybox:glibc) with some related dependencies. This will constitute the function Docker image that the Fn infrastructure will use when the function is invoked.
+Here is an explanation of each of the Docker commands.
 
-## Deploy and Run the Java Application
+* FROM alpine:latest - Use the latest version of Alpine Linux as the base image.
+* COPY --from=fnproject/hotwrap:latest /hotwrap /hotwrap - Install the HotWrap Fn tool.
+* CMD "/bin/rev" - The Linux command to run.
+* ENTRYPOINT ["/hotwrap"] - Tells the container to execute the previous command using HotWrap: /hotwrap /bin/rev
 
-Java Class HelloFunction.java was generated as the starting point for this function. You can check out file in the editor. 
+## Build and Deploy the Function
+Once you have your custom Dockerfile you can simply use fn build to build your function. Give it a try:
+`fn -v build`{{execute}}
 
-Warning: if you make changes to the output of the file, ensure that you change the unit test accordingly because when the test fails, the function cannot be built and deployed. The unit test is in the source file hello-java-aot/src/test/java/com/example/fn/HelloFunctionTest.java.
+Just like with a default build, the output is a container image. From this point forward everything is just as it would be for any Fn function. Since you’ve previously started an Fn server, you can deploy it.
 
-Note: the fact that is application is deployed as native Java application does not mean anything for the way you program the Java code. (well, in all honesty, it does; there are some Java mechanism that are not available in native Java applications - such as dynamic class loading and certain elements of reflection; that is why turning Spring applications into Native Java applications is not a simple challenge).
+`fn -v deploy --app hello-app --local --no-bump`{{execute}}
+List the functions in the hello-app application, to see that now revfunc is a function:
 
-Deploy the native Java application just as before the regular Java application
+`fn list functions hello-app`{{execute}}
 
-```
-fn -v deploy --app hello-app --local 
-```{{execute}}
+Pro tip: The Fn cli let's you abbreviate most of the keywords so you can also say `fn ls f hello-app`! You should see the same output.
 
-One major difference we expect to see is in the size of the Docker image prepared for our function. It should be small - much smaller than the container image produced for the regular Java function that contains a full blown Java Runtime environment.
+## Invoking the Function
+With the function deployed let’s invoke it to make sure it’s working as expected.
 
-To check and compare the sizes of the Docker images, execute this command: 
-`docker images | grep hello `{{execute}}
+`echo "Hello World" | fn invoke hello-app revfunc`{{excute}}
 
-As you can see, the function image that includes everything required to run, including the operating system and the function native executable, is only weighing around 21 MB! Since all necessary components of a virtual machine (ex. GC) are embedded into the function executable, there is no need to have a separate Java runtime (JRE) in the function Docker image! When a function is invoked through Fn, Fn will instruct Docker to pull and launch the corresponding container image and hence the smaller this container image is, the better it is to reduce the cold-startup time of this function.
+For this command you should see the following output: `dlroW olleH`
 
-To give us an idea, we can quickly measure the cold startup of the function. Execute this command:
+We included an HTTP trigger declaration in the func.yaml so we can also call the function with curl:
+`curl --data "Hello World" -H "Content-Type: text/plain" -X POST http://localhost:8080/t/hello-app/revfunc`{{execute}}
 
-`time fn invoke hello-app hello_java_aot`{{execute}}
+What about this one?
 
-We expect to see that the cold startup time of a GraalVM native-image function is improved.
-
-Those numbers will vary depending on the machine you run the tests on but this basic benchmark shows that the cold startup of the GraalVM native-image function is faster. In this particular example, the cold startup of the GraalVM native-image function is probably ~70% of the cold startup time of the same Java function that uses a regular JVM (HotSpot in the case of Fn with Java runtime).
-
-
+`curl --data "Eva, can I see bees in a cave" -H "Content-Type: text/plain" -X POST http://localhost:8080/t/hello-app/revfunc`{{execute}}
 
 
+## Conclusion
 
+One of the most powerful features of Fn is the ability to use custom defined Docker container images as functions. This feature makes it possible to customize your function’s runtime environment including letting you use Linux command line tools as your function. And thanks to the Fn CLI's support for Dockerfiles it's the same user experience as when developing any function.
 
+Having completed this step you've successfully built a function using a custom Dockerfile. Congratulations!
