@@ -70,3 +70,13 @@ Again, a friendly, this time personalized, welcome message should be your reward
 What is happening here: when you invoke "hello-app hello" the Fn server looked up the "hello-app" application and then looked for the Docker container image bound to the "hello" function, started the container (if it was not already running) and send the request to the handler listening inside the container.
 
 ![Fn Server handles request](assets/fn-server-functions.jpg)
+
+## Logging locally for Debugging
+
+When working with Fn locally, you have the option to turn on the DEBUG log-level using the fn start command. This causes detailed information about functions to be output to the terminal after Fn server is started.
+
+To enable DEBUG logging for Fn server, restart the server with the following command:
+
+`fn start --log-level DEBUG`{{execute}}
+
+Running the Fn server with the DEBUG log level is a great way to track down any issues you are having with your functions.
