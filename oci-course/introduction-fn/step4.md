@@ -30,7 +30,7 @@ It is not as obvious as in the func.js generated for the Node runtime that an Fn
 
 Deploy the Java Function hello-java locally, into the app that was created in step 2 of this scenario. You will again see a Docker Container Image being built. Or actually: two images. The first image is the build environment with the full Java JDK, Maven and facilities to run unit tests. The outcome of this first image is a Fat Jar that contains the built application artifact. This is the input for the second container image - that is based on the Java Runtime Environment, a much lighter weight image. The final result of deploying the function is the image based on JRE and with only the Fat Jar created for the function. 
 
-````
+```
 cd ~/hello-java
 
 fn -v deploy --app hello-app --local 
@@ -38,7 +38,9 @@ fn -v deploy --app hello-app --local
 
 To invoke the Java function, execute this command:
 
-`fn invoke hello-app hello-java`{{execute}}
+`time fn invoke hello-app hello-java`{{execute}}
+
+Note: we have added the `time` instruction to get timing for the cold startup time of the function. In step 6, we will use GraalVM powered ahead of time compiled Java applications, that are supposed to have a much faster cold startup time. Please remember the values you are getting for the timing of this command for comparison in step 6.
 
 To send input to the function, use the following command:
 

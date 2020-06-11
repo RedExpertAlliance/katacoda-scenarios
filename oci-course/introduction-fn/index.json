@@ -28,6 +28,10 @@
       {
         "title": "Step 5 - Bonus: Custom Docker Images as Function Implementation",
         "text": "step5.md"
+      },
+      {
+        "title": "Step 6 - Bonus: Ahead of Time Function Compilation with GraalVM",
+        "text": "step6.md"
       }
     ],
     "intro": {

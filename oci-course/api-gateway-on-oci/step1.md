@@ -7,9 +7,11 @@ You need to provide details on the OCI tenancy you will work in and the OCI user
 
 Paste the contents that you prepared in the [OCI Tenancy preparation scenario](https://katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation-cloud-trial).
 
-Set the environment variable LAB_ID to the number provided to you by the workshop instructor.
+Set the environment variable LAB_ID to 1 - unless you are in a workshop with multiple participants and each uses their own number.
 
 `export LAB_ID=1`{{execute}}
+
+Note: in order to ensure that all workshop participants will have their own individual copies of the function (and more specifically: of the Function's container image on OCI Container Registry), we need to add the participant's LAB_ID to the name of the function.
 
 Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and you can continue.
 
