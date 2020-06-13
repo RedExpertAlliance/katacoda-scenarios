@@ -57,9 +57,9 @@ Update the *fn* context with the settings relevant for this workshop. Note: the 
 ```
 fn update context oracle.compartment-id $compartmentId
 
-fn update context api-url https://functions.us-ashburn-1.oci.oraclecloud.com
+fn update context api-url https://functions.$REGION.oci.oraclecloud.com
 
-r=$(fn update context registry iad.ocir.io/$ns/cloudlab-repo)
+r=$(fn update context registry $REGION_KEY.ocir.io/$ns/cloudlab-repo)
 
 fn update context oracle.profile FN
 ```{{execute}}
@@ -70,7 +70,7 @@ You can list the currently available Fn contexts again and see whether your chan
 
 Next and finally, login to the private Docker Registry that is prepared for you on OCI.
 
-`docker login iad.ocir.io`{{execute}}
+`docker login $REGION_KEY.ocir.io`{{execute}}
 
 The username you have to provide is composed of `<tenancy-namespace>/<username>`. The password is an Authentication Token generated for the specified user. Both these values are provided by your workshop instructor.
 
@@ -151,9 +151,9 @@ We are going to create two buckets:
 - One to upload the text file
 - A second one where the PDF document will be automatically uploaded by our function
 
-`oci os bucket create -c $COMPARTMENT_OCID --name $IN_BUCKET`{{execute}}
+`oci os bucket create -c $COMPARTMENT_OCID --name $IN_BUCKET --object-events-enabled true`{{execute}}
 
-`oci os bucket create -c $COMPARTMENT_OCID --name $OUT_BUCKET`{{execute}}
+`oci os bucket create -c $COMPARTMENT_OCID --name $OUT_BUCKET --object-events-enabled true`{{execute}}
 
 ## Rule creation using OCI CLI
 

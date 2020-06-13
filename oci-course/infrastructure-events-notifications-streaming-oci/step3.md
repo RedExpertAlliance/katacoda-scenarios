@@ -51,7 +51,7 @@ We are all set with our first Rule, now let's create a Bucket and see if we rece
 
 Let's use the CLI for creating the bucket (the name of the bucket is in the MY_BUCKET variable):
 
-`oci os bucket create -c $COMPARTMENT_OCID --name $MY_BUCKET`{{execute}}
+`oci os bucket create -c $COMPARTMENT_OCID --name $MY_BUCKET --object-events-enabled true`{{execute}}
 
 You should had received the email notification, since the two conditions were met: Bucket creation and the name of the Bucket. The email body should look
 something like this:
