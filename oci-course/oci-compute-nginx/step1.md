@@ -19,7 +19,7 @@ Try out the following command to get a list of all namespaces you currently have
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
-Note: the assumptions here is a compartment called *lab-compartment*. In that compartment we will create our
+Note: the assumption here is a compartment called *lab-compartment*. In that compartment we will create our
 compute instance and we will use **ASHBURN-AD-1** (you can use your own region, just set the value in variable **REGION**) just as our availability domain. 
 We will use shape **VM.Standard2** for our compute instance. 
 If you are interested on which other shapes exist, please 
@@ -87,7 +87,8 @@ echo "AVAILABILITY DOMAIN to be used: $AVAILABILITY_DOM"
 | us-luke-1        | ocid1.image.oc2.us-luke-1.aaaaaaaadxeycutztmvaeefvilc57lfqool2rlgl2r34juyu4jkbodx2xspq        |
 | us-phoenix-1     | ocid1.image.oc1.phx.aaaaaaaacy7j7ce45uckgt7nbahtsatih4brlsa2epp5nzgheccamdsea2yq              |
 
-Now set the following variable, to point to your region OCID image id (copy it from the previous table). For example, if you are in uk-london-1:
+Now set the following variable (**only if you are not in us-ashburn-1**), to point to your region OCID image id (copy it from the previous table). 
+For example, if you are in uk-london-1:
 
 `export IMG_ID=ocid1.image.oc1.uk-london-1.aaaaaaaa2uwbd457cd2gtviihmxw7cqfmqcug4ahdg7ivgyzla25pgrn6soa`{{execute}}
 
