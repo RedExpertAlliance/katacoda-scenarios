@@ -117,26 +117,10 @@ The key fingerprint is:
 11:3a:f8:f4:9o:d9:c7:dg:09:3b:e3:3f:c4:3f:44:95
 ~~~~
 
-## Create an Ingress Rule to open port 443/80 in your VCN
+## Create an Ingress Rule to open port 80 in your VCN
 
-Now let's update the Security List (**Default Security List for vcn-lab**) with the ingress rule that will allow TCP traffic through port 443 to the compute 
+Now let's update the Security List (**Default Security List for vcn-lab**) with the ingress rule that will allow TCP traffic through port 80 to the compute 
 instance that we are about to create.
-
-This Security List is part of the VCN ($VCNID) that you've created in the Preparation Lab Scenario. **Execute the following in case you are using the compute instance
-to provision the reverse proxy for OKE:**
-
-```
-export securitylist=$(oci network security-list list --compartment-id $COMPARTMENT_OCID --vcn-id $VCNID)
-export seclistID=$(echo $securitylist | jq -r --arg name "Default Security List for vcn-lab" '.data | map(select(.["display-name"] == $name)) | .[0] | .id')
-oci network security-list get --security-list-id $seclistID > seclist.json
-jq --argjson ingressRule '{"source": "0.0.0.0/0", "protocol": "6", "isStateless": false, "tcpOptions": {"destinationPortRange": {"max": 443, "min": 443}, "sourcePortRange": null}}' '.data."ingress-security-rules" += [$ingressRule]' seclist.json > seclistupdated.json
-export ingress_rules=$(cat seclistupdated.json)
-export INGRESS_RULES_UPDATED=$(echo $ingress_rules | jq -r '.data | .["ingress-security-rules"]')
-echo $INGRESS_RULES_UPDATED
-oci network security-list update --security-list-id $seclistID --ingress-security-rules "$INGRESS_RULES_UPDATED"
-```{{execute}}
-
-Or, **execute the following if you are using the scenario to provision a compute instance with NGINX:**
 
 ```
 export securitylist=$(oci network security-list list --compartment-id $COMPARTMENT_OCID --vcn-id $VCNID)
@@ -165,8 +149,8 @@ This is what we added to the Security List:
       "isStateless": false,
       "tcpOptions": {
          "destinationPortRange": {
-            "max": 443,
-            "min": 443
+            "max": 80,
+            "min": 80
          },
          "sourcePortRange": null
       }
@@ -174,14 +158,9 @@ This is what we added to the Security List:
 ]
 ~~~~
 
-In the Web Console you will see this, in the case you opened port 80:
+In the Web Console you will see this:
 
 ![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/ingress_rule_80.jpg)
-
-
-In the Web Console you will see this, in the case you opened port 443 (OKE scenario):
-
-![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/ingress_rule.jpg)
 
 
 Now you have everything you need to create your compute instance within your lab-compartment. Let's go to the next step.

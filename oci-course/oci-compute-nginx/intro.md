@@ -9,7 +9,7 @@ This scenario will help you to understand:
 
 Important notes to use this scenario:
 
-- You can use this scenario to have NGINX as the reverse proxy for the OKE API Server that is used in the [OKE Scenario Part 2](https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-cache-and-functions-oci_part2 "OKE Scenario Part 2").
-If that is your case, then you need to finish this in order to continue with the OKE Scenario.
 - If you are following to learn how to create an OCI compute instance using the OCI CLI, then this is also useful for you. The result of following it will be
 an NGINX installed with a welcome index page. 
+- Depending on your region you will use a different image id. Every region has a different OCID for the image id, and therefore you need to set it accordingly.
+We will provide you the OCID for your region in step 1

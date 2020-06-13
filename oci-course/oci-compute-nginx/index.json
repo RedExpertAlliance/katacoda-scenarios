@@ -14,12 +14,8 @@
         "text": "step2.md"
       },
       {
-        "title": "Step 3 - Only if you are using the scenario for the OKE reverse proxy",
+        "title": "Step 3 - Validate the Compute Instance creation with NGINX",
         "text": "step3.md"
-      },
-	  {
-        "title": "Step 4 - Only if you are following the scenario to lear how to use the OCI CLI to create a compute instance",
-        "text": "step4.md"
       }
     ],
     "intro": {

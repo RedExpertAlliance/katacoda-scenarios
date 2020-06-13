@@ -12,17 +12,8 @@ The command receives all the following values:
 
 (**Note. All the variables were set in the previous step.**)
 
-The following steps are very relevant depending on why you are following this scenario:
-
-- If you are following the scenario for learning how to provision an OCI compute instance with an NGINX, set the following variable:
+The following variable points to the configuration of our instance. In this case it will include the installation for NGINX:
 `export CONFIG=/root/computeInstanceConfigNginx.txt`{{execute}}
-
-- If you are following the scenario to create the reverse proxy for the OKE API Server, then set the variable like this:
-`export CONFIG=/root/computeInstanceConfig.txt`{{execute}}
-
-Now, **only** if you are following this scenario for the **OKE API Server Reverse proxy**, edit the File `computeInstanceConfig.txt`{{open}} and change the 
-**IP address** (in the **proxy pass element**) to the one that you got in Step 2 of the OKE Scenario. The port (**6443**) does not need to be changed. 
-**It is very important that you do that before proceeding.**
 
 Let's create the compute instance:
 
@@ -42,33 +33,7 @@ You can use the following command to get the list of compute instances. You shou
 
 ## What did we install in the compute instance?
 
-We have installed **nginx** in the compute instance, we did it using a config file that contains the following (in the case of the OKE API Server Reverse Proxy):
-
-~~~~
-#cloud-config
-write_files:
--   content: |
-      load_module '/usr/lib64/nginx/modules/ngx_stream_module.so';
-      events {}
-      stream {
-        server {
-          listen     443;
-          proxy_pass <IP_ADDRESS_OKE_API_SERVER>:6443;
-        }
-      }
-    owner: root:root
-    path: /home/opc/nginx.conf
-runcmd:
--   /bin/yum install -y nginx
--   mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bkp
--   mv /home/opc/nginx.conf /etc/nginx/nginx.conf
--   sudo setenforce 0
--   /bin/firewall-offline-cmd --add-port=443/tcp
--   /bin/systemctl restart firewalld
--   /bin/systemctl start nginx
-~~~~
-
-And in the case of a simple NGINX serving a index.html , the config file looks like this:
+We have installed **nginx** in the compute instance, with a simple index.html. The config file we used (computeInstanceConfigNginx.txt), looks like this:
 
 ~~~~
 #cloud-config
@@ -96,7 +61,3 @@ runcmd:
 -   cp /usr/share/nginx/html/index.html /usr/share/nginx/html/index.original.html
 -   cat /home/opc/index.html > /usr/share/nginx/html/index.html
 ~~~~
-
-***If you are following this scenario for the Reverse Proxy of your OKE API Server, proceed to Step 3.***
-
-***If you are following just for learning how to install an OCI instance with NGINX you can go directly to Step 4.***
