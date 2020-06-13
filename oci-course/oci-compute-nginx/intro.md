@@ -13,3 +13,7 @@ Important notes to use this scenario:
 an NGINX installed with a welcome index page. 
 - Depending on your region you will use a different image id. Every region has a different OCID for the image id, and therefore you need to set it accordingly.
 We will provide you the OCID for your region in step 1
+
+At the end of the scenario you will get something like this:
+
+![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/intro.jpg)
