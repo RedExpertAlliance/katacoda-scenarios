@@ -17,4 +17,4 @@ We will provide you the OCID for your region in step 1
 At the end of the scenario you will get something like this:
 
 ![Intro](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/intro.jpg)
-![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/ingress_rule_80.jpg)
+
