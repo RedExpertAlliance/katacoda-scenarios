@@ -29,5 +29,7 @@ Escape character is '^]'.
 Connection closed by foreign host.
 ~~~~
 
+**NOTE: If you did not get the previous output, wait for two minutes and re-try. It may take a couple of minutes to respond**
+
 ***You can close this scenario and go directly to Part 2 
 of the OKE scenario https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-cache-and-functions-oci_part2***.
