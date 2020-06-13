@@ -36,8 +36,8 @@ Now please set the Region environment variable using this command:
 
 ```
 export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
-export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
-export USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."id"')
+export REGION_KEY_UPPER=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
+export REGION_KEY=$(echo $REGION_KEY_UPPER | tr '[:upper:]' '[:lower:]')
 ```{{execute}}
 
 
