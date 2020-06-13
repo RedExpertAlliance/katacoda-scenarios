@@ -1,0 +1,46 @@
+{
+  "title": "OKE Reverse Proxy for API Server. Compute Instance Creation",
+  "description": "Provision an Oracle Compute Instance using OCI CLI",
+  "difficulty": "beginner",
+  "time": "15 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Prepare the environment with OCI CLI",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2 - Provision the Compute Instance that will server as a Reverse Proxy (NGINX)",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - Validate the reverse proxy",
+        "text": "step3.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "",
+      "courseData": "background.sh",
+      "code": "foreground.sh"
+        },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "client": [
+        {
+          "file": "prepareStepOne.sh",
+          "target": "/root/"
+        }
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "editor-terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "ubuntu1904"
+  }
+}

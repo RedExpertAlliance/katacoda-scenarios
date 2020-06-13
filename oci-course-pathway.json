@@ -58,6 +58,11 @@
       "title": "Introduction to Oracle Kubernetes Engine - Part 1 - Create an OKE cluster",
       "description": "Work with OKE, the OCI managed Kubernetes service."
     },
+	{
+      "course_id": "oke-redis-api-server-reverse-proxy",
+      "title": "Create a Reverse Proxy for OKE API Server",
+      "description": "Create a compute instance that will contain an NGINX Server configured as reverse proxy."
+    },
     {
       "course_id": "oke-redis-cache-and-functions-oci_part2",
       "title": "Introduction to Oracle Kubernetes Engine - Part 2 - Use an OKE cluster",
