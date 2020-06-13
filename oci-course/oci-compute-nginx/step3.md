@@ -17,6 +17,11 @@ To validate the NGINX installation, please execute this:
 
 ** It may take two minutes to respond. Please wait**
 
+You will get something like this:
+![Ingress Rule](/RedExpertAlliance/courses/oci-course/oci-compute-nginx/assets/nginx.jpg)
+
+**If you get the normal NIGINX home page, just do a couple of refresh until you get the result of the previous image.**
+
 
 ## Extra step
 
