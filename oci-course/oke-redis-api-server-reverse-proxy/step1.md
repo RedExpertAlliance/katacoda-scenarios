@@ -53,8 +53,13 @@ echo "SUBNETID: $SUBNETID"
 echo "AVAILABILITY DOMAIN to be used: $AVAILABILITY_DOM"
 ```{{execute}}
 
-**To set your own region, change the value for the following variable:**
-`export REGION=us-ashburn-1`{{execute}}
+Now please set the Region environment variable using this command:
+
+```
+export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
+export REGION_KEY_UPPER=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
+export REGION_KEY=$(echo $REGION_KEY_UPPER | tr '[:upper:]' '[:lower:]')
+```{{execute}}
 
 `echo "My region is: $REGION"`{{execute}}
 
