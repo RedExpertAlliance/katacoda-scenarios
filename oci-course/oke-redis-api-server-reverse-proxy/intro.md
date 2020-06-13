@@ -11,3 +11,7 @@ Important notes to use this scenario:
 - You can use this scenario to have NGINX as the reverse proxy for the OKE API Server that is used in the [OKE Scenario Part 2](https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-cache-and-functions-oci_part2 "OKE Scenario Part 2").
 If that is your case, then you need to finish this in order to continue with the OKE Scenario.
 - Depending on your region you will set an specific image id for your VM Shape.
+
+After creating the scenario you will get something like this:
+
+![Ingress Rule](/RedExpertAlliance/courses/oci-course/oke-redis-api-server-reverse-proxy/assets/intro.jpg)
