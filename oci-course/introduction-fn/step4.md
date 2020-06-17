@@ -57,7 +57,7 @@ fn init --runtime go hello-go
 ```{{execute}}
 
 ### Custom Docker Containers as Function implementation
-It is possible to take any Docker Container and use it as the implementation of a function. In that case the runtime is *docker*. The next step in this scenario demonstrates this compelling feature of Fn.
+It is possible to take any Docker Container and use it as the implementation of a function. In that case the runtime is *docker*. A subsequent step in this scenario demonstrates this compelling feature of Fn.
 
 ### GraalVM
 

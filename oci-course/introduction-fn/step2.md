@@ -21,8 +21,10 @@ The generated func.yaml file contains metadata about your function and declares 
 * version--automatically starting at 0.0.1.
 * runtime--the name of the runtime/language which was set based on the value set in --runtime.
 * entrypoint--the name of the Docker execution command to invoke when your function is called, in this case node func.js.
+* memory - maximum memory threshold for this function. If this function exceeds this limit during execution, it is stopped and error message is logged. 
+* timeout - maximum runtime allowed for this function in seconds. The maximum value is 300 and the default values is 30.
 
-There are other user specifiable properties that can be defined in the yaml file for a function. We do not need those for this simple example.
+There are other user specifiable properties that can be defined in the yaml file for a function. We do not need those for this simple example. See [Func.yaml metadata options](https://github.com/fnproject/docs/blob/master/fn/develop/func-file.md) for a complete overview of the options for the func.yaml file
 
 The package.json file is present in (most) Node applications: it specifies all the NPM dependencies for your Node function - on third party libraries and also on the Fn FDK for Node (@fnproject/fdk).
 
@@ -71,6 +73,35 @@ What is happening here: when you invoke "hello-app hello" the Fn server looked u
 
 ![Fn Server handles request](assets/fn-server-functions.jpg)
 
+## Wrap existing Node module with Fn Function Wrapper
+Suppose you already have Node code performing some valuable task. You can take the existing code and turn it into an Fn Function quite easily - using several approaches even. One is to build a custom Docker container and use it as the implementation for your function (see step 6 in this scenario). An easier one is shown next.
+
+
+Open the file *func.js* in the text editor. Select all current contents (CTRL + A), remove it (Del) and copy this snippet to the file:
+<pre class="file" data-target="clipboard">
+const fdk=require('@fnproject/fdk');
+const app = require( './existingNodeApp.js' );
+
+fdk.handle(function(input){
+  let name = 'World';
+  if (input.name) {
+    name = input.name;
+  }
+  return {'message': app.doYourThing(name)}
+})
+</pre>
+
+The function hello now leverages the existing Node module *existingNodeApp* for the hard work this function is doing when invoked.
+
+Deploy the Function Hello locally, into the app that was just created
+`fn -v deploy --app hello-app --local `{{execute}}
+
+Now to invoke the function:
+`curl --data '{"name":"Bob"}' -H "Content-Type: text/plain" -X POST http://localhost:8080/t/hello-app/hello`{{execute}}
+
+In the response, you will see the product of the *existingNodeApp*.
+
+
 ## Logging locally for Debugging
 
 When working with Fn locally, you have the option to turn on the DEBUG log-level using the fn start command. This causes detailed information about functions to be output to the terminal after Fn server is started.
@@ -80,3 +111,9 @@ To enable DEBUG logging for Fn server, restart the server with the following com
 `fn start --log-level DEBUG`{{execute}}
 
 Running the Fn server with the DEBUG log level is a great way to track down any issues you are having with your functions.
+
+## File Writing
+
+If you want to write to a file from a function, it can only be to the local file system (inside the function container) and only to /tmp. Each function is configured with its own /tmp as non-persistent disk space. The size of this disk space is set as part of the function configuration.
+
+Of course, functions can write files on/to storage services - such as Oracle Cloud Object Storage.

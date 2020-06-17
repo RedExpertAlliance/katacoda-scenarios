@@ -96,6 +96,7 @@ Context Variable (CTX)
 
 
 
+
 ## Resources 
 Check out this article for details about the contents of the Fn request context:[Oracle Cloud Infrastructure Functions and Project Fn – Retrieving Headers, Query Parameters and other HTTP Request elements](https://technology.amis.nl/2020/01/02/oracle-cloud-infrastructure-functions-and-project-fn-retrieving-headers-query-parameters-and-other-http-request-elements/)
 

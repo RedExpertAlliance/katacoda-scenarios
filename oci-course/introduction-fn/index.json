@@ -52,6 +52,10 @@
         {
           "file": "prepareStepOne.sh",
           "target": "/root/new_directory/"
+        },
+        {
+          "file": "existingNodeApp.js",
+          "target": "/root/scenarioResources/"
         }
       ]
     }
