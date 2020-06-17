@@ -76,9 +76,16 @@ What is happening here: when you invoke "hello-app hello" the Fn server looked u
 ## Wrap existing Node module with Fn Function Wrapper
 Suppose you already have Node code performing some valuable task. You can take the existing code and turn it into an Fn Function quite easily - using several approaches even. One is to build a custom Docker container and use it as the implementation for your function (see step 6 in this scenario). An easier one is shown next.
 
+Copy the existing Node application *existingNodeApplication.js* to the folder created for function *hello*:
+`cp /root/scenarioResources/existingNodeApp.js /root/hello`{{execute}}
+
+Run the existingNodeApp:
+`node existingNodeApp.js YourName`{{execute}}
+
+Note: feel free to make changes to the existingNodeApp.js.
 
 Open the file *func.js* in the text editor. Select all current contents (CTRL + A), remove it (Del) and copy this snippet to the file:
-<pre class="file" data-target="clipboard">
+<pre class="file" data-target="replace">
 const fdk=require('@fnproject/fdk');
 const app = require( './existingNodeApp.js' );
 
@@ -91,15 +98,15 @@ fdk.handle(function(input){
 })
 </pre>
 
-The function hello now leverages the existing Node module *existingNodeApp* for the hard work this function is doing when invoked.
+The function *hello* now leverages the existing Node module *existingNodeApp* for the hard work this function is doing when invoked.
 
 Deploy the Function Hello locally, into the app that was just created
 `fn -v deploy --app hello-app --local `{{execute}}
 
 Now to invoke the function:
-`curl --data '{"name":"Bob"}' -H "Content-Type: text/plain" -X POST http://localhost:8080/t/hello-app/hello`{{execute}}
+`echo -n '{"name":"Your Own Name"}' | fn invoke hello-app hello --content-type application/json`{{execute}}
 
-In the response, you will see the product of the *existingNodeApp*.
+In the response, you will see the product of the *existingNodeApp*. The Fn function *hello* is now completely implemented by *existingNodeApp*. In this case this application is wafer thin, but in real life this can be a sizable Node application that uses scores of NPM modules. This application can be developed and tested in its own right, outside the context of the Fn framework. You have now seen how easy it is to wrap the application in/as a Function. 
 
 
 ## Logging locally for Debugging

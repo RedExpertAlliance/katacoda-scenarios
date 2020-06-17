@@ -8,4 +8,4 @@ module.exports = {
 console.log(doIt(process.argv[2]))
 
 // to test:
-//node h.js YourName
+//node existingNodeApp.js YourName
