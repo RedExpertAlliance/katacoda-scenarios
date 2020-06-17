@@ -82,7 +82,7 @@ Pro tip: The Fn cli let's you abbreviate most of the keywords so you can also sa
 ## Invoking the Function
 With the function deployed let’s invoke it to make sure it’s working as expected.
 
-`echo "Hello World" | fn invoke hello-app revfunc`{{excute}}
+`echo "Hello World" | fn invoke hello-app revfunc`{{execute}}
 
 For this command you should see the following output: `dlroW olleH`
 

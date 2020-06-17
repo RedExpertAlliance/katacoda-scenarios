@@ -79,13 +79,16 @@ Suppose you already have Node code performing some valuable task. You can take t
 Copy the existing Node application *existingNodeApplication.js* to the folder created for function *hello*:
 `cp /root/scenarioResources/existingNodeApp.js /root/hello`{{execute}}
 
+This node application is quite simple, as you can verify:
+`cat /root/hello/existingNodeApp.js`
+
 Run the existingNodeApp:
 `node existingNodeApp.js YourName`{{execute}}
 
 Note: feel free to make changes to the existingNodeApp.js.
 
 Open the file *func.js* in the text editor. Select all current contents (CTRL + A), remove it (Del) and copy this snippet to the file:
-<pre class="file" data-target="replace">
+<pre class="file" data-target="clipboard">
 const fdk=require('@fnproject/fdk');
 const app = require( './existingNodeApp.js' );
 

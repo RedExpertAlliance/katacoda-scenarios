@@ -13,7 +13,7 @@ fn init --runtime java hello-java
 
 Check out the generated directory structure and Java Classes:
 
-`ls -R`{{execute}}
+`ls -R hello-java`{{execute}}
 
 Now inspect the generated Java class that handles requests - and can be customized by us. 
 ```
@@ -41,6 +41,12 @@ To invoke the Java function, execute this command:
 `time fn invoke hello-app hello-java`{{execute}}
 
 Note: we have added the `time` instruction to get timing for the cold startup time of the function. In step 6, we will use GraalVM powered ahead of time compiled Java applications, that are supposed to have a much faster cold startup time. Please remember the values you are getting for the timing of this command for comparison in step 6.
+
+To verify the cold startup effect, invoke the Java function again:
+
+`time fn invoke hello-app hello-java`{{execute}}
+
+The real time reported is expected to be much shorter this time - because the container that implements the function is already running and started up. 
 
 To send input to the function, use the following command:
 

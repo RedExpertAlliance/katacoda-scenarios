@@ -22,10 +22,6 @@ fn init --init-image fnproject/fn-java-native-init hello_java_aot
 
 If you compare this to the approach used for generating a "regular" Java function, the key difference is that we instruct the Fn CLI to rely the fnproject/fn-java-native-init Docker init-image (see here for more details on init-image) to generate a boilerplate GraalVM based Java function (instead of relying on the regular java runtime option).
 
-Check out the generated directory structure and Java Classes:
-
-`ls -R`{{execute}}
-
 The func.yaml contains some meta-data related to the function (its version, its name, etc.). It is very similar to a regular Java func.yaml, the only difference being the runtime entry. The Java function uses the java runtime while the GraalVM native-image function rely on the default Docker runtime which also explains the presence of a Dockerfile.
 
 Now inspect the generated files and notice the Docker file. 
