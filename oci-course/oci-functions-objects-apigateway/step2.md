@@ -35,8 +35,8 @@ Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oc
 
 Copy the JSON snippet produced by the next command between the curly braces in fil *oci-configuration.js*:
 ```
-json="\"namespaceName\": \"\"$ns\",\n
-\"region\": \"\"$REGION\",\n
+json="\"namespaceName\": \"$ns\",\n
+\"region\": \"$REGION\",\n
 \"compartmentId\": \"$compartmentId\",\n 
 \"authUserId\": \"$USER_OCID\",\n
 \"identityDomain\": \"identity.$REGION.oraclecloud.com\",\n
@@ -47,7 +47,7 @@ json="\"namespaceName\": \"\"$ns\",\n
 \"bucketOCID\": \"$bucketOCID\",\n
 \"bucketName\":\"$bucketName\",\n
 \"objectStorageAPIEndpoint\":\"objectstorage.$REGION.oraclecloud.com\",\n
-\"streamingAPIEndpoint\": \"streaming.$REGION.oci.oraclecloud.com\",\n
+\"streamingAPIEndpoint\": \"streaming.$REGION.oci.oraclecloud.com\"\n
 "
 echo "paste JSON fragment in file oci-configuration.js "
 echo -e $json

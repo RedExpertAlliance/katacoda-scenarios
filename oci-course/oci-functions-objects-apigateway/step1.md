@@ -1,5 +1,22 @@
 ## Wait for OCI CLI and Fn CLI to be installed
 
+Execute the following command to install the OCI CLI:
+```
+curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
+chmod +777 install-oci-cli.sh
+sudo ./install-oci-cli.sh --accept-all-defaults
+
+# add this line to ~/.profile - to make oci a recognized shell command
+echo 'oci() { /root/bin/oci "$@"; }' >> ~/.profile
+# reload ~/.profile
+. /root/.profile
+# now oci is recognized as a command
+
+# get workshop resource into scenario
+
+git clone https://github.com/AMIS-Services/oracle-cloud-native-meetup-20-january-2020
+```{{execute}}
+
 You need to provide details on the OCI tenancy you will work in and the OCI user you will work as. Please open the IDE tab and edit these two files:
 
 * ~/.oci/config
