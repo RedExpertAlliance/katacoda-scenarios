@@ -42,15 +42,7 @@ export TENANCY_OCID=$(oci iam user list --all | jq -r  '.data[0]."compartment-id
 cs=$(oci iam compartment list)
 export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
 
-apigws=$(oci api-gateway gateway list -c $compartmentId)
-export apiGatewayId=$(echo $apigws | jq -r --arg display_name "lab-apigw" '.data.items | map(select(."display-name" == $display_name)) | .[0] | .id')
-depls=$(oci api-gateway deployment list -c $compartmentId)
-deploymentEndpoint=$(echo $depls | jq -r --arg display_name "MY_API_DEPL_$LAB_ID" '.data.items | map(select(."display-name" == $display_name)) | .[0] | .endpoint')
-apiDeploymentId=$(echo $depls | jq -r --arg display_name "MY_API_DEPL_$LAB_ID" '.data.items | map(select(."display-name" == $display_name)) | .[0] | .id')
-nss=$(oci os ns get)
-export ns=$(echo $nss | jq -r '.data')
-
 echo "Compartment OCID: $compartmentId"
 echo "Namespace: $ns"
-echo "API Deployment Id and Endpoint: $deploymentEndpoint and $apiDeploymentId"
+
 ```{{execute}}

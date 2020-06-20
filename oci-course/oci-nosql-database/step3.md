@@ -18,6 +18,14 @@ oci nosql query execute --compartment-id $compartmentId --statement="INSERT INTO
 oci nosql query execute --compartment-id $compartmentId --statement="INSERT INTO $tableName  (id, name, country) VALUES (4,\"José\",\"Portugal\")"
 ```{{execute}}
 
+Check in the console for the NoSQL Table's contents:
+
+```
+echo Open the following URL in the OCI Console to find the current data records in the newly created table: https://console.$REGION.oraclecloud.com/nosql/tables/$tableName/$compartmentId/rows
+```{{execute}}
+
+![](assets/nosql-in-console.png)
+
 And query the table again for all its data:
 `oci nosql query execute --compartment-id $compartmentId --statement="SELECT * FROM $tableName"`{{execute}}
 

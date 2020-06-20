@@ -1,5 +1,5 @@
 {
-  "title": "Preview: First steps with NoSQL Database on Oracle Cloud Infrastructure",
+  "title": "First steps with NoSQL Database on Oracle Cloud Infrastructure",
   "description": "Managing data through Relational Model and JSON with Oracle NoSQL.",
   "difficulty": "beginner",
   "time": "25 minutes",
@@ -22,11 +22,11 @@
         "text": "step4.md"
       },
       {
-        "title": "Step 5 - and more",
+        "title": "Step 5 - Working with JSON properties in Query and Update",
         "text": "step5.md"
       },
       {
-        "title": "Step 6 - clean up",
+        "title": "Step 6 - Clean Up: remove the NoSQL data & tables",
         "text": "step6.md"
       }    ],
     "intro": {

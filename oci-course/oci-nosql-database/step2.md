@@ -21,8 +21,11 @@ Note: the creation of the table happens asynchronously from the *oci nosql table
 This is what your list of table(s) should look like:
 ![Table List](/RedExpertAlliance/courses/oci-course/oci-nosql-database/assets/oci-nosql-tablelist.png)
 
-You can check the list of NoSQL Database tables in the current compartmant in the console: Database | NoSQL Database.
+You can check the list of NoSQL Database tables in the current compartment in the console: Database | NoSQL Database.
 https://console.us-ashburn-1.oraclecloud.com/nosql/tables
+
+`echo Open the Console at https://console.$REGION.oraclecloud.com/nosql/tables`
+
 
 ## Resources
 [OCI Documentation on SQL for Inserting data  in NoSQL Database](https://docs.oracle.com/en/database/other-databases/nosql-database/19.5/sqlreferencefornosql/insert-statement.html)
