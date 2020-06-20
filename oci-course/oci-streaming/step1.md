@@ -38,21 +38,11 @@ To check on the message, close the popup window and press Load Messages. All rec
 
 This is the simplest example of pub/sub through OCI Streaming.
 
-
-## Wait for OCI CLI (and Fn CLI) to be installed
-
-You need to provide details on the OCI tenancy you will work in and the OCI user you will work as. Please edit these two files:
-
-* ~/.oci/config
-* ~/.oci/oci_api_key.pem
-
-Paste the contents provided by the workshop instructor into these two files.
+### Finalizing the Environment 
 
 Set the environment variable LAB_ID to the number provided to you by the workshop instructor.
 
 `export LAB_ID=1`{{execute}}
-
-Do not continue until you see the file `/root/allSetInBackground` appear. If it appears, then the OCI CLI has been installed and you can continue.
 
 Try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
 

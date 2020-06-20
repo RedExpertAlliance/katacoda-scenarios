@@ -54,7 +54,7 @@ Invoke the function:
 
 Check in the Streaming console if the message was indeed published to the stream by the Function:
 
-`echo "Console endpoint for Recent Messages on Stream lab-stream: https://console.us-ashburn-1.oraclecloud.com/storage/streaming/$streamId/recent-messages"`{{execute}}
+`echo "Console endpoint for Recent Messages on Stream lab-stream: https://console.$REGION.oraclecloud.com/storage/streaming/$streamId/recent-messages"`{{execute}}
 
 or of course run the Stream Consumer we used before:
 

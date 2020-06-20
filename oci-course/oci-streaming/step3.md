@@ -8,9 +8,9 @@ Some steps are required before the Node application can be successfully executed
 ### Configure OCI connection details
 
 Copy the private key file used for accessing OCI to the Function resources directory:
-`cp ~/.oci/oci_api_key.pem ~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci_api_key.pem`{{execute}}
+`cp ~/.oci/oci_api_key.pem ~/oracle-cloud-native-meetup-20-january-2020/functions/streams-pubsub/oci_api_key.pem`{{execute}}
 
-Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci-configuration.js` in the IDE. This file is used by the Node application to connect to the OCI REST APIs. It has to make signed HTTP requests - signed using the private key of an OCI User with necessary permissions on the OCI Object Storage.
+Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/streams-pubsub/oci-configuration.js` in the IDE. This file is used by the Node application to connect to the OCI REST APIs. It has to make signed HTTP requests - signed using the private key of an OCI User with necessary permissions on the OCI Object Storage.
 
 Copy the JSON snippet produced by the next command between the curly braces in fil *oci-configuration.js*:
 ```
@@ -53,7 +53,7 @@ Run the Stream Consume application with the following command:
 
 This application creates a cursor on the *lab-stream* with TRIM_HORIZON set - meaning all messages on the Stream. It then reads messages from the cursor and writes them to the console.
 
-You may want to check the code that reads from the Stream. It is in file *streams-pubsub.js*.
+You may want to check the code that reads from the Stream. It is in file *stream-consumer.js*.
 
 Note the following lines
 ```
@@ -72,7 +72,7 @@ Then run the Node application another time - and watch the fresh messages come i
 
 `node stream-consumer`{{execute}}
 
-You could change the constant CURSOR_TYPE from TRIM_HORIZON (all messages) to LATEST (only messages published after the cursor was created). Run the application again - and again - to only see new messages.
+You could change the constant CURSOR_TYPE from TRIM_HORIZON (all messages) to LATEST (only messages published after the cursor was created) - in file *stream-consumer.js*, line 8. Run the application again - and again - to only see new messages.
 
 
 ## Resources
