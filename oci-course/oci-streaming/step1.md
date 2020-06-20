@@ -1,6 +1,37 @@
+Execute the following command to install the OCI CLI:
+```
+curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
+chmod +777 install-oci-cli.sh
+sudo ./install-oci-cli.sh --accept-all-defaults
+
+# add this line to ~/.profile - to make oci a recognized shell command
+echo 'oci() { /root/bin/oci "$@"; }' >> ~/.profile
+# reload ~/.profile
+. /root/.profile
+# now oci is recognized as a command
+
+# get workshop resource into scenario
+
+git clone https://github.com/AMIS-Services/oracle-cloud-native-meetup-20-january-2020
+```{{execute}}
+
+You need to provide details on the OCI tenancy you will work in and the OCI user you will work as. Please open the IDE tab and edit these two files:
+
+* ~/.oci/config
+* ~/.oci/oci_api_key.pem
+
+Paste the contents that you prepared in the [OCI Tenancy preparation scenario](https://katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation-cloud-trial). 
+
+Set the environment variable LAB_ID to 1 - unless you are in a workshop with multiple participants and each uses their own number.
+
+`export LAB_ID=1`{{execute}}
+
+
+
 The environment is currently being prepared. While that is happening, we can take a look at the Stream `lab-stream` in the `lab-compartment`. Note: there is a fairly strict limit on the number of Stream (partitions) that we are allowed to create (out of the box); therefore we are all sharing the stream in this workshop.
 
 Open the OCI Console as lab-user at: https://console.us-ashburn-1.oraclecloud.com/storage/streaming . Here you should see the stream `lab-stream`. 
+`echo "Open the console at https://console.${REGION,,}.oraclecloud.com/storage/streaming"`{{execute}}
 
 Click on the stream *lab-stream* to go to the details page. Click on Produce Test Message to... well, produce a test message of course.
 
