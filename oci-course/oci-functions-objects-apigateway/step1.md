@@ -78,9 +78,9 @@ Update the context with the settings relevant for this workshop.
 ```
 fn update context oracle.compartment-id $compartmentId
 
-fn update context api-url https://functions.us-ashburn-1.oci.oraclecloud.com
+fn update context api-url https://functions.$REGION.oci.oraclecloud.com
 
-fn update context registry iad.ocir.io/$ns/cloudlab-repo
+fn update context registry ${REGION_KEY,,}.ocir.io/$ns/cloudlab-repo
 
 fn update context oracle.profile FN
 ```{{execute}}
