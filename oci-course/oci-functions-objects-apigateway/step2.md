@@ -15,13 +15,47 @@ bucketOCID=$(echo $bucket | jq -r  '.data | .id')
 echo "Bucket OCID for bucket $bucketName is $bucketOCID "
 ```{{execute}}
 
+You may want to inspect the code of the FileWriter application. Open the IDE tab and locate file ~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/fileWriter.js.
+![](assets/file-writerjs-in-ide.png)
+
+The function itself is quite simple - apart from the code required to make authorized requests to the OCI REST APIs. Function *fileWriter* calls *createFileObject* to invoke the OCI Object Storage Service API to create the file in the indicated bucket. Function *fileWriter* itself is called from function *run* with input parameters based on the command line arguments passed when running the node application as you will do in a little while.
+
+Most complexity is around the signing of the REST request using the private key. Function *signRequest* is the linking pin to this signing operation.
+
+
+## Prepare Node application
+Some steps are required before the Node application can be successfully executed.
+
+### Configure OCI connection details
 
 Copy the private key file used for accessing OCI to the Function resources directory:
 `cp ~/.oci/oci_api_key.pem ~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci_api_key.pem`{{execute}}
 
-Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci-configuration.js` in the text editor. This file is used by the Node application to connect to the OCI REST APIs. It has to make signed HTTP requests - signed using the private key of an OCI User with necessary permissions on the OCI Object Storage.
+Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci-configuration.js` in the IDE. This file is used by the Node application to connect to the OCI REST APIs. It has to make signed HTTP requests - signed using the private key of an OCI User with necessary permissions on the OCI Object Storage.
 
-Define the correct file for the keyFingerprint property. Replace the text *YOUR_FINGERPRINT_FROM FILE ./oci_api_key.pem* with the actual fingerprint value from the indicated file. 
+Copy the JSON snippet produced by the next command between the curly braces in fil *oci-configuration.js*:
+```
+json="\"namespaceName\": \"\"$ns\",\n
+\"region\": \"\"$REGION\",\n
+\"compartmentId\": \"$compartmentId\",\n 
+\"authUserId\": \"$USER_OCID\",\n
+\"identityDomain\": \"identity.$REGION.oraclecloud.com\",\n
+\"tenancyId\": \"$TENANCY_OCID\",\n
+\"keyFingerprint\": \"YOUR_FINGERPRINT_FROM FILE ./oci_api_key.pem\",\n
+\"privateKeyPath\": \"./oci_api_key.pem\",\n
+\"coreServicesDomain\": \"iaas.$REGION.oraclecloud.com\",\n
+\"bucketOCID\": \"$bucketOCID\",\n
+\"bucketName\":\"$bucketName\",\n
+\"objectStorageAPIEndpoint\":\"objectstorage.$REGION.oraclecloud.com\",\n
+\"streamingAPIEndpoint\": \"streaming.$REGION.oci.oraclecloud.com\",\n
+"
+echo "paste JSON fragment in file oci-configuration.js "
+echo -e $json
+```{{execute}}
+
+Define the correct value for the *keyFingerprint* property in this file: replace the text *YOUR_FINGERPRINT_FROM FILE ./oci_api_key.pem* with the actual fingerprint value from the indicated file. 
+
+### Install required libraries
 
 Navigate to the directory that contains the File Writer application:
 

@@ -1,6 +1,6 @@
 ## Wait for OCI CLI and Fn CLI to be installed
 
-You need to provide details on the OCI tenancy you will work in and the OCI user you will work as. Please edit these two files:
+You need to provide details on the OCI tenancy you will work in and the OCI user you will work as. Please open the IDE tab and edit these two files:
 
 * ~/.oci/config
 * ~/.oci/oci_api_key.pem
