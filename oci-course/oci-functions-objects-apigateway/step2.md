@@ -16,9 +16,16 @@ echo "Bucket OCID for bucket $bucketName is $bucketOCID "
 touch ~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci_api_key.pem 
 ```{{execute}}
 
-Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci-configuration.js` in the text editor. Replace the current contents with the section provided to you by the workshop instructor. This file is used by the Node application to connect to the OCI REST APIs. It has to make signed HTTP requests - signed using the private key of an OCI User with necessary permissions on the OCI Object Storage.
 
-Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci-api-key.pem. Copy the private key that the instructor provided to you into this file.
+Copy the private key file used for accessing OCI to the Function resources directory:
+`cp ~/.oci/oci_api_key.pem ~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci-api_key.pem`{{execute}}
+
+Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci-configuration.js` in the text editor. This file is used by the Node application to connect to the OCI REST APIs. It has to make signed HTTP requests - signed using the private key of an OCI User with necessary permissions on the OCI Object Storage.
+
+Define the correct file for the keyFingerprint property. Replace the text *YOUR_FINGERPRINT_FROM FILE ./oci_api_key.pem* with the actual fingerprint value from the indicated file. 
+
+
+
 
 Navigate to the directory that contains the File Writer application:
 
