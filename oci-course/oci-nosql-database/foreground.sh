@@ -1,4 +1,7 @@
+echo "Installing Project Fn - in the background"
+
 export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
+
 
 # add this line to ~/.profile - to make oci a recognized shell command
 echo 'oci() { /root/bin/oci "$@"; }' >> ~/.profile
@@ -6,12 +9,16 @@ echo 'oci() { /root/bin/oci "$@"; }' >> ~/.profile
 . /root/.profile
 # now oci is recognized as a command
 
-echo "Installing OCI CLI"
+# get workshop resource into scenario
 
-# Install the OCI CLI in silent mode with default settings
-curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
+git clone https://github.com/AMIS-Services/oracle-cloud-native-meetup-20-january-2020
 
-chmod +777 install-oci-cli.sh
-./install-oci-cli.sh --accept-all-defaults
+
+# prerequisite of OCI CLI
+echo install python3-venv
+sudo apt-get --yes --allow-downgrades --allow-remove-essential --allow-change-held-packages  install  python3-venv 
+
+
+echo "Wait for the file /root/allSetInBackground to appear"
 
 

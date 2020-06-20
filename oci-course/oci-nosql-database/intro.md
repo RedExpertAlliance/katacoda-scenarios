@@ -8,6 +8,10 @@ The *managed* aspect of this services results among other things in data safety:
 
 In this scenario, you will take your first steps with OCI NoSQL Database Service. You will create a structured table, insert several records, query these records - working both from the command line and from the console. You will also work with schemaless (JSON) documents.
 
+The scenario uses an Ubuntu 20.04 environment with Docker, OCI CLI and Fn CLI. Before you can start the steps in the scenario, the two Command Line interfaces are downloaded and installed. This will take about one minute. 
+
+The assumption is that you have already completed the [the REAL OCI Handson Tenancy Preparation Scenario](https://katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation-cloud-trial).
+
 
 # Resources
 [OCI Documentation on NoSQL Database](https://docs.cloud.oracle.com/en-us/iaas/nosql-database/index.html)
