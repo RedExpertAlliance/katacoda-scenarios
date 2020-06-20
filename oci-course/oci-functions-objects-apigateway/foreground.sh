@@ -5,7 +5,7 @@ export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
     # Install the OCI CLI in silent mode with default settings
     curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
     chmod +777 install-oci-cli.sh
-    sudo apt-get install python3-venv
+    sudo apt-get --yes --allow-downgrades --allow-remove-essential --allow-change-held-packages  install  python3-venv 
     sudo ./install-oci-cli.sh --accept-all-defaults
 
 # add this line to ~/.profile - to make oci a recognized shell command
