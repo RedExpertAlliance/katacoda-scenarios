@@ -2,17 +2,48 @@
 
 OCI can be accessed through a console, through the OCI CLI and through REST APIs. Custom applications probably work most easily with this last option. In this step you will create (well, actually the code is already there, cloned from github and almost ready to execute) and test a Node JS application that consumes messages from the OCI Stream *lab-stream*. 
 
-Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/streams-pubsub/oci-configuration.js` in the text editor. Replace the current contents with the section provided to you by the workshop instructor. This file is used by the Node application to connect to the OCI REST APIs. It has to make signed HTTP requests - signed using the private key of an OCI User with necessary permissions on the OCI Object Storage.
+## Prepare Node application
+Some steps are required before the Node application can be successfully executed.
 
-Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/streams-pubsub/oci-api-key.pem. Copy the private key that the instructor provided to you into this file.
+### Configure OCI connection details
 
-Navigate to the directory that contains the Stream application:
+Copy the private key file used for accessing OCI to the Function resources directory:
+`cp ~/.oci/oci_api_key.pem ~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci_api_key.pem`{{execute}}
+
+Open file `~/oracle-cloud-native-meetup-20-january-2020/functions/file-writer/oci-configuration.js` in the IDE. This file is used by the Node application to connect to the OCI REST APIs. It has to make signed HTTP requests - signed using the private key of an OCI User with necessary permissions on the OCI Object Storage.
+
+Copy the JSON snippet produced by the next command between the curly braces in fil *oci-configuration.js*:
+```
+json="\"namespaceName\": \"$ns\",\n
+\"region\": \"$REGION\",\n
+\"compartmentId\": \"$compartmentId\",\n 
+\"authUserId\": \"$USER_OCID\",\n
+\"identityDomain\": \"identity.$REGION.oraclecloud.com\",\n
+\"tenancyId\": \"$TENANCY_OCID\",\n
+\"keyFingerprint\": \"YOUR_FINGERPRINT_FROM FILE ./oci_api_key.pem\",\n
+\"privateKeyPath\": \"./oci_api_key.pem\",\n
+\"coreServicesDomain\": \"iaas.$REGION.oraclecloud.com\",\n
+\"bucketOCID\": \"$bucketOCID\",\n
+\"bucketName\":\"$bucketName\",\n
+\"objectStorageAPIEndpoint\":\"objectstorage.$REGION.oraclecloud.com\",\n
+\"streamingAPIEndpoint\": \"streaming.$REGION.oci.oraclecloud.com\"\n
+"
+echo "paste JSON fragment in file oci-configuration.js "
+echo -e $json
+```{{execute}}
+
+Define the correct value for the *keyFingerprint* property in this file: replace the text *YOUR_FINGERPRINT_FROM FILE ./oci_api_key.pem* with the actual fingerprint value from the indicated file. 
+
+### Install required libraries
+
+Navigate to the directory that contains the File Writer application:
 
 `cd ~/oracle-cloud-native-meetup-20-january-2020/functions/streams-pubsub`{{execute}}
 
 and run `npm install` to install the required libraries.
 
 `npm install`{{execute}} 
+
 
 ## Run the Stream Consumer to consume all current messages on OCI Stream lab-stream
 
@@ -33,7 +64,11 @@ Note the following lines
 
 that take care of decoding (from  Base64 en from ByteArray format) the message payload.
 
-Go to the OCI Console (as lab-user at: https://console.us-ashburn-1.oraclecloud.com/storage/streaming) and publish a few test messages on *lab-stream*. Then run the Node application another time - and watch the fresh messages come in.
+Go to the OCI Console (as lab-user at: https://console.us-ashburn-1.oraclecloud.com/storage/streaming) and publish a few test messages on *lab-stream*. 
+
+`echo "Open the console at https://console.${REGION,,}.oraclecloud.com/storage/streaming"`{{execute}}
+
+Then run the Node application another time - and watch the fresh messages come in.
 
 `node stream-consumer`{{execute}}
 

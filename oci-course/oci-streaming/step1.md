@@ -27,9 +27,10 @@ Set the environment variable LAB_ID to 1 - unless you are in a workshop with mul
 The environment is currently being prepared. While that is happening, we can take a look at the Stream `lab-stream` in the `lab-compartment`. Note: there is a fairly strict limit on the number of Stream (partitions) that we are allowed to create (out of the box); therefore we are all sharing the stream in this workshop.
 
 Open the OCI Console as lab-user at: https://console.us-ashburn-1.oraclecloud.com/storage/streaming . Here you should see the stream `lab-stream`. 
-`echo "Open the console at https://console.${REGION,,}.oraclecloud.com/storage/streaming"`{{execute}}
+`echo "Open the console at https://console.YOUR_REGION.oraclecloud.com/storage/streaming"`{{execute}}
 
 Click on the stream *lab-stream* to go to the details page. Click on Produce Test Message to... well, produce a test message of course.
+![](assets/stream-details.png)  
 
 Type a message and press Produce. The console will indicate that the message was produced successfully.
 
@@ -62,6 +63,10 @@ If you get a proper response, the OCI is configured correctly and you can procee
 Prepare a number of environment variables. Note: the assumptions here are a compartment called *lab-compartment*  and an API Gateway *lab-apigw* in that same compartment as well as an API Deployment called MY_API_DEPL# on the API Gateway. We need to get references to these resources in order to create new resources in the right place.  
 
 ```
+export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
+export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
+export USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."id"')
+export TENANCY_OCID=$(oci iam user list --all | jq -r  '.data[0]."compartment-id"') 
 cs=$(oci iam compartment list)
 export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
 
@@ -92,9 +97,9 @@ fn use context lab-fn-context
 
 fn update context oracle.compartment-id $compartmentId
 
-fn update context api-url https://functions.us-ashburn-1.oci.oraclecloud.com
+fn update context api-url https://functions.$REGION.oci.oraclecloud.com
 
-fn update context registry iad.ocir.io/$ns/cloudlab-repo
+fn update context registry ${REGION_KEY,,}.ocir.io/$ns/cloudlab-repo
 
 fn update context oracle.profile FN
 ```{{execute}}
@@ -105,8 +110,19 @@ A remote Fn context based on Oracle as provider should now be set up. List the c
 
 Next and finally, login to the private Docker Registry that is prepared for you on OCI.
 
-`docker login iad.ocir.io`{{execute}}
+The username you have to provide is composed of `<tenancy-namespace>/<username>`. 
+```
+NAMESPACE=$(oci os ns get| jq -r  '.data')
+USER_USERNAME=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."name"')
+echo "Username for logging in into Container Registry is $NAMESPACE/$USER_USERNAME"
+```{{execute}}
 
-The username you have to provide is composed of `<tenancy-namespace>/<username>`. The password is an Authentication Token generated for the specified user. Both these values are provided by your workshop instructor.
+The password is an Authentication Token generated for the specified user, in the OCI Tenancy preparation scenario. If you do not remember the authentication token, you can generate another one in the OCI Console:  https://console.REGION.oraclecloud.com/identity/users/<user-ocid>/swift-credentials or using the instructions in the preparation scenario. 
+
+`echo "Open the console at https://console.${REGION,,}.oraclecloud.com/identity/users/$USER_OCID/swift-credentials"`{{execute}}
+
+Now you can perform the login. Type the username and press enter, then type or paste the authentication token and press enter again. 
+
+`docker login ${REGION_KEY,,}.ocir.io`{{execute}}
 
 And now we are ready.
