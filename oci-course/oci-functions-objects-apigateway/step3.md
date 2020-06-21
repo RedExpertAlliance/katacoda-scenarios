@@ -18,12 +18,12 @@ fn -v deploy --app "lab$LAB_ID"
 
 We have to ensure that the environment variable *bucketName* is set in the context where function FileWriter is executing. This is done by defining a configuration setting for the function:
 ```
-fn config function "lab$LAB_ID" file-writer$LAB_ID bucketName "$bucketName"
+fn config function "lab$LAB_ID" file-writer bucketName "$bucketName"
 ```{{execute}}
 
 To invoke the function
 
-`echo -n '{ "filename":"my-special-file.txt","contents":"A new file, written by a Function on OCI"}' | fn invoke lab$LAB_ID file-writer$LAB_ID`{{execute}}
+`echo -n '{ "filename":"my-special-file.txt","contents":"A new file, written by a Function on OCI"}' | fn invoke lab$LAB_ID file-writer`{{execute}}
 
 Check the current contents of the bucket:
 

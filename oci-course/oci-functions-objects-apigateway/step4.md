@@ -7,8 +7,8 @@ apps=$(oci fn application list -c $compartmentId)
 labApp=$(echo $apps | jq -r --arg display_name "lab$LAB_ID" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
 
 funs=$(oci fn function list --application-id $labApp)
-fileWriterFun=$(echo $funs | jq -r --arg display_name "file-writer$LAB_ID" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
-echo "OCID for file-writer$LAB_ID function : $fileWriterFun"
+fileWriterFun=$(echo $funs | jq -r --arg display_name "file-writer" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
+echo "OCID for file-writer function : $fileWriterFun"
 ```{{execute}}
 
 Create the new file api_deployment.json:
@@ -44,7 +44,15 @@ Replace `function ocid` in the file with the OCID that was found just now.
 }
 </pre>
 
-Update the API Deployment in API Gateway lab-apigw with the following command:  
+We need to set some variables before proceeding into the next steps:
+
+```
+depls=$(oci api-gateway deployment list -c $compartmentId)
+deploymentEndpoint=$(echo $depls | jq -r --arg display_name "MY_API_DEPL_$LAB_ID" '.data.items | map(select(."display-name" == $display_name)) | .[0] | .endpoint')
+apiDeploymentId=$(echo $depls | jq -r --arg display_name "MY_API_DEPL_$LAB_ID" '.data.items | map(select(."display-name" == $display_name)) | .[0] | .id')
+```{{execute}}
+
+Update the API Deployment in API Gateway lab-apigw with the following command: 
 
 `oci api-gateway deployment update --deployment-id $apiDeploymentId --specification file://./api_deployment.json`{{execute}}
 
