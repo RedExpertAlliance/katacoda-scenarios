@@ -73,9 +73,9 @@ labApp=$(echo $apps | jq -r --arg display_name "lab$LAB_ID" '.data | map(select(
 
 funs=$(oci fn function list --application-id $labApp)
 fileWriterFun=$(echo $funs | jq -r --arg display_name "file-writer" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
-echo "OCID for file-writer$LAB_ID function : $fileWriterFun"
+echo "OCID for file-writer function : $fileWriterFun"
 rssFeederFun=$(echo $funs | jq -r --arg display_name "rss-feeder" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
-echo "OCID for rss-feeder$LAB_ID function : $rssFeederFun"
+echo "OCID for rss-feeder function : $rssFeederFun"
 ```{{execute}}
 
 Create the new file api_deployment2.json:
