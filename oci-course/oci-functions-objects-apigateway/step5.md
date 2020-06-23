@@ -2,15 +2,15 @@
 
 In this step, you will create a function that invokes the File Writer to produce files on OCI Object Storage.
 
-## Run the Node Application
+## Get the code for the RSS function (Node.JS app)
 
-Navigate to the directory that contains the RSSFeeder application:
+Clone the code repo and change directory:
 
-`cd ~/oracle-cloud-native-meetup-20-january-2020/functions/rss-feeder`{{execute}}
-
-and run `npm install` to install the required libraries.
-
-`npm install`{{execute}} 
+```
+cd
+git clone https://github.com/rcarrascosps/faas.git
+cd /root/faas/rss-feeder
+```{{execute}}
 
 Make sure that the endpoint on the API Gateway where the File Writer function can be accessed is set in enviroment variable `file_writer_endpoint`.  
 
@@ -18,25 +18,15 @@ Make sure that the endpoint on the API Gateway where the File Writer function ca
 
 Make sure $bucketName is set (to oci-lab#)
 
-`node rssFeeder "https://technology.amis.nl/feed/" "amis-blog-rss.json"`{{execute}}
-
-This will create a file called amis-blog-rss.json on Object Storage. It contains the actual contents from the AMIS Technology Blog's RSS Feed.
-
-Check output
-
-List objects in bucket:
-
-`oci os object list --bucket-name $bucketName`{{execute}}
-
 
 ## Create, Deploy and Invoke a Function
 
 We will now turn the Node application into a Function, just like we did with File Writer.
 
-Check the contents of file `~/oracle-cloud-native-meetup-20-january-2020/functions/rss-feeder/func.js`. This file is the wrapper for the Fn Function around the RSSFeeder application.
+Check the contents of file `~/faas/rss-feeder/func.js`. This file is the wrapper for the Fn Function around the RSSFeeder application.
 
 ````
-cd ~/oracle-cloud-native-meetup-20-january-2020/functions/rss-feeder
+cd ~~/faas/rss-feeder
 
 cat func.js
 ```{{execute}}
@@ -49,13 +39,13 @@ Let's deploy this function to application `lab#`. Execute the next command - mak
 
 Make sure that the environment variables are set when RSSFeerder is executing. This is done by defining configuration settings for the function:
 ```
-fn config function "lab$LAB_ID" rss-feeder$LAB_ID bucketName "$bucketName"
-fn config function "lab$LAB_ID" rss-feeder$LAB_ID file_writer_endpoint "$file_writer_endpoint"
+fn config function "lab$LAB_ID" rss-feeder bucketName "$bucketName"
+fn config function "lab$LAB_ID" rss-feeder file_writer_endpoint "$file_writer_endpoint"
 ```{{execute}}
 
 To invoke the function
 
-`echo -n '{"rssFeedURL":"https://technology.amis.nl/feed/","filename":"another-amis-blog-rss.json"}' | fn invoke lab$LAB_ID rss-feeder$LAB_ID`{{execute}}
+`echo -n '{"rssFeedURL":"https://technology.amis.nl/feed/","filename":"another-amis-blog-rss.json"}' | fn invoke lab$LAB_ID rss-feeder`{{execute}}
 
 Check the current contents of the bucket:
 
@@ -82,10 +72,10 @@ apps=$(oci fn application list -c $compartmentId)
 labApp=$(echo $apps | jq -r --arg display_name "lab$LAB_ID" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
 
 funs=$(oci fn function list --application-id $labApp)
-fileWriterFun=$(echo $funs | jq -r --arg display_name "file-writer$LAB_ID" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
-echo "OCID for file-writer$LAB_ID function : $fileWriterFun"
-rssFeederFun=$(echo $funs | jq -r --arg display_name "rss-feeder$LAB_ID" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
-echo "OCID for rss-feeder$LAB_ID function : $rssFeederFun"
+fileWriterFun=$(echo $funs | jq -r --arg display_name "file-writer" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
+echo "OCID for file-writer function : $fileWriterFun"
+rssFeederFun=$(echo $funs | jq -r --arg display_name "rss-feeder" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
+echo "OCID for rss-feeder function : $rssFeederFun"
 ```{{execute}}
 
 Create the new file api_deployment2.json:
