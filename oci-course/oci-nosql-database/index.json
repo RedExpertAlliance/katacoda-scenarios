@@ -46,6 +46,10 @@
       "host01": [       {
         "file": "special-doc.json",
         "target": "/root/"
+      }, 
+      {
+        "file": "nosql.js",
+        "target": "/root/"
       }
 
       ]

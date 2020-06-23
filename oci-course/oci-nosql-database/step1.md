@@ -122,17 +122,3 @@ Now you can perform the login. Type the username and press enter, then type or p
 `docker login ${REGION_KEY,,}.ocir.io`{{execute}}
 
 
-Prepare a number of environment variables. Note: the assumptions here is that a compartment called *lab-compartment* exists. We need to get a reference in order to create new resources in the right place.  
-
-```
-export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
-export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
-export USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."id"')
-export TENANCY_OCID=$(oci iam user list --all | jq -r  '.data[0]."compartment-id"') 
-cs=$(oci iam compartment list)
-export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
-
-echo "Compartment OCID: $compartmentId"
-echo "Namespace: $ns"
-
-```{{execute}}

@@ -1,5 +1,20 @@
 # Bonus: Interact with NoSQL Database from Function
 
+`fn init --runtime node nosql-talker`{{execute}}
+
+```
+cd nosql-talker
+
+npm install oracle-nosqldb --save
+
+cp ~/.oci/oci_api_key.pem .
+
+cp ~/nosql.js .
+```
+{{execute}}
+
+
+
 
 
 
