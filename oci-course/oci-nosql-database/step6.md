@@ -1,12 +1,10 @@
-Drop the tables that were created in this scenario - to clean up after yourself:
+# Bonus: Interact with NoSQL Database from Function
 
-```
-oci nosql table delete  --compartment-id $compartmentId --table-name-or-id  $tableName --force
-oci nosql table delete  --compartment-id $compartmentId --table-name-or-id  $docTableName --force
-```{{execute}}
 
-Verify if the tables have been dropped:
 
-`oci nosql table list --compartment-id $compartmentId `{{execute}}
 
-This concludes your first rapid introduction to the NoSQL Database service on Oracle Cloud Infrastructure.
+## Resources
+
+[Tutorial: Connecting an Application to Oracle NoSQL Database Cloud Service](https://oracle.github.io/nosql-node-sdk/tutorial-connect-cloud.html)
+
+[Oracle NoSQL Database Node.js SDK](https://oracle.github.io/nosql-node-sdk/index.html)

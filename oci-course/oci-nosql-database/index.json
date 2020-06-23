@@ -26,8 +26,12 @@
         "text": "step5.md"
       },
       {
-        "title": "Step 6 - Clean Up: remove the NoSQL data & tables",
+        "title": "Step 6 - Bonus: Interact with NoSQL Database from Function",
         "text": "step6.md"
+      },
+      {
+        "title": "Step 7 - Clean Up: remove the NoSQL data & tables",
+        "text": "step7.md"
       }    ],
     "intro": {
       "text": "intro.md",
