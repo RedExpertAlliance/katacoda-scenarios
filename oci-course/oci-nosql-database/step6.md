@@ -1,7 +1,11 @@
 # Bonus: Interact with NoSQL Database from Function
+In this step, you will work with a very simple Node application that leverages the Node SDK for NoSQL Database. Then you will turn this Node application into a function - and invoke that function to query NoSQL Database on your behalf.
+
+## Simple Node Application using the SDK for NoSQL Database
 
 `fn init --runtime node nosql-talker`{{execute}}
 
+Execute the following snippet
 ```
 cd nosql-talker
 
@@ -10,13 +14,37 @@ npm install oracle-nosqldb --save
 cp ~/.oci/oci_api_key.pem .
 
 cp ~/nosql.js .
-```
-{{execute}}
+```{{execute}}
+
+And now execute the Node application that interacts with NoSQL Database Cloud Service:
+`node nosql.js`
+
+See the results coming in. Feel free to edit the file `nosql.js` and manipulate the results.
+
+## Create and Deploy Function
 
 
+<pre target="clipboard">
+const fdk=require('@fnproject/fdk')
+const nosql=require('./nosql')
+
+fdk.handle(async function(input){
+  let name = 'John';
+  if (input.name) {
+    name = input.name;
+  }
+  const rows = await nosql.queryRecordByName(name)
+  console.log('\nInside Node nosql-talker function')
+  return {'name':name, 'results': rows}
+})
+</pre>
 
 
+Now deploy the function:
+`fn -v deploy --app "lab$LAB_ID"`{{execute}}
 
+And run it:
+`echo -n '{ "name":"Rolando"}' | fn invoke lab$LAB_ID nosql-talker`{{execute}}
 
 ## Resources
 

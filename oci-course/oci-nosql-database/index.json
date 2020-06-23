@@ -2,7 +2,7 @@
   "title": "First steps with NoSQL Database on Oracle Cloud Infrastructure",
   "description": "Managing data through Relational Model and JSON with Oracle NoSQL.",
   "difficulty": "beginner",
-  "time": "25 minutes",
+  "time": "35 minutes",
   "details": {
     "steps": [
       {
@@ -26,7 +26,7 @@
         "text": "step5.md"
       },
       {
-        "title": "Step 6 - Bonus: Interact with NoSQL Database from Function",
+        "title": "Step 6 - Bonus: Interact with NoSQL Database from Node App and OCI Function",
         "text": "step6.md"
       },
       {
