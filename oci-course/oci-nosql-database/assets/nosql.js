@@ -22,7 +22,7 @@ const queryRecordByName = async function (name) {
         const tableName = process.env['tableName'] ? process.env['tableName'] : "labTable1";
         try {
             let result = await nosqlClient.query(
-                `SELECT * FROM ${tableName} WHERE NAME= ${name}`);
+                `SELECT * FROM ${tableName} WHERE NAME= "${name}"`);
             return result.rows
 
         } catch (error) {            

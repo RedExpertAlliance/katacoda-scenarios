@@ -10,21 +10,40 @@ Execute the following snippet
 cd nosql-talker
 
 npm install oracle-nosqldb --save
+npm install
 
 cp ~/.oci/oci_api_key.pem .
 
 cp ~/nosql.js .
 ```{{execute}}
 
+This next command creates a snippet of JSON that you need to copy and paste into file nosql.js, starting at line 5:
+```
+json="region: \"$REGION\",\n
+compartment: \"lab-compartment\",\n 
+auth: {\n
+    iam : {\n
+        tenantId: \"$TENANCY_OCID\",\n
+        userId: \"$USER_OCID\",\n
+        fingerprint: \"YOUR_FINGERPRINT_FROM FILE ~/.oci/config\",\n
+        privateKeyFile: \"oci_api_key.pem\"\n
+    }\n
+}"
+echo "paste JSON fragment in file oci-configuration.js "
+echo -e $json
+```{{execute}
+
+Replace the fingerprint mock value with the actual fingerprint value from file ~/.oci/config
+
 And now execute the Node application that interacts with NoSQL Database Cloud Service:
-`node nosql.js`
+`node nosql.js`{{execute}}
 
 See the results coming in. Feel free to edit the file `nosql.js` and manipulate the results.
 
 ## Create and Deploy Function
 
-
-<pre target="clipboard">
+Open file *func.js*. Copy the snippet below and paste it in *func.js*, completely replacing all current contents:
+<pre class="file" data-target="clipboard">
 const fdk=require('@fnproject/fdk')
 const nosql=require('./nosql')
 
@@ -34,17 +53,21 @@ fdk.handle(async function(input){
     name = input.name;
   }
   const rows = await nosql.queryRecordByName(name)
-  console.log('\nInside Node nosql-talker function')
+  console.log(`\nInside Node nosql-talker function; the query result is in: ${JSON.stringify(rows)}`)
   return {'name':name, 'results': rows}
 })
 </pre>
 
 
 Now deploy the function:
+
 `fn -v deploy --app "lab$LAB_ID"`{{execute}}
 
 And run it:
+
 `echo -n '{ "name":"Rolando"}' | fn invoke lab$LAB_ID nosql-talker`{{execute}}
+and
+`echo -n '{ "name":"Sven"}' | fn invoke lab$LAB_ID nosql-talker`{{execute}}
 
 ## Resources
 
