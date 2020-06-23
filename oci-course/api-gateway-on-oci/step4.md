@@ -62,7 +62,7 @@ It will take a few seconds (up to 15 seconds) for the API Gateway to synchronize
 
 You can check on the state of the API Deployment and the current update (called a *workrequest*) in the OCI Console. Execute this command to get the URL to the Console:
 
-```echo "Your OCI Console Endpoint to inspect your API Deployment's current state: https://console.$REGION  .oraclecloud.com/api-gateway/gateways/$apiGatewayId/deployments/$apiDeploymentId/workrequests"```{{execute}}
+```echo "Your OCI Console Endpoint to inspect your API Deployment's current state: https://console.$REGION.oraclecloud.com/api-gateway/gateways/$apiGatewayId/deployments/$apiDeploymentId/workrequests"```{{execute}}
 
 ## Invoke the Hello Function - Now publicly exposed through API Gateway
 
