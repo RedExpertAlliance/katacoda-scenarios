@@ -33,7 +33,7 @@ auth: {\n
 }"
 echo "paste JSON fragment in file oci-configuration.js "
 echo -e $json
-```{{execute}
+```{{execute}}
 
 Note: After pasting the snippet into nosql.js, there is one final step before you can run the Node application: Replace the fingerprint mock value with the actual fingerprint value from file ~/.oci/config
 
