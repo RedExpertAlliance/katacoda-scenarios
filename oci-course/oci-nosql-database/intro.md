@@ -6,7 +6,7 @@ In addition to the NoSQL SDKs (Java and Python at the time of writing), Oracle N
 
 The *managed* aspect of this services results among other things in data safety: The Oracle NoSQL Database Cloud Service stores data across multiple Availability Domains (ADs) or Fault Domains (FDs) in single AD regions. If an AD or FD becomes unavailable, user data is still accessible from another AD or FD. Also encryption: Data is encrypted at rest (on disk) with Advanced Encryption Standard (AES). Data is encrypted in motion (transferring data between the application and Oracle NoSQL Database Cloud Service) with HTTPS.
 
-In this scenario, you will take your first steps with OCI NoSQL Database Service. You will create a structured table, insert several records, query these records - working both from the command line and from the console. You will also work with schemaless (JSON) documents.
+In this scenario, you will take your first steps with OCI NoSQL Database Service. You will create a structured table, insert several records, query these records - working both from the command line and from the console. You will also work with schemaless (JSON) documents. In the last step, you will create and run a Node application that uses the Node SDK for NoSQL Dataase to query and create records. Finally, you will turn this Node application into a function that is deployed to OCI.
 
 The scenario uses an Ubuntu 20.04 environment with Docker, OCI CLI and Fn CLI. Before you can start the steps in the scenario, the two Command Line interfaces are downloaded and installed. This will take about one minute. 
 
