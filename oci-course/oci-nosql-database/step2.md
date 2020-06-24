@@ -24,7 +24,7 @@ This is what your list of table(s) should look like:
 You can check the list of NoSQL Database tables in the current compartment in the console: Database | NoSQL Database.
 https://console.us-ashburn-1.oraclecloud.com/nosql/tables
 
-`echo Open the Console at https://console.$REGION.oraclecloud.com/nosql/tables`
+`echo Open the Console at https://console.$REGION.oraclecloud.com/nosql/tables`{{execute}}
 
 
 ## Resources

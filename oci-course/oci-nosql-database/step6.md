@@ -5,7 +5,7 @@ In this step, you will work with a very simple Node application that leverages t
 
 `fn init --runtime node nosql-talker`{{execute}}
 
-Execute the following snippet
+Execute the following snippet - that will do several things including downloading the NoSQL Database SDK for Node (`npm install oracle-nosqldb`)
 ```
 cd nosql-talker
 
@@ -17,7 +17,9 @@ cp ~/.oci/oci_api_key.pem .
 cp ~/nosql.js .
 ```{{execute}}
 
-This next command creates a snippet of JSON that you need to copy and paste into file nosql.js, starting at line 5:
+Open file *nosql.js* in the IDE. Check out function *nosqlActor* and see how the SDK facilitates the interaction for querying and creating records. 
+
+This next command creates a snippet of JSON that you need to copy and paste into file *nosql.js*, starting at line 5:
 ```
 json="region: \"$REGION\",\n
 compartment: \"lab-compartment\",\n 
@@ -33,16 +35,19 @@ echo "paste JSON fragment in file oci-configuration.js "
 echo -e $json
 ```{{execute}
 
-Replace the fingerprint mock value with the actual fingerprint value from file ~/.oci/config
+Note: After pasting the snippet into nosql.js, there is one final step before you can run the Node application: Replace the fingerprint mock value with the actual fingerprint value from file ~/.oci/config
 
 And now execute the Node application that interacts with NoSQL Database Cloud Service:
 `node nosql.js`{{execute}}
+
+If the execution fails you may have overlooked the step instruction to replace the fingerprint in nosql.js. I kept making that mistake 
 
 See the results coming in. Feel free to edit the file `nosql.js` and manipulate the results.
 
 ## Create and Deploy Function
 
 Open file *func.js*. Copy the snippet below and paste it in *func.js*, completely replacing all current contents:
+
 <pre class="file" data-target="clipboard">
 const fdk=require('@fnproject/fdk')
 const nosql=require('./nosql')
