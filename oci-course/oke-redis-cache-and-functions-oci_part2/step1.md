@@ -43,11 +43,10 @@ export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"
 export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
 export USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."id"')
 export TENANT_OCID=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
+cs=$(oci iam compartment list)
 ```{{execute}}
 
 `export LAB_ID=1`{{execute}}
-
-`cs=$(oci iam compartment list)`{{execute}}
 
 Let's get the compartment ID first:
 `export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')`{{execute}}
