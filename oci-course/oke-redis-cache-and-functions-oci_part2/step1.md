@@ -1,5 +1,9 @@
 ## Wait for OCI CLI to be installed
 
+**IMPORTANT NOTE: Do not proceed if you have not perfomed steps of these both scenarios:**
+- OKE Part 1 https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1
+- OKE API Reverse Proxy https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-api-server-reverse-proxy
+
 You need to provide details on the OCI tenancy you will work in and the OCI user you will work as. Please edit these two files:
 
 * ~/.oci/config

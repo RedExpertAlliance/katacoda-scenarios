@@ -35,7 +35,7 @@ to provision your trial: https://docs.oracle.com/en/cloud/get-started/subscripti
 - The user that you will use to manage the cluster using kubectl will be the tenant administrator that you will get after provisioning your 30 days free
 trial instance - or at least a user in the Administrators group.
 
-- The user that we are going to use to publish the docker image into OCIR (Oracle Container Registry) is the *lab-user* created in the OCI Lab Preparation scenario
+- The user that we are going to use to publish the docker image into OCIR (Oracle Container Registry) is the tenant administrator created in the OCI Lab Preparation scenario
 
 
 # Scenario Description

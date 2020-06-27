@@ -144,7 +144,7 @@ Now execute the following to create the secret:
 
 To validate that it was creted, execute:
 
-`kubectl get secrets -n $NAMESPACE`{{execute}}
+`kubectl get secrets -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 And you will get something like this:
 
@@ -157,7 +157,7 @@ ocilabsecret          kubernetes.io/dockerconfigjson        1         5s   <----
 
 **Now let's edit our yml file: kubernetes/session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.**
 
-`export image=us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
+`export image=$REGION.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
 
 `echo $image`{{execute}}
 
@@ -169,11 +169,11 @@ image: docker.io/rortegasps/redis-session:latest
 
 Now let's deploy our api, with:
 
-`kubectl apply -f kubernetes/session-api.yml -n $NAMESPACE`{{execute}}
+`kubectl apply -f kubernetes/session-api.yml -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 To find out if the service was properly deployed, execute:
 
-`kubectl get services -n $NAMESPACE`{{execute}}
+`kubectl get services -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 Wait for the External IP address to be assigned (and do not proceed until that happens). After executing the previous command it should be in **pending** state:
 

@@ -53,11 +53,11 @@ We apply the yaml file into our cluster within the namespace that we created ste
 
 `cd redis-session-api`{{execute}}
 
-`kubectl apply -f kubernetes/redis-deployment.yml -n $NAMESPACE`{{execute}}
+`kubectl apply -f kubernetes/redis-deployment.yml -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 Then wait (around 30s) for the redis cluster to be ready, issuing:
 
-`kubectl get pods -n $NAMESPACE -w`{{execute}}
+`kubectl get pods -n $NAMESPACE -w --insecure-skip-tls-verify`{{execute}}
 
 ~~~~
 NAME                                    READY     STATUS        RESTARTS   AGE
@@ -74,11 +74,11 @@ With our Redis instance up and running we will deploy the servie describe in the
 
 To deploy it, we will use the same thing as the previous step. That is:
 
-`kubectl apply -f kubernetes/redis-svc.yml -n $NAMESPACE`{{execute}}
+`kubectl apply -f kubernetes/redis-svc.yml -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 To validate that our service is running properly, let's do this:
 
-`kubectl get services -n $NAMESPACE`{{execute}}
+`kubectl get services -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 You should get something like this:
 

@@ -25,7 +25,7 @@ The intention to create namespaces is to be used in environments where you have 
 
 After you created your cluster, you will have a set of default namespaces. Exeute this to get the list:
 
-`kubectl get namespaces`{{execute}}
+`kubectl get namespaces --insecure-skip-tls-verify`{{execute}}
 
 ~~~~
 NAME              STATUS   AGE
@@ -43,9 +43,9 @@ For our scenario we will create the namespace: ociLab + $LAB_ID
 
 Now let's create the namespace:
 
-`kubectl create namespace $NAMESPACE`{{execute}}
+`kubectl create namespace $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
-If you re-issue the `kubectl get namespaces`{{execute}}  you will see your newly created namespace listed:
+If you re-issue the `kubectl get namespaces --insecure-skip-tls-verify`{{execute}}  you will see your newly created namespace listed:
 
 ~~~~
 NAME              STATUS   AGE
@@ -60,6 +60,6 @@ In order to deploy your artifacts to the ocilab$LAB_ID namespace, you just need 
 
 For example, to get the list of pods in the $NAMESPACE, you will do:
 
-`kubectl get pods -n $NAMESPACE`{{execute}}
+`kubectl get pods -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
 
 ![OKE Create Cluster](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/11.jpg)
