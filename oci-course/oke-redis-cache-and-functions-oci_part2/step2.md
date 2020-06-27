@@ -20,7 +20,7 @@ With the list of clusters, now let's get the clusterID of our particular cluster
 
 And let's configure it:
 
-`oci ce cluster create-kubeconfig --cluster-id $CLUSTER_ID --file $HOME/.kube/config --region us-ashburn-1 --token-version 2.0.0`{{execute}}
+`oci ce cluster create-kubeconfig --cluster-id $CLUSTER_ID --file $HOME/.kube/config --region $REGION --token-version 2.0.0`{{execute}}
 
 And finally, let's create an environment variable that points to our kubeconfig file:
 

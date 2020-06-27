@@ -73,9 +73,9 @@ We will login to our Oracle Cloud Image Registry to register our image, the user
 Let's get the username and namespace executing this:
  
 ```
-NAMESPACE=$(oci os ns get| jq -r  '.data')
+TENANT_NAMESPACE=$(oci os ns get| jq -r  '.data')
 USER_USERNAME=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."name"')
-echo "Username for logging in into Container Registry is $NAMESPACE/$USER_USERNAME"
+echo "Username for logging in into Container Registry is $TENANT_NAMESPACE/$USER_USERNAME"
 ```{{execute}}
 
 The password is an Authentication Token generated for the specified user, in the OCI Tenancy preparation scenario. If you do not remember the authentication token, you can generate another one in the OCI Console:  https://console.REGION.oraclecloud.com/identity/users/<user-ocid>/swift-credentials or using the instructions in the preparation scenario. 
@@ -84,7 +84,7 @@ The password is an Authentication Token generated for the specified user, in the
 
 Now you can perform the login. Type the username and press enter, then type or paste the authentication token and press enter again. 
 
-`docker login ${REGION_KEY,,}.ocir.io`{{execute}}
+`docker login $REGION.ocir.io`{{execute}}
 
 Now let's push the image to OCIR:
 
@@ -133,7 +133,7 @@ and deploy it to the cluster.
 Let's create the secret. But before that, set the following 03 environment variables.
 ***(Note. For pwd and youremail, set your information. The password is the one you used for login to docker)*** 
 
-`export user=$ns/lab-user`{{execute}}
+`export user=$TENANT_NAMESPACE/$USER_USERNAME`{{execute}}
 
 `export pwd=mypwd`{{execute}}
 
