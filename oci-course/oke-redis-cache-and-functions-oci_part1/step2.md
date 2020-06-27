@@ -56,7 +56,7 @@ LS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
 ~~~~
 
 **Write down the IP Address and you can proceed to scenario:
-https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-compute-nginx**
+https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-api-server-reverse-proxy**
 
 Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. It is a Kubernetes cluster with 2 nodes. Those nodes
 are OCI compute instances that were created automatically by the quick creation wizard.

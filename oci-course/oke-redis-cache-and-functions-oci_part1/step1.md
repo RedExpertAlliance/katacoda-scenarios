@@ -5,7 +5,7 @@ You need to provide details on the OCI tenancy you will work in and the OCI user
 * ~/.oci/config
 * ~/.oci/oci_api_key.pem
 
-If you do not have the OCI config file, nor the oci API key yet, you can go through these steps: https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
+If you do not have the OCI config file, nor the oci API key yet, you can go through these steps: https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation-cloud-trial
 
 Once you have the config file and the api key, copy their contents in ~/.oci/config and ~/.oci/oci_api_key.pem respectively. 
 
@@ -36,6 +36,12 @@ error: Missing or incomplete configuration info.  Please point to an existing, c
 That happened because we have not created a kubeconfig file, yet.
 
 Let´s also create the following environment variables, that we will use in the next steps:
+
+```
+export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
+export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
+export USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."id"')
+```{{execute}}
 
 `export TENANT_OCID=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=' | head -1)`{{execute}}
 

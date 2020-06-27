@@ -33,7 +33,6 @@ default           Active   17d
 kube-node-lease   Active   17d
 kube-public       Active   17d
 kube-system       Active   17d
-webinar           Active   17d
 ~~~~
 
 Those are the default namespaces. 
@@ -55,7 +54,6 @@ kube-node-lease   Active   17d
 kube-public       Active   17d
 kube-system       Active   17d
 ocilab$LAB_ID     Active   11s    <---
-webinar           Active   17d
 ~~~~
 
 In order to deploy your artifacts to the ocilab$LAB_ID namespace, you just need to include the option -n $NAMESPACE within the kubectl commands. 
