@@ -9,13 +9,13 @@ cat kubernetes/session-api.yml | grep replicas
 ```{{execute}}
 
 And listing our pods
-`kubectl get pods -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
+`kubectl get pods -n $NAMESPACE`{{execute}}
 
 If we have too much requests we can can create more instances or pods to handle it.
-`kubectl scale --replicas=10 deployment session-api -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
+`kubectl scale --replicas=10 deployment session-api -n $NAMESPACE`{{execute}}
 
 Now we have 10 session-api pods:
-`kubectl get pods -n $NAMESPACE --insecure-skip-tls-verify`{{execute}}
+`kubectl get pods -n $NAMESPACE`{{execute}}
 
 You should get something like this:
 
@@ -85,7 +85,7 @@ And you should get something like this:
 
 If you want to dynamically scale your deployment, you can try the following:
 
-`kubectl autoscale deployment session-api --cpu-percent=5 --min=10 --max=16 --insecure-skip-tls-verify -n $NAMESPACE`{{execute}}
+`kubectl autoscale deployment session-api --cpu-percent=5 --min=10 --max=16 -n $NAMESPACE`{{execute}}
 
 The previous command means that the deployment by the name session-api, will autoscale when it goes above 5% of CPU usage, and it will go to a maximum
 of  16 pods, and remain at 10 pods as a minimum.

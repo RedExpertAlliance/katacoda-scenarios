@@ -26,11 +26,8 @@ Let's also test that kubectl install and working properly, execute the following
 You should receive something like this:
 
 ~~~~
-error: Missing or incomplete configuration info.  Please point to an existing, complete config file:
-
-  1. Via the command-line flag --kubeconfig
-  2. Via the KUBECONFIG environment variable
-  3. In your home directory as ~/.kube/config
+Client Version: version.Info{Major:"1", Minor:"18", GitVersion:"v1.18.5", GitCommit:"e6503f8d8f769ace2f338794c914a96fc335df0f", GitTreeState:"clean", BuildDate:"2020-06-26T03:47:41Z", GoVersion:"go1.13.9", Compiler:"gc", Platform:"linux/amd64"}
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
 ~~~~
 
 That happened because we have not created a kubeconfig file, yet.
