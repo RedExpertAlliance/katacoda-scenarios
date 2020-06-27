@@ -74,6 +74,11 @@
       "description": "On monitoring OCI metrics and creating automated alarms to publish notifications upon relevant situations"
     },
     {
+      "course_id": "oci-vault-and-secrets",
+      "title": "Under Construction: Managing a Vault with Keys and Secrets",
+      "description": "On creating a Vault with Keys and Secrets (and using Secrets from Functions)"
+    },
+    {
       "course_id": "oci-terraform-provider",
       "title": "Introduction to OCI Terraform Provider",
       "description": "Infrastructure as Code on Oracle Cloud Infrastructure with Terraform."

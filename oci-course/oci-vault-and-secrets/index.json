@@ -1,0 +1,54 @@
+{
+  "title": "Under Construction: Managing a Vault with Keys and Secrets",
+  "description": "On creating a Vault with Keys and Secrets (and using Secrets from Functions)",
+  "difficulty": "beginner",
+  "time": "35 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Preparing the lab environment",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2 - Create a Vault",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - Create a Key and a Secret",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4 - Work with Vault through CLI",
+        "text": "step4.md"
+      },
+      {
+        "title": "Step 5 - Retrieve Secrets from JavaScript Functions",
+        "text": "step5.md"
+      },
+      {
+        "title": "Step 6 - Clean Up: Remove Secrets, Keys and Vault (delayed)",
+        "text": "step6.md"
+      }    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "",
+      "courseData": "background.sh",
+      "code": "foreground.sh"
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n",
+    "showide": true
+  },
+  "backend": {
+    "imageid": "ubuntu:2004"
+  }
+}
