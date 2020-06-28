@@ -22,12 +22,16 @@
         "text": "step4.md"
       },
       {
-        "title": "Step 5 - Retrieve Secrets from JavaScript Functions",
+        "title": "Step 5 - Retrieve Secrets from Node application using OCI Node SDK",
         "text": "step5.md"
       },
       {
-        "title": "Step 6 - Clean Up: Remove Secrets, Keys and Vault (delayed)",
+        "title": "Step 6 - Retrieve Secret from Resource Principal Enabled Node Function",
         "text": "step6.md"
+      },
+      {
+        "title": "Step 7 - Clean Up: Remove Secrets, Keys and Vault (delayed)",
+        "text": "step7.md"
       }    ],
     "intro": {
       "text": "intro.md",
