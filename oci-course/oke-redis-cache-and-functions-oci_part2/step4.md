@@ -57,7 +57,7 @@ We apply the yaml file into our cluster within the namespace that we created ste
 
 Then wait (around 30s) for the redis cluster to be ready, issuing:
 
-`kubectl get pods -n $NAMESPACE --insecure-skip-tls-verify -w`{{execute}}
+`kubectl get pods -n $NAMESPACE -w --insecure-skip-tls-verify`{{execute}}
 
 ~~~~
 NAME                                    READY     STATUS        RESTARTS   AGE

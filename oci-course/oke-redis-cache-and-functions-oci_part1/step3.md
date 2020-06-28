@@ -3,16 +3,20 @@ To quickly assess our new Kubernetes cluster, we can make use of OCI Cloud Shell
 Note: All commands in this step need to be executed in Cloud Shell - not in the Katacoda terminal environment.
 
 To access the Kubernetes cluster through Cloud Shell, go through these steps:
-1. Copy the contents of file ~/.kube/config to the clipboard
-2. Open Cloud Shell in OCI Console
-In Cloud Shell, execute these commands:
-3. `touch $HOME/.kube/config`
-4. `vi $HOME/.kube/config`
-5. Paste the contents of the clipboard to the *config* file and save the file
+1. Go to the OKE console
+`echo "Open console at https://console.us-ashburn-1.oraclecloud.com/containers/clusters"`{{execute}}
+2. Click on the newly created cluster
+![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/clusterConsole.jpg)
+3. Click on the button Access cluster
+![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/cshell1.jpg)
+4. Copy the command:
+![OKE Summary](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/cshell2.jpg)
+5. Open Cloud Shell in OCI Console
+6. Paste the contents of the clipboard, this will create the config file for K8s
 To check whether you can access the Kubernetes Cluster and whether it is running successfully, execute this command to learn about the version of the Kubernetes Cluster:
-6. `kubectl version`
+7. `kubectl version`
 And to list all pods in all namespaces:
-7. `kubectl get pods -A=true`
+8. `kubectl get pods -A=true`
 
 You can go one step further and create a new deployment on the Kubernetes cluster. Still in Cloud Shell, execute these commands to create a a deployment of a *hello world* application and subsequently expose that application through a load balancer as a public application: 
 

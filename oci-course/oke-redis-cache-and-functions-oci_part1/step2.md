@@ -27,7 +27,7 @@ Now let's just be sure that our PATH environment variable is well set:
 
 And let's configure it:
 
-`oci ce cluster create-kubeconfig --cluster-id $CLUSTER_ID --file $HOME/.kube/config --region us-ashburn-1 --token-version 2.0.0`{{execute}}
+`oci ce cluster create-kubeconfig --cluster-id $CLUSTER_ID --file $HOME/.kube/config --region $REGION --token-version 2.0.0`{{execute}}
 
 And finally, let's create an environment variable that points to our kubeconfig file:
 
@@ -51,16 +51,20 @@ MzFUclIwZmUvUUJnVkhwRlQzQVp0cnBCNU43VytqR0t3RStuCk1QU0ZocUNxbHpLVDhUV0ZXZnRYOEI4
 aU4KcGNrOGtsem51SmRHaGxaSzdJdTNISVF0RC9tREZqd3hKMjQyMmRTMThJNGMwY01kMGxVR3l0TnJKVnR0OVFXWgpvajB0YkRsY0liaEtsT1RVSTdybnplUGE0OEJZOFJC
 NjAyRWxtbGxoUmZQWFNEUDR1bHEvVjlnT2t1ZFlMaE1ECjVJYzZDKy9mZTUxZmpZM1M0T3prODkyWWRWOHdublM2Y2RQZkNiOGVIenhEMEI5cHhZWHVsdVpuN2tKbk1ZUVUK
 LS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-    server: https://<IP_ADDRESS>:6443
+    server: https://<IP_ADDRESS>:6443     <-----
   name: cluster-c3tgnzyga2t
 ~~~~
 
 **Write down the IP Address and you can proceed to scenario:
-https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-compute-nginx**
+https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-api-server-reverse-proxy**
 
 Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. It is a Kubernetes cluster with 2 nodes. Those nodes
 are OCI compute instances that were created automatically by the quick creation wizard.
 The Kubernetes API Server is serving at the IP address that you've checked in the ~/kube/config file and listening on port 6443.
+
+Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. It is a Kubernetes cluster with 3 nodes. Those nodes
+are OCI compute instances that were created automatically by the quick creation wizard.
+The Kubernetes API Server is serving at the IP address that you can check in the ~/kube/config file and listening on port 6443.
 
 ## OCI Cloud Shell
 The OCI Cloud Shell us a browser based command line interface that is available in the OCI Console. The Cloud Shell environment is configured for accessing OCI resources. It provides many tools - including the OCI CLI, Terraform, Fn CLI and also kubectl. The OKE Cluster instance that you have created can be accessed using kubectl in the Cloud Shell. You can try this out in the next (Bonus) step/

@@ -63,22 +63,32 @@ export ocirname=cloudlab
 
 Now let's tag it. 
 
-`docker tag lab-user/session-api:1.0.0 us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}} 
+`docker tag lab-user/session-api:1.0.0 $REGION.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}} 
 
 So far we have an image that contains our Go code, and is locally in our file system. Now we need to register in Oracle Container Registry
 
 ## Image Registration
 
-The first step is to login to OCIR:
+We will login to our Oracle Cloud Image Registry to register our image, the username you have to provide is composed of `<tenancy-namespace>/<username>`.
+Let's get the username and namespace executing this:
+ 
+```
+TENANT_NAMESPACE=$(oci os ns get| jq -r  '.data')
+USER_USERNAME=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."name"')
+echo "Username for logging in into Container Registry is $TENANT_NAMESPACE/$USER_USERNAME"
+```{{execute}}
 
-`docker login us-ashburn-1.ocir.io`{{execute}}
+The password is an Authentication Token generated for the specified user, in the OCI Tenancy preparation scenario. If you do not remember the authentication token, you can generate another one in the OCI Console:  https://console.REGION.oraclecloud.com/identity/users/<user-ocid>/swift-credentials or using the instructions in the preparation scenario. 
 
-You will be prompted for your user. The notation you need to use is $ns/lab-user. And for the password, is the Auth Token that you generated in Step 4
-for the OCI Lab preparation https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation
+`echo "Open the console at https://console.${REGION,,}.oraclecloud.com/identity/users/$USER_OCID/swift-credentials"`{{execute}}
+
+Now you can perform the login. Type the username and press enter, then type or paste the authentication token and press enter again. 
+
+`docker login $REGION.ocir.io`{{execute}}
 
 Now let's push the image to OCIR:
 
-`docker push us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
+`docker push $REGION.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
 The result must me something like this:
 ~~~~
 docker push us-ashburn-1.ocir.io/idi66ekilhnr/spsocir/session-api:1.0.0
@@ -107,6 +117,10 @@ If you login to your OCI tenant and go to OCIR, you will see something like this
 
 ![OCIR](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci/assets/ocir.jpg)
 
+You can open the registry with this url:
+
+`echo "Open the console at https://console.us-ashburn-1.oraclecloud.com/containers/registry"`{{execute}}
+
 The image has been pushed to your OCI registry.
 
 Now we are ready to deploy our Go API.
@@ -119,7 +133,7 @@ and deploy it to the cluster.
 Let's create the secret. But before that, set the following 03 environment variables.
 ***(Note. For pwd and youremail, set your information. The password is the one you used for login to docker)*** 
 
-`export user=$ns/lab-user`{{execute}}
+`export user=$TENANT_NAMESPACE/$USER_USERNAME`{{execute}}
 
 `export pwd=mypwd`{{execute}}
 
@@ -138,12 +152,12 @@ And you will get something like this:
 NAME                  TYPE                                  DATA      AGE
 default-token-bz52x   kubernetes.io/service-account-token   3         19m
 istio.default         istio.io/key-and-cert                 3         19m
-ocilabsecret          kubernetes.io/dockerconfigjson        1         5s
+ocilabsecret          kubernetes.io/dockerconfigjson        1         5s   <----
 ~~~~
 
 **Now let's edit our yml file: kubernetes/session-api.yml. We will edit with the value of variable $image, that is going to be set with the following export.**
 
-`export image=us-ashburn-1.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
+`export image=$REGION.ocir.io/$ns/$ocirname/session-api:1.0.0`{{execute}}
 
 `echo $image`{{execute}}
 
