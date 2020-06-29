@@ -38,7 +38,7 @@ echo "OCID for secret THE_SECRET = $secretOCID "
 
 Specific Secret Details:
 
-`oci vault secret get --secret-id $secretOCID`
+`oci vault secret get --secret-id $secretOCID`{{execute}}
 
 Get Secret Bundle - including the secret contents:
 
