@@ -43,12 +43,9 @@
       "text": "finish.md"
     },
     "assets": {
-      "host01": [       {
-        "file": "special-doc.json",
-        "target": "/root/"
-      }, 
+      "host01": [       
       {
-        "file": "readSecret.js",
+        "file": "readObject.js",
         "target": "/root/"
       }]
     }
