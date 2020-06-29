@@ -2,6 +2,13 @@
 
 Function deployed to FaaS: Resource Principal enabled. Does not require the private key for a specific user.
 
+allow group functions-in-lab-compartment to read secret-family in tenancy
+
+allow group functions-in-lab-compartment to manage vaults in tenancy
+allow group functions-in-lab-compartment to manage keys in tenancy
+
+
+
 Create new function *secret-retriever* using Node as the runtime: 
 `fn init --runtime node secret-retriever`{{execute}}
 
@@ -13,7 +20,7 @@ npm install
 ```{{execute}}
 
 paste into func.js:
-<pre >
+<pre class="file" data-target="clipboard">
 const fdk = require('@fnproject/fdk');
 const fs = require('fs')
 
@@ -45,30 +52,12 @@ Add these dependencies:
 
 `npm install http-signature jssha install --save`{{execute}}
 
-Now again copy this snippet to func.js:
-<pre>
-const fdk = require('@fnproject/fdk');
-//const rs = require('./readSecret')
-const ro = require('./readObject')
-fdk.handle(async function (input) {
-    const r = await ro.readObject(input.namespace, input.bucketName, input.fileName)
-    return {
-     'fileContents': r
-    }
-})
-</pre>
+Copy this Node module to the function directory:
+`cp /root/readSecret.js .`{{execute}}
 
-Deploy the function:
+Copy this snippet to file func.js - our implementation of the function wrapper geared towards reading a secret:
 
-`fn -v deploy --app "lab$LAB_ID"`{{execute}}
-
-Invoke the function:
-
-`export NAMESPACE=$(oci os ns get| jq -r  '.data')`
-
-`echo -n "{\"namespace\":\"$NAMESPACE\", \"bucketName\":\"function-resource-principal-test\", \"fileName\": \"test-file.json\"}" | fn invoke "lab${LAB_ID}" secret-retriever --content-type application/json`{{execute}}
-
-<pre>
+<pre class="file" data-target="clipboard">
 const fdk = require('@fnproject/fdk');
 const rs = require('./readSecret')
 fdk.handle(async function (input) {
@@ -82,9 +71,6 @@ fdk.handle(async function (input) {
     }
 })
 </pre>
-Add these dependencies:
-
-`npm install http-signature jssha install --save`{{execute}}
 
 Deploy the function:
 
