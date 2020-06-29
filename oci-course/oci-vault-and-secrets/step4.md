@@ -4,6 +4,9 @@ Encode a secret plain text into a base64 encoded string
 
 `the_secret=$(echo "my secret message" | base64)`{{execute}}
 
+What does the encoded message look like?
+`echo $the_secret`{{execute}}
+
 Verify if the encoding was successful by decoding again:
 
 `echo $the_secret | base64 --decode`{{execute}}
@@ -22,7 +25,7 @@ oci vault secret create-base64 \
 
 Of course we need to verify if we can retrieve the secret:
 List of secrets:
-`oci vault secret list --compartment-id $compartmentId`
+`oci vault secret list --compartment-id $compartmentId`{{execute}}
 
 Get the Secret OCID
 ```

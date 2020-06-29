@@ -45,7 +45,7 @@
     "assets": {
       "host01": [       
       {
-        "file": "readObject.js",
+        "file": "readSecret.js",
         "target": "/root/"
       }]
     }

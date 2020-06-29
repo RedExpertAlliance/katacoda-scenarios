@@ -13,6 +13,7 @@ Create a policy that grants read access on secrets in the *lab-compartment* to a
 oci iam policy create  --name "read-secret-permissions-for-resource-principal-enabled-functions-in-lab-compartment" --compartment-id $compartmentId  --statements "[ \"allow dynamic-group functions-in-lab-compartment to read secret-family in compartment lab-compartment\" ]" --description "to allow functions in lab-compartment to read secrets"
 ```{{execute}}
 
+![](assets/function-resource-principal-read-secret.png)
 
 ## Create Function Secret Retriever
 
