@@ -41,15 +41,18 @@ function sign(request, options) {
 }// sign
 
 
-const readObject = async function (privateKey, keyId, tenancyId, namespace, bucketName, fileName) {
+const readSecretFromVault = async function (privateKey, keyId, tenancyId, secretOCID, compartmentOCID, region) {
     /* return a promise that contains the REST API call */
     return new Promise((resolve, reject) => {
 
         /* the domain/path for the REST endpoint */
         const requestOptions = {
-            host: 'objectstorage.us-ashburn-1.oraclecloud.com',
-            //path: "/n/idtwlqf2hanz/b/function-resource-principal-test/o/test-file.json"
-            path: `/n/${encodeURIComponent(namespace)}/b/${encodeURIComponent(nucketName)}/o/${encodeURIComponent(fileName)}`,
+            host: `secrets.vaults.${region}.oci.oraclecloud.com`,
+            path: `/20190301/secretbundles/${secretOCID}`,
+            headers: {
+                "compartmentId": compartmentOCID,
+                "stage": "CURRENT"
+            }
         };
 
         /* the request itself */
@@ -77,7 +80,8 @@ const readObject = async function (privateKey, keyId, tenancyId, namespace, buck
     })
 }
 
-const readObject = async function (secret) {
+const readSecret = async function (secretOCID, compartmentOCID,region) {
+    console.log(`secretOCID ${secretOCID}, compartment ${compartmentOCID}`)
     const privateKeyPath = process.env.OCI_RESOURCE_PRINCIPAL_PRIVATE_PEM
     const sessionTokenFilePath = process.env.OCI_RESOURCE_PRINCIPAL_RPST
     console.log(`$process.env.OCI_RESOURCE_PRINCIPAL_PRIVATE_PEM ${process.env.OCI_RESOURCE_PRINCIPAL_PRIVATE_PEM}`)
@@ -96,7 +100,10 @@ const readObject = async function (secret) {
     /*  set the keyId used to sign the request; the format here is the literal string 'ST$', followed by the entire contents of the RPST */
     const keyId = `ST$${rpst}`
 
-    const response = await readObject(privateKey, keyId, tenancyId)
+    const response = await readSecretFromVault(privateKey, keyId, tenancyId, secretOCID, compartmentOCID, region)
+    let secretContentBase64 = response.secretBundleContent.content;
+    //let buff = new Buffer(secretContentBase64, 'base64');
+    response.secretContent = new Buffer(secretContentBase64, 'base64').toString('ascii');
     return response
 
 

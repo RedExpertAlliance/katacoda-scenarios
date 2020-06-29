@@ -1,4 +1,4 @@
-# Create a Key and a Secret
+# Create a Key
 
 Creating a key that is used to encrypt and decrypt strings - or anything you want to have encrypted and decrypted - is best done in the console.
 
