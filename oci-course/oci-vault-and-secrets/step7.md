@@ -50,9 +50,18 @@ Removing the Function is the simplest of all operations - although traces of the
 ## Remove the Dynamic Group and the Policy
 Delete the Dynamic Group *functions-in-lab-compartment*:
 
-`oci iam dynamic-group delete --compartment-id $TENANCY_OCID --name "functions-in-lab-compartment" `{{execute}}
+```
+oci iam dynamic-group list --compartment-id $TENANCY_OCID
+dgs=$(oci iam dynamic-group list --compartment-id $TENANCY_OCID)
+export dgId=$(echo $dgs | jq -r --arg dgname "functions-in-lab-compartment" '.data | map(select(."name" == $dgname)) | .[0] | .id')
+oci iam dynamic-group delete --dynamic-group-id $dgId --force
+```{{execute}}
 
 Delete the policy *read-secret-permissions-for-resource-principal-enabled-functions-in-lab-compartment*:
 
 ```
-oci iam policy delete  --name "read-secret-permissions-for-resource-principal-enabled-functions-in-lab-compartment" --compartment-id $compartmentId```{{execute}}
+oci iam policy list --compartment-id $compartmentId
+pols=$(oci iam policy list --compartment-id $compartmentId)
+export polId=$(echo $pols | jq -r --arg polname "read-secret-permissions-for-resource-principal-enabled-functions-in-lab-compartment" '.data | map(select(."name" == $polname)) | .[0] | .id')
+oci iam policy delete --policy-id $polId --force
+```{{execute}}

@@ -54,6 +54,8 @@ fdk.handle(async function (input) {
 })
 </pre>
 
+This function reads the values of the two environment variables set by the FaaS runtime framework for Functions that are Resource Principals (or Resource Principal enabled). It also reads the contents of the RPST file that is injected at runtime into the container that implements the Function. If this function returns a result, the resource principilazation of the function was successful.
+
 Deploy the function:
 
 `fn -v deploy --app "lab$LAB_ID"`{{execute}}
@@ -75,6 +77,8 @@ Add these dependencies on two NPM modules *http-signature* and *jssha*:
 
 Copy this Node module to the function directory:
 `cp /root/readSecret.js .`{{execute}}
+
+Inspect the contents of *readSecret.js* in the IDE. As before, the injected RPST token and Private Key pem-file are read. These provide the necessary elements for signing the API request. The Secrets API is pretty straightforward: a GET request to the endpoint (secrets.vaults.${region}.oci.oraclecloud.com) and path (/20190301/secretbundles/${secretOCID}) for the secret. 
 
 Copy this snippet to file func.js - our implementation of the function wrapper geared towards reading a secret:
 

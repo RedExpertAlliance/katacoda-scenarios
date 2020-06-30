@@ -8,4 +8,4 @@ You have used to Key to encrypt contents. The encrypted contents was later decry
 
 The secret was stored in the Vault and later retrieved using the OCI CLI and in a Node application using the Node SDK for OCI. The last step you took was the creation of a Function that retrieves the secret - using its Resource Principal status.  
 
-Finally, the function was removed and the Secret, Key and Vault where scheduled for deletion. Note that this pending deletion can still be canceled.
+Finally, the function, the dynamic group and the policy were removed and the Secret, Key and Vault where scheduled for deletion. Note that the pending deletion for the Vault, Key and Secret can still be canceled, although for Key and Secret only when the deletion of the Vault is canceled first.
