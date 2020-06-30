@@ -75,7 +75,7 @@
     },
     {
       "course_id": "oci-vault-and-secrets",
-      "title": "Under Construction: Managing a Vault with Keys and Secrets",
+      "title": "Managing a Vault with Keys and Secrets",
       "description": "On creating a Vault with Keys and Secrets (and using Secrets from Functions)"
     },
     {

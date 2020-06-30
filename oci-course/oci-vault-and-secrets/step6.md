@@ -1,6 +1,11 @@
-# Retrieve Secret from Resource Principal Enabled Function
+In this step you will create a function on OCI that reads a secret from the vault. We will make use in this example of the Resource Principal mechanism in OCI. This means that the function itself has permissions to access OCI services and resources, instead of leveraging permissions of an OCI user. Functions can become a Resource Principal when they are a member of a Dynamic Group. They inherit the permissions granted to the Dynamic Group through policies. When a function is a resource principal - the FaaS runtime framework injects a private key file and an RPST token file into the container that implements the function and sets two environment variables to refer to these files.  
 
-Function deployed to FaaS: Resource Principal enabled. Does not require the private key for a specific user.
+![](assets/function-resource-principal-read-secret.png)
+
+In order to create a function that can read a secret, we have to:
+* create a dynamic group of which the function will be a member
+* through a policy [statement] grant permission to this group for reading secrets 
+* create the function that reads the Private Key and RPST files references by the environment variables and uses their contents to sign requests to the OCI REST APIs 
 
 ## Dynamic Group and Policy 
 Create dynamic group *functions-in-lab-compartment* that has all functions in compartment *lab-compartment* as member:
@@ -13,12 +18,15 @@ Create a policy that grants read access on secrets in the *lab-compartment* to a
 oci iam policy create  --name "read-secret-permissions-for-resource-principal-enabled-functions-in-lab-compartment" --compartment-id $compartmentId  --statements "[ \"allow dynamic-group functions-in-lab-compartment to read secret-family in compartment lab-compartment\" ]" --description "to allow functions in lab-compartment to read secrets"
 ```{{execute}}
 
-![](assets/function-resource-principal-read-secret.png)
+
 
 ## Create Function Secret Retriever
 
 Create new function *secret-retriever* using Node as the runtime: 
-`fn init --runtime node secret-retriever`{{execute}}
+```
+cd ~
+fn init --runtime node secret-retriever
+```{{execute}}
 
 Change to the directory created for the function, with the familiar resources *func.js*, *func.yaml* and *package.json*; install the NPM module for the FN FDK
 

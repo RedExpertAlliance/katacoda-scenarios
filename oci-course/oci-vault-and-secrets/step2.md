@@ -1,5 +1,7 @@
 # Creating Vault in Console
 
+
+
 Note: you should be aware before creating a Vault that it cannot be deleted instantly. When you delete a vault, the vault and all its associated keys go into a *pending deletion* state until the waiting period expires. By default, this is 30 days, but can be set from a minimum of 7 days up to a maximum of 30 days. When a vault is deleted, all its associated keys are also deleted. In terms of costs, it seems that you do not actually pay for the vault in teh pending deletion state.  
 ```
 oci kms management vault create\
