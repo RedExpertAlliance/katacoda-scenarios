@@ -4,7 +4,6 @@ In this step, you will work with a Node application that retrieves the secret fr
 
 ![](assets/oci-sdks.png)
 
-## 
 
 ```
 mkdir node-read-secret
@@ -73,16 +72,22 @@ const secretClient =
 secretClient.region = region;
 secretClient.getSecretBundle({"secretId": process.env.secretOCID})
   .then((result) => {
-    console.log(util.inspect(result, false, null, true));
-    const secretContent = Buffer.from(result.secretBundleContent.content, 'base64').toString('ascii')
-    console.log(`The secret is out: $(secretContent)`)
+    console.log(`Quest for Secrets ${util.inspect(result, false, null, true)}`);
+    const secretContent = Buffer.from(result.secretBundle.secretBundleContent.content, 'base64').toString('ascii')
+    console.log(`The secret is out: ${secretContent}`)
   })
   .catch((e) => {
     console.log(e);
   });
 </pre>
 
+New in this snippet is the *oci-secrets* library in the OCI Node SDK. A SecretsClient object is created using the *authProvider* that was also used with the storage service. On this SecretClients object, the method getSecretBundle() is invoked with the OCID of the secret we are interested in. From the result we can derive the base64 encoded content that can subsequently be bas64 decoded into the original string.
 
+Two lessons can be learned:
+* interacting with OCI APIs is much easier through the Node SDK than use of raw REST API requests
+* retrieving secrets from an OCI vault in a Node application is quite straightforward
+
+In the next step, we will create a Serverless Function that retrieves the secret. 
 
 ## Resources
 
