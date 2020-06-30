@@ -24,4 +24,12 @@ Advantages of managing secrets in Oracle Cloud Infrastructure vault
 * You can centralize secrets management and only administrators will have Create, Update, and Delete permissions on secrets
 * You can rotate/update secrets/credentials without any changes in the consumer application
 * Secrets are encrypted at rest to improve security posture
-* secrets management proliferates machine to machine communication or serverless computing by making it secure*
+* secrets management proliferates machine to machine communication or serverless computing by making it secure
+
+## Scenario steps
+In this scenario, you will:
+* create a Vault
+* generate a Key in the Vault and use the key for Encryption and Decyption
+* create and retrieve Secrets
+* read Secrets from a Node application
+* read Secrets from a Function
