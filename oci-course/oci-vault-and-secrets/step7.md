@@ -8,6 +8,7 @@ To remove the secret that was created in step 4, execute this command. This sets
 
 Inspect the state of the secret at this point:
 `oci vault secret get --secret-id $secretOCID`{{execute}}
+The *lifecycle-state* and the *time-of-deletion* are the most interesting properties in the result of this call.
 
 ## Remove Key
 
@@ -15,17 +16,18 @@ Deleting a key is not an immediate action; because of the potential impact, the 
 
 This command schedules the key for deletion after 30 days:
 
-`oci kms management key schedule-deletion  --key-id $keyOCID`{{execute}}
+`oci kms management key schedule-deletion  --key-id $keyOCID --endpoint $vaultManagementEndpoint`{{execute}}
 
 The new key status can be inspected:
-`oci kms management key get  --key-id $keyOCID`{{execute}}
+`oci kms management key get  --key-id $keyOCID --endpoint $vaultManagementEndpoint`{{execute}}
 
 The scheduled deletion can be revoked:
 
-`oci kms management key cancel-deletion --key-id $keyOCID`{{execute}}
+`oci kms management key cancel-deletion --key-id $keyOCID --endpoint $vaultManagementEndpoint`{{execute}}
 
 The new key status can be inspected:
-`oci kms management key get  --key-id $keyOCID`{{execute}}
+`oci kms management key get  --key-id $keyOCID --endpoint $vaultManagementEndpoint`{{execute}}
+The *lifecycle-state* is first updated to *CANCELLING_DELETION* and then to *ENABLED*.
 
 ## Remove Vault
 
@@ -38,9 +40,19 @@ The new status of the vault is retrieved like this:
 `oci kms management vault get --vault-id $vaultOCID`{{execute}}
 
 The new key status - assigned because of the deletion of the vault - can be inspected:
-`oci kms management key get  --key-id $keyOCID`{{execute}}
+`oci kms management key get  --key-id $keyOCID  --endpoint $vaultManagementEndpoint`{{execute}}
 
 ## Remove the Function
-Removing the Function is the simplest of all operations - although traces of the Function are left behind in the form of the container image in the OCIR - the Contairer Registry.
+Removing the Function is the simplest of all operations - although traces of the Function are left behind in the form of the container image in the OCIR - the Container Registry.
 
-`fn delete f secret-retriever`{{execute}}
+`fn delete f  "lab$LAB_ID" secret-retriever`{{execute}}
+
+## Remove the Dynamic Group and the Policy
+Delete the Dynamic Group *functions-in-lab-compartment*:
+
+`oci iam dynamic-group delete --compartment-id $TENANCY_OCID --name "functions-in-lab-compartment" `{{execute}}
+
+Delete the policy *read-secret-permissions-for-resource-principal-enabled-functions-in-lab-compartment*:
+
+```
+oci iam policy delete  --name "read-secret-permissions-for-resource-principal-enabled-functions-in-lab-compartment" --compartment-id $compartmentId```{{execute}}

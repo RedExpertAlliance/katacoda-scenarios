@@ -17,9 +17,6 @@ Then install the OCI SDK:
 
 Open *app.js* in the IDE. Paste the snippet below into file app.js.
 
-Make sure to update line 8 and set the correct region for your tenancy:
-![](assets/set-region.png)
-
 <pre class="file" data-target="clipboard">
 const objectstorage = require('oci-objectstorage')
 const common = require('oci-common');
@@ -54,6 +51,10 @@ objectStorageClient.listBuckets(listBucketsRequest)
   });
 </pre>
 
+
+Make sure to update line 8 and set the correct region for your tenancy:
+![](assets/set-region.png)
+
 Run this little application that will show a list of all buckets in your tenancy:
 `node app.js`{{execute}}
 
@@ -82,6 +83,9 @@ secretClient.getSecretBundle({"secretId": process.env.secretOCID})
 </pre>
 
 New in this snippet is the *oci-secrets* library in the OCI Node SDK. A SecretsClient object is created using the *authProvider* that was also used with the storage service. On this SecretClients object, the method getSecretBundle() is invoked with the OCID of the secret we are interested in. From the result we can derive the base64 encoded content that can subsequently be bas64 decoded into the original string.
+
+Run this little application that will show the secret that we created in the previous step (in addition to list of buckets in the object storage service):
+`node app.js`{{execute}}
 
 Two lessons can be learned:
 * interacting with OCI APIs is much easier through the Node SDK than use of raw REST API requests

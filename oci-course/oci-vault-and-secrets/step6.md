@@ -63,12 +63,13 @@ Invoke the function:
 `fn invoke "lab${LAB_ID}" secret-retriever --content-type application/json`{{execute}}
 
 This will return evidence of the values injected into the function at run time by the Oracle Functions FaaS framework because of the Resource Principal configuration.
+![](assets/resouce-principal-injection.png)
 
 ## Function Secret Retriever - and now for real!
 
 We will now extend the function to do the job we have in mind for it: reading a secret from a vault.
 
-Add these dependencies:
+Add these dependencies on two NPM modules *http-signature* and *jssha*:
 
 `npm install http-signature jssha install --save`{{execute}}
 
@@ -96,7 +97,7 @@ Invoke the function - to retrieve the value of the secret that was created in st
 
 `echo -n "{\"secretOCID\":\"${secretOCID}\", \"compartmentOCID\":\"${compartmentId}\", \"region\":\"${REGION}\"}" | fn invoke "lab${LAB_ID}" secret-retriever --content-type application/json`{{execute}}
 
-This time, a secret really is read from the Vault and its value is included in the function's response.
+This time, a secret really is read from the Vault and its value is included in the function's response. Check the *secretContent* property in the function result.
 
 ## Resources
 
