@@ -6,10 +6,81 @@ In this step, you will work with a Node application that retrieves the secret fr
 
 ## 
 
-npm init node-read-secret
+```
+mkdir node-read-secret
+cd node-read-secret/
+npm init -y
+touch app.js
+```{{execute}}
 
-npm install oci-sdk --save
+Then install the OCI SDK: 
+`npm install oci-sdk --save`{{execute}}
 
+Open *app.js* in the IDE. Paste the snippet below into file app.js.
+
+Make sure to update line 8 and set the correct region for your tenancy:
+![](assets/set-region.png)
+
+<pre class="file" data-target="clipboard">
+const objectstorage = require('oci-objectstorage')
+const common = require('oci-common');
+const util = require('util');
+const configurationFilePath = "~/.oci/config";
+const configProfile = "DEFAULT";
+const compartmentId = process.env.compartmentId;
+const tenancyName = `${process.env.ns}`;
+const region = common.Region.US_ASHBURN_1
+
+const authProvider = new common.ConfigFileAuthenticationDetailsProvider(
+    configurationFilePath,
+    configProfile
+);
+
+const objectStorageClient = 
+      new objectstorage.ObjectStorageClient({
+        authenticationDetailsProvider: authProvider
+      });
+objectStorageClient.region = region;
+
+const listBucketsRequest = {
+  namespaceName: tenancyName,
+  compartmentId: compartmentId,
+};
+objectStorageClient.listBuckets(listBucketsRequest)
+  .then((result) => {
+    console.log(util.inspect(result, false, null, true));
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+</pre>
+
+Run this little application that will show a list of all buckets in your tenancy:
+`node app.js`{{execute}}
+
+## Reading Secrets
+
+Now we are going to extend the application with the capability to read a secret from a vault. Paste the following snippet at the bottom of the app.js file. 
+
+<pre class="file" data-target="clipboard">
+const secrets = require('oci-secrets')
+
+const secretClient = 
+      new secrets.SecretsClient
+      ({
+        authenticationDetailsProvider: authProvider
+      });
+secretClient.region = region;
+secretClient.getSecretBundle({"secretId": process.env.secretOCID})
+  .then((result) => {
+    console.log(util.inspect(result, false, null, true));
+    const secretContent = Buffer.from(result.secretBundleContent.content, 'base64').toString('ascii')
+    console.log(`The secret is out: $(secretContent)`)
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+</pre>
 
 
 
