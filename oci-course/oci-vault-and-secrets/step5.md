@@ -1,4 +1,14 @@
-Retrieve Secrets from Node Application
+# Retrieve Secrets from Node Application
+
+In this step, you will work with a Node application that retrieves the secret from the vault. This application uses the OCI SDK for TypeScript | JavaScript | Node to handle most of the work regarding composing and signing the REST API calls. The SDK still makes the REST calls under the hood - just like the CLI - and just as with the CLI are the details of these calls hidden from view.
+
+![](assets/oci-sdks.png)
+
+## 
+
+npm init node-read-secret
+
+npm install oci-sdk --save
 
 
 
