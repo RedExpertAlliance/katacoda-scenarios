@@ -31,7 +31,7 @@ Try out the following command to get a list of all namespaces you currently have
 `oci os ns get`{{execute}} 
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
-```
+
 
 ## Environment Preparation
 
@@ -44,6 +44,7 @@ export USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-creat
 export TENANCY_OCID=$(oci iam user list --all | jq -r  '.data[0]."compartment-id"') 
 cs=$(oci iam compartment list)
 export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
+```{{execute}}
 
 
 

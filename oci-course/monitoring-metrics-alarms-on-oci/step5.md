@@ -18,7 +18,7 @@ You will now receive an email at the email address. You are requested to confirm
 Until you confirm the subscription, no additional emails are sent your way. Note that this request for confirmation may have arrived in your spam or junk folder.
 
 If you now check in the console for the Notification Topic, you will find a subscription created under it:
-https://console.us-ashburn-1.oraclecloud.com/notification/topics
+`echo "Open the console at https://console.$REGION.oraclecloud.com/notification/topics"`{{execute}}
 
 ![Confirmation Email](/RedExpertAlliance/courses/oci-course/monitoring-metrics-alarms-on-oci/assets/oci-email-subscription.png)
 

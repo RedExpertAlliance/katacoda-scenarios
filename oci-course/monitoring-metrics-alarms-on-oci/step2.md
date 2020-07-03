@@ -3,7 +3,7 @@ You will first make some noise: by taking several actions through the Object Sto
 First you need to make sure that the bucket exists into which the files can be uploaded. Execute this command:
 `oci os bucket create -c $compartmentId --name bucket-$LAB_ID`{{execute}}
 
-Let's upload five new files to the bucket *bucket-$LAB_ID* - with some pauses in between. Note: the finest granularity at which the metrics are collected in OCI is one minute; all actions that take place within one minute of each other are aggregated together.
+Let's upload five new files to the bucket *bucket-$LAB_ID* - with 20 seconds pause after uploading each file. Note: the finest granularity at which the metrics are collected in OCI is one minute; all actions that take place within one minute of each other are aggregated together.
 ```
 FILENAME=helloWorldFile$LAB_ID
 
@@ -43,6 +43,7 @@ This returns the number of objects in various buckets over the most recent three
 
 This returns the number of objects in *bucket-$LAB_ID* over the most recent three datapoints (spaced one minute apart)
 `oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "ObjectCount[1m]{resourceDisplayName = "bucket-$LAB_ID"}.sum()" --resolution 1m`{{execute}}
+Note: for no good reason that I can think of, this previous query frequently does not return any results, even though we clearly have created files in the bucket. 
 
 Count the put requests to Object Storage (aka the file uploads) into bucket-$LAB-ID over the most recent three datapoints (spaced one minute apart):
 `oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "PutRequests[1m]{resourceDisplayName = "bucket-$LAB_ID"}.sum()" --resolution 1m --output table`{{execute}}
@@ -52,6 +53,7 @@ The responses to the metrics requests can quickly grow pretty sizable. Typically
 `oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace oci_objectstorage --query-text "PutRequests[1m]{resourceDisplayName = "bucket-$LAB_ID"}.sum()" --resolution 1m > putrequests-bucket-$LAB_ID.txt`{{execute}}
 
 Then open the file in the editor or use cat to inspect the file contents.
+`cat putrequests-bucket-$LAB_ID.txt`{{execute}}
 
 ## Resouces
 OCI Docs on [Monitoring](https://docs.cloud.oracle.com/en-us/iaas/Content/Monitoring/Concepts/monitoringoverview.htm)

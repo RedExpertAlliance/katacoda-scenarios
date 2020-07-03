@@ -22,9 +22,9 @@ Replace the timestamps with values that are less than two hours ago.
 
 To post the metrics defined in this file to OCI, execute this statement:
 
-`oci monitoring metric-data post --endpoint https://telemetry-ingestion.us-ashburn-1.oraclecloud.com --metric-data file://./custom-metrics.json`{{execute}}
+`oci monitoring metric-data post --endpoint https://telemetry-ingestion.$REGION.oraclecloud.com --metric-data file://./custom-metrics.json`{{execute}}
 
-If your tenancy is not associated with region Ashburn, you need to use a different endpoint for publishing the custom metrics to. Note: for this to work, a policy has to have been granted to a group your user is a member of defined like this:
+Note: for this to work, a policy has to have been granted to a group your user is a member of defined like this:
 `Allow group lab-participants to use metrics in tenancy where target.metrics.namespace='mymetricsnamespace'`
 
 ## Resources

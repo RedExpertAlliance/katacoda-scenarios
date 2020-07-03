@@ -8,16 +8,13 @@ The next screenshot shows the graphical representation of the few custom data po
 
 The Data Table view shows the *individual data points* for the selected resource group and the selected metric.
 
-Alternatively, you can retrieve the metrics from the OCI CLI, using the next statement. Before you execute this statement, please open file get-metrics.json and modify the endTime timestamp to very recently or even the near the future.
-
-`get-metrics.json`{{open}}
- Also replace `$compartmentId` in this file with the value of the compartment OCID:
-`echo compartment OCID= $compartmentId`{{execute}}
-
-Now fetch those metrics:
+Alternatively, you can retrieve the metrics from the OCI CLI, using the next statement:
 `oci monitoring metric-data summarize-metrics-data --from-json file://./get-metrics.json`{{execute}}
 
-The result is a JSON document that in this example contains aggregated data points for the *productOrder* metric in namespace *mymetricsnamespace* and only for resource group *divisionX*. In this case, data points have been aggregated per 1 minute, resulting in three different timestamps. The values in the aggregated data points are the summation of the values reported for productOrders.
+
+`oci monitoring metric-data summarize-metrics-data -c $compartmentId --namespace  mymetricsnamespace --resource-group  divisionX --query-text "productOrder[1m].count()"`{{execute}}
+
+The result is a JSON response that in this example contains aggregated data points for the *productOrder* metric in namespace *mymetricsnamespace* and only for resource group *divisionX*. In this case, data points have been aggregated per 1 minute, resulting in three different timestamps. The values in the aggregated data points are the summation of the values reported for productOrders.
 
 In the next step you will create an Alarm on the Custom Metric, to get notified when a specific business relevant situation occurs.
 

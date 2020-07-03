@@ -20,21 +20,27 @@ List all Notification Topics in compartment *lab-compartment* and verify that a 
 `oci ons topic list --compartment-id=$compartmentId --output table
 
 Get hold of Topic OCID
-`export ONS_TOPIC_OCID=$(oci ons topic list --compartment-id=$compartmentId | jq -r --arg name "lab-notification-topic-$LAB_ID" '.data | map(select(."name" == $name)) | .[0] | ."topic-id"')`{{execute}}
+```
+export ONS_TOPIC_OCID=$(oci ons topic list --compartment-id=$compartmentId | jq -r --arg name "lab-notification-topic-$LAB_ID" '.data | map(select(."name" == $name)) | .[0] | ."topic-id"')
+echo "OCID for the Notification Topic lab-notification-topic-$LAB_ID  = $ONS_TOPIC_OCID"
+```{{execute}}
 
 We need to pass the list of destinations for an alarm (one ore more notification topics) in a JSON document. To learn the format for this document, we can use the OCI CLI feature *--generate-param-json-input*. When we pass this switch and indicate the name of the parameter for which we want to learn the required format, we can make a call like the following one for *destinations*:
 `oci monitoring alarm create  --generate-param-json-input destinations > destinations-param-sample.txt`{{execute}}
 
 Inspect file
 `destinations-param-sample.txt`{{open}}
-to see the structure we need to provide for the *destinations* parameter.
+to see the structure we need to provide for the *destinations* parameter. The expected JSON structure is simple enough: just an array of strings. So we can pass an array with as its only element a string containing the Topic's OCID. 
 
 Create an alarm, associated with the *lab-notification-topic-$LAB_ID* notification topic and triggered by a fairly high (> 3) number of file downloads within one minute:
 ```
 oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-alarm-rapid-file-download-$LAB_ID --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="High rate of file downloads" --metric-compartment-id=$compartmentId --namespace="oci_objectstorage"  --query-text="GetRequests[1m].count() > 3"  --severity="INFO" --body="The number of recent file download operations in compartment lab-compartment was excessive" --pending-duration="PT1M"  --resolution="1m" --is-enabled=true
 ```{{execute}}
 
-Check out the alarm definition - and its current state - in the console (https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms ) or through the CLI:
+Check out the alarm definition - and its current state - in the console :
+`echo "Open the Console at URL https://console.$REGION.oraclecloud.com/monitoring/alarms"`{{execute}}
+
+or through the CLI
 
 `oci monitoring alarm list --compartment-id=$compartmentId --output table`{{execute}}
 

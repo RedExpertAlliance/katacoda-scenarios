@@ -17,6 +17,10 @@ Five files are downloaded. As a consequence, the count for metric PutRequests in
 When the Alarm is triggered, a message is published to the Notification Topic. And this results in an email to your email address - because of the subscription on the topic. You should receive an email before too long - and it should look like this:
 ![Email Alert](/RedExpertAlliance/courses/oci-course/monitoring-metrics-alarms-on-oci/assets/oci-alarm-notification.png)
 
-You can check the alarm status in the console as well: https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms or Solutions and Platform | Monitoring | Alarms, and click on the alarm definition. For this alarm in its current, firing state, it will look like this:
+You can check the alarm status in the console as well: 
+
+`echo "Open the console at https://console.$REGION.oraclecloud.com/monitoring/alarms"`{{execute}} 
+
+Open open the menu for Monitoring | Alarms, and click on the alarm definition. For this alarm in its current, firing state, it will look like this:
 ![Alarm firing](/RedExpertAlliance/courses/oci-course/monitoring-metrics-alarms-on-oci/assets/oci-alarm-firing.png)
 
