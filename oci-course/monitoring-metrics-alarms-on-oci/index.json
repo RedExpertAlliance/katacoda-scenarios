@@ -1,8 +1,8 @@
 {
-  "title": "Preview: Monitoring, Metrics, Alarms and Notifications",
+  "title": "Monitoring, Metrics, Alarms and Notifications, Audit and Health Checks",
   "description": "On monitoring OCI metrics and creating automated alarms to publish notifications upon relevant situations.",
   "difficulty": "beginner",
-  "time": "35 minutes",
+  "time": "50 minutes",
   "details": {
     "steps": [
       {
