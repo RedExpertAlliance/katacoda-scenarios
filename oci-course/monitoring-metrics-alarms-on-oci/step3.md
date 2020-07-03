@@ -3,7 +3,7 @@ The OCI Console is the browser based GUI for managing Oracle Cloud Infrastructur
 Open the OCI Console - for tenancies subscribed to the Ashburn region, the URL is:
 https://console.us-ashburn-1.oraclecloud.com/monitoring/explore.
 
-`echo "Open the console at URL https://console.$REGION.oraclecloud.com/monitoring/explore"`
+`echo "Open the console at URL https://console.$REGION.oraclecloud.com/monitoring/explore"`{{execute}}
 
 Or navigate to the Metrics Explorer in the *hamburger menu*, select Solutions and Platform | Monitoring | Metrics Explorer.
 

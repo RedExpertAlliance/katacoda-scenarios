@@ -7,7 +7,10 @@ The alarm is associated with the *lab-notification-topic-$LAB_ID* notification t
 oci monitoring alarm create --compartment-id=$compartmentId --display-name=TooManyProductOrders --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="An extremely high number or product orders were received" --metric-compartment-id=$compartmentId --namespace="mymetricsnamespace"  --query-text="productOrder[5m].sum() > 100"  --severity="INFO" --body="High order volume alert: The number of products ordered over a 5 minute period exceeded 100." --pending-duration="PT1M"  --resolution="1m" --is-enabled=true  --resource-group="divisionX"
 ```{{execute}}
 
-Check out the alarm definition - and its current state - in the console (https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms ) or through the CLI:
+Check out the alarm definition - and its current state - in the console: 
+`echo "Open the console at https://console.$REGION.oraclecloud.com/monitoring/alarms"`{{execute}}
+
+or through the CLI:
 
 `oci monitoring alarm list --compartment-id=$compartmentId --output table`{{execute}}
 
@@ -22,6 +25,6 @@ Replace the timestamps with somewhat more recent values. You could change some o
 
 Then execute this statement to publish these metrics:
 
-`oci monitoring metric-data post --endpoint https://telemetry-ingestion.us-ashburn-1.oraclecloud.com --metric-data file://./custom-metrics.json`{{execute}}
+`oci monitoring metric-data post --endpoint https://telemetry-ingestion.$REGION.oraclecloud.com --metric-data file://./custom-metrics.json`{{execute}}
 
 This should set off the alarm - but remember that it takes some time (several minutes) to be activated. You can check the alarm status in the console https://console.us-ashburn-1.oraclecloud.com/monitoring/alarms/status or through the CLI. You can also sit back and relax and wait for that email alert to arrive.
