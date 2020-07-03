@@ -41,6 +41,14 @@
       {
         "title": "Step 9 - Create and Trigger a Functional Alarm on Custom Metrics",
         "text": "step9.md"
+      }      ,
+      {
+        "title": "Step 10 - Audit Log",
+        "text": "step10.md"
+      }      ,
+      {
+        "title": "Step 11 - Health Checks",
+        "text": "step11.md"
       }    ],
     "intro": {
       "text": "intro.md",
@@ -65,10 +73,11 @@
     }
   },
   "environment": {
-    "uilayout": "editor-terminal",
-    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
+    "uilayout": "terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n",
+    "showide": true
   },
   "backend": {
-    "imageid": "ubuntu1904"
+    "imageid": "ubuntu:2004"
   }
 }
