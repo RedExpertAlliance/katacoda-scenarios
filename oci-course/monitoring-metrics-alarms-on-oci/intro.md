@@ -4,7 +4,9 @@ You can publish your own metrics to Monitoring using the API. You can view chart
 
 Metrics are retained for 14 days.
 
-In this scenario, you will look at OCI Resource metrics as well as custom metrics. You will perform some activities that make sure some metrics are produced and then you will inspect these metrics through the OCI Monitoring facilities. Subsequently, you will look at Alarms and Notifications and cause these to be triggered. Notification topics can be subscribed to - by email subscribers, Slack and PagerDuty, WebHooks and OCI Functions. All of these channels can be triggered by a message publishe to the Notification Topic.
+In this scenario, you will look at standard *OCI Resource metrics* as well as custom metrics. You will perform some activities that make sure some metrics are produced and then you will inspect these metrics through the OCI Monitoring facilities. Subsequently, you will look at Alarms and Notifications and cause these to be triggered. Notification topics can be subscribed to - by email subscribers, Slack and PagerDuty, WebHooks and OCI Functions. All of these channels can be triggered by a message published to the Notification Topic.
+
+You will also briefly look at the Audit service, that also provides insight in activity on the OCI tenancy from the perspective of Who did What at Which moment. And finally you will make a brief acquaintance with the Health Checks service that allows us to monitor the health of services anywhere in the world *from anywhere in the world*. 
 
 # Resources
 [OCI Documentation on Metrics and Monitoring](https://docs.cloud.oracle.com/en-us/iaas/Content/Monitoring/Concepts/monitoringoverview.htm)
@@ -14,3 +16,7 @@ OCI Documentation - Publishing Custom Metrics: https://docs.cloud.oracle.com/en-
 CLI Reference for publishing custom metrics: https://docs.cloud.oracle.com/en-us/iaas/tools/oci-cli/2.9.1/oci_cli_docs/cmdref/monitoring/metric-data/post.html
 
 REST API reference for publishing custom metrics: https://docs.cloud.oracle.com/en-us/iaas/api/#/en/monitoring/latest/MetricData/PostMetricData 
+
+[OCI Documentation on Audit Service](https://docs.cloud.oracle.com/en-us/iaas/Content/Audit/Concepts/auditoverview.htm)
+
+[OCI Documentation on Health Checks](https://docs.cloud.oracle.com/en-us/iaas/Content/HealthChecks/Concepts/healthchecks.htm)
