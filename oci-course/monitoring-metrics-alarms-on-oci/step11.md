@@ -41,7 +41,17 @@ oci monitoring alarm create --compartment-id=$compartmentId --destinations="[\"$
 ```{{execute}}
 
 With this alarm in place, it is expected that because of the findings from some of the vantage points there will be warnings published to the notification topic. Because in step 5 you subscribed your email address to the notification topic, these warning will result in emails in your mailbox.
+![](assets-healthcheck-alarm-notification.png)
 
+## Bonus: Hot Functions
+
+Imagine - or even implement - the following scenario:
+
+* create and deploy two functions to OCI - just the default, hello world template is enough
+* create routes for both functions on the API Gateway
+* create two health checks - one for each route and function ; set the interval time for one health check at 5 minutes, the other at 15 minutes
+* after one hour or longer, compare the average processing time for the two health checks. Remember that the functions are the same - as well was the way they are deployed and exposed. What can be the cause for any (substantial) differences in the findings between the health checks?
+![](assets/hot-function-with-health-check.png)
 
 ## Resources
 [OCI Documentation on Health Checks](https://docs.cloud.oracle.com/en-us/iaas/Content/HealthChecks/Concepts/healthchecks.htm)
