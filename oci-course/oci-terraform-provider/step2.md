@@ -4,7 +4,7 @@ Download Terraform Installer from GitHub https://github.com/robertpeteuil/terraf
 Run the Terraform installer to install Terraform
 `./terraform-installer/terraform-install.sh`{{execute}}
 
-Test the currently installed version of Terraform. This should be at least version v0.10.
+Test the currently installed version of Terraform. This should be at least version v0.12.
 
 `terraform version`{{execute}}
 

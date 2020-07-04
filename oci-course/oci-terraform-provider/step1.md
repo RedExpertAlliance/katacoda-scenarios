@@ -32,15 +32,6 @@ Try out the following command to get a list of all namespaces you currently have
 
 If you get a proper response, the OCI is configured correctly and you can proceed. If you run into an error, ask for help from your instructor.
 
-```
-[DEFAULT]
-user=ocid1.user.oc1..aaaaaaaazr7eselv5q
-fingerprint=fd:db:13:bd:31
-tenancy=ocid1.tenancy.oc1..aaaaaaaaggg6okq
-region=us-ashburn-1
-key_file=/root/.oci/oci_api_key.pem
-```
-
 ## Environment Preparation
 
 ```

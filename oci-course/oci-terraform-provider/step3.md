@@ -6,6 +6,8 @@ Execute these statements to set two environment variables -TF_VAR_compartment_id
 ```
 export TF_VAR_compartment_id=$(oci iam compartment list | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
 export TF_VAR_namespace=$(oci os ns get| jq -r '.data')
+echo "TF_VAR_compartment_id=$TF_VAR_compartment_id"
+echo "TF_VAR_namespace=$TF_VAR_namespace"
 ```{{execute}}
 
 File `main.tf`{{open}} contains the definitions of the OCI resources we want Terraform to manage. If they exist, Terraform should only update them where properties differ in definition and actual state and if they do not exist, Terraform should create them.
@@ -14,7 +16,7 @@ In this file, a single bucket is defined. The name of the bucket is set through 
 
 `export TF_VAR_lab_bucket_name=tf_lab_bucket_$LAB_ID`{{execute}}
 
-The file also contains the definition of an (file) object called *hello-world-object-in-bucket*. This object resource refers to the bucket resource in which it should be created.  
+The file also contains the definition of an (file) object called *hello-world-object-in-bucket*. This object resource refers to the bucket resource in which it should be created. The content of the file object is defined - hard coded - in the file *main.tf* as well. Of course it could also be read from an environment variable
 
 The following command *plan* is used to create an execution plan. Terraform first performs a refresh: it reads the actual state of affairs on OCI and creates or updates the statefile accordingly. Then it determines what actions are necessary to achieve the desired state specified in the configuration files.
 
@@ -28,8 +30,26 @@ To make our plan real, use the following command. Terraform will apply the chang
 
 Enter *yes* when prompted to confirm our desire.
 
-Note: Any change you made outside of Terraform to resources managed by Terraform will be overwritten the next time you apply the configuration unless you add the *ignore_changes* parameter to the resource in the configuration file.
+The plan is now executed - resulting in the creation of the bucket and the object in the bucket. The result of the these two actions is reported back.
 
+Check on existence of the bucket:
+`oci os bucket get --bucket-name="$TF_VAR_lab_bucket_name"`{{execute}}
+
+and on the file:
+`oci os object get --bucket-name="$TF_VAR_lab_bucket_name" --name my-new-object --file myfileDownloadedFromOCI`{{execute}}
+
+Check the contents of the file:
+`cat myfileDownloadedFromOCI`{{execute}}
+
+You can run *apply* again. Terraform will attempt to bring the OCI resource in the state that is defined in fule *main.tf*. Since the resource have just been created based on this file, a second round of *apply* does not actually change anything:
+
+`terraform apply `{{execute}}
+
+However, if you were to make a change in *main.tf* - for example add `freeform_tags  = var.tags` to the definition of resource *"oci_objectstorage_object" "hello-world-object-in-bucket"* - and run *apply* again, the existing object is updated and this metadata is added.
+
+`terraform apply `{{execute}}
+
+Note: Any change you made outside of Terraform to resources managed by Terraform will be overwritten the next time you apply the configuration unless you add the *ignore_changes* parameter to the resource in the configuration file.
 
 
 ## Resources
