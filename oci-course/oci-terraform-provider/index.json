@@ -1,5 +1,5 @@
 {
-  "title": "Preview: Infrastructure as Code with OCI Terraform Provider",
+  "title": "Infrastructure as Code with OCI Terraform Provider, Resource Manager & Stacks",
   "description": "Provisioning Oracle Cloud Infrastructure resources as Infrastructure as Code through Terraform.",
   "difficulty": "beginner",
   "time": "25 minutes",
@@ -61,8 +61,20 @@
           "target": "/root"
         },
         {
-          "file": "stack.zip",
-          "target": "/root"
+          "file": "stack/stack.zip",
+          "target": "/root/stack"
+        },
+        {
+          "file": "stack/variables.tf",
+          "target": "/root/stack"
+        },
+        {
+          "file": "stack/provider.tf",
+          "target": "/root/stack"
+        },
+        {
+          "file": "stack/main.tf",
+          "target": "/root/stack"
         }
       ]
     }

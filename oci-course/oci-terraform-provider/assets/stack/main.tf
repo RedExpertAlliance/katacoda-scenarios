@@ -4,12 +4,12 @@ terraform {
 
 # this variable holds the name for the bucket that will be created; the default value is tf-bucket. This could be overridden through an Environment Variable called TF_VAR_lab_bucket_name
 variable "lab_bucket_name" {
-  default = "tf-bucket"
+  default = "tf-bucket-from-stack"
 }
 
 
 data "oci_identity_compartments" "lab_compartments" {
-    compartment_id = var.tenancy_id
+    compartment_id = var.tenancy_ocid
     # only retain the compartment called lab-compartment
     filter {
         name   = "name"
@@ -31,7 +31,7 @@ resource "oci_objectstorage_object" "hello-world-object-in-bucket" {
     bucket = oci_objectstorage_bucket.lab_bucket.name
     content = "Hello World"
     namespace = var.namespace
-    object = "my-new-object"
+    object = "my-new-object-from-stack"
     content_type = "text/text"
 }
 
