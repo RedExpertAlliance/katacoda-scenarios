@@ -11,17 +11,58 @@ Click on *Create Stack*. Leave the radio button on *Custom Solution*.
 
 Upload stack.zip file. This file is in the directory */root/stack* of the scenario. You can download it to your laptop from this URL on GitHub: https://github.com/RedExpertAlliance/katacoda-scenarios/blob/master/oci-course/oci-terraform-provider/assets/stack/stack.zip  (in REAL OCI Katacoda Scenarios GitHub repo: https://github.com/RedExpertAlliance/katacoda-scenarios/tree/master/oci-course ).
 
+![](assets/upload-stack.zip.png)
+
+Press Nex to go to step 2 - *Configure Variables*
+
 ### Set variables
+The variables required for this stack are almost all defined through acceptable defaults or inherited from the envionment settings of the Stack Manager (such as compartment and tenancy). You only need to provide the value for the *namespace* variable.
+
+Use this value:
+`echo "Value for variable namespace $ns"`{{execute}}
+![](assets-confg-variables.png)
+
+Press Next to go to the Review of the Variable values. The press Create to complete the creation process for the stack.
+
+The stack is now part of the tenancy and the compartment. It is available for further editing and of course to *plan* and *apply*.
+![](assets/stack-details.png) 
+
+You can also list the stacks in the OCI CLI:
+`oci resource-manager stack list --compartment-id=$compartmentId`{{execute}}
 
 ### Plan
+Open the dropdown *Terraform Actions* and select the action *Plan*.
+
+The Resource Manager will now inspect the stack to discover if it can be realized and what it would entail if it is. The outcome of this action is a log that shows what the Configuration would result in.
+
 
 ### Apply
+The same dropdown *Terraform Actions* also includes action *Apply*. Select this action. Now Resource Manager will execute the plan; this means that a bucket - with a name specified in a variable (default is *tf-bucket-from-stack*)  and an object in that bucket will be created. 
+
+![](assets/apply-stack-output.png)
+
+You can inspect the values of variables as assigned during the apply, the created resources and the outputs as well as the final state - through the four menu items shown on the left side of the page.
 
 ### Change Variable: Bucket Name
+We are going the same stack a second time, with a different value for the bucket. Navigate to the *stack details* for the stack. Click on *Edit Stack*. Go to step 2 in the wizard: *Configure Variables* . Change the value for variable *LAB_BUCKET_NAME* into something different - for example *2nd-tf-bucket-from-stack*. Click *Next* and click *Save Changes* . 
 
 ### Apply Again
+From the dropdown with *Terraform Actions* , select once again the option to *Apply*. The same stack is processed - with a tiny change: the name of the target bucket is different. The process should be successful and report back that it has created a bucket and an object. You can check, either in the Console or in the terminal:
+`oci os bucket list -c $compartmentId`{{execute}}
 
-### Destroy
+if the two buckets have both been created successfully.
+
+The message to take away: the stack is like a template that can be used many times - with different input and/or in a different (target) compartment - to create and manage OCI Resources.
+
+### Destroy the Results of the Stack
+
+From the dropdown with *Terraform Actions* , select the option to *Destroy*. A new job is started to delete all the OCI Resources described in the current definition of the stack and its input variables. The log files produced by the job indicate what was done: two objects destroyed (one bucket and the object in that bucket).
+
+In order to undo the results from the first run of the stack, you should now change back the name of the *LAB_BUCKET_NAME* to its original value and then run *Destroy* once more. 
+
+Navigate to the *stack details* for the stack. Click on *Edit Stack*. Go to step 2 in the wizard: *Configure Variables* . Change the value for variable *LAB_BUCKET_NAME* to its original value. From the dropdown with *Terraform Actions* , select the option to *Destroy*. A new job is started to delete all the OCI Resources described in the original definition of the stack and its input variables. The log files produced by the job indicate what was done: the two objects created when you first ran the stack are now also destroyed (one bucket and the object in that bucket). And we are back in the state we were in before we started dabbling in Stacks.
+
+
 
 ### Destroy Variables (back)
 
