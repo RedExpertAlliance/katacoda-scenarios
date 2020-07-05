@@ -11,8 +11,23 @@ Click on *Create Stack*. Leave the radio button on *Custom Solution*.
 
 Upload stack.zip file. This file is in the directory */root/stack* of the scenario. You can download it to your laptop from this URL on GitHub: https://github.com/RedExpertAlliance/katacoda-scenarios/blob/master/oci-course/oci-terraform-provider/assets/stack/stack.zip  (in REAL OCI Katacoda Scenarios GitHub repo: https://github.com/RedExpertAlliance/katacoda-scenarios/tree/master/oci-course ).
 
+### Set variables
 
+### Plan
 
+### Apply
+
+### Change Variable: Bucket Name
+
+### Apply Again
+
+### Destroy
+
+### Destroy Variables (back)
+
+### Destroy Again
+
+And now all traces of the stack are removed - except the stack itself that is still there and ready to be re-applied - once or many times! 
 
 
 ## Sample Solutions
