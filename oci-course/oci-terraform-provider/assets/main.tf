@@ -4,6 +4,16 @@ variable "lab_bucket_name" {
   default = "tf-bucket"
 }
 
+
+data "oci_identity_compartments" "lab_compartments" {
+    compartment_id = var.tenancy_id
+    # only retain the compartment called lab-compartment
+    filter {
+        name   = "name"
+        values  = [ "lab-compartment"]
+    }
+}
+
 # the bucket to be managed by Terraform
 resource "oci_objectstorage_bucket" "lab_bucket" {
     # variables namespace and tags and data source oci_identity_compartments.lab_compartments are defined in variables.tf

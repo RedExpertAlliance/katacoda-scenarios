@@ -25,12 +25,3 @@ variable "tenancy_id" {
   type = string
   default = "ocid1.tenancy.oc1..aaaaaaaag7c7slwmlvsodyym662ixlsonnihko2igwpjwwe2egmlf3gg6okq"
 }
-
-data "oci_identity_compartments" "lab_compartments" {
-    compartment_id = var.tenancy_id
-    # only retain the compartment called lab-compartment
-    filter {
-        name   = "name"
-        values  = [ "lab-compartment"]
-    }
-}
