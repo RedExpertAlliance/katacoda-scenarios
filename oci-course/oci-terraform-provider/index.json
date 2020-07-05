@@ -59,6 +59,10 @@
         {
           "file": "environment.sh",
           "target": "/root"
+        },
+        {
+          "file": "stack.zip",
+          "target": "/root"
         }
       ]
     }
