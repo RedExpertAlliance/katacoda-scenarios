@@ -28,6 +28,10 @@
       {
         "title": "Bonus: Step 6 - Create and Invoke Function using Terraform",
         "text": "step6.md"
+      },
+      {
+        "title": "Bonus: Step 7 - OCI Resurce Manager, Sample and Custom Stacks",
+        "text": "step7.md"
       }    ],
     "intro": {
       "text": "intro.md",
