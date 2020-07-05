@@ -27,7 +27,7 @@ To turn our plan into reality, use the following command. Terraform will apply t
 
 `terraform apply -var lab_id=$LAB_ID  -var application_name=lab$LAB_ID  -var function_name=hello$LAB_ID`{{execute}}
 
-Enter *yes* when prompted to confirm your desire.
+Enter *yes* when prompted to confirm your desire. The execution of the second step - invocation of the function - will take some time (up to 30 seconds) because the function needs to be initialized (the container started up) which tends to take some time.
 
 The output lists details on the application, the function managed by Terraform and the response from the invoked function. You can check the results and output again using:
 
@@ -39,4 +39,4 @@ Let's now remove the function that we had Terraform create in this scenario.
 
 `terraform destroy -var lab_id=$LAB_ID  -var application_name=lab$LAB_ID  -var function_name=hello$LAB_ID`{{execute}}
 
-Again, enter *yes* when prompted. Note: the OCI Terraform provider struggles a bit with deleting functions. The *destroy* command can take quite a long time to complete. You do not need to wait for completion of the command in order to finish this scenario.
+Again, enter *yes* when prompted. Note: the OCI Terraform provider struggles a bit with deleting functions. The *destroy* command can take quite a long time to complete. You do not need to wait for completion of the command before moving to the next step in the scenario.

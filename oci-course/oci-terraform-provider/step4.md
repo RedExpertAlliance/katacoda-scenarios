@@ -4,7 +4,7 @@ With the next command, we ask Terraform to show in human-readable output the cur
 `terraform show`{{execute}}
 
 Check in the console if the resource was created as intended:
-https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets 
+`echo "Open the console at https://console.$REGION.oraclecloud.com/object-storage/buckets"  `{{execute}}
 
 Drill down into the new bucket to see its details and its contents; there should be a single file object.
 
@@ -23,6 +23,7 @@ The next command will generate an SVG visualization of the resources managed by 
 `terraform graph | dot -Tsvg > graph.svg`{{execute}}
 
 You can open the file `graph.svg`{{open}} and copy the contents to the clipboard. Then open an online SVG editor, for example at https://www.freecodeformat.com/svg-editor.php or https://thedevband.com/online-svg-viewer.html  . Copy the contents of the clipboard into the editor and press *Draw* to show the visual representation. 
+![](assets/svg-drawing-of-terraformactions.png)
 
 ## Discovery
 
