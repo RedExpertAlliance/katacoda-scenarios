@@ -73,7 +73,7 @@ the rest of the fields as default:
 
 ![OKE Workflow](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/13.jpg)
 
-In the lower part of the window enable both Tiller and Kubernetes Dashboard:
+In the lower part of the window enable Kubernetes Dashboard:
 
 ![OKE Enable Tiller](/RedExpertAlliance/courses/oci-course/oke-redis-cache-and-functions-oci_part1/assets/5.jpg)
 

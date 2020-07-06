@@ -58,10 +58,6 @@ LS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
 **Write down the IP Address and you can proceed to scenario:
 https://www.katacoda.com/redexpertalliance/courses/oci-course/oke-redis-api-server-reverse-proxy**
 
-Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. It is a Kubernetes cluster with 2 nodes. Those nodes
-are OCI compute instances that were created automatically by the quick creation wizard.
-The Kubernetes API Server is serving at the IP address that you've checked in the ~/kube/config file and listening on port 6443.
-
 Up to this point you have configured a Kubernetes cluster on top of Oracle Cloud Infrastructure. It is a Kubernetes cluster with 3 nodes. Those nodes
 are OCI compute instances that were created automatically by the quick creation wizard.
 The Kubernetes API Server is serving at the IP address that you can check in the ~/kube/config file and listening on port 6443.
