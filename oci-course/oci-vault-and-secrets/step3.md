@@ -5,10 +5,12 @@ Creating a key that is used to encrypt and decrypt strings - or anything you wan
 Please open the vault in the console:
 `echo "Open the Console at this URL: https://console.${REGION}.oraclecloud.com/security/kms/vaults/${vaultOCID}"`{{execute}} 
 
+Check the status of the Vault - it may still be *creating* in which case you have to wait a little in order for it to become *active*.  
+
 Then create a new (Master Encryption) Key. Set the name to *lab-key*.
 ![](assets/create-key-in-console.png)
 
-When the key is successfully created, return to the terminal window. Get the key's details:
+When the key is successfully created, return to the terminal window. Note: as long as it is *creating*, you have to hold back on going to the next step. Only when the key is *active* can you proceed. Get the key's details:
 
 `oci kms management key list -c $compartmentId --endpoint $vaultManagementEndpoint`{{execute}}
 

@@ -48,7 +48,7 @@ Removing the Function is the simplest of all operations - although traces of the
 `fn delete f  "lab$LAB_ID" secret-retriever`{{execute}}
 
 ## Remove the Dynamic Group and the Policy
-Delete the Dynamic Group *functions-in-lab-compartment*:
+Delete the Dynamic Group *functions-in-lab-compartment* that was created in the previous step:
 
 ```
 oci iam dynamic-group list --compartment-id $TENANCY_OCID
@@ -57,7 +57,7 @@ export dgId=$(echo $dgs | jq -r --arg dgname "functions-in-lab-compartment" '.da
 oci iam dynamic-group delete --dynamic-group-id $dgId --force
 ```{{execute}}
 
-Delete the policy *read-secret-permissions-for-resource-principal-enabled-functions-in-lab-compartment*:
+Also delete the policy *read-secret-permissions-for-resource-principal-enabled-functions-in-lab-compartment* that created in step 6:
 
 ```
 oci iam policy list --compartment-id $compartmentId

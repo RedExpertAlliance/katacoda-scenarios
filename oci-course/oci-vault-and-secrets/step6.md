@@ -56,6 +56,16 @@ fdk.handle(async function (input) {
 
 This function reads the values of the two environment variables set by the FaaS runtime framework for Functions that are Resource Principals (or Resource Principal enabled). It also reads the contents of the RPST file that is injected at runtime into the container that implements the Function. If this function returns a result, the resource principilazation of the function was successful.
 
+Note: these instructions assume that you still have the Function Application *lab$LAB_ID* in your compartment. This application was created and used in earlier scenarios. If the application is not available, you can (re)create it with the next set of commands:
+
+```
+vcns=$(oci network vcn list -c $compartmentId)
+vcnId=$(echo $vcns | jq -r --arg display_name "vcn-lab" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
+subnets=$(oci network subnet list  -c $compartmentId --vcn-id $vcnId)
+export subnetId=$(echo $subnets | jq -r --arg display_name "Public Subnet-vcn-lab" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
+fn create app "lab$LAB_ID" --annotation "oracle.com/oci/subnetIds=[\"$subnetId\"]"
+```{{execute}}
+
 Deploy the function:
 
 `fn -v deploy --app "lab$LAB_ID"`{{execute}}
