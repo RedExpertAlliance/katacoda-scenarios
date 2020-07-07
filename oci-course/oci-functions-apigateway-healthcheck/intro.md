@@ -1,0 +1,11 @@
+In this scenario you will create two Fn functions - with identical, fully generated implementation. You choose your runtime of choice - node, java, python, go, .... Both functions are deployed to an application. Both functions are exposed in an API Gateway API Deployment with separate routes. Finally, for both routes are Health Checks defined through OCI Monitoring; one health check will have a 5 min interval, the other a 15 minute interval. Inspecting the metrics collected by these healthchecks - we expect one function to remain *hot* and producing much faster responses than the second function that will not stay hot and needs to be reinitialized upon every health check request.
+![](assets/healthchecks-and-hotfunctions.png)
+The scenario uses an Ubuntu 20.04 environment with Docker, OCI CLI and Fn CLI as well Visual Studio Code IDE. Before you can start the steps in the scenario, the two Command Line interfaces are downloaded and installed. This will take about one minute. 
+
+The scenario expects a number of preparations:
+* an API Gateway already has been provided in compartment *lab-compartment* with permissions to access functions in this compartment; the API Gateway is associated with a public subnet (this is part of [the OCI Tenancy Preparation Scenario](https://katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation-cloud-trial))
+
+Note: it is assumed that you prepared an OCI tenancy using the Katacoda scenario [Preparation of Cloud Trial tenancy for REAL OCI scenarios](https://katacoda.com/redexpertalliance/courses/oci-course/oci-lab-preparation-cloud-trial). This preparation will have created the VCN you need for running functions in OCI as well as the *lab-compartment* in which the functions are created. Additionally, you should have created a key pair in this scenario and prepared the contents of the *config* and  *oci_api_key.pem* files. If you have not gone through this OCI tenancy preparation, please do so before continuing with this scenario. You also need an Auth Token to login to the OCIR Container Registry; this too is created in the preparation scenario and used in the Function on OCI scenario.
+
+The scenario was prepared in July 2020.
+

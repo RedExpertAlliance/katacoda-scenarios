@@ -84,6 +84,11 @@
       "description": "Infrastructure as Code on Oracle Cloud Infrastructure with Terraform."
     },
     {
+      "course_id": "oci-functions-apigateway-healthcheck",
+      "title": "Deeper Dive: Healthcheck on Functions through API Gateway",
+      "description": "Check health of Functions exposed through API Gateway (keep functions hot)"
+    },
+    {
       "course_id": "oci-lab-preparation",
       "title": "Preparation for OCI Workshops",
       "description": "Manage OCI LAB environment for Katacoda Scenarios"
