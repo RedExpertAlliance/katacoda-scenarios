@@ -10,19 +10,19 @@
         "text": "step1.md"
       },
       {
-        "title": "Step 2 - Node JS application accessing OCI Object Storage",
+        "title": "Step 2 - Create and Deploy Two Functions",
         "text": "step2.md"
       },
       {
-        "title": "Step 3 - Create, Deploy and Invoke Node Application as FileWriter Function on OCI",
+        "title": "Step 3 - Expose Functions through API Gateway Routes",
         "text": "step3.md"
       },
       {
-        "title": "Step 4 - Expose File Writer Function through API Gateway for public access",
+        "title": "Step 4 - Create Monitor Healthchecks for the two Routes",
         "text": "step4.md"
       },
       {
-        "title": "Step 5 - Create an RSSFeed Reader Function that writes RSSFeed through FileWriter to OCI Object Storage",
+        "title": "Step 5 - Create an Alarm for the Healhcheck Metrics",
         "text": "step5.md"
       }
     ],
