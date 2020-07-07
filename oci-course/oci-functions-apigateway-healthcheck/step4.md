@@ -1,16 +1,7 @@
 # Create Monitor Healthchecks for the two Routes
 Create a Healthcheck for the /hello1 function, with the an interval of 5 minutes: 
 
-/my-depl$LAB_ID
-
-echo "${deploymentEndpoint///my-depl$LAB_ID/}" 
-
-export apiGatewayURL=${deploymentEndpoint///my-depl$LAB_ID/}
-export apiGatewayServerX=${apiGatewayURL/https:/} 
-apiGatewayServer=$(echo "$apiGatewayServerX" | tr  '//' ' ') 
-echo $apiGatewayServer
-
-
+(some preparations are necessary to get the environment variable *apiGatewayServer* in the right shape - without http:// and without /path)s
 ```
 export apiGatewayURL=${deploymentEndpoint///my-depl$LAB_ID/}
 export apiGatewayServerX=${apiGatewayURL/https:/} 
