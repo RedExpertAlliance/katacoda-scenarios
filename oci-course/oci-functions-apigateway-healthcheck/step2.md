@@ -6,7 +6,7 @@ In this step we will create two simple, identifical function with Fn. We pick No
 ```
 export function1=hello1$LAB_ID
 
-fn init --runtime node $function1`
+fn init --runtime node $function1
 cd $function1
 ```{{execute}}
 
@@ -15,7 +15,6 @@ Three files have been created in the new directory *hello1#*.
 `ls`{{execute}}
 
 You could open func.js in the text editor to see the generated functionality. 
-`func.js`{{open}}
 
 ## Create Application
 
@@ -49,16 +48,17 @@ All of the above should have been prepared in the OCI Tenancy Preparation scenar
 
 To send in a JSON object as input to the function, use the following command:
 
-`echo -n '{"name":"Your Own Name"}' | fn invoke "lab${LAB_ID}" "hello$LAB_ID" --content-type application/json`{{execute}}
+`echo -n '{"name":"Your Own Name"}' | fn invoke "lab${LAB_ID}" "$function1" --content-type application/json`{{execute}}
 
 Again, a friendly, this time personalized welcome message should be your reward - coming from the cloud.
 
 ## Create the second function hello2 in the exact same manner
 
 ```
+cd /root
 export function2=hello2$LAB_ID
 
-fn init --runtime node $function2`
+fn init --runtime node $function2
 cd $function2
 fn -v deploy --app "lab$LAB_ID"
 fn invoke "lab$LAB_ID" $function2

@@ -2,7 +2,10 @@
 
 Create a file called api_deployment.json in the current directory with this contents. 
 
-`touch api_deployment.json`{{execute}}
+````
+cd ..
+touch api_deployment.json
+```{{execute}}
 
 Copy the definition of the route */stock* to the api_deployment.json file:
 
@@ -34,9 +37,7 @@ It will take a few seconds - up to 15-20 seconds - for the new API Deployment to
 depls=$(oci api-gateway deployment list -c $compartmentId)
 deploymentEndpoint=$(echo $depls | jq -r --arg display_name "MY_API_DEPL_$LAB_ID" '.data.items | map(select(."display-name" == $display_name)) | .[0] | .endpoint')
 apiDeploymentId=$(echo $depls | jq -r --arg display_name "MY_API_DEPL_$LAB_ID" '.data.items | map(select(."display-name" == $display_name)) | .[0] | .id')
-```{{execute}}
 
-```
 apps=$(oci fn application list -c $compartmentId)
 labApp=$(echo $apps | jq -r --arg display_name "lab$LAB_ID" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
 
@@ -90,8 +91,13 @@ You can check on the state of the API Deployment and the current update (called 
 
 Using *curl* you can now invoke the route that leads to the function *hello* that you created in a previous scenario, and POST an input message to the function.
 
-`curl -X "POST" -H "Content-Type: application/json" -d '{"name":"Bob"}' $deploymentEndpoint/hello`{{execute}}
+`curl -X "POST" -H "Content-Type: application/json" -d '{"name":"Bob Hello 1"}' $deploymentEndpoint/hello1`{{execute}}
+
+And the second endpoint:
+
+`curl -X "POST" -H "Content-Type: application/json" -d '{"name":"Bob Hello 2"}' $deploymentEndpoint/hello2`{{execute}}
+
 
 Feel free to invoke the function in Postman and/or in your Browser, using its endpoint:
 
-`echo "Function Hello's Endpoint $deploymentEndpoint/hello"`{{execute}}
+`echo "Function Hello's Endpoint $deploymentEndpoint/hello1 and $deploymentEndpoint/hello2"`{{execute}}

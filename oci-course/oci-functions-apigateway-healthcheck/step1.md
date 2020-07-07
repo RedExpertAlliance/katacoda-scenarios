@@ -70,7 +70,9 @@ Create an appropriate Fn context for working with OCI as provider (see [OCI Docs
 
 `fn use context lab-fn-context`{{execute}}
 
-**Prepare a number of environment variables. Note: the assumptions here are that you have a compartment called *lab-compartment*, as well as an API Gateway *lab-apigw* in that same compartment as well as an API Deployment called MY_API_DEPL# on the API Gateway. We need to get references to these resources in order to create new resources in the right place.**
+##Prepare a number of environment variables. 
+
+Note: the assumptions here are that you have a compartment called *lab-compartment*, as well as an API Gateway *lab-apigw* in that same compartment as well as an API Deployment called MY_API_DEPL# on the API Gateway. We need to get references to these resources in order to create new resources in the right place.**
 
 ```
 export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
@@ -85,6 +87,10 @@ export apiGatewayId=$(echo $apigws | jq -r --arg display_name "lab-apigw" '.data
 depls=$(oci api-gateway deployment list -c $compartmentId)
 deploymentEndpoint=$(echo $depls | jq -r --arg display_name "MY_API_DEPL_$LAB_ID" '.data.items | map(select(."display-name" == $display_name)) | .[0] | .endpoint')
 apiDeploymentId=$(echo $depls | jq -r --arg display_name "MY_API_DEPL_$LAB_ID" '.data.items | map(select(."display-name" == $display_name)) | .[0] | .id')
+vcns=$(oci network vcn list -c $compartmentId)
+vcnId=$(echo $vcns | jq -r --arg display_name "vcn-lab" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
+subnets=$(oci network subnet list  -c $compartmentId --vcn-id $vcnId)
+export subnetId=$(echo $subnets | jq -r --arg display_name "Public Subnet-vcn-lab" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
 # get namespace
 nss=$(oci os ns get)
 export ns=$(echo $nss | jq -r '.data')
