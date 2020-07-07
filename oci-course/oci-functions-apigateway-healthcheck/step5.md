@@ -18,11 +18,11 @@ export ONS_TOPIC_OCID=$(oci ons topic list --compartment-id=$compartmentId | jq 
 echo "OCID for the Notification Topic lab-notification-topic-$LAB_ID  = $ONS_TOPIC_OCID"
 ```{{execute}}
 
-Create the two alarms that trigger when the function execution from the health checks takes longer than 1000 ms:
+Create the two alarms that trigger when the function execution from the health checks takes longer than 2000 ms:
 ```
-oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-poor-function-hello1-response-$LAB_ID --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="Function hello1 response takes a long time" --metric-compartment-id=$compartmentId --namespace="oci_faas"  --query-text="FunctionExecutionDuration[5m]{resourceDisplayName = \"lab1:$function1\"}.mean() > 1000"  --severity="INFO" --body="The execution of function hello1 took quite long" --pending-duration="PT5M"  --resolution="1m" --is-enabled=true
+oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-poor-function-hello1-response-$LAB_ID --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="Function hello1 response takes a long time" --metric-compartment-id=$compartmentId --namespace="oci_healthchecks"  --query-text="HTTP.TotalDuration[1m]{resourceDisplayName = \"Check on Health of Hello 1 function\"}.mean() > 2000"  --severity="INFO" --body="The execution of function hello1 took quite long" --pending-duration="PT5M"  --resolution="1m" --is-enabled=true
 
-oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-poor-function-hello2-response-$LAB_ID --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="Function hello2 response takes a long time" --metric-compartment-id=$compartmentId --namespace="oci_faas"  --query-text="FunctionExecutionDuration[5m]{resourceDisplayName = \"lab1:$function2\"}.mean() > 1000"  --severity="INFO" --body="The execution of function hello2 took quite long" --pending-duration="PT5M"  --resolution="1m" --is-enabled=true
+oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-poor-function-hello2-response-$LAB_ID --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="Function hello2 response takes a long time" --metric-compartment-id=$compartmentId --namespace="oci_healthchecks"   --query-text="HTTP.TotalDuration[1m]{resourceDisplayName = \"Check on Health of Hello 2 function\"}.mean() > 2000"   --severity="INFO" --body="The execution of function hello2 took quite long" --pending-duration="PT5M"  --resolution="1m" --is-enabled=true
 ```{{execute}}
 
 Now you have to sit back and relax - and see whether any alarm will start firing.
