@@ -1,149 +1,26 @@
-# Creating a Function RSSFeeder that Leverages the File Writer API
+ Create an Alarm for the Healthcheck Metrics
 
-In this step, you will create a function that invokes the File Writer to produce files on OCI Object Storage.
+ In this final step, you will create an alarm that reports a notification when the average HTTP Processing time is longer than 3 seconds for the two healthchecks we have created. As stated before, we expect the healthcheck for function *hello2* (the cold function) to trigger the alarm.
 
-## Get the code for the RSS function (Node.JS app)
+ The steps we will go through:
+* create notification topic *lab-notification-topic-$LAB_ID*
+* create alarms for both healthchecks - associated with notification topic
 
-Clone the code repo and change directory:
+This next command creates a Notification Topic called *lab-notification-topic-$LAB_ID*.
+`oci ons topic create --compartment-id=$compartmentId --name=lab-notification-topic-$LAB_ID --description="notification topic gets notified for lab alarms"`{{execute}}
 
+List all Notification Topics in compartment *lab-compartment* and verify that a new topic has been created:
+`oci ons topic list --compartment-id=$compartmentId --output table`{{execute}}
+
+Get hold of Topic OCID
 ```
-cd
-git clone https://github.com/rcarrascosps/faas.git
-cd /root/faas/rss-feeder
+export ONS_TOPIC_OCID=$(oci ons topic list --compartment-id=$compartmentId | jq -r --arg name "lab-notification-topic-$LAB_ID" '.data | map(select(."name" == $name)) | .[0] | ."topic-id"')
+echo "OCID for the Notification Topic lab-notification-topic-$LAB_ID  = $ONS_TOPIC_OCID"
 ```{{execute}}
 
-Make sure that the endpoint on the API Gateway where the File Writer function can be accessed is set in enviroment variable `file_writer_endpoint`.  
-
-`export file_writer_endpoint="$deploymentEndpoint/write"`{{execute}}
-
-Make sure $bucketName is set (to oci-lab#)
-
-
-## Create, Deploy and Invoke a Function
-
-We will now turn the Node application into a Function, just like we did with File Writer.
-
-Check the contents of file `~/faas/rss-feeder/func.js`. This file is the wrapper for the Fn Function around the RSSFeeder application.
-
-````
-cd ~~/faas/rss-feeder
-
-cat func.js
-```{{execute}}
-
-Open the file *func.yaml* in the text editor. Change the name of the function from *rss-feeder* to *rss-feeder#* , where # is the LAB_ID you have neen assigned. 
-
-Let's deploy this function to application `lab#`. Execute the next command - make sure you are in the correct directory.
-
-`fn -v deploy --app "lab$LAB_ID"`{{execute}}
-
-Make sure that the environment variables are set when RSSFeerder is executing. This is done by defining configuration settings for the function:
+Create the two alarms:
 ```
-fn config function "lab$LAB_ID" rss-feeder bucketName "$bucketName"
-fn config function "lab$LAB_ID" rss-feeder file_writer_endpoint "$file_writer_endpoint"
+oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-poor-function-hello1-response-$LAB_ID --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="Function hello1 response takes a long time" --metric-compartment-id=$compartmentId --namespace="oci_faas"  --query-text="FunctionExecutionDuration[5m]{resourceDisplayName = \"lab1:$function1\"}.mean() > 3000"  --severity="INFO" --body="The execution of function hello1 took quite long" --pending-duration="PT5M"  --resolution="1m" --is-enabled=true
+
+oci monitoring alarm create --compartment-id=$compartmentId --display-name=lab-poor-function-hello2-response-$LAB_ID --destinations="[\"$ONS_TOPIC_OCID\"]"  --display-name="Function hello2 response takes a long time" --metric-compartment-id=$compartmentId --namespace="oci_faas"  --query-text="FunctionExecutionDuration[5m]{resourceDisplayName = \"lab1:$function2\"}.mean() > 3000"  --severity="INFO" --body="The execution of function hello2 took quite long" --pending-duration="PT5M"  --resolution="1m" --is-enabled=true
 ```{{execute}}
-
-To invoke the function
-
-`echo -n '{"rssFeedURL":"https://technology.amis.nl/feed/","filename":"another-amis-blog-rss.json"}' | fn invoke lab$LAB_ID rss-feeder`{{execute}}
-
-Check the current contents of the bucket:
-
-`oci os object list --bucket-name $bucketName`{{execute}}
-
-Check in OCI Console for Object Storage: the bucket you have created and the file that should now be visible and manipulatable in the console: https://console.us-ashburn-1.oraclecloud.com/object-storage/buckets.
-
-Retrieve the file that was just created:
-
-`oci os object get  -bn $bucketName --name another-amis-blog-rss.json --file large-json.txt`{{execute}}
-
-Check contents of the file:
-```
-ls -l large-json*
-cat large-json.txt
-```{{execute}}
-
-## Expose Function RSSFeeder on API Gateway
-
-In this step, you will create a route to the RSSFeeder Function on OCI. 
-
-```
-apps=$(oci fn application list -c $compartmentId)
-labApp=$(echo $apps | jq -r --arg display_name "lab$LAB_ID" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
-
-funs=$(oci fn function list --application-id $labApp)
-fileWriterFun=$(echo $funs | jq -r --arg display_name "file-writer" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
-echo "OCID for file-writer function : $fileWriterFun"
-rssFeederFun=$(echo $funs | jq -r --arg display_name "rss-feeder" '.data | map(select(."display-name" == $display_name)) | .[0] | .id')
-echo "OCID for rss-feeder function : $rssFeederFun"
-```{{execute}}
-
-Create the new file api_deployment2.json:
-
-`touch api_deployment2.json`{{execute}}
-
-Open the new file *api_deployment2.json* in the text editor and copy the definitions of the routes */rss*, */write* and */health* to the api_deployment.json file. The new /rss route accepts POST requests. The route is of type ORACLE_FUNCTIONS_BACKEND and has a Function as its target - the function rss-feeder. 
-
-Replace the two occurrences of `function ocid` in the file with the OCIDs that were found just now for the RSSFeeder Function and the File Writer Function.
-
-<pre class="file" data-filename="api_deployment2.json" data-target="append">
-{
-  "routes": [
-    {
-      "path": "/rss",
-      "methods": ["POST"],
-      "backend": {
-        "type": "ORACLE_FUNCTIONS_BACKEND",
-        "functionId": "function ocid"
-      }
-    },
-    {
-      "path": "/write",
-      "methods": ["POST"],
-      "backend": {
-        "type": "ORACLE_FUNCTIONS_BACKEND",
-        "functionId": "function ocid"
-      }
-    },
-    {
-      "path": "/health",
-      "methods": ["GET"],
-      "backend": {
-        "type": "STOCK_RESPONSE_BACKEND",
-        "body": "{\"status\":\"Up and Running\"}",
-        "headers":[],
-        "status":200
-      }
-    }
-  ]
-}
-</pre>
-
-Update the API Deployment in API Gateway lab-apigw with the following command:  
-
-`oci api-gateway deployment update --deployment-id $apiDeploymentId --specification file://./api_deployment2.json`{{execute}}
-
-It will take a few seconds (up to 15 seconds) for the API Gateway to synchronize its definition with the new specification. When the API Gateway deployment is updated, you can start using the new route. 
-
-You can check on the state of the API Deployment and the current update (called a *workrequest*) in the OCI Console. Execute this command to get the URL to the Console:
-
-```echo "Your OCI Console Endpoint to inspect your API Deployment's current state: https://console.us-ashburn-1.oraclecloud.com/api-gateway/gateways/$apiGatewayId/deployments/$apiDeploymentId/workrequests"```{{execute}}
-
-## Invoke the RSSFeeder Function - Now publicly exposed through API Gateway
-
-Using *curl* you can now invoke the route that leads to the function *rss-feeder* that you created in the previous step, and POST a file name and an RSS Feed URL to the function.
-
-`curl -X "POST" -H "Content-Type: application/json" -d '{"rssFeedURL":"https://technology.amis.nl/feed/","filename":"amis-rss-through-api-gateway.json"}' $deploymentEndpoint/rss`{{execute}}
-
-Check the current contents of the bucket:
-
-`oci os object list --bucket-name $bucketName`{{execute}}
-
-## Summary
-
-In this step you have
-* created a Node application that reads an RSS Feed and writes its contents as a File on OCI Object Storage - leveraging the File Writer function through the API Gateway
-* turned that Node application into a Function and deployed it on OCI
-* created a public endpoint for the function in API Gateway
-* invoked the public endpoint on API Gateway using curl. No special authorization required. No special access privileges. 
-

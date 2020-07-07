@@ -17,7 +17,7 @@ This next command creates a Notification Topic called *lab-notification-topic-$L
 `oci ons topic create --compartment-id=$compartmentId --name=lab-notification-topic-$LAB_ID --description="notification topic gets notified for lab alarms"`{{execute}}
 
 List all Notification Topics in compartment *lab-compartment* and verify that a new topic has been created:
-`oci ons topic list --compartment-id=$compartmentId --output table
+`oci ons topic list --compartment-id=$compartmentId --output table`{{execute}}
 
 Get hold of Topic OCID
 ```
