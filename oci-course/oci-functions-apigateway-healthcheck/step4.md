@@ -31,3 +31,5 @@ Findings for the health checks take about one minute to become available. They c
 `oci monitoring metric-data summarize-metrics-data --compartment-id=$compartmentId --namespace="oci_healthchecks" --query-text="HTTP.TotalDuration[1m]{resourceDisplayName = \"Check on Health of Hello 1 function\"}.mean()"`{{execute}}
 
 It is probably easier to inspect the findings from the healthchecks in the console. Note: we expect both healthchecks to report health all the time. However we expect a substantial difference in the total HTTP Processing Time. We expect function *hello1* to stay hot - because every time before it could go cold, it is invoked again by the Health Check. Function *hello2* by contrast goes cold after each healthcheck and therefore every healthcheck takes the hit of reinitializing the cold function. This should result in a significant difference between the metrics for the two healthchecks. 
+
+![](assets/two-healthchecks.png)
