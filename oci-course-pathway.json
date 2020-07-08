@@ -80,8 +80,8 @@
     },
     {
       "course_id": "oci-terraform-provider",
-      "title": "Introduction to OCI Terraform Provider",
-      "description": "Infrastructure as Code on Oracle Cloud Infrastructure with Terraform."
+      "title": "Introduction to OCI Terraform Provider and Resource Manager",
+      "description": "Infrastructure as Code on Oracle Cloud Infrastructure with Terraform through OCI provider, Resource Manager and Stacks & Jobs."
     },
     {
       "course_id": "oci-functions-apigateway-healthcheck",
