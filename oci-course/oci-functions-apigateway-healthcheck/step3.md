@@ -1,4 +1,7 @@
 # Expose Functions through API Gateway
+In this step, you will create an API Deployment on a preexisting API Gateway with routes for the two functions created in the previous step.
+![](assets/api-gateway.png)
+
 
 Create a file called api_deployment.json in the current directory with this contents. 
 

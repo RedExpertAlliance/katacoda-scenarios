@@ -14,7 +14,7 @@ healthprobe=$(oci health-checks http-probe create-on-demand --compartment-id=$co
 healthProbeId=$(echo $healthprobe | jq -r  '.data | .id')
 echo $healthprobe
 echo $healthProbeId
-```
+```{{execute}}
 
 To see the results of the probe, wait a few seconds, then check for the probe's findings using:
 `oci health-checks http-probe-result list --probe-configuration-id=$healthProbeId`{{execute}}
@@ -52,6 +52,8 @@ Imagine - or even implement - the following scenario:
 * create two health checks - one for each route and function ; set the interval time for one health check at 5 minutes, the other at 15 minutes
 * after one hour or longer, compare the average processing time for the two health checks. Remember that the functions are the same - as well was the way they are deployed and exposed. What can be the cause for any (substantial) differences in the findings between the health checks?
 ![](assets/hot-function-with-health-check.png)
+
+Note: this thought experiment is now available in a [separate Katacoda Scenario](https://katacoda.com/redexpertalliance/courses/oci-course/oci-functions-apigateway-healthcheck).
 
 ## Resources
 [OCI Documentation on Health Checks](https://docs.cloud.oracle.com/en-us/iaas/Content/HealthChecks/Concepts/healthchecks.htm)

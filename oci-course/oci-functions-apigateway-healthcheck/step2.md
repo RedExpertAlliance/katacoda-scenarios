@@ -1,6 +1,7 @@
 # Creating, Deploying and Invoking a Functions on OCI
 
 In this step we will create two simple, identifical function with Fn. We pick Node (JS) as our runtime - Go, Python, Java and Ruby are other out of the box options that you may use.
+![](assets/two-fn.png)
 
 
 ```
