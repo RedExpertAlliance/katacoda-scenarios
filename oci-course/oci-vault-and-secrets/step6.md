@@ -75,7 +75,8 @@ Invoke the function:
 `fn invoke "lab${LAB_ID}" secret-retriever --content-type application/json`{{execute}}
 
 This will return evidence of the values injected into the function at run time by the Oracle Functions FaaS framework because of the Resource Principal configuration.
-![](assets/resouce-principal-injection.png)
+
+![](assets/function-resourceprincipal-injection.png)
 
 ## Function Secret Retriever - and now for real!
 
