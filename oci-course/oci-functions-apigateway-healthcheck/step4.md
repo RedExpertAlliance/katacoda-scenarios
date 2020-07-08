@@ -1,4 +1,7 @@
 # Create Monitor Healthchecks for the two Routes
+In this step, you will create Healthchecks for the two routes and the two functions. One healthcheck with an interval of 5 minutes, the other with an interval of 15 minutes.
+![](assets/healthchecks.png)
+
 Create a Healthcheck for the /hello1 function, with the an interval of 5 minutes: 
 
 (some preparations are necessary to get the environment variable *apiGatewayServer* in the right shape - without http:// and without /path)s

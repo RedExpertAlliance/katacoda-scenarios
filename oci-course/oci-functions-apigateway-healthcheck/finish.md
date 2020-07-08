@@ -8,4 +8,4 @@ You have:
 * created health checks for the two routes (and indirectly the two functions)
 * create alarms for the two health checks - to publish notifications when the function invocation time is slowish
 
-![](assets/total-scenario.png)
+![](assets/alarms-on-healthchecks.png)
