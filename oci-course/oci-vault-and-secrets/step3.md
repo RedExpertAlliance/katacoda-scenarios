@@ -47,6 +47,7 @@ export b64encodedPlaintext=$(echo $decrypted | jq -r '.data | .plaintext')
 echo $b64encodedPlaintext | base64 --decode
 ```{{execute}}
 First, the cipher is decrypted. The result is the base64 encoded plaintext that we can normally read when it is base64 decoded.
+![](assets/encrypt-and-decrypt-throughkey.png)
 
 ## Resources 
 https://blogs.oracle.com/developers/protect-your-sensitive-data-with-secrets-in-the-oracle-cloud
