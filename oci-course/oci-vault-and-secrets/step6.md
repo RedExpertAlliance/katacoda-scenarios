@@ -112,7 +112,7 @@ Invoke the function - to retrieve the value of the secret that was created in st
 `echo -n "{\"secretOCID\":\"${secretOCID}\", \"compartmentOCID\":\"${compartmentId}\", \"region\":\"${REGION}\"}" | fn invoke "lab${LAB_ID}" secret-retriever --content-type application/json`{{execute}}
 
 This time, a secret really is read from the Vault and its value is included in the function's response. Check the *secretContent* property in the function result.
-
+![](assets/function-reads-key-fromvault.png)
 ## Resources
 
 [How to Implement an OCI API Gateway Authorization Fn in Node.js that Retrieves Secrets from an OCI Vault and Accesses OCI Resources](https://www.ateam-oracle.com/how-to-implement-an-oci-api-gateway-authorization-fn-in-nodejs-that-accesses-oci-resources)
