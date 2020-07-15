@@ -20,18 +20,26 @@
         "text": "step3.md"
       },
       {
-        "title": "Step 4 - Functions in other Languages such as Java",
-        "text": "step4.md",
-        "courseData": "step4-background.sh",
-        "code": "step4-foreground.sh"
+        "title": "Step 4 - Testing a Function",
+        "text": "step4.md"
       },
       {
-        "title": "Step 5 - Bonus: Ahead of Time Function Compilation with GraalVM",
+        "title": "Step 5 - Passing Configuration Values to a Function",
         "text": "step5.md"
       },
       {
-        "title": "Step 6 - Bonus: Custom Docker Images as Function Implementation",
-        "text": "step6.md"
+        "title": "Step 6 - Functions in other Languages such as Java",
+        "text": "step6.md",
+        "courseData": "step6-background.sh",
+        "code": "step6-foreground.sh"
+      },
+      {
+        "title": "Step 7 - Bonus: Ahead of Time Function Compilation with GraalVM",
+        "text": "step7.md"
+      },
+      {
+        "title": "Step 8 - Bonus: Custom Docker Images as Function Implementation",
+        "text": "step8.md"
       }
     ],
     "intro": {
@@ -61,10 +69,11 @@
     }
   },
   "environment": {
-    "uilayout": "editor-terminal",
-    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
+    "uilayout": "terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n",
+    "showide": true
   },
   "backend": {
-    "imageid": "ubuntu1904"
+    "imageid": "ubuntu:2004"
   }
 }

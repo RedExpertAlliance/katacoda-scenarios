@@ -1,101 +1,70 @@
-# Bonus: Custom Docker Images as Function Implementation
+# Creating Functions in other Languages 
 
-Note: this step is based very heavily on this tutorial on the Fn Project Website [Make your own Linux command Function with HotWrap and a Customer Docker Image](https://fnproject.io/tutorials/docker/CustomLinuxContainer/)
+The hello function we have been working with in the previous steps was implemented using Node JS (server side JavaScript). Fn supports many other runtime, such as Go, Python, Java and Ruby. Additionally, you can create a function from just any Docker Container, regardless which (combination of) runtime engines and languages you have used in it.
 
-This tutorial walks through how to use a custom Docker image to define an Fn function. Although Fn functions are packaged as Docker images, when developing functions using the Fn CLI developers are not directly exposed to the underlying Docker platform. Docker isn’t hidden (you can see Docker build output and image names and tags), but you aren’t required to be very Docker-savvy to develop functions with Fn.
+In this step you will create a function in Java. Feel free to try out the other runtimes as well.
 
-What if you want to make a function using Linux command line tools, or a script that does not involve one of the supported Fn languages? Can you use your Docker image as a function? Fortunately the design and implementation of Fn enables you to do exactly that. Let’s build a simple custom function container image to see how it’s done.
-
-The *Fn HotWrap* tool allows you to create functions using conventional Unix command line tools and a Docker container. The tool provides the FDK contract for any command that can be run on the command line. Once wrapped, event data is passed to your function via STDIN and the output is returned through STDOUT.
-
-## Initial Linux Command
-
-Try out this command - that simply reverses text.
-`echo "Hello World" | rev`{{execute}}
-
-Our function implementation is simple: we only need to call the command /bin/rev with the input to the function and produce the result of the rev* command as output.
-
-## Initialize Function
-
-We need a directory for our project.
+Return to the home directory and create a new function called *hello-java* with Java as its runtime engine.
 ```
 cd ~
-mkdir revfunc
+
+fn init --runtime java hello-java
 ```{{execute}}
-and change into the directory:
-`cd revfunc`{{execute}}
 
-In the folder , create a func.yaml file 
-`touch func.yaml`{{execute}}
+Check out the generated directory structure and Java Classes:
 
-Open this file in the text editor and copy/paste the following as its content:
-<pre class="file" data-target="clipboard">
-schema_version: 20180708
-name: revfunc
-version: 0.0.1
-runtime: docker
-triggers:
-- name: revfunc
-  type: http
-  source: /revfunc
-</pre>
+`ls -R hello-java`{{execute}}
 
-This is a typical func.yaml except that instead of declaring the runtime as a programming language we've specified *docker*. If you were to type fn build right now you'd get the error:
+Now inspect the generated Java class that handles requests - and can be customized by us. 
+```
+cd hello-java/src/main/java/com/example/fn
 
-`Fn: Dockerfile does not exist for 'docker' runtime`
+cat HelloFunction.java
+```{{execute}}
 
-This is because when you set the runtime type to *docker*. The `fn build` command defers to your Dockerfile to build the function container image–and you haven’t defined one yet!
+Java Class HelloFunction.java was generated as the starting point for this function. You can check out file in the editor. 
 
-## Create the Dockerfile for the Function
-Create a file named Dockerfile 
-`touch Dockerfile`{{execute}}
-and copy/paste the following as its content:
-<pre class="file" data-target="clipboard">
-FROM alpine:latest
+Warning: if you make changes to the output of the file, ensure that you change the unit test accordingly because when the test fails, the function cannot be built and deployed. The unit test is in the source file hello-java/src/test/java/com/example/fn/HelloFunctionTest.java.
 
-# Install hotwrap binary in your container
-COPY --from=fnproject/hotwrap:latest  /hotwrap /hotwrap
-CMD "/bin/rev"
-ENTRYPOINT ["/hotwrap"]
-</pre>
+It is not as obvious as in the func.js generated for the Node runtime that an Fn handler is at play. However, also in the case of Java based functions, requests are handled by a generic Fn Java runtime handler before being passed to our own code. Check in *func.yaml* how the Java Class and method that the generic handler should forward the request to are specified. 
 
-Here is an explanation of each of the Docker commands.
+Deploy the Java Function hello-java locally, into the app that was created in step 2 of this scenario. You will again see a Docker Container Image being built. Or actually: two images. The first image is the build environment with the full Java JDK, Maven and facilities to run unit tests. The outcome of this first image is a Fat Jar that contains the built application artifact. This is the input for the second container image - that is based on the Java Runtime Environment, a much lighter weight image. The final result of deploying the function is the image based on JRE and with only the Fat Jar created for the function. 
 
-* FROM alpine:latest - Use the latest version of Alpine Linux as the base image.
-* COPY --from=fnproject/hotwrap:latest /hotwrap /hotwrap - Install the HotWrap Fn tool.
-* CMD "/bin/rev" - The Linux command to run.
-* ENTRYPOINT ["/hotwrap"] - Tells the container to execute the previous command using HotWrap: /hotwrap /bin/rev
+```
+cd ~/hello-java
 
-## Build and Deploy the Function
-Once you have your custom Dockerfile you can simply use fn build to build your function. Give it a try:
-`fn -v build`{{execute}}
+fn -v deploy --app hello-app --local 
+```{{execute}}
 
-Just like with a default build, the output is a container image. From this point forward everything is just as it would be for any Fn function. Since you’ve previously started an Fn server, you can deploy it.
+To invoke the Java function, execute this command:
 
-`fn -v deploy --app hello-app --local --no-bump`{{execute}}
-List the functions in the hello-app application, to see that now revfunc is a function:
+`time fn invoke hello-app hello-java`{{execute}}
 
-`fn list functions hello-app`{{execute}}
+Note: we have added the `time` instruction to get timing for the cold startup time of the function. In step 6, we will use GraalVM powered ahead of time compiled Java applications, that are supposed to have a much faster cold startup time. Please remember the values you are getting for the timing of this command for comparison in step 6.
 
-Pro tip: The Fn cli let's you abbreviate most of the keywords so you can also say `fn ls f hello-app`! You should see the same output.
+To verify the cold startup effect, invoke the Java function again:
 
-## Invoking the Function
-With the function deployed let’s invoke it to make sure it’s working as expected.
+`time fn invoke hello-app hello-java`{{execute}}
 
-`echo "Hello World" | fn invoke hello-app revfunc`{{execute}}
+The real time reported is expected to be much shorter this time - because the container that implements the function is already running and started up. 
 
-For this command you should see the following output: `dlroW olleH`
+To send input to the function, use the following command:
 
-We included an HTTP trigger declaration in the func.yaml so we can also call the function with curl:
-`curl --data "Hello World" -H "Content-Type: text/plain" -X POST http://localhost:8080/t/hello-app/revfunc`{{execute}}
+`echo -n 'Your Own Name' | fn invoke hello-app hello-java --content-type application/json`{{execute}}
 
-What about this one?
+Again, a friendly, this time personalized, welcome message should be your reward.
 
-`curl --data "Eva, can I see bees in a cave" -H "Content-Type: text/plain" -X POST http://localhost:8080/t/hello-app/revfunc`{{execute}}
+## Further Explorations
+To try out other languages, simply replace *java* as runtime with *go* or *python* in the call to `fn init`. For example:
+```
+cd ~
 
+fn init --runtime go hello-go
+```{{execute}}
 
-## Conclusion
+### Custom Docker Containers as Function implementation
+It is possible to take any Docker Container and use it as the implementation of a function. In that case the runtime is *docker*. A subsequent step in this scenario demonstrates this compelling feature of Fn.
 
-One of the most powerful features of Fn is the ability to use custom defined Docker container images as functions. This feature makes it possible to customize your function’s runtime environment including letting you use Linux command line tools as your function. And thanks to the Fn CLI's support for Dockerfiles it's the same user experience as when developing any function.
+### GraalVM
 
-Having completed this step you've successfully built a function using a custom Dockerfile. Congratulations!
+ Project Fn also supports binary executables with GraalVM; there is a special runtime available that takes a Java application and builds it all the way into a container image with just a binary executable. This results in an even smaller image and even faster function warmup and execution. In step 5 of this scenario, you can check out this approach to packaging Java applications.

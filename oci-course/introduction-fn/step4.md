@@ -1,70 +1,15 @@
-# Creating Functions in other Languages 
+# Test a Function
+Originally, the Fn CLI supported the `fn test` command that could run a series of predefined tests on the function. The definition of the tests was the same across all function implementation languages. However, somewhere along the way, this test support was dropped from Fn.
 
-The hello function we have been working with in the previous steps was implemented using Node JS (server side JavaScript). Fn supports many other runtime, such as Go, Python, Java and Ruby. Additionally, you can create a function from just any Docker Container, regardless which (combination of) runtime engines and languages you have used in it.
+Testing a function is now your own responsibility - and can be done at various levels:
+* test the code that implements the function - without invoking the function itself - using appropriate tooling for the relevant programming language
+* test the function in its entirety - including the Fn framework - using a mechanism for testing HTTP services (such as Newman)
 
-In this step you will create a function in Java. Feel free to try out the other runtimes as well.
+In order to test the function's implementation without testing the Fn framework, we should ideally implement everything that is specific to the function in a separate module and use the func.js only as the generic wrapper.
 
-Return to the home directory and create a new function called *hello-java* with Java as its runtime engine.
-```
-cd ~
+Install the testing module *jest*  (see [jest documentation](https://jestjs.io/docs/en/getting-started.html) for details on how to get started).
 
-fn init --runtime java hello-java
-```{{execute}}
+Execute this command to install jest as a development time dependency:
 
-Check out the generated directory structure and Java Classes:
+`npm install --save-dev jest`{{execute}}
 
-`ls -R hello-java`{{execute}}
-
-Now inspect the generated Java class that handles requests - and can be customized by us. 
-```
-cd hello-java/src/main/java/com/example/fn
-
-cat HelloFunction.java
-```{{execute}}
-
-Java Class HelloFunction.java was generated as the starting point for this function. You can check out file in the editor. 
-
-Warning: if you make changes to the output of the file, ensure that you change the unit test accordingly because when the test fails, the function cannot be built and deployed. The unit test is in the source file hello-java/src/test/java/com/example/fn/HelloFunctionTest.java.
-
-It is not as obvious as in the func.js generated for the Node runtime that an Fn handler is at play. However, also in the case of Java based functions, requests are handled by a generic Fn Java runtime handler before being passed to our own code. Check in *func.yaml* how the Java Class and method that the generic handler should forward the request to are specified. 
-
-Deploy the Java Function hello-java locally, into the app that was created in step 2 of this scenario. You will again see a Docker Container Image being built. Or actually: two images. The first image is the build environment with the full Java JDK, Maven and facilities to run unit tests. The outcome of this first image is a Fat Jar that contains the built application artifact. This is the input for the second container image - that is based on the Java Runtime Environment, a much lighter weight image. The final result of deploying the function is the image based on JRE and with only the Fat Jar created for the function. 
-
-```
-cd ~/hello-java
-
-fn -v deploy --app hello-app --local 
-```{{execute}}
-
-To invoke the Java function, execute this command:
-
-`time fn invoke hello-app hello-java`{{execute}}
-
-Note: we have added the `time` instruction to get timing for the cold startup time of the function. In step 6, we will use GraalVM powered ahead of time compiled Java applications, that are supposed to have a much faster cold startup time. Please remember the values you are getting for the timing of this command for comparison in step 6.
-
-To verify the cold startup effect, invoke the Java function again:
-
-`time fn invoke hello-app hello-java`{{execute}}
-
-The real time reported is expected to be much shorter this time - because the container that implements the function is already running and started up. 
-
-To send input to the function, use the following command:
-
-`echo -n 'Your Own Name' | fn invoke hello-app hello-java --content-type application/json`{{execute}}
-
-Again, a friendly, this time personalized, welcome message should be your reward.
-
-## Further Explorations
-To try out other languages, simply replace *java* as runtime with *go* or *python* in the call to `fn init`. For example:
-```
-cd ~
-
-fn init --runtime go hello-go
-```{{execute}}
-
-### Custom Docker Containers as Function implementation
-It is possible to take any Docker Container and use it as the implementation of a function. In that case the runtime is *docker*. A subsequent step in this scenario demonstrates this compelling feature of Fn.
-
-### GraalVM
-
- Project Fn also supports binary executables with GraalVM; there is a special runtime available that takes a Java application and builds it all the way into a container image with just a binary executable. This results in an even smaller image and even faster function warmup and execution. In step 5 of this scenario, you can check out this approach to packaging Java applications.
