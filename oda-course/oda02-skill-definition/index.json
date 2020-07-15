@@ -1,0 +1,46 @@
+{
+  "title": "Defining Intents and Entities in an ODA Skill",
+  "description": "In this scenario you will create an ODA Skill and define Intents and Entities.",
+  "difficulty": "Beginner",
+  "time": "7 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Enable LOCATION Entity",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2 - Create Skill",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - ODA Overview",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4 - Create Intents",
+        "text": "step4.md"
+      },
+      {
+        "title": "Step 5 - Add Entities to the Intents",
+        "text": "step5.md"
+      },
+      {
+        "title": "Step 6 - Testing & Training",
+        "text": "step6.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "terminal"
+  },
+  "backend": {
+    "imageid": "javascript"
+  }
+}

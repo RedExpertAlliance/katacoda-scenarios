@@ -1,0 +1,32 @@
+{
+  "title": "Oracle Digital Assistant - Hands-on Labs",
+  "description": "A series of handson labs produced by REAL - the Red Expert Alliance - to get introduced to Oracle Digital Assistant",
+  "icon": "fa-katacoda",
+  "courses": [
+    {
+      "course_id": "oda01-provisioning",
+      "title": "Provisioning an Oracle Digital Assistant instance",
+      "description": "In this scenario you will provision an Oracle Digital Assistant instance"
+    },
+    {
+      "course_id": "oda02-skill-definition",
+      "title": "Defining Intents and Entities in an ODA Skill",
+      "description": "In this scenario you will create an ODA Skill and define Intents and Entities."
+    },
+    {
+      "course_id": "oda03-skill-flow-implementation",
+      "title": "Implementing the dialog flow in an ODA Skill",
+      "description": "In this scenario you will implement the skill flow"
+    },
+    {
+      "course_id": "oda04-skill-custom-components",
+      "title": "Custom Components to access external data sources",
+      "description": "In this scenario you will provision an Oracle Digital Assistant instance"
+    },
+    {
+      "course_id": "oda05-channels",
+      "title": "Setup and customize a web widget to expose your ODA Skill",
+      "description": "In this scenario you will configure a web widget for your website."
+    }
+  ]
+}

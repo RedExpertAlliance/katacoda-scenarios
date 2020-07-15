@@ -1,0 +1,53 @@
+{
+  "title": "Setup and customize a web widget to expose your ODA Skill",
+  "description": "In this scenario you will configure a web widget for your website.",
+  "difficulty": "Beginner",
+  "time": "15 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Create a channel",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2 - Create a channel",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - Create a channel",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4 - Setting up the environment",
+        "text": "step4.md"
+      },
+      {
+        "title": "Step 5 - Understanding the SDK",
+        "text": "step5.md"
+      },
+      {
+        "title": "Step 6 - Customize & Test the widget",
+        "text": "step6.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+        "uieditorpath": "/root/ODAComponents",
+        "showide": true,
+        "idePort": 23000,
+        "uilayout": "terminal-iframe",
+		"showdashboard": true,
+		"dashboards": [
+			{"name": "Web Widget", "href": "https://[[HOST_SUBDOMAIN]]-3000-[[KATACODA_HOST]].environments.katacoda.com"}
+		]
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}

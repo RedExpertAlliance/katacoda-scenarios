@@ -1,0 +1,53 @@
+{
+  "title": "Custom Components to access external data sources",
+  "description": "In this scenario you will provision an Oracle Digital Assistant instance",
+  "difficulty": "Beginner",
+  "time": "15 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Configuring the environment",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2 - Component Implementation (I)",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - Component Implementation (II)",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4 - Component Implementation (III)",
+        "text": "step4.md"
+      },
+      {
+        "title": "Step 5 - Creating the Service",
+        "text": "step5.md"
+      },
+      {
+        "title": "Step 6 - Calling Custom Component from dialog flow",
+        "text": "step6.md"
+      },
+      {
+        "title": "Step 7 - Testing the skill",
+        "text": "step7.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+        "uieditorpath": "/root/ODAComponents",
+        "showide": true,
+        "idePort": 23000,
+        "uilayout": "terminal"
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}

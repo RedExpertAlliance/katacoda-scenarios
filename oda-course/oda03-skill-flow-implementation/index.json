@@ -1,0 +1,42 @@
+{
+  "title": "Implementing the dialog flow in an ODA Skill",
+  "description": "In this scenario you will implement the skill flow",
+  "difficulty": "Beginner",
+  "time": "10 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - System.Intent",
+        "text": "step1.md"
+      },
+      {
+        "title": "Step 2 - System.Output and System.List",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - System.SetVariable and System.Text",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4 - System.CommonResponse",
+        "text": "step4.md"
+      },
+      {
+        "title": "Step 5 - Validating and Testing your Skill",
+        "text": "step5.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "environment": {
+    "uilayout": "terminal"
+  },
+  "backend": {
+    "imageid": "javascript"
+  }
+}
