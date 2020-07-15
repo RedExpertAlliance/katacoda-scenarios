@@ -2,7 +2,7 @@ This scenario introduces serverless Functions with Project Fn. It was originally
 
 The scenario uses an Ubuntu 20.04 environment with embedded browser based VS Code, Docker, Fn CLI and Fn Server running locally. It does not require an OCI Cloud instance.
 
-You will create Functions locally and deploy them to the local Fn Server. Functions can then be invoked through the Fn CLI or through regular HTTP clients such as CURL.
+You will create Functions locally and deploy them to the local Fn Server. Functions can then be invoked through the Fn CLI or through regular HTTP clients such as CURL. You will briefly look at testing the function and at passing (environment specific) context variables to the function's runtime deployment
 
 The scenario works with Node (JS) and Java as runtime languages. You can experiment with Go, Ruby, Python as runtimes just as easily.
 

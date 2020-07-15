@@ -13,3 +13,49 @@ Execute this command to install jest as a development time dependency:
 
 `npm install --save-dev jest`{{execute}}
 
+Create the test file for module *existingNodeApp*:
+`touch existingNodeApp.test.js`{{execute}}
+And add the contents:
+<pre class="file" data-target="clipboard">
+const app = require( './existingNodeApp.js' );
+const name ="Henk"
+test(`Simple test for ${name}`, () => {
+  expect(app.doYourThing(name)).toBe(`Warm greeting to you, dear ${name} and all your loved ones`);
+});
+</pre>
+
+Run the test using
+`npm test`{{execute}}
+
+This should report favorably on the test of module *existingNodeApp*.
+
+This test of course does not test the Fn framework, the successful creation of the Docker container image and whatever is done inside *func.js*.
+
+A different type of test could forego the Node implementation and only focus on the HTTP interaction - including the Fn framework and the Container Image. We leave that for another time.
+
+
+## Performance Testing
+We will now briefly look at performance testing the Fn function, using a simple tool called Apache Bench.
+
+Read this article for a very quick introduction of Apache Bench: https://www.petefreitag.com/item/689.cfm
+
+Let's install Apache Bench:
+```
+apt install apache2-utils
+```{{execute}}
+and confirm by typing *y*
+
+A simple test of the *hello* function - without supplying any input - looks like this:
+`ab -n 100 -c 10 $HELLO_FUNCTION_ENDPOINT`{{execute}}
+Here we ask for 100 requests, with a maximum of 10 requests running concurrently.
+
+The tool reports how the response times were distributed. 
+
+A slightly more serious test would involve at least real input. Here we write the POST body to a file and then send that file along in all the test requests:
+```
+echo -n '{"name":"William Shakespeare"}' > postfile
+ab -n 100 -c 10 -T 'application/json' -p postfile $HELLO_FUNCTION_ENDPOINT 
+```{{execute}}
+
+
+

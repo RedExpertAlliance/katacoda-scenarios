@@ -20,7 +20,7 @@ Now with the variable set you should be able to invoke the function using curl:
 
 ## Trigger Function Execution (through HTTP)
 
-If we would add a trigger of type *http* to the func.yaml for function hello, we can trigger the execution of a function even more directly.
+If we would add a trigger of type *http* to the func.yaml for function hello, we can trigger the execution of a function by triggering the Fn runtime framework.
 
 Open the file `func.yaml` and this snippet at the end of the file:
 <pre class="file" data-target="clipboard">
@@ -33,7 +33,7 @@ triggers:
 Deploy the Function Hello locally, into the app that was just created
 `fn -v deploy --app hello-app --local `{{execute}}
 
-Now to invoke the function:
+Now to invoke the function, we send an HTTP trigger to the Fn runtime server that in turn will send an HTTP request to the container that implements the function :
 `curl --data '{"name":"Bob"}' -H "Content-Type: text/plain" -X POST http://localhost:8080/t/hello-app/hello`{{execute}}
 
 ## Context available to a Function when processing a Request.
@@ -53,7 +53,7 @@ The FDK framework's handler (fdk.handle) will now pass the request context in th
 Change line 8 to make it read: 
 
 <pre class="file" data-target="clipboard">
-  return {'message': 'Hello ' + name ,'ctx':ctx}
+  return {'message': app.doYourThing(name) ,'ctx':ctx}
 </pre>
 
 Changes to file func.js are saved automatically by the editor - do not look for a Save button or use Ctrl+S.

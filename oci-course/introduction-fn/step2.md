@@ -80,7 +80,7 @@ Copy the existing Node application *existingNodeApplication.js* to the folder cr
 `cp /root/scenarioResources/existingNodeApp.js /root/hello`{{execute}}
 
 This node application is quite simple, as you can verify:
-`cat /root/hello/existingNodeApp.js`
+`cat /root/hello/existingNodeApp.js`{{execute}}
 
 Run the existingNodeApp:
 `node existingNodeApp.js YourName`{{execute}}
