@@ -28,8 +28,8 @@
 							"  });\r",
 							"pm.test(\"Function response should have property ctx that contains custom header CustomHeader\", function () {\r",
 							"      const jsonData = pm.response.json();\r",
-							"      pm.expect(jsonData).to.have.property('headers');\r",
-							"      pm.expect(jsonData[\"_headers\"]).to.have.deep.property('CustomHeader');\r",
+							"      pm.expect(jsonData.ctx).to.have.property('_headers');\r",
+							"      pm.expect(jsonData.ctx[\"_headers\"]).to.have.deep.property('Custom-Header');\r",
 							"  });  "
 						],
 						"type": "text/javascript"
@@ -40,7 +40,7 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "CustomHeader",
+						"key": "Custom-Header",
 						"value": "SpecialValue",
 						"description": "Only for testing purposes",
 						"type": "text"

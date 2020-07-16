@@ -5,24 +5,25 @@ Testing a function is now your own responsibility - and can be done at various l
 * test the code that implements the function - without invoking the function itself - using appropriate tooling for the relevant programming language
 * test the function in its entirety - including the Fn framework - using a mechanism for testing HTTP services (such as Newman)
 
-In order to test the function's implementation without testing the Fn framework, we should ideally implement everything that is specific to the function in a separate module and use the func.js only as the generic wrapper.
+In order to test the function's implementation without testing the Fn framework, we should ideally implement everything that is specific to the function in a separate module and use the func.js only as the generic wrapper. We can the focus the testing effort on this separate module and all its dependencies.
 
-Install the testing module *jest*  (see [jest documentation](https://jestjs.io/docs/en/getting-started.html) for details on how to get started).
+Install the npm testing module *jest*  (see [jest documentation](https://jestjs.io/docs/en/getting-started.html) for details on how to get started). Jest has rapidly become the industry's choice for testing JavaScript & Node applications.
 
-Execute this command to install jest as a development time dependency:
+Execute this command to install *jest* as a development time dependency:
 
 `npm install --save-dev jest`{{execute}}
 
-Add this snippet to `package.json` - creating a new property at the same level as *main* and *dependencies* :
+Add this snippet to `package.json` to have jest invoked whenever *npm test* is executed - creating a new property at the same level as *main* and *dependencies* :
 <pre class="file" data-target="clipboard">
 ,"scripts": {
 		"test": "jest"
 	  }
 </pre>    
 
-Create the test file for module *existingNodeApp*:
+Create the test file for module *existingNodeApp*; by convention, this file is typically called *existingNodeApp.test.js*:
 `touch existingNodeApp.test.js`{{execute}}
-And add the contents to `existingNodeApp.test.js`:
+
+And add the contents to `existingNodeApp.test.js` - which specifies a spectacularly simple test:
 <pre class="file" data-target="clipboard">
 const app = require( './existingNodeApp.js' );
 const name ="Henk"
@@ -36,16 +37,18 @@ Run the test using
 
 This should report favorably on the test of module *existingNodeApp*.
 
-This test of course does not test the Fn framework, the successful creation of the Docker container image and whatever is done inside *func.js*.
+This test of course does not test the Fn framework, the successful creation of the Docker container image and whatever is done inside *func.js*. It tests the core functionality that *existingNodeApp* provides to the wrapper function.
 
-A different type of test could forego the Node implementation and only focus on the HTTP interaction - including the Fn framework and the Container Image. We leave that for another time.
+A different type of test could forego the Node implementation and only focus on the HTTP interaction - including the Fn framework and the Container Image. That can be done using a tool such as Newman.
 
 ## Service Testing with Newman
+Newman is an npm module that is used for running Postman test collections from the command line - and therefore in an automated fashion. See [Running collections on the command line with Newman](https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/) for more details on Newman.
 
 Install Newman as Node module:
 `npm install --save-dev newman`{{execute}}
 
-Copy files to hello function resources
+Copy these files to the folder with hello function resources. The first file defines a single request to the Hello Function along with a number of tests. This file - defined as a collection in Postman - relies on an environment variable defined in the file env.json. This second file does not exist yet; it will be created from the file env_temp.json. This file defines the variable with the endpoint for the hello function. The value of this variable is taken from the environment variable *$HELLO_FUNCTION_ENDPOINT*. We use the *envsubst* command for this replacement.
+
 ```
 cp /root/scenarioResources/postman-hello-collection.json /root/hello 
 cp /root/scenarioResources/env_temp.json /root/hello 
@@ -60,14 +63,15 @@ This script is used to run the function test using Newman.
 Replace the Hello Function's endpoint and create file *env.json* from the template *env_temp.json*: 
 `envsubst < env_temp.json > env.json`{{execute}}
 
-You can check whether file *env.json* contains the correct function endpoint.
+You can check whether file *env.json* now contains the correct function endpoint.
 `cat env.json`{{execute}}
 
-To run the test, now you can use
+To run the test, you can use
 `npm run test-fn`{{execute}}
 
-this will run the *test-fn* script as defined in the file package.json that will run *Newman* with the specified collection *postman-hello-collection.json* that was copied in from the scenario assets folder. 
+this will run the *test-fn* script as defined in the file package.json that will run *Newman* with the specified collection *postman-hello-collection.json* that was copied in from the scenario assets folder. You should now see confirmation of the tests - defined in the Postman collection and executed by Newman (against the locally deployed Function - invoked through the local Fn framework).
 
+![](assets/newman-tests.png)
 
 
 
