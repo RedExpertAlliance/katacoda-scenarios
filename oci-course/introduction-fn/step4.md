@@ -40,6 +40,26 @@ This test of course does not test the Fn framework, the successful creation of t
 
 A different type of test could forego the Node implementation and only focus on the HTTP interaction - including the Fn framework and the Container Image. We leave that for another time.
 
+## Service Testing with Newman
+
+Install Newman as Node module:
+`npm install --save-dev newman`{{execute}}
+
+To open file in editor/IDE 
+
+`package.json`{{open}}
+
+
+
+To copy snippet to clipboard:
+
+<pre class="file" data-target="clipboard">
+
+snippet
+
+</pre>
+
+
 
 ## Performance Testing
 We will now briefly look at performance testing the Fn function, using a simple tool called Apache Bench.
