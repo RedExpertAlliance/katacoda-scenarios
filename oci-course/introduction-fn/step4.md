@@ -13,7 +13,7 @@ Execute this command to install jest as a development time dependency:
 
 `npm install --save-dev jest`{{execute}}
 
-Add this snippet to package.json - creating a new property at the same level as *main* and *dependencies* :
+Add this snippet to `package.json`{{open}} - creating a new property at the same level as *main* and *dependencies* :
 <pre class="file" data-target="clipboard">
 ,"scripts": {
 		"test": "jest"
@@ -22,7 +22,7 @@ Add this snippet to package.json - creating a new property at the same level as 
 
 Create the test file for module *existingNodeApp*:
 `touch existingNodeApp.test.js`{{execute}}
-And add the contents:
+And add the contents to `/root/hello/existingNodeApp.js`{{open}}:
 <pre class="file" data-target="clipboard">
 const app = require( './existingNodeApp.js' );
 const name ="Henk"
@@ -47,7 +47,21 @@ Install Newman as Node module:
 
 To open file in editor/IDE 
 
-`package.json`{{open}}
+`/root/hello/package.json`{{open}}
+
+Add in *scripts* element:
+<pre class="file" data-target="clipboard">
+","test-fn": "newman run /root/hello/postman-hello-collection.json -e /root/hello/env.json -global-var \"hello-endpoint=$HELLO_FUNCTION_ENDPOINT\""
+
+
+
+</pre>
+
+`sed  "s/XXXX/$HELLO_FUNCTION_ENDPOINT/g" -i /root/hello/env.json`{{execute}}
+
+Then we can handle configs for environments as we like, and run
+`npm run test-fn`{{execute}}
+to execute the test!
 
 
 
