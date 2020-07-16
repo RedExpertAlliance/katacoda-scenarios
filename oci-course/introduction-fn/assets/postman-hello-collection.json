@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "2b753fe1-304c-4b9d-b790-021763c49ead",
+		"name": "test-fn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "fn-endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "32e4fce6-8233-4c84-9a34-bc0d100661d7",
+						"exec": [
+							"pm.test(\"Function Response Status\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Function response must be valid and have a body\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Function response should have property message that should contain name Tester 1\", function () {\r",
+							"      const jsonData = pm.response.json();\r",
+							"      pm.expect(jsonData).to.have.property('message');\r",
+							"      pm.expect(jsonData.message).to.include('Tester 1');\r",
+							"  });\r",
+							"pm.test(\"Function response should have property ctx that contains custom header CustomHeader\", function () {\r",
+							"      const jsonData = pm.response.json();\r",
+							"      pm.expect(jsonData).to.have.property('headers');\r",
+							"      pm.expect(jsonData[\"_headers\"]).to.have.deep.property('CustomHeader');\r",
+							"  });  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CustomHeader",
+						"value": "SpecialValue",
+						"description": "Only for testing purposes",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Tester 1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{function-endpoint}}",
+					"host": [
+						"{{function-endpoint}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

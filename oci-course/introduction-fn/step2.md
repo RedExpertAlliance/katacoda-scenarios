@@ -88,7 +88,7 @@ Run the existingNodeApp:
 Note: feel free to make changes to the existingNodeApp.js.
 
 Open the file *func.js* in the text editor. 
-`/root/hello/func.js`{{open}}
+`func.js`
 
 Select all current contents (CTRL + A), remove it (Del) and copy this snippet to the file:
 <pre class="file" data-target="clipboard">

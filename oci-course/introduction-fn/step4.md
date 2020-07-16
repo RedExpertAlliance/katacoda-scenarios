@@ -13,7 +13,7 @@ Execute this command to install jest as a development time dependency:
 
 `npm install --save-dev jest`{{execute}}
 
-Add this snippet to `package.json`{{open}} - creating a new property at the same level as *main* and *dependencies* :
+Add this snippet to `package.json` - creating a new property at the same level as *main* and *dependencies* :
 <pre class="file" data-target="clipboard">
 ,"scripts": {
 		"test": "jest"
@@ -22,7 +22,7 @@ Add this snippet to `package.json`{{open}} - creating a new property at the same
 
 Create the test file for module *existingNodeApp*:
 `touch existingNodeApp.test.js`{{execute}}
-And add the contents to `/root/hello/existingNodeApp.test.js`{{open}}:
+And add the contents to `existingNodeApp.test.js`:
 <pre class="file" data-target="clipboard">
 const app = require( './existingNodeApp.js' );
 const name ="Henk"
@@ -51,14 +51,11 @@ cp /root/scenarioResources/postman-hello-collection.json /root/hello
 cp /root/scenarioResources/env_temp.json /root/hello 
 ```{{execute}}
 
-To open file in editor/IDE 
-
-`/root/hello/package.json`{{open}}
-
-Add in *scripts* element:
+Open file *package.json* in the editor/IDE. Add this script element in the existing *scripts* element:
 <pre class="file" data-target="clipboard">
 ,"test-fn": "newman run /root/hello/postman-hello-collection.json -e /root/hello/env.json"
 </pre>
+This script is used to run the function test using Newman.
 
 Replace the Hello Function's endpoint and create file *env.json* from the template *env_temp.json*: 
 `envsubst < env_temp.json > env.json`{{execute}}

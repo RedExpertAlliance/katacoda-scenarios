@@ -22,7 +22,7 @@ Now with the variable set you should be able to invoke the function using curl:
 
 If we would add a trigger of type *http* to the func.yaml for function hello, we can trigger the execution of a function by triggering the Fn runtime framework.
 
-Open the file `/root/hello/func.yaml`{{open}} and this snippet at the end of the file:
+Open the file `func.yaml` and this snippet at the end of the file:
 <pre class="file" data-target="clipboard">
 triggers:
 - name: hello
@@ -40,7 +40,7 @@ Now to invoke the function, we send an HTTP trigger to the Fn runtime server tha
 
 When you invoke a function, the request is handled and forwarded by the Fn Server to the function. This means that an HTTP request is sent to the container that implements the function. This request is received by a handler provided by the Fn FDK for Node. This handler can be seen in the file func.js - which is the generated Node implementation of the function.
 
-Click on the file `/root/hello/func.js`{{open}} to open it in the editor. On line 3 you see the call `fdk.handle()`. This initializes the Fn Runtime with a generic request handler; when a request is received it is forwarded to the function that is passed to *fdk.handle()* - the function that takes one parameter called *input*.  
+Click on the file `func.js` to open it in the editor. On line 3 you see the call `fdk.handle()`. This initializes the Fn Runtime with a generic request handler; when a request is received it is forwarded to the function that is passed to *fdk.handle()* - the function that takes one parameter called *input*.  
 
 Add a second parameter to the function definition on line 3, to make this line read:
 
