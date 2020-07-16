@@ -22,7 +22,7 @@ Add this snippet to `package.json`{{open}} - creating a new property at the same
 
 Create the test file for module *existingNodeApp*:
 `touch existingNodeApp.test.js`{{execute}}
-And add the contents to `/root/hello/existingNodeApp.js`{{open}}:
+And add the contents to `/root/hello/existingNodeApp.test.js`{{open}}:
 <pre class="file" data-target="clipboard">
 const app = require( './existingNodeApp.js' );
 const name ="Henk"
@@ -45,33 +45,32 @@ A different type of test could forego the Node implementation and only focus on 
 Install Newman as Node module:
 `npm install --save-dev newman`{{execute}}
 
+Copy files to hello function resources
+```
+cp /root/scenarioResources/postman-hello-collection.json /root/hello 
+cp /root/scenarioResources/env_temp.json /root/hello 
+```{{execute}}
+
 To open file in editor/IDE 
 
 `/root/hello/package.json`{{open}}
 
 Add in *scripts* element:
 <pre class="file" data-target="clipboard">
-","test-fn": "newman run /root/hello/postman-hello-collection.json -e /root/hello/env.json -global-var \"hello-endpoint=$HELLO_FUNCTION_ENDPOINT\""
-
-
-
+,"test-fn": "newman run /root/hello/postman-hello-collection.json -e /root/hello/env.json"
 </pre>
 
-`sed  "s/XXXX/$HELLO_FUNCTION_ENDPOINT/g" -i /root/hello/env.json`{{execute}}
+Replace the Hello Function's endpoint and create file *env.json* from the template *env_temp.json*: 
+`envsubst < env_temp.json > env.json`{{execute}}
 
-Then we can handle configs for environments as we like, and run
+You can check whether file *env.json* contains the correct function endpoint.
+`cat env.json`{{execute}}
+
+To run the test, now you can use
 `npm run test-fn`{{execute}}
-to execute the test!
 
+this will run the *test-fn* script as defined in the file package.json that will run *Newman* with the specified collection *postman-hello-collection.json* that was copied in from the scenario assets folder. 
 
-
-To copy snippet to clipboard:
-
-<pre class="file" data-target="clipboard">
-
-snippet
-
-</pre>
 
 
 

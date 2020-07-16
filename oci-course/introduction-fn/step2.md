@@ -88,7 +88,7 @@ Run the existingNodeApp:
 Note: feel free to make changes to the existingNodeApp.js.
 
 Open the file *func.js* in the text editor. 
-`func.js`{{open}}
+`/root/hello/func.js`{{open}}
 
 Select all current contents (CTRL + A), remove it (Del) and copy this snippet to the file:
 <pre class="file" data-target="clipboard">
@@ -123,7 +123,7 @@ To enable DEBUG logging for Fn server, restart the server with the following com
 
 ```
 fn stop
-nohup fn start --log-level DEBUG &
+fn start --log-level DEBUG
 ```{{execute}}
 
 Running the Fn server with the DEBUG log level is a great way to track down any issues you are having with your functions. For example, invoke the function once more:

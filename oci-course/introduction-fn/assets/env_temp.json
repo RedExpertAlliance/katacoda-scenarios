@@ -1,0 +1,13 @@
+
+{
+	"id": "8831df73-10ba-4ed4-adfd-5acaefd39fb7",
+	"name": "fn",
+	"values": [
+		{
+			"key": "function-endpoint",
+			"value": "$HELLO_FUNCTION_ENDPOINT",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment"
+}

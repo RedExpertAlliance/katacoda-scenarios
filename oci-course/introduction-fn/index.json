@@ -56,6 +56,12 @@
         {
           "file": "prepareStepOne.sh",
           "target": "/root/"
+        },{
+          "file": "test-fn.postman_collection.json",
+          "target": "/root/scenarioResources/"
+        },{
+          "file": "env_temp.json",
+          "target": "/root/scenarioResources/"
         },
         {
           "file": "prepareStepOne.sh",
