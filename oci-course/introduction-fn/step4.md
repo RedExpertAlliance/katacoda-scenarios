@@ -45,8 +45,13 @@ We can go one step further, and test *func.js* as well - still before the functi
 * implement the mock version of module @fnproject/fdk with a mock version of function *handle*
 * create file func.test.js that uses module @fnproject/fdk and runs tests against *func.js* 
 
+![](assets/jest-testing-offunction.png)
 Create the new file for implementing the mock fdk.js:  
-`touch /root/hello/__mocks__/@fnproject/fdk.js`{{execute}}
+```
+mkdir /root/hello/__mocks__
+mkdir /root/hello/__mocks__/@fnproject
+touch /root/hello/__mocks__/@fnproject/fdk.js
+```{{execute}}
 
 Open the new file fdk.js in the IDE. Copy this code snippet to the file.
 <pre class="file" data-target="clipboard">
@@ -66,7 +71,8 @@ When the func.js is required, it invokes function *handle* on the *fdk* module a
 
 The test function invokes *functionCache* to retrieve the handle to this function and subsequently invoke it - just as it would be in case of the normal invocation of the Fn function.
 
-Create the file for the Jest tests for module *func*"
+Create the file for the Jest tests for module *func*:
+
 `touch /root/hello/func.test.js`{{execute}}
 
 Copy the following snippet to this file:
@@ -89,6 +95,10 @@ test(`Test of func.js for Host header in context object`, () => {
 });
 </pre>
 
+The story for this test: the test loads the object to test - *func.js* - and the mock for the Fn FDK. The require of *func.js* causes the call in func.js to fdk.handle() to take place; this loads the reference to function object defined in func.js in the functionCache. The test gets the reference to the function in the local variable *theFunction*. Two tests are defined:
+* when the function is invoked with an object that contains a *name* property, does the response object contain a *message* property that has the specified value?
+*  when the function is invoked with a second object - *context* - does the response contain a *ctx* object 
+
 Run the test using
 `npm test`{{execute}}
 
@@ -98,6 +108,7 @@ A different type of test could forego the Node implementation and only focus on 
 
 ## Service Testing with Newman
 Newman is an npm module that is used for running Postman test collections from the command line - and therefore in an automated fashion. See [Running collections on the command line with Newman](https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/) for more details on Newman.
+![](assets/testing-with-newman.png)
 
 Install Newman as Node module:
 `npm install --save-dev newman`{{execute}}
@@ -115,7 +126,7 @@ Open file *package.json* in the editor/IDE. Add this script element in the exist
 </pre>
 This script is used to run the function test using Newman.
 
-Replace the Hello Function's endpoint and create file *env.json* from the template *env_temp.json*: 
+Replace the Hello Function's endpoint in template file env_temp.json and produce file *env.json* from the template *env_temp.json* with the replaced value: 
 `envsubst < env_temp.json > env.json`{{execute}}
 
 You can check whether file *env.json* now contains the correct function endpoint.
@@ -126,12 +137,38 @@ To run the test, you can use
 
 this will run the *test-fn* script as defined in the file package.json that will run *Newman* with the specified collection *postman-hello-collection.json* that was copied in from the scenario assets folder. You should now see confirmation of the tests - defined in the Postman collection and executed by Newman (against the locally deployed Function - invoked through the local Fn framework).
 
-![](assets/newman-tests.png)
+Check the contents of the file `postman-hello-collection.json` - in the IDE or on the terminal:
+`cat postman-hello-collection.json`{{execute}}
 
+The json file contains a single request - to the Hello function - with a body and a header. It also defines four tests that the function's HTTP result should conform with. Note: the *language* used for defining the test conditions is described here in the [Chai BDD Assertion Library](https://www.chaijs.com/api/bdd/). Feel free to edit the test definitions in the file.
+
+```
+"pm.test(\"Function Response Status\", function () {\r",
+"    pm.response.to.have.status(200);\r",
+"});\r",
+"pm.test(\"Function response must be valid and have a body\", function () {\r",
+"     pm.response.to.be.ok;\r",
+"     pm.response.to.be.withBody;\r",
+"     pm.response.to.be.json;\r",
+"});\r",
+"pm.test(\"Function response should have property message that should contain name Tester 1\", function () {\r",
+"      const jsonData = pm.response.json();\r",
+"      pm.expect(jsonData).to.have.property('message');\r",
+"      pm.expect(jsonData.message).to.include('Tester 1');\r",
+"  });\r",
+"pm.test(\"Function response should have property ctx that contains custom header CustomHeader\", function () {\r",
+"      const jsonData = pm.response.json();\r",
+"      pm.expect(jsonData.ctx).to.have.property('_headers');\r",
+"      pm.expect(jsonData.ctx[\"_headers\"]).to.have.deep.property('Custom-Header');\r",
+"  });  "
+```
+
+![](assets/newman-tests.png)
 
 
 ## Performance Testing
 We will now briefly look at performance testing the Fn function, using a simple tool called Apache Bench.
+![](assets/testing-with-apachebench.png)
 
 Read this article for a very quick introduction of Apache Bench: https://www.petefreitag.com/item/689.cfm
 
