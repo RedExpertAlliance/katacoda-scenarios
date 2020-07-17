@@ -21,9 +21,7 @@ List the currently available Fn contexts
 
 Notice we have a default context which deploys to a local Fn server. The default context is created the first time you run the Fn CLI. However, we need to select default as our current context and set a registry value for remote or local Docker use.
 
-Set context to *default* - this is a local context that uses the locally running Fn server for deploying functions. 
-
-`fn use context default`{{execute}}
+The currently active context is *default* - this is a local context that uses the locally running Fn server for deploying functions. 
 
 Before we start using Fn, we need to configure Fn to point to an appropriate Docker registry so it knows where to push your function images to. Normally Fn points to your Docker Hub account by specifying your Docker Hub username. However, for pure local development we can simply configure Fn with an arbitrary value
 

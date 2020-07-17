@@ -34,7 +34,7 @@ test(`Simple test for ${name}`, () => {
 
 Run the test using
 `npm test`{{execute}}
-
+![](assets/jest-existingNodeApp.png)
 This should report favorably on the test of module *existingNodeApp*.
 
 This test of course does not test the Fn framework, the successful creation of the Docker container image and whatever is done inside *func.js*. It tests the core functionality that *existingNodeApp* provides to the wrapper function.
@@ -46,6 +46,7 @@ We can go one step further, and test *func.js* as well - still before the functi
 * create file func.test.js that uses module @fnproject/fdk and runs tests against *func.js* 
 
 ![](assets/jest-testing-offunction.png)
+
 Create the new file for implementing the mock fdk.js:  
 ```
 mkdir /root/hello/__mocks__
@@ -73,7 +74,9 @@ The test function invokes *functionCache* to retrieve the handle to this functio
 
 Create the file for the Jest tests for module *func*:
 
-`touch /root/hello/func.test.js`{{execute}}
+```
+touch /root/hello/func.test.js
+```{{execute}}
 
 Copy the following snippet to this file:
 
@@ -135,7 +138,9 @@ You can check whether file *env.json* now contains the correct function endpoint
 To run the test, you can use
 `npm run test-fn`{{execute}}
 
-this will run the *test-fn* script as defined in the file package.json that will run *Newman* with the specified collection *postman-hello-collection.json* that was copied in from the scenario assets folder. You should now see confirmation of the tests - defined in the Postman collection and executed by Newman (against the locally deployed Function - invoked through the local Fn framework).
+this will run the *test-fn* script as defined in the file package.json that will run *Newman* with the specified collection *postman-hello-collection.json* that was copied in from the scenario assets folder. You should now see confirmation of the tests - defined in the Postman collection and executed by Newman (against the - locally - deployed Function - invoked through the local Fn framework).
+
+![](assets/newman-tests.png)
 
 Check the contents of the file `postman-hello-collection.json` - in the IDE or on the terminal:
 `cat postman-hello-collection.json`{{execute}}
@@ -163,7 +168,7 @@ The json file contains a single request - to the Hello function - with a body an
 "  });  "
 ```
 
-![](assets/newman-tests.png)
+
 
 
 ## Performance Testing
