@@ -95,6 +95,8 @@ fn -v deploy --app hello-app --local
 echo -n '{"name":"Your Own Name"}' | fn invoke hello-app hello --content-type application/json
 ```{{execute}}
 
+The response contains the message object that contains the value of the configuration variable `hello-config-value1`.  
+
 ### Hint:
 
 If you put all of your functions under the same parent directory, you can setup an app.yaml file to hold configuration data. Create an app.yaml file in the parent directory of your two functions. Deploy and invoke your function locally from the parent directory of your functions. The command deploys all functions under the parent directory to the application specified in app.yaml.
