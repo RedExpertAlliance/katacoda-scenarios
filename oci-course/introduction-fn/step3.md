@@ -40,9 +40,9 @@ Now to invoke the function, we send an HTTP trigger to the Fn runtime server tha
 
 When you invoke a function, the request is handled and forwarded by the Fn Server to the function. This means that an HTTP request is sent to the container that implements the function. This request is received by a handler provided by the Fn FDK for Node. This handler can be seen in the file func.js - which is the generated Node implementation of the function.
 
-Click on the file `func.js` to open it in the editor. On line 3 you see the call `fdk.handle()`. This initializes the Fn Runtime with a generic request handler; when a request is received it is forwarded to the function that is passed to *fdk.handle()* - the function that takes one parameter called *input*.  
+Click on the file `func.js` to open it in the editor. On line 4 you see the call `fdk.handle()`. This initializes the Fn Runtime with a generic request handler; when a request is received it is forwarded to the function that is passed to *fdk.handle()* - the function that takes one parameter called *input*.  
 
-Add a second parameter to the function definition on line 3, to make this line read:
+Add a second parameter to the function definition on line 4, to make this line read:
 
 <pre class="file" data-target="clipboard">
    fdk.handle(function(input , ctx){
@@ -50,7 +50,7 @@ Add a second parameter to the function definition on line 3, to make this line r
 
 The FDK framework's handler (fdk.handle) will now pass the request context in this variable, in addition to the input or payload that was already passed to the function by the handler. 
 
-Change line 8 to make it read: 
+Change line 10 to make it read: 
 
 <pre class="file" data-target="clipboard">
   return {'message': app.doYourThing(name) ,'ctx':ctx}

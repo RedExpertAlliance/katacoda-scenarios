@@ -39,6 +39,61 @@ This should report favorably on the test of module *existingNodeApp*.
 
 This test of course does not test the Fn framework, the successful creation of the Docker container image and whatever is done inside *func.js*. It tests the core functionality that *existingNodeApp* provides to the wrapper function.
 
+We can go one step further, and test *func.js* as well - still before the function is deployed to a container. We will use Jest - and in particular the mocking capabilities of Jest. The function - func.js - uses the Fn FDK framework - to handle HTTP requests that are handed to the function for procesing. However, in the test situation, we want to test outside the scope and context of the Fn framework. This can be done by using a mock for the fdk module. Jest allows us to define a mock in the following way :
+
+* create file fdk.js in the folder __mocks__/@fnproject under the hello function
+* implement the mock version of module @fnproject/fdk with a mock version of function *handle*
+* create file func.test.js that uses module @fnproject/fdk and runs tests against *func.js* 
+
+Create the new file for implementing the mock fdk.js:  
+`touch /root/hello/__mocks__/@fnproject/fdk.js`{{execute}}
+
+Open the new file fdk.js in the IDE. Copy this code snippet to the file.
+<pre class="file" data-target="clipboard">
+const handle = function (f) {
+    theFunction = f
+    return f
+}
+let theFunction
+const functionCache = function getFunction() {    
+    return theFunction
+}
+
+exports.handle = handle
+exports.functionCache = functionCache
+</pre>
+When the func.js is required, it invokes function *handle* on the *fdk* module and passes a function as input parameter. This function is the actual Fn function implementation that handles the input and context objects to the Fn function. In the case of the mock fdk module, the *handle* function will simply retain the function reference in local variable *theFunction*. 
+
+The test function invokes *functionCache* to retrieve the handle to this function and subsequently invoke it - just as it would be in case of the normal invocation of the Fn function.
+
+Create the file for the Jest tests for module *func*"
+`touch /root/hello/func.test.js`{{execute}}
+
+Copy the following snippet to this file:
+
+<pre class="file" data-target="clipboard">
+// simply require func.js registers the function (input, context) with mock fdk
+const func = require( './func.js' );
+const fdk=require('@fnproject/fdk');
+const name ="Bob"
+const input = {"name":name}
+const context = {"_headers":{"Host":"localhost","Content-Type":"application/json"}}
+const theFunction = fdk.functionCache() // get the function that was registered in func.js with the (mock) fdk handler
+test(`Test of func.js for ${name}`, () => {
+  expect(theFunction(input,context).message)
+  .toBe(`Warm greeting to you, dear ${name} and all your loved ones`);
+});
+test(`Test of func.js for Host header in context object`, () => {
+  expect(theFunction(input,context).ctx._headers.Host)
+  .toBe(`localhost`);
+});
+</pre>
+
+Run the test using
+`npm test`{{execute}}
+
+This should report favorably on the test of module *existingNodeApp* and the two tests for module *func*, the real function implementation - but still without the runtime interference of Fn.
+
 A different type of test could forego the Node implementation and only focus on the HTTP interaction - including the Fn framework and the Container Image. That can be done using a tool such as Newman.
 
 ## Service Testing with Newman
