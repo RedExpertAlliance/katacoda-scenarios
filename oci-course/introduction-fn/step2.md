@@ -115,26 +115,6 @@ Now to invoke the function:
 In the response, you will see the product of the *existingNodeApp*. The Fn function *hello* is now completely implemented by *existingNodeApp*. In this case this application is wafer thin, but in real life this can be a sizable Node application that uses scores of NPM modules. This application can be developed and tested in its own right, outside the context of the Fn framework. You have now seen how easy it is to wrap the application in/as a Function. 
 
 
-## Logging locally for Debugging
-
-When working with Fn locally, you have the option to turn on the DEBUG log-level using the fn start command. This causes detailed information about functions to be output to the terminal after Fn server is started.
-
-To enable DEBUG logging for Fn server, restart the server with the following command:
-
-```
-fn stop
-fn start --log-level DEBUG
-```{{execute}}
-
-Running the Fn server with the DEBUG log level is a great way to track down any issues you are having with your functions. For example, invoke the function once more:
-`echo -n '{"name":"Your Own Name"}' | fn invoke hello-app hello --content-type application/json`{{execute}}
-
-To return to *normal mode*:
-```
-fn stop
-nohup fn start &
-```{{execute}}
-
 ## File Writing
 
 If you want to write to a file from a function, it can only be to the local file system (inside the function container) and only to /tmp. Each function is configured with its own /tmp as non-persistent disk space. The size of this disk space is set as part of the function configuration.
