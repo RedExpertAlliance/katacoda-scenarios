@@ -70,6 +70,10 @@
         {
           "file": "existingNodeApp.js",
           "target": "/root/scenarioResources/"
+        },
+        {
+          "file": "syslog.js",
+          "target": "/root/scenarioResources/"
         }
       ]
     }

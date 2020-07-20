@@ -73,6 +73,68 @@ What is happening here: when you invoke "hello-app hello" the Fn server looked u
 
 ![Fn Server handles request](assets/fn-server-functions.jpg)
 
+### Inspect some under-the-hood details
+
+To easily get some understanding of what is happening when you invoke the function, you can use *debug mode* in Fn CLI. Invoke the function with the command prepended with *DEBUG=1*, to get additional debug details on the HTTP requests sent from the Fn CLI to the Fn runtime and received back:
+
+`echo -n '{"name":"Your Own Name"}' | DEBUG=1 fn invoke hello-app hello --content-type application/json`{{execute}}
+
+If you need more clarity on what is happening during the build process that creates the container image, you can use the *verbose* flag- which you need to put immediately after fn:
+
+`fn --verbose build`{{execute}}
+
+## Capturing Logging
+When calling a deployed function, Fn captures all standard error output and sends it to a syslog server, if configured. So if you have a function throwing an exception and the stack trace is being written to standard error it’s straightforward to get that stack trace via syslog.
+
+We need to capture the logs for the function so that we can see what happens when it fails. To capture logs you need to configure the tutorial application with the URL of a syslog server. You can do this either when you create an app or after it’s been created.
+
+When creating a new app you can specify the URL using the --syslog-url option. For existing applications, you can use *fn update app* to set the syslog-url setting.
+
+We will quickly grab logging output to a local syslog server. First, install the npm module [Simple Syslog Server](https://www.npmjs.com/package/simple-syslog-server)
+
+``
+
+Open a second terminal window - for running the syslog server:
+![](assets/open-2nd-terminal.png)
+
+Execute the following commands to copy a simple node application to run a syslog server based on the npm module:
+```
+cp /root/scenarioResources/syslog.js /root/hello
+cd /root/hello
+node syslog.js
+```{{execute}}  
+
+The syslog server is now running and listening on port 20514 on the TCP protocol.
+
+Switch to the original terminal window. Execute this command to configure application *hello-app* with the now active syslog server:
+
+`fn update app hello-app --syslog-url tcp://localhost:20514`
+
+Time now to invoke the function again and see output being sent to the syslog server
+
+`fn invoke hello-app hello`{{execute}}
+
+Switch to terminal 2 where the syslog server is running and check if the log output from the function was received in the syslog server. 
+
+Perhaps you feel like adding additional log output to the function and see it too being produced to the syslog server.
+
+### Using Papertrail Cloud Service for collecting and inspecting log output 
+A more advanced option to use as a log collection server is Papertrail - a SaaS service for log collection and inspection that you can start using for free. Set up a [free Papertrail account](https://papertrailapp.com/signup?plan=free).
+
+On the Papertrail website, go to ‘Settings’ (top right hand corner), click on ‘Log Destinations’, and click ‘Create a Log Destination’.
+
+In the create dialog, under TCP unselect ‘TLS’ and under both TCP and UDP select ‘Plain Text’. Click ‘Create’. You’ll see the address of your log destination displayed at the top of the page looking something like logs7.papertrailapp.com:<PORT>. Copy this value to your clipboard for use in a minute.
+
+`fn update app hello-app --syslog-url tcp://[your Papertrail destination]`
+
+You can confirm that the syslog URL is set correctly by inspecting your application:
+`fn inspect app hello-app`{{execute}}
+
+Let’s go over to the Papertrail Dashboard and click on our “System” to open a page with the log showing our function's output.
+
+Resource: https://fnproject.io/tutorials/Troubleshooting/#LogCapturetoaLoggingService
+
+
 ## Wrap existing Node module with Fn Function Wrapper
 Suppose you already have Node code performing some valuable task. You can take the existing code and turn it into an Fn Function quite easily - using several approaches even. One is to build a custom Docker container and use it as the implementation for your function (see step 6 in this scenario). An easier one is shown next.
 
