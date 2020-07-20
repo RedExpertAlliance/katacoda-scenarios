@@ -90,25 +90,26 @@ We need to capture the logs for the function so that we can see what happens whe
 
 When creating a new app you can specify the URL using the --syslog-url option. For existing applications, you can use *fn update app* to set the syslog-url setting.
 
-We will quickly grab logging output to a local syslog server. First, install the npm module [Simple Syslog Server](https://www.npmjs.com/package/simple-syslog-server)
-
-``
+We will quickly grab logging output to a local syslog server. 
 
 Open a second terminal window - for running the syslog server:
 ![](assets/open-2nd-terminal.png)
 
-Execute the following commands to copy a simple node application to run a syslog server based on the npm module:
+Execute the following commands to install the npm module [Simple Syslog Server](https://www.npmjs.com/package/simple-syslog-server), copy a simple node application to run a syslog server based on the npm module and run that application:
+
 ```
-cp /root/scenarioResources/syslog.js /root/hello
-cd /root/hello
+mkdir /root/syslog
+cd /root/syslog
+npm install simple-syslog-server
+cp /root/scenarioResources/syslog.js .
 node syslog.js
-```{{execute}}  
+```{{execute}}
 
 The syslog server is now running and listening on port 20514 on the TCP protocol.
 
 Switch to the original terminal window. Execute this command to configure application *hello-app* with the now active syslog server:
 
-`fn update app hello-app --syslog-url tcp://localhost:20514`
+`fn update app hello-app --syslog-url tcp://localhost:20514`{{execute}}
 
 Time now to invoke the function again and see output being sent to the syslog server
 
@@ -116,7 +117,13 @@ Time now to invoke the function again and see output being sent to the syslog se
 
 Switch to terminal 2 where the syslog server is running and check if the log output from the function was received in the syslog server. 
 
-Perhaps you feel like adding additional log output to the function and see it too being produced to the syslog server.
+Perhaps you feel like adding additional log output to the function and see it too being produced to the syslog server. If so, after adding a console.log or console.warn command, (and in the original terminal window) redeploy the function and invoke it again:
+```
+fn -v deploy --app hello-app --local
+fn invoke hello-app hello
+```{{execute}}
+
+
 
 ### Using Papertrail Cloud Service for collecting and inspecting log output 
 A more advanced option to use as a log collection server is Papertrail - a SaaS service for log collection and inspection that you can start using for free. Set up a [free Papertrail account](https://papertrailapp.com/signup?plan=free).
