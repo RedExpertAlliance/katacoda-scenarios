@@ -55,6 +55,7 @@ touch /root/hello/__mocks__/@fnproject/fdk.js
 ```{{execute}}
 
 Open the new file fdk.js in the IDE. Copy this code snippet to the file.
+
 <pre class="file" data-target="clipboard">
 const handle = function (f) {
     theFunction = f
@@ -68,6 +69,7 @@ const functionCache = function getFunction() {
 exports.handle = handle
 exports.functionCache = functionCache
 </pre>
+
 When the func.js is required, it invokes function *handle* on the *fdk* module and passes a function as input parameter. This function is the actual Fn function implementation that handles the input and context objects to the Fn function. In the case of the mock fdk module, the *handle* function will simply retain the function reference in local variable *theFunction*. 
 
 The test function invokes *functionCache* to retrieve the handle to this function and subsequently invoke it - just as it would be in case of the normal invocation of the Fn function.
@@ -99,6 +101,7 @@ test(`Test of func.js for Host header in context object`, () => {
 </pre>
 
 The story for this test: the test loads the object to test - *func.js* - and the mock for the Fn FDK. The require of *func.js* causes the call in func.js to fdk.handle() to take place; this loads the reference to function object defined in func.js in the functionCache. The test gets the reference to the function in the local variable *theFunction*. Two tests are defined:
+
 * when the function is invoked with an object that contains a *name* property, does the response object contain a *message* property that has the specified value?
 *  when the function is invoked with a second object - *context* - does the response contain a *ctx* object 
 
