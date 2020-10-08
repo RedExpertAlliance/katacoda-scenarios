@@ -58,8 +58,6 @@ echo \"$(cat ~/oci-keys/oci_api_key.pem)\" > /root/.oci/oci_api_key.pem\n# copy 
 Select the output from this command in Cloud Shell and copy it to the clipboard (through right mouse menu or using Ctrl-C or Ctrl-Insert in Windows and Cmd-C on Mac OS).
 ![](assets/copy-config-file-values.png)
 
-If you have any problems, go into the console and delete any existing API keys for the earliest created user, as this script tries to use the first user.
-
 ## Try out the OCI CLI connection to your Tenancy
 To make sure that the *config* file and the *oci-api-key.pem* file have the correct contents, try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
 
