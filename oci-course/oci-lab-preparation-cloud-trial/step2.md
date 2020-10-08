@@ -11,9 +11,9 @@ In the scenarios you will be using the OCI CLI (command line interface) on many 
 
 Empty versions of these two files are created as part of every scenario in this series. Look in the file explorer in directory /root/.oci for these two files. Click on *config* to open the empty file.
 
-Here is an example of what the *config* file will look like; click on `Copy to Editor` to copy this content to the *config* file:
+Here is an example of what the *config* file will look like:
 
-<pre class="file" data-filename="config" data-target="append">
+<pre class="file">
 [DEFAULT]
 user=OCID FOR YOUR TENANCY OWNER USER OR OTHER ADMIN USER
 fingerprint=FINGERPRINT FOR KEY FOR USER
@@ -35,73 +35,30 @@ Note: For clipboard operations, Windows users can use Ctrl-C or Ctrl-Insert to c
 
 Execute these commands in Cloud Shell to retrieve the OCID (Oracle Cloud Identifier) of the tenancy and the OCID of your user into environment variables, as well as the Region (name and key):
 <pre class="file" data-target="clipboard">
-export TENANCY_OCID=$(oci iam user list --all | jq -r  '.data[0]."compartment-id"') 
-export USER_OCID=$(oci iam user list --all | jq -r  '.data |sort_by(."time-created")| .[0]."id"')
-export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
-export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
-</pre>
-
-Let's see if all values have been set as expected; execute this command in Cloud Shell:
-
-<pre class="file" data-target="clipboard">
-__config="user=$USER_OCID
-tenancy=$TENANCY_OCID
-region=$REGION
-"
-echo "$__config"
-</pre>
-You should now see values for user, tenancy and region. If not all of these three have a value, please repeat the the previous commands. 
-
-### Generate Public & Private Key pair in Cloud Shell
-
-Then - still in Cloud Shell - use the following statements to generate the key pair, upload the public key to the OCI user resource and retrieve the public key fingerprint:
-
-<pre class="file" data-target="clipboard">
+export USER_OCID=$(oci iam user list --all | jq -r '.data |sort_by(."time-created")| .[0]."id"')
+# Generate private key
 mkdir ~/oci-keys
 openssl genrsa -out ~/oci-keys/oci_api_key.pem 2048
 # generate public key
 openssl rsa -pubout -in ~/oci-keys/oci_api_key.pem -out ~/oci-keys/oci_api_key_public.pem
-# add public key to the OCI admin user
-oci iam user api-key upload --user-id $USER_OCID  --key-file ~/oci-keys/oci_api_key_public.pem
-# get fingerprint
-export KEY_FINGERPRINT=$(oci iam user api-key list --user-id  $USER_OCID  | jq -r '.data[0]."fingerprint"')
-</pre>
+# upload public key
+oci iam user api-key upload --user-id $USER_OCID --key-file ~/oci-keys/oci_api_key_public.pem
 
-
-## Edit Config and Private Key File in Katacoda
-You will now use the results of the actions in Cloud Shell for completing the configuration and private key file in Katacoda.
-
-### Config File
-In Cloud Shell, execute this command, to get the contents for the config file:
-
-<pre class="file" data-target="clipboard">
-__config="[DEFAULT]
-user=$USER_OCID
-fingerprint=$KEY_FINGERPRINT
-tenancy=$TENANCY_OCID
-region=$REGION
-key_file=/root/.oci/oci_api_key.pem
-"
-echo "$__config"
+# Get important login values
+export KEY_FINGERPRINT=$(oci iam user api-key list --user-id $USER_OCID | jq -r '.data |sort_by(."time-created")| .[-1]."fingerprint"')
+export TENANCY_OCID=$(oci iam user list --all | jq -r '.data[0]."compartment-id"')
+export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
+export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
+reset && echo -e "# Copy and paste the following into the Katacoda terminal:\n# Echo the login details into the correct file path in Katacoda
+echo \"[DEFAULT]\nuser=$USER_OCID\nfingerprint=$KEY_FINGERPRINT\ntenancy=$TENANCY_OCID\nregion=$REGION\nkey_file=/root/.oci/oci_api_key.pem\" >  ~/.oci/config\n
+# Echo the private key into the correct file path in Katacoda. Keep this secret!\n
+echo \"$(cat ~/oci-keys/oci_api_key.pem)\" > /root/.oci/oci_api_key.pem\n# copy from the top of this terminal to the line above"
 </pre>
 
 Select the output from this command in Cloud Shell and copy it to the clipboard (through right mouse menu or using Ctrl-C or Ctrl-Insert in Windows and Cmd-C on Mac OS).
 ![](assets/copy-config-file-values.png)
 
-Back in the Katacoda scenario: open file *~/.oci/config* in the text editor, and paste the contents from the clipboard into the file.
-
-### Private Key File
-In Cloud Shell, execute this command to list the contents of the private key and copy the contents to the clipboard. 
-
-<pre class="file" data-target="clipboard">
-cat ~/oci-keys/oci_api_key.pem
-</pre>
-
-Note: this is the private key that no one but you should have access to. We only need to show the contents so you can copy it to the clipboard and paste into a file in the Katacoda scenario.
-![](assets/copy-private-key.png)
-
-Back in the Katacoda scenario: open file *~/.oci/oci-api-key.pem* in the text editor, and paste the contents from the clipboard into the file.
-![](assets/paste-private-key-to-katacoda.png)
+If you have any problems, go into the console and delete any existing API keys for the earliest created user, as this script tries to use the first user.
 
 ## Try out the OCI CLI connection to your Tenancy
 To make sure that the *config* file and the *oci-api-key.pem* file have the correct contents, try out the following command to get a list of all namespaces you currently have access to - based on the OCI Configuration defined above.
