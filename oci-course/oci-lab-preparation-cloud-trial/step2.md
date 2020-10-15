@@ -35,7 +35,12 @@ Note: For clipboard operations, Windows users can use Ctrl-C or Ctrl-Insert to c
 
 Execute these commands in Cloud Shell to retrieve the OCID (Oracle Cloud Identifier) of the tenancy and the OCID of your user into environment variables, as well as the Region (name and key):
 <pre class="file" data-target="clipboard">
-export USER_OCID=$(oci iam user list --all | jq -r '.data |sort_by(."time-created")| .[0]."id"')
+# Get important login values
+USERLIST=$(oci iam user list --all)
+export USER_OCID=$(echo $USERLIST | jq -r '.data |sort_by(."time-created")| .[0]."id"')
+export TENANCY_OCID=$(echo $USERLIST | jq -r '.data[0]."compartment-id"')
+export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
+if [ ! -f ~/oci-keys/oci_api_key.pem ]; then
 # Generate private key
 mkdir ~/oci-keys
 openssl genrsa -out ~/oci-keys/oci_api_key.pem 2048
@@ -43,16 +48,12 @@ openssl genrsa -out ~/oci-keys/oci_api_key.pem 2048
 openssl rsa -pubout -in ~/oci-keys/oci_api_key.pem -out ~/oci-keys/oci_api_key_public.pem
 # upload public key
 oci iam user api-key upload --user-id $USER_OCID --key-file ~/oci-keys/oci_api_key_public.pem
-
-# Get important login values
+fi
 export KEY_FINGERPRINT=$(oci iam user api-key list --user-id $USER_OCID | jq -r '.data |sort_by(."time-created")| .[-1]."fingerprint"')
-export TENANCY_OCID=$(oci iam user list --all | jq -r '.data[0]."compartment-id"')
-export REGION=$(oci iam region-subscription list | jq -r '.data[0]."region-name"')
-export REGION_KEY=$(oci iam region-subscription list | jq -r '.data[0]."region-key"')
-reset && echo -e "# Copy and paste the following into the Katacoda terminal:\n# Echo the login details into the correct file path in Katacoda
-echo \"[DEFAULT]\nuser=$USER_OCID\nfingerprint=$KEY_FINGERPRINT\ntenancy=$TENANCY_OCID\nregion=$REGION\nkey_file=/root/.oci/oci_api_key.pem\" >  ~/.oci/config\n
+reset && echo -e "# Copy and paste the following into the Katacoda terminal:\n# Echo the login details into the correct file path in Katacoda\nmkdir ~/.oci\n
+echo \"[DEFAULT]\nuser=$USER_OCID\nfingerprint=$KEY_FINGERPRINT\ntenancy=$TENANCY_OCID\nregion=$REGION\nkey_file=~/.oci/oci_api_key.pem\" >  ~/.oci/config\n
 # Echo the private key into the correct file path in Katacoda. Keep this secret!\n
-echo \"$(cat ~/oci-keys/oci_api_key.pem)\" > /root/.oci/oci_api_key.pem\n# copy from the top of this terminal to the line above"
+echo \"$(cat ~/oci-keys/oci_api_key.pem)\" > ~/.oci/oci_api_key.pem"
 </pre>
 
 Select the output from this command in Cloud Shell and copy it to the clipboard (through right mouse menu or using Ctrl-C or Ctrl-Insert in Windows and Cmd-C on Mac OS).
