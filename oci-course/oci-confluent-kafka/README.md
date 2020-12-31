@@ -37,5 +37,5 @@ Important notes to use this scenario:
 
 At the end of the scenario you will get something like this:
 
-TBD
+TBD.
 
