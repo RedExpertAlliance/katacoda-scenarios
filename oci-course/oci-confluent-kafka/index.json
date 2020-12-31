@@ -21,10 +21,10 @@
         "title": "Step 4 - Execute terraform plan to deploy Confluent Kafka Cluster on OCI",
         "text": "step4.md"
       },
+	  {
 	    "title": "Step 5 - Validate your deployment",
         "text": "step5.md"
-      }
-	  ,
+	  },
 	  {
 	    "title": "Step 6 - Destroy the Confluent Kafka Cluster",
         "text": "step6.md"
