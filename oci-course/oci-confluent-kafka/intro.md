@@ -16,7 +16,7 @@ Kafka is conformed by many components:
 - Connect Servers
 - Schema Registry
 
-![Intro](/RedExpertAlliance/courses/oci-course/oci-confluent-kafka/assets/arch.jpg)
+![Intro](/RedExpertAlliance/courses/oci-course/oci-confluent-kafka/assets/arch1.jpg)
 
 Terraform plans are going to provision the compute instances, install, deploy and configure the services and create a whole Confluent Kafka environment within OCI.
 
