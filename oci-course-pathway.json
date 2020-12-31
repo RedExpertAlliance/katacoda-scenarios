@@ -93,5 +93,11 @@
       "title": "Preparation for OCI Workshops",
       "description": "Manage OCI LAB environment for Katacoda Scenarios"
     }
+	,
+    {
+      "course_id": "oci-confluent-kafka",
+      "title": "Deploy Confluent Kafka on Oracle Cloud Infrastructure (Work in Progress)",
+      "description": "Deploy a functional Confluent Kafka Cluster on top of OCI in less than 30 minutes"
+    }
   ]
 }
