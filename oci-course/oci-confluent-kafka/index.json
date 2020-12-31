@@ -1,0 +1,58 @@
+{
+  "title": "Confluent Kafka provisioning on OCI",
+  "description": "This scenario is going to show you how to deploy Confluent (Kafka) on OCI. Both community and enterprise edition",
+  "difficulty": "beginner",
+  "time": "45 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1 - Prepare the environment with OCI CLI",
+        "text": "step1.md"
+      },
+	  {
+        "title": "Step 2 - Download and prepare Terraform",
+        "text": "step2.md"
+      },
+      {
+        "title": "Step 3 - Download the repo and prepare the terraform plans",
+        "text": "step3.md"
+      },
+      {
+        "title": "Step 4 - Execute terraform plan to deploy Confluent Kafka Cluster on OCI",
+        "text": "step4.md"
+      },
+	    "title": "Step 5 - Validate your deployment",
+        "text": "step5.md"
+      }
+	  ,
+	  {
+	    "title": "Step 6 - Destroy the Confluent Kafka Cluster",
+        "text": "step6.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": "",
+      "courseData": "background.sh",
+      "code": "foreground.sh"
+        },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "client": [
+        {
+          "file": "prepareStepOne.sh",
+          "target": "/root/"
+        }
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "editor-terminal",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\r\nExecute bash shell commands \u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "ubuntu1904"
+  }
+}
