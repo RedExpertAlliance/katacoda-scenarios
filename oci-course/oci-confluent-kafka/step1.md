@@ -48,4 +48,23 @@ export ns=$(echo $nss | jq -r '.data')
 
 ```{{execute}}
 
+## Create compartment to organize the Kafka Confluent resources that you will deploy. 
+
+Create a compartment with the name confluent_ce (confluent community edition)
+
+```
+compartment=$(oci iam compartment create --compartment-id "$TENANCY_OCID"  --name "confluent_ce1" --description "Compartment for resources for Confluent Community Edition")
+echo "JSON response from the command to create the compartment:"
+echo $compartment
+compartmentId=$(echo $compartment | jq --raw-output .data.id)
+echo The OCID for the lab compartment:  $compartmentId
+```{{execute}}
+
+To set an environment variable $compartmentId fetch the OCID from the compartment with this command (this also works when the compartment already existed prior to running this scenario):
+```
+cs=$(oci iam compartment list)
+export compartmentId=$(echo $cs | jq -r --arg display_name "lab-compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
+```{{execute}}
+
+Now let's prepare Terraform in the next Step.
 
