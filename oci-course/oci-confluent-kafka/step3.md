@@ -35,15 +35,42 @@ Now let's validate the plan:
 Something like this will appear:
 
 ~~~~
-Generating public/private rsa key pair.
-Enter file in which to save the key (/root/keys):
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in id_rsa.
-Your public key has been saved in id_rsa.pub.
-The key fingerprint is:
-11:3a:f8:f4:9o:d9:c7:dg:09:3b:e3:3f:c4:3f:44:95
+Plan: 24 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + broker_public_ips          = (known after apply)
+  + connect_public_ips         = (known after apply)
+  + connect_url                = (known after apply)
+  + ksql_public_ips            = (known after apply)
+  + rest_proxy_public_ips      = (known after apply)
+  + rest_proxy_url             = (known after apply)
+  + schema_registry_public_ips = (known after apply)
+  + schema_registry_url        = (known after apply)
+  + zookeeper_public_ips       = (known after apply)
+
+Warning: "subnet_id": [DEPRECATED] The 'subnet_id' field has been deprecated. Please use 'subnet_id under create_vnic_details' instead.
+
+  on broker.tf line 1, in resource "oci_core_instance" "broker":
+   1: resource "oci_core_instance" "broker" {
+
+(and 4 more similar warnings elsewhere)
+
+
+Warning: "compartment_id": [DEPRECATED] The 'compartment_id' field has been deprecated and may be removed in a future version. Do not use this field.
+
+  on broker.tf line 53, in resource "oci_core_volume_attachment" "broker":
+  53: resource "oci_core_volume_attachment" "broker" {
+
+
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
 ~~~~
+
+The Plan will add 24 resources, as it mentioned in the out of of the terrafom plan command.
 
 Now we are ready to apply terraform plan to our OCI tenant. It will:
 
