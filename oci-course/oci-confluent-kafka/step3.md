@@ -1,7 +1,7 @@
 # Let's get the terraform plans from github
 
-Download Terraform plans from https://github.com/rcarrascosps/oci-confluent.git
-`git clone https://github.com/rcarrascosps/oci-confluent.git`{{execute}}
+Download Terraform plans from https://github.com/oracle-quickstart/oci-confluent.git
+`git clone https://github.com/oracle-quickstart/oci-confluent.git`{{execute}}
 
 **All credits on the authors of the terraform plans, we've made a fork to change the variables.tf file to convey with the instructions on this scenario**
 

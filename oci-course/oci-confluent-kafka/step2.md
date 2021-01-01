@@ -4,28 +4,10 @@ Download Terraform Installer from GitHub https://github.com/robertpeteuil/terraf
 Run the Terraform installer to install Terraform
 `./terraform-installer/terraform-install.sh`{{execute}}
 
-Test the currently installed version of Terraform. This should be at least version v0.12.
+Test the currently installed version of Terraform. This should be at least version v0.14.3.
 
 `terraform version`{{execute}}
 
-And now initialize the Terraform provider:
-
-`terraform init`{{execute}}
-
-In our scenario the provider will take values from your oci config file (created in the previous step) as well from a set of environment variables.
-Terraform provider will take from the oci config file the following values:
-
-- user_ocid
-- fingerprint
-- private_key_path
-- region
-
-And from the environment variables, it will take:
-
-- tenancy_ocid       
-- compartment_ocid  (created in the previous step, name: confluent_ce)
-- ssh_public_key    (needed to make ssh to the compute instances that we are going to create) 
-- ssh_private_key   (needed to make ssh to the compute instances that we are going to create) 
 
 ## Creation of private and public key for the compute instances
 
@@ -55,9 +37,13 @@ Your public and private key will be listed here **/root/keys** as **confluent** 
 
 ## Set environment variables for Terraform Provider
 
-As mentioned in a previous section of this step, we need to set four variables for our terraform provider, let's do it:
+We need to set some environment variables for our terraform provider, let's do it:
 
 ```
+export TF_VAR_tenancy_ocid=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
+export TF_VAR_user_ocid=$(grep -i 'user' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
+export TF_VAR_fingerprint=$(grep -i 'fingerprint' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
+export TF_VAR_private_key_path=$(grep -i 'key_file' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
 export TF_VAR_tenancy_ocid=$TENANCY_OCID
 export TF_VAR_compartment_ocid=$compartmentId
 export TF_VAR_ssh_private_key=/root/keys/confluent
