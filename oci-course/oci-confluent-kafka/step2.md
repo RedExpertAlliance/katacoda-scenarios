@@ -40,15 +40,14 @@ Your public and private key will be listed here **/root/keys** as **confluent** 
 We need to set some environment variables for our terraform provider, let's do it:
 
 ```
-export TF_VAR_tenancy_ocid=$(grep -i 'tenancy' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
+export TF_VAR_region=$(grep -i 'region' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
 export TF_VAR_user_ocid=$(grep -i 'user' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
 export TF_VAR_fingerprint=$(grep -i 'fingerprint' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
 export TF_VAR_private_key_path=$(grep -i 'key_file' $HOME/.oci/config  | cut -f2 -d'=' | head -1)
 export TF_VAR_tenancy_ocid=$TENANCY_OCID
 export TF_VAR_compartment_ocid=$compartmentId
 export TF_VAR_ssh_private_key=/root/keys/confluent
-export TF_VAR_ssh_public_key=/root/keys/confluent.pub
+export TF_VAR_ssh_public_key=$(cat /root/keys/confluent.pub)
 ```{{execute}}
 
 Now we are all set with our terraform oci provier, and we are ready to execute the plan. 
-
