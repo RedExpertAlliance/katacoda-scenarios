@@ -18,6 +18,7 @@ And to validate that we've retrieved it properly, execute:
 
 From this point we will have to use the cloud shell from your OCI Console.
 Open the OCI Cloud Shell tool, from the OCI Cloud Console.
+
 ![](assets/cloud-shell.png)
 
 Now that you are in cloud shell, you will have to copy the contents of your **/root/keys/confluent** private key and create a file with the name confluent 

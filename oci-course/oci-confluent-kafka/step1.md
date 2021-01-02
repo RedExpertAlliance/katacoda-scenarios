@@ -69,5 +69,9 @@ cs=$(oci iam compartment list)
 export compartmentId=$(echo $cs | jq -r --arg display_name "$confluent_compartment" '.data | map(select(."name" == $display_name)) | .[0] | .id')
 ```{{execute}}
 
+In your OCI console you will see the new compartment created:
+
+![](assets/compartments.jpg)
+
 Now let's prepare Terraform in the next Step.
 

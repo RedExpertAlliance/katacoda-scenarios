@@ -20,11 +20,6 @@ It will start to destroy everything:
 
 ![](assets/destroy1.jpg)
 
-All resources will be deleted. It will take some minutes. Just wait for this appear:
-
-~~~~
-
-~~~~
 
 You can validate that the resources are deleted, go to the Compute Instances section at your OCI console and you will see something like this:
 
