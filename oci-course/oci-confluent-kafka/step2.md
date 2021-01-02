@@ -9,7 +9,7 @@ Test the currently installed version of Terraform. This should be at least versi
 `terraform version`{{execute}}
 
 
-## Creation of private and public key for the compute instances
+## Creation of private and public keys for the compute instances
 
 For generating the public and private key that will be used to ssh to the compute instances, execute the following (plsease remember to use ***/root/keys/confluent***):
 
