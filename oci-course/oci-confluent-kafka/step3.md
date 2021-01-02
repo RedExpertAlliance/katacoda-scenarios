@@ -26,6 +26,34 @@ File `variables.tf`{{open}} contains the OCI provider definition and is also - b
 In this case since all variables are already set for our terraform provider there is nothing extra to configure, but to execute the plan.
 
 
+The expected output for the terraform init command execution is this:
+
+~~~~
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding latest version of hashicorp/oci...
+- Installing hashicorp/oci v4.7.0...
+- Installed hashicorp/oci v4.7.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+~~~~
+
+Now let's move on to the plan execution.
+
 # Terraform Plan Execution
 
 Now let's validate the plan:
@@ -70,7 +98,7 @@ can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ~~~~
 
-The Plan will add 24 resources, as it mentioned in the out of of the terrafom plan command.
+The Plan will add 24 resources, as it mentioned in the output of of the terrafom plan command.
 
 Now we are ready to apply terraform plan to our OCI tenant. It will:
 
@@ -82,10 +110,28 @@ To apply the terraform plan, execute this:
 
 `terraform apply`{{execute}}
 
+You will be prompted with something this:
+
+~~~~
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve
+~~~~
+
+**Just type the word: yes.**
+
+Terraform will provision and install everything for you. You will see something like this during the process:
+
+![Intro](/RedExpertAlliance/courses/oci-course/oci-confluent-kafka/assets/apply3.jpg)
+
 Now let's wait for some minutes while the components are getting configured and prepared.
 
 You can open a browser to point to the compute instances that are being created:
 
 `echo "Open the console at https://console.us-ashburn-1.oraclecloud.com/identity/compartments/${compartmentId}"`{{execute}}
 
+You will see something similar to this (IP adresses will be different):
 
+![Intro](/RedExpertAlliance/courses/oci-course/oci-confluent-kafka/assets/instances2.jpg)
+
+Wait for five minutes before getting into the next step.

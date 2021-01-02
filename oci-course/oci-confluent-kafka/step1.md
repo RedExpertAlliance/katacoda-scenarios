@@ -60,7 +60,7 @@ compartment=$(oci iam compartment create --compartment-id "$TENANCY_OCID"  --nam
 echo "JSON response from the command to create the compartment:"
 echo $compartment
 compartmentId=$(echo $compartment | jq --raw-output .data.id)
-echo The OCID for the $confluent_compartment compartment is:  $compartmentId
+echo The OCID for the compartment is:  $compartmentId
 ```{{execute}}
 
 To set an environment variable $compartmentId fetch the OCID from the compartment with this command (this also works when the compartment already existed prior to running this scenario):
