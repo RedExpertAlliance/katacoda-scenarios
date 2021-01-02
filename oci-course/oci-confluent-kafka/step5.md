@@ -18,12 +18,12 @@ Do you really want to destroy all resources?
 
 It will start to destroy everything:
 
-![](assets/destroy1.jpg)
+![](assets/destroy11.jpg)
 
 
 You can validate that the resources are deleted, go to the Compute Instances section at your OCI console and you will see something like this:
 
-![](assets/destroy2.jpg)
+![](assets/destroy22.jpg)
 
 And when the terraform destroy command finish, it will print this:
 

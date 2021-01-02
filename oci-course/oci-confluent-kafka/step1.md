@@ -71,7 +71,7 @@ export compartmentId=$(echo $cs | jq -r --arg display_name "$confluent_compartme
 
 In your OCI console you will see the new compartment created:
 
-![](assets/compartments.jpg)
+![](assets/compartments1.jpg)
 
 Now let's prepare Terraform in the next Step.
 
