@@ -14,19 +14,19 @@
         "text": "step2.md"
       },
       {
-        "title": "Step 3 - Download the repo and prepare the terraform plans",
+        "title": "Step 3 - Download the repo, prepare and execute the terraform plan",
         "text": "step3.md"
       },
       {
-        "title": "Step 4 - Execute terraform plan to deploy Confluent Kafka Cluster on OCI",
+        "title": "Step 4 - Validate your Kafka Confluent cluster",
         "text": "step4.md"
       },
 	  {
-	    "title": "Step 5 - Validate your deployment",
+	    "title": "Step 5 - Destroy the cluster",
         "text": "step5.md"
 	  },
 	  {
-	    "title": "Step 6 - Destroy the Confluent Kafka Cluster",
+	    "title": "Step 6 - Extra step. DIY with Enterprise Edition",
         "text": "step6.md"
       }
     ],

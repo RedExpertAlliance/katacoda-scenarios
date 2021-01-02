@@ -134,4 +134,27 @@ You will see something similar to this (IP adresses will be different):
 
 ![Intro](/RedExpertAlliance/courses/oci-course/oci-confluent-kafka/assets/instances2.jpg)
 
-Wait for five minutes before getting into the next step.
+The output for the terraform apply command is something like this (again, the IP addresses for you will be different):
+
+~~~~
+Apply complete! Resources: 24 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+broker_public_ips = 150.136.123.1,150.136.121.120,158.101.96.178
+connect_public_ips = 150.136.63.195,129.213.121.248
+connect_url = http://10.0.0.11:8083/connectors
+
+ksql_public_ips = 132.145.167.90,129.213.56.208
+rest_proxy_public_ips = 193.122.146.4,129.213.166.115
+rest_proxy_url = http://10.0.0.13:8082/topics
+
+schema_registry_public_ips = 193.122.151.64
+schema_registry_url = http://10.0.0.5:8081/
+
+zookeeper_public_ips = 150.136.106.173,150.136.82.75,129.213.119.25
+~~~~
+
+If you are courious you can get into your OCI console, and review the VCN that was created, as well as the storage.
+
+Wait for 10 minutes before getting into the next step.
