@@ -155,6 +155,6 @@ schema_registry_url = http://10.0.0.5:8081/
 zookeeper_public_ips = 150.136.106.173,150.136.82.75,129.213.119.25
 ~~~~
 
-If you are courious you can get into your OCI console, and review the VCN that was created, as well as the storage.
+If you are curious you can get into your OCI console, and review the VCN that was created, as well as the storage.
 
-Wait for 10 minutes before getting into the next step.
+Wait for **10 minutes** before getting into the next step.

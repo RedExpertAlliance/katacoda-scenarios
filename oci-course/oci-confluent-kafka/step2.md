@@ -50,4 +50,4 @@ export TF_VAR_ssh_private_key=/root/keys/confluent
 export TF_VAR_ssh_public_key=$(cat /root/keys/confluent.pub)
 ```{{execute}}
 
-Now we are all set with our terraform oci provier, and we are ready to execute the plan. 
+Now we are all set with our terraform oci provider, and we are ready to execute the plan. 
