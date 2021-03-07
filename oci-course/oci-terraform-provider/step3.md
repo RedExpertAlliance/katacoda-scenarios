@@ -39,7 +39,7 @@ Check on existence of the bucket:
 `oci os bucket get --bucket-name="$TF_VAR_lab_bucket_name"`{{execute}}
 
 and on the file:
-`oci os object get --bucket-name="$TF_VAR_lab_bucket_name" --name my-new-object --file myfileDownloadedFromOCI`{{execute}}
+`oci os object get --bucket-name="$TF_VAR_lab_bucket_name" --name my-new-object-from-stack --file myfileDownloadedFromOCI`{{execute}}
 
 Check the contents of the file:
 `cat myfileDownloadedFromOCI`{{execute}}
