@@ -91,6 +91,7 @@ export REGION_KEY=$(echo $REGION_KEY_UPPER | tr '[:upper:]' '[:lower:]')
 | us-langley-1     | ocid1.image.oc2.us-langley-1.aaaaaaaauckkms7acrl6to3cuhmv6hfjqwlnoxzuzophaose7pi2sfk4dzna     |
 | us-luke-1        | ocid1.image.oc2.us-luke-1.aaaaaaaadxeycutztmvaeefvilc57lfqool2rlgl2r34juyu4jkbodx2xspq        |
 | us-phoenix-1     | ocid1.image.oc1.phx.aaaaaaaacy7j7ce45uckgt7nbahtsatih4brlsa2epp5nzgheccamdsea2yq              |
+| ap-hyderabad-1   | ocid1.image.oc1.ap-hyderabad-1.aaaaaaaaq5m4tcqcean4n7vkwxk6ssizepq5xuqr4dqtqap7gxzchd6vz3fq   |
 
 Now set the following variable (**only if you are not in us-ashburn-1**), to point to your region OCID image id (copy it from the previous table). 
 For example, if you are in uk-london-1:
