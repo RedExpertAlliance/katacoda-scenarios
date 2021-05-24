@@ -4,7 +4,7 @@
       "actionType": "FAAS",
       "description": "Invoke PDF conversion when text file is uploaded to the IN bucket",
       "isEnabled": true,
-      "functionId": "<FunctionID>"
+      "functionId": "FunctionID"
     }
   ]
 }

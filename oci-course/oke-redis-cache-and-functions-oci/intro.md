@@ -34,6 +34,11 @@ trial instance
 
 - The user that we are going to use to publish the docker image into OCIR (Oracle Container Registry) is the lab-user created in the OCI Lab Preparation scenario
 
+- Katacoda does not allow to connect through port 6443 within their environments. The OKE API Server will be serving in that port, and for that reason we have
+created this scenario https://www.katacoda.com/redexpertalliance/courses/oci-course/oci-compute-nginx , where you will provision an OCI compute intance with
+an NGINX server that will be used as a reverse proxy for the API Server.
+
+- 
 
 # Scenario Description
 
