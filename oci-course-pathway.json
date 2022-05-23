@@ -96,7 +96,7 @@
 	,
     {
       "course_id": "oci-confluent-kafka",
-      "title": "Deploy Confluent Kafka on Oracle Cloud Infrastructure with Terraform (Work in Progress)",
+      "title": "Deploy Confluent Kafka on Oracle Cloud Infrastructure with Terraform",
       "description": "Deploy a functional Confluent Kafka Cluster on top of OCI in less than 45 minutes"
     }
   ]
